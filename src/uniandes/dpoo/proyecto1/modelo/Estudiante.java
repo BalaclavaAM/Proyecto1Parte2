@@ -1,38 +1,41 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
-public class Estudiante extends Usuario implements Serializable {
-	private static final long serialVersionUID = -232931508719866061L;
+public class Estudiante extends Usuario{
+	private static final long serialVersionUID = 7413490025559091836L;
 	private String name;
 	private String codigo;
-	private ArrayList<Pensum> pensum;
 	private HistoriaAcademica HistoriaAcademica;
 	
-	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo, ArrayList<Pensum> pensum,
-			uniandes.dpoo.proyecto1.modelo.HistoriaAcademica historiaAcademica) {
+
+
+	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo,
+			HistoriaAcademica historiaAcademica) {
 		super(nombredeusuario, contrasenha);
 		this.name = name;
 		this.codigo = codigo;
-		this.setPensum(pensum);
-		setHistoriaAcademica(historiaAcademica);
+		HistoriaAcademica = historiaAcademica;
 	}
+
 	public String getName() {
 		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
-	public ArrayList<Pensum> getPensum() {
-		return pensum;
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
-	public void setPensum(ArrayList<Pensum> pensum) {
-		this.pensum = pensum;
-	}
+
 	public HistoriaAcademica getHistoriaAcademica() {
 		return HistoriaAcademica;
 	}
+
 	public void setHistoriaAcademica(HistoriaAcademica historiaAcademica) {
 		HistoriaAcademica = historiaAcademica;
 	}

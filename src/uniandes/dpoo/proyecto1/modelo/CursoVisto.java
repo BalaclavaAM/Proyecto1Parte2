@@ -1,51 +1,49 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-import java.util.Date;
 
-public class CursoVisto extends Curso {
-	private static final long serialVersionUID = 3105887169616828617L;
-	private boolean notanumerica;
-	private boolean aprobado;
+public class CursoVisto {
+	private Curso curso;
 	private float nota;
-	private Date fecha;
+	private Periodo periodo;
 	
 
-	public CursoVisto(String nombre, String codigo, String programa, String duracion, String tipologia,
-			boolean notanumerica, boolean aprobado, float nota, Date fecha) {
-		super(nombre, codigo, programa, duracion, tipologia);
-		this.notanumerica = notanumerica;
-		this.aprobado = aprobado;
-		this.nota = nota;
-		this.fecha = fecha;
+	public CursoVisto(Curso curso, Periodo periodo, float nota) {
+		this.setCurso(curso);
+		this.setPeriodo(periodo);
+		this.setNota(nota);
 	}
-	
-	
-	public boolean isNotanumerica() {
-		return notanumerica;
+
+
+	public Curso getCurso() {
+		return curso;
 	}
-	public void setNotanumerica(boolean notanumerica) {
-		this.notanumerica = notanumerica;
+
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
-	
-	public boolean isAprobado() {
-		return aprobado;
-	}
-	public void setAprobado(boolean aprobado) {
-		this.aprobado = aprobado;
-	}
-	
+
+
 	public float getNota() {
 		return nota;
 	}
+
+
 	public void setNota(float nota) {
 		this.nota = nota;
 	}
-	
-	public Date getFecha() {
-		return fecha;
+
+
+	public Periodo getPeriodo() {
+		return periodo;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+
+
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
 	}
+
+
+
 	
 }
