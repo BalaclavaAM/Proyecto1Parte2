@@ -3,6 +3,7 @@ package uniandes.dpoo.proyecto1.modelo;
 import java.util.Date;
 
 public class CursoVisto extends Curso {
+	private static final long serialVersionUID = 3105887169616828617L;
 	private boolean notanumerica;
 	private boolean aprobado;
 	private float nota;

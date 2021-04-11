@@ -1,6 +1,9 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-public class Coordinador extends Usuario {
+import java.io.Serializable;
+
+public class Coordinador extends Usuario implements Serializable {
+	private static final long serialVersionUID = 8736824648617471317L;
 	private String nombre;
 	private Carrera carrera;
 

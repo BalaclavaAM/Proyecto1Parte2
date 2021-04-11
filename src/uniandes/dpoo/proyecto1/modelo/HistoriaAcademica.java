@@ -1,20 +1,22 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
+import java.util.Collections;
+import java.util.Map;
 
 public class HistoriaAcademica {
+	private Pensum pensum;
 	private float creditos;
 	private int semestre;
 	private float promedio;
-	private ArrayList<CursoVisto> cursosvistos;
-	
-	public HistoriaAcademica(float creditos, int semestre, float promedio, ArrayList<CursoVisto> cursosvistos) {
+	private Map<String, ArrayList<CursoVisto>> cursosvistos;
+
+	public HistoriaAcademica(ArrayList<CursoVisto> cursosvistos) {
 		super();
-		this.creditos = creditos;
-		this.semestre = semestre;
-		this.promedio = promedio;
-		this.cursosvistos = cursosvistos;
+		this.creditos = 0;
+		this.semestre = 0;
+		this.promedio = 0;
+		this.cursosvistos = Collections.emptyMap();;
 	}
 	public float getCreditos() {
 		return creditos;
@@ -34,30 +36,16 @@ public class HistoriaAcademica {
 	public void setPromedio(float promedio) {
 		this.promedio = promedio;
 	}
-	public ArrayList<CursoVisto> getCursosvistos() {
+	public Pensum getPensum() {
+		return pensum;
+	}
+	public void setPensum(Pensum pensum) {
+		this.pensum = pensum;
+	}
+	public Map<String, ArrayList<CursoVisto>> getCursosvistos() {
 		return cursosvistos;
 	}
-	public void setCursosvistos(ArrayList<CursoVisto> cursosvistos) {
+	public void setCursosvistos(Map<String, ArrayList<CursoVisto>> cursosvistos) {
 		this.cursosvistos = cursosvistos;
 	}
-	
-=======
-import java.util.Map;
-
-public class HistoriaAcademica {
-    private Pensum plan;
-    private Map<String, ArrayList<CursoInscrito>> cursosPorSemestre;
-    private int semestre;
-
-    public HistoriaAcademica(Pensum plan){
-        this.plan = plan;
-        semestre = 1;
-    }
-
-
-
-    public void setSemestre(int semestre) {
-        this.semestre = semestre;
-    }
->>>>>>> 65bc98c5aac87b21397d961916857c963fa63c69
 }

@@ -1,7 +1,12 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-public class Curso {
-    private Restriccion[] restrictions;
+import java.io.Serializable;
+
+public class Curso implements Serializable {
+    /**
+	 * Suave
+	 */
+	private static final long serialVersionUID = -1708691240589592764L;
 	private String nombre;
 	private String codigo;
 	private String programa;
@@ -56,6 +61,4 @@ public class Curso {
 	public void setTipologia(String tipologia) {
 		this.tipologia = tipologia;
 	}
-
-    Restriccion[] restrictions;
 }
