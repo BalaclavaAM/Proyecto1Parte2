@@ -8,6 +8,12 @@ public class Pensum {
 	private ArrayList<Requerimiento> Requerimientos;
 
 
+	public Pensum(int creditos, String nombre, ArrayList<Requerimiento> requerimientos) {
+		this.creditos = creditos;
+		Nombre = nombre;
+		Requerimientos = requerimientos;
+	}
+
 	public ArrayList<Requerimiento> getRequerimientos() {
 		return Requerimientos;
 	}

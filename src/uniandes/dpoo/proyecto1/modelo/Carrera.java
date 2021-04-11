@@ -7,6 +7,12 @@ public class Carrera {
 	private String diminutivo;
 	private ArrayList<Pensum> Pensum;
 	
+	public Carrera(String nombre, String diminutivo, ArrayList<uniandes.dpoo.proyecto1.modelo.Pensum> pensum) {
+		super();
+		this.nombre = nombre;
+		this.diminutivo = diminutivo;
+		Pensum = pensum;
+	}
 	
 	public ArrayList<Pensum> getPensum() {
 		return Pensum;

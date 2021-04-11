@@ -1,23 +1,29 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
+
 
 public class HistoriaAcademica {
 	private Pensum pensum;
 	private float creditos;
 	private int semestre;
 	private float promedio;
-	private Map<String, ArrayList<CursoVisto>> cursosvistos;
+	private Map<Integer, ArrayList<CursoVisto>> cursosvistosXsemestre;
+	private Map<String, CursoVisto> cursosvistos;
+	private Map<Object, Curso> requerimientosCumplidos;
 
-	public HistoriaAcademica(ArrayList<CursoVisto> cursosvistos) {
+
+
+	public HistoriaAcademica() {
 		super();
 		this.creditos = 0;
 		this.semestre = 0;
 		this.promedio = 0;
-		this.cursosvistos = Collections.emptyMap();;
+		this.cursosvistos = new Hashtable<>();
+		this.cursosvistosXsemestre =  new Hashtable<>();
 	}
+
+
 	public float getCreditos() {
 		return creditos;
 	}
@@ -42,10 +48,36 @@ public class HistoriaAcademica {
 	public void setPensum(Pensum pensum) {
 		this.pensum = pensum;
 	}
-	public Map<String, ArrayList<CursoVisto>> getCursosvistos() {
-		return cursosvistos;
+	public Map<Integer, ArrayList<CursoVisto>> getCursosvistos() {
+		return cursosvistosXsemestre;
 	}
-	public void setCursosvistos(Map<String, ArrayList<CursoVisto>> cursosvistos) {
-		this.cursosvistos = cursosvistos;
+
+	public void agregarCurso(Curso curso,Periodo periodo, float nota, int semestre){
+		CursoVisto registro = new CursoVisto(curso, periodo, nota);
+		cursosvistosXsemestre.computeIfAbsent(semestre, k -> new ArrayList<>());
+		cursosvistosXsemestre.get(semestre).add(registro);
+		cursosvistos.put(curso.getCodigo(),registro);
 	}
+	public int agregarRequerimiento(String nombreCurso, RequerimientoCurso req){
+		CursoVisto cursoV = cursosvistos.get(nombreCurso);
+		if (cursoV == null){
+			return -1;
+		}
+		if (!req.validar(cursoV.getCurso())){
+			return 0;
+		}
+		requerimientosCumplidos.put(req,cursoV.getCurso());
+		return 1;
+	}
+
+	public int actualizarRequerimiento(){
+
+	}
+
+
+	public boolean validarRequerimiento(Requerimiento req){
+
+	}
+
+
 }

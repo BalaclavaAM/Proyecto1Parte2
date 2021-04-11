@@ -1,18 +1,12 @@
 package uniandes.dpoo.proyecto1.modelo;
 
+
 public class Restriccion {
-	private String nombre;
-	private String tipo;
-
-	public String getNombre() {
-		return nombre;
+	private String[] opciones;
+	private String[] tipo;
+	
+	public Restriccion(String[] opciones, String[] tipo){
+		this.opciones = opciones;
+		this.tipo = tipo;
 	}
-
-	
-	public String getTipo() {
-		return tipo;
-	}
-
-	
-	
 }

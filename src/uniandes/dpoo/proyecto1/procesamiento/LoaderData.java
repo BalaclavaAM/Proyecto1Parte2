@@ -44,7 +44,7 @@ public class LoaderData {
 			}
 			in3.close();  
 			
-			ObjectInputStream in4=new ObjectInputStream(new FileInputStream("cursos.txt"));  
+			ObjectInputStream in4=new ObjectInputStream(new FileInputStream("carreras.txt"));
 			Carrera carrera=(Carrera)in4.readObject();  
 			
 			while (carrera!=null) {
@@ -60,19 +60,58 @@ public class LoaderData {
 	}
 	
 	
-	public void guardarEstudiantes(List<Estudiante> estudiantes) {
+	public static void guardarData(ProcesadorBanner procesador) {
 		try {
 			FileOutputStream fout=new FileOutputStream("estudiantes.txt");  
 			ObjectOutputStream out=new ObjectOutputStream(fout);  
 			int guardados= 0;
 			
-			for (Estudiante e : estudiantes){
-				out.writeObject(e);  
+			for (Map.Entry<String,Estudiante> entry : procesador.getEstudiantes().entrySet()){
+				out.writeObject(entry.getValue());
 				guardados+=1;
 			}
 			out.flush();    
 			out.close();  
-			System.out.println("Se han guardado "+guardados+" estudiantes");  
+			System.out.println("Se han guardado "+guardados+" estudiantes");
+
+			FileOutputStream fout2=new FileOutputStream("coordinadores.txt");
+			ObjectOutputStream out2=new ObjectOutputStream(fout2);
+			int guardados2= 0;
+
+			for (Map.Entry<String,Coordinador> entry : procesador.getCoordinadores().entrySet()){
+				out.writeObject(entry.getValue());
+				guardados2+=1;
+			}
+			out2.flush();
+			out2.close();
+			System.out.println("Se han guardado "+guardados2+" coordinadores");
+
+
+			FileOutputStream fout3=new FileOutputStream("cursos.txt");
+			ObjectOutputStream out3=new ObjectOutputStream(fout3);
+			int guardados3= 0;
+
+			for (Curso curso : procesador.getCursos()){
+				out.writeObject(curso);
+				guardados3+=1;
+			}
+			out3.flush();
+			out3.close();
+			System.out.println("Se han guardado "+guardados3+" cursos");
+
+			FileOutputStream fout4=new FileOutputStream("carreras.txt");
+			ObjectOutputStream out4=new ObjectOutputStream(fout4);
+			int guardados4= 0;
+
+			for (Carrera carrera : procesador.getCarreras()){
+				out.writeObject(carrera);
+				guardados4+=1;
+			}
+			out4.flush();
+			out4.close();
+			System.out.println("Se han guardado "+guardados4+" carreras");
+
+
 		}catch(Exception a){System.out.println(a);}  
 	}  
 
