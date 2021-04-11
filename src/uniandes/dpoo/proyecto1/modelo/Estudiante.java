@@ -3,25 +3,26 @@ package uniandes.dpoo.proyecto1.modelo;
 public class Estudiante extends Usuario {
 	private String name;
 	private String codigo;
-	private PlandeEstudios plan;
-	
+	private Pensum plan;
+	private HistoriaAcademica historia;
+
+	public Estudiante(String name, String codigo, Pensum plan) {
+		this.name = name;
+		this.codigo = codigo;
+		this.plan = plan;
+		this.historia = new HistoriaAcademica(plan);
+	}
+
 	public String getName() {
 		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	public PlandeEstudios getPlan() {
+	public Pensum getPlan() {
 		return plan;
 	}
-	public void setPlan(PlandeEstudios plan) {
-		this.plan = plan;
-	}
+
+
 	
 }
