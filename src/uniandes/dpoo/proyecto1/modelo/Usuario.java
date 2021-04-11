@@ -8,6 +8,15 @@ public class Usuario {
 	private String contrasenha;
 	
 	
+	
+	// ************************************************************************
+	// Elcons tructor
+	// ************************************************************************
+	public Usuario(String nombredeusuario, String contrasenha) {
+		this.nombredeusuario = nombredeusuario;
+		this.contrasenha = contrasenha;
+	}
+
 	public String getContrasenha() {
 		return contrasenha;
 	}
