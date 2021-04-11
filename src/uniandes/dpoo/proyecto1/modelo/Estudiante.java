@@ -7,6 +7,7 @@ public class Estudiante extends Usuario implements Serializable {
 	private static final long serialVersionUID = -232931508719866061L;
 	private String name;
 	private String codigo;
+<<<<<<< HEAD
 	private ArrayList<Pensum> pensum;
 	private HistoriaAcademica HistoriaAcademica;
 	
@@ -18,20 +19,28 @@ public class Estudiante extends Usuario implements Serializable {
 		this.setPensum(pensum);
 		setHistoriaAcademica(historiaAcademica);
 	}
+=======
+	private Pensum plan;
+	private HistoriaAcademica historia;
+
+	public Estudiante(String name, String codigo, Pensum plan) {
+		this.name = name;
+		this.codigo = codigo;
+		this.plan = plan;
+		this.historia = new HistoriaAcademica(plan);
+	}
+
+>>>>>>> 65bc98c5aac87b21397d961916857c963fa63c69
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
 	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public Pensum getPlan() {
+		return plan;
 	}
+<<<<<<< HEAD
 	public ArrayList<Pensum> getPensum() {
 		return pensum;
 	}
@@ -46,4 +55,9 @@ public class Estudiante extends Usuario implements Serializable {
 	}
 	
 
+=======
+
+
+	
+>>>>>>> 65bc98c5aac87b21397d961916857c963fa63c69
 }

@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 
 public class HistoriaAcademica {
 	private float creditos;
@@ -40,4 +41,23 @@ public class HistoriaAcademica {
 		this.cursosvistos = cursosvistos;
 	}
 	
+=======
+import java.util.Map;
+
+public class HistoriaAcademica {
+    private Pensum plan;
+    private Map<String, ArrayList<CursoInscrito>> cursosPorSemestre;
+    private int semestre;
+
+    public HistoriaAcademica(Pensum plan){
+        this.plan = plan;
+        semestre = 1;
+    }
+
+
+
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+>>>>>>> 65bc98c5aac87b21397d961916857c963fa63c69
 }
