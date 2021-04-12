@@ -24,6 +24,10 @@ public class Pensum implements Serializable {
 		return requerimientos;
 	}
 
+	public Map<String, Requerimiento> requerimientosXtipo(){
+		return requerimientosXtipo;
+	}
+
 
 	public String getNombre() {
 		return Nombre;

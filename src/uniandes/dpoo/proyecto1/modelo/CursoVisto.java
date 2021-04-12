@@ -1,6 +1,5 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-import java.util.Date;
 
 public class CursoVisto {
 	private Curso curso;
@@ -12,6 +11,10 @@ public class CursoVisto {
 		this.curso = curso;
 		this.periodo = periodo;
 		this.nota = nota;
+	}
+
+	public Periodo getPeriodo() {
+		return periodo;
 	}
 
 	public Curso getCurso() {
