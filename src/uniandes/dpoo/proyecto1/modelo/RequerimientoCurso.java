@@ -7,7 +7,6 @@ public class RequerimientoCurso extends Requerimiento {
     private int semestresugerido;
     private ArrayList<Curso> cursos;
     private int creditos;
-    
     public RequerimientoCurso(String nombre, int semestresug, ArrayList<Curso> cursos) {
         super(nombre, semestresug, cursos);
     }

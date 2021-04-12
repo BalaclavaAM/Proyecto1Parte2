@@ -32,6 +32,4 @@ public abstract class Requerimiento implements Serializable {
 		return cursos;
 	}
 
-	public abstract boolean validar(Curso cursoOp);
-	
 }

@@ -13,18 +13,20 @@ public class Curso implements Serializable {
 	private String programa;
 	private String duracion;
 	private String tipologia;
+	private int creditos;
 	private Restriccion[] restricciones;
 			
 
 
 
 
-	public Curso(String nombre, String codigo, String programa, String duracion, String tipologia, boolean notanumerica) {
+	public Curso(String nombre, String codigo, String programa, int creditos, String duracion, String tipologia, boolean notanumerica) {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.programa = programa;
 		this.duracion = duracion;
 		this.tipologia = tipologia;
+		this.creditos = creditos;
 		this.notanumerica = notanumerica;
 
 	}
@@ -56,6 +58,10 @@ public class Curso implements Serializable {
 
 	public Restriccion[] getRestricciones() {
 		return restricciones;
+	}
+
+	public int getCreditos() {
+		return creditos;
 	}
 
 	public void setRestricciones(Restriccion[] restricciones) {
