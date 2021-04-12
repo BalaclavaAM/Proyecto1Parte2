@@ -9,4 +9,12 @@ public class Restriccion {
 		this.opciones = opciones;
 		this.tipo = tipo;
 	}
+
+	public String[] getOpciones() {
+		return opciones;
+	}
+	
+	public void setOpciones(String[] opciones) {
+		this.opciones = opciones;
+	}
 }

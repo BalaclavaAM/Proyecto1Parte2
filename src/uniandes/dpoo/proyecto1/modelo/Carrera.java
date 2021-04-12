@@ -1,8 +1,13 @@
 package uniandes.dpoo.proyecto1.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Carrera {
+public class Carrera implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7300727299950071526L;
 	private String nombre;
 	private String diminutivo;
 	private ArrayList<Pensum> Pensum;

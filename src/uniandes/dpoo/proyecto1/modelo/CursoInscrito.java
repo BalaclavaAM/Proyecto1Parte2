@@ -5,8 +5,24 @@ public class CursoInscrito {
     private Periodo periodo;
 
     public CursoInscrito(Curso curso, Periodo periodo) {
-        this.curso = curso;
-        this.periodo = periodo;
+        this.setCurso(curso);
+        this.setPeriodo(periodo);
     }
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+	public Periodo getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
+	}
 
 }

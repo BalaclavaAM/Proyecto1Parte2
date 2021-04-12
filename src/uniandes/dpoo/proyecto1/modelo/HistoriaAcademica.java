@@ -1,9 +1,15 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 
 
-public class HistoriaAcademica {
+public class HistoriaAcademica implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -491840464239633611L;
 	private Pensum pensum;
 	private float creditos;
 	private int semestre;
@@ -19,11 +25,8 @@ public class HistoriaAcademica {
 		this.creditos = 0;
 		this.semestre = 0;
 		this.promedio = 0;
-		this.cursosvistos = new Hashtable<>();
-		this.cursosvistosXsemestre =  new Hashtable<>();
+		this.cursosvistos = Collections.emptyMap();;
 	}
-
-
 	public float getCreditos() {
 		return creditos;
 	}

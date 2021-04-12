@@ -1,8 +1,12 @@
 package uniandes.dpoo.proyecto1.modelo;
 import java.util.ArrayList;
 
-public abstract class Requerimiento {
+public abstract class Requerimiento implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7762431642880730439L;
 	private String nombre;
 	private int semestresugerido;
 	private ArrayList<Curso> cursos;

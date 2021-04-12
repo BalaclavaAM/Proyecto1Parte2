@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.procesamiento;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -7,8 +8,10 @@ import java.util.Map;
 
 import uniandes.dpoo.proyecto1.modelo.*;
 
-public class ProcesadorBanner {
+public class ProcesadorBanner implements Serializable {
 	
+	private static final long serialVersionUID = -4746963895960324815L;
+
 	private List<Curso> cursos;
 
 	private List<Carrera> carreras;

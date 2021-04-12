@@ -1,6 +1,11 @@
 package uniandes.dpoo.proyecto1.consola;
 
 import uniandes.dpoo.proyecto1.procesamiento.*;
+import uniandes.dpoo.proyecto1.modelo.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,22 +16,67 @@ public class ConsolaBanner {
 
 	private ProcesadorBanner procesador;
 
+
+	public static void main(String[] args)
+	{
+//		Curso cursoejemplo = new Curso("Introducci√≥n a la Programaci√≥n","ISIS1221","ISIS","16","Fundamentaci√≥n", false);
+//
+//		ArrayList <Curso> arreglocursos = new ArrayList<Curso>();
+//		arreglocursos.add(cursoejemplo);
+//
+//		Requerimiento requerimiento1 = new Requerimiento("Programaci√≥n1",1,arreglocursos);
+//
+//		ArrayList <Requerimiento> arreglorequerimiento = new ArrayList<Requerimiento>();
+//		arreglorequerimiento.add(requerimiento1);
+//
+//		Pensum pensumejemplo = new Pensum(160,"ISIS2020",arreglorequerimiento);
+//
+//		ArrayList <Pensum> arreglopensum = new ArrayList<Pensum>();
+//		arreglopensum.add(pensumejemplo);
+//
+//		Carrera carreraejemplo = new Carrera("Ingenier√≠a de Sistemas y Computaci√≥n","ISIS",arreglopensum);
+//
+//		List<Curso> cursos = new ArrayList<>();
+//		cursos.add(cursoejemplo);
+//
+//		List<Carrera> carreras = new ArrayList<>();
+//		carreras.add(carreraejemplo);
+//		
+//		HistoriaAcademica historia = new HistoriaAcademica();
+//
+//		Estudiante estudiantejemplo = new Estudiante("pe.yerson","vivamillonarios123","Pablo Esteban Yerso Nando","202014198",historia);
+//
+//		Coordinador coordinadorejemplo = new Coordinador("elcor.dinador","perritosdulces123","Elcor Dinador Martinez",carreraejemplo);
+//
+//		Map<String, Estudiante> estudiantes = new HashMap<>();
+//		Map<String, Coordinador> coordinadores = new HashMap<>();
+//		estudiantes.put(estudiantejemplo.getCodigo(),estudiantejemplo);
+//		coordinadores.put(coordinadorejemplo.getNombre(),coordinadorejemplo);
+//
+//		ProcesadorBanner procesador = new ProcesadorBanner(cursos,carreras,estudiantes,coordinadores);
+//
+//		LoaderData.guardarData(procesador);
+		
+		ConsolaBanner consola = new ConsolaBanner();
+		consola.ejecutarapp();
+	}
+
 	public void ejecutarapp() {
 
-		System.out.println("Sistema de gestiÛn de cursos y calificaciones\n");
+		System.out.println("Sistema de gesti√≥n de cursos y calificaciones\n");
 
 		boolean ejecutar = true;
 
 		while (ejecutar) {
 			try {
 				mostrarMenu();
-				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opciÛn"));
+				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opci√≥n"));
 				if (opcion_seleccionada == 1)
 					ejecutarCargarInfo();
 			}
 			catch (NumberFormatException e)
 			{
-				System.out.println("Debe seleccionar uno de los n˙meros de las opciones.");
+				System.out.println("Debe seleccionar uno de los n√∫meros de las opciones.");
 			}
 		}
 	}
@@ -34,8 +84,8 @@ public class ConsolaBanner {
 
 	public void mostrarMenu()
 	{
-		System.out.println("\nOpciones de la aplicaciÛn\n");
-		System.out.println("1. Cargar la informaciÛn");
+		System.out.println("\nOpciones de la aplicaci√≥n\n");
+		System.out.println("1. Cargar la informaci√≥n");
 	}
 	
 	public String input(String mensaje)
@@ -62,9 +112,9 @@ public class ConsolaBanner {
 		try
 		{
 			procesador = LoaderData.cargarData();
-			System.out.println("Se cargÛ el archivo con informaciÛn del sistema.");
+			System.out.println("Se carg√≥ el archivo con informaci√≥n del sistema.");
 			Collection<String> eventos = procesador.darNombresCarreras();
-			System.out.println("Las carreras para las que se tiene informaciÛn son:");
+			System.out.println("Las carreras para las que se tiene informaci√≥n son:");
 			for (String dep : eventos)
 			{
 				System.out.println(" - " + dep);
@@ -75,10 +125,5 @@ public class ConsolaBanner {
 			System.out.println("ERROR: "+e);
 		}
 
-	}
-	public static void main(String[] args)
-	{
-		ConsolaBanner consola = new ConsolaBanner();
-		consola.ejecutarapp();
 	}
 }

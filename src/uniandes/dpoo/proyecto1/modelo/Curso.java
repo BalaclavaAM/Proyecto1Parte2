@@ -49,4 +49,16 @@ public class Curso implements Serializable {
 		this.codigo = codigo;
 		
 	}
+
+	public boolean isNotanumerica() {
+		return notanumerica;
+	}
+
+	public Restriccion[] getRestricciones() {
+		return restricciones;
+	}
+
+	public void setRestricciones(Restriccion[] restricciones) {
+		this.restricciones = restricciones;
+	}
 }
