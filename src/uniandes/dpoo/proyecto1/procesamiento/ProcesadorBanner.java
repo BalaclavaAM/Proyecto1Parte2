@@ -104,5 +104,9 @@ public class ProcesadorBanner implements Serializable {
 		}
 	}
 	
+	public boolean crearEstudiante(String username, String contrasenha, String nombre, String codigo) 
+	{
+		return true;
+	}
 	
 }
