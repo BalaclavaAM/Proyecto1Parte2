@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.procesamiento;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -109,4 +110,57 @@ public class ProcesadorBanner implements Serializable {
 		return true;
 	}
 	
+	public boolean checkCorequisitos(Curso elcurso, List<Curso> cursosSemestre) {
+		boolean retorno = true;
+		if (elcurso.getRestricciones().containsKey("coreq")) {
+			List<Curso> correquisitos = elcurso.getRestricciones().get("coreq");
+			for (Curso correquisito : correquisitos) {
+				if (!(cursosSemestre.contains(correquisito))){
+					retorno = false;
+					break;
+				}
+			}
+		}
+		return retorno;
+	}
+	
+	public boolean checkPreRequisitos(Curso elcurso, HistoriaAcademica historia) {
+		boolean retorno = true;
+		if (elcurso.getRestricciones().containsKey("prereq")) {
+			List<Curso> prerequisitos = elcurso.getRestricciones().get("prereq");
+			for (Curso prereq : prerequisitos) {
+				Map<Integer, ArrayList<CursoVisto>> cursosvistos = historia.getCursosvistosXsemestre();
+				for (Map.Entry<Integer,ArrayList<CursoVisto>> entrada : cursosvistos.entrySet()) {
+					ArrayList<CursoVisto> cursossemestre = entrada.getValue();
+					for (CursoVisto cv : cursossemestre) {
+						if (!(cv.getCurso().getCodigo()==prereq.getNombre())) {
+							retorno=false;
+							break;
+						}
+					}
+				}
+			}
+		}
+		return retorno;
+	}
+	
+	public boolean checkPlan(Estudiante elestudiante) {
+		boolean retorno = true;
+		Map<String,List<Curso>> plan = elestudiante.getPlan();
+		for (Map.Entry<String,List<Curso>> entrada : plan.entrySet()) {
+			int creditos = 0;
+			for (Curso cursoplaneado : entrada.getValue()) {
+				creditos+=cursoplaneado.getCreditos();
+				if (! (checkCorequisitos(cursoplaneado,entrada.getValue())) || !(checkPreRequisitos(cursoplaneado,elestudiante.getHistoriaAcademica()))) {
+					retorno = false;
+					break;
+				}
+				if (creditos>25) {
+					retorno = false;
+					break;
+				}
+			}
+		}
+		return retorno;
+	}
 }

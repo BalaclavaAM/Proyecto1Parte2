@@ -1,6 +1,8 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 public class Curso implements Serializable {
     /**
@@ -13,18 +15,24 @@ public class Curso implements Serializable {
 	private String programa;
 	private String duracion;
 	private String tipologia;
+	private int creditos;
+<<<<<<< HEAD
+	private Map<String,List<Curso>> restricciones;
+=======
 	private Restriccion[] restricciones;
+>>>>>>> 5cc8f09a88c4a4dab762fa52a56ae621905cb9a4
 			
 
 
 
 
-	public Curso(String nombre, String codigo, String programa, String duracion, String tipologia, boolean notanumerica) {
+	public Curso(String nombre, String codigo, String programa, int creditos, String duracion, String tipologia, boolean notanumerica) {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.programa = programa;
 		this.duracion = duracion;
 		this.tipologia = tipologia;
+		this.creditos = creditos;
 		this.notanumerica = notanumerica;
 
 	}
@@ -54,11 +62,24 @@ public class Curso implements Serializable {
 		return notanumerica;
 	}
 
-	public Restriccion[] getRestricciones() {
+	public Map<String,List<Curso>> getRestricciones() {
 		return restricciones;
 	}
 
+<<<<<<< HEAD
+	public void setRestricciones(Map<String,List<Curso>> restricciones) {
+=======
+	public int getCreditos() {
+		return creditos;
+	}
+
 	public void setRestricciones(Restriccion[] restricciones) {
+>>>>>>> 5cc8f09a88c4a4dab762fa52a56ae621905cb9a4
 		this.restricciones = restricciones;
 	}
+
+	public int getCreditos() {
+		return creditos;
+	}
+
 }
