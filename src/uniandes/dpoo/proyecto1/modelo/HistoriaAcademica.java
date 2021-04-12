@@ -64,9 +64,7 @@ public class HistoriaAcademica implements Serializable {
 		return cursosvistosXsemestre;
 	}
 
-	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre() {
-		return cursosvistosXsemestre;
-	}
+
 
 	public void agregarCurso(Curso curso, Periodo periodo, float nota, int semestre){
 		CursoVisto registro = new CursoVisto(curso, periodo, nota);
@@ -101,6 +99,16 @@ public class HistoriaAcademica implements Serializable {
 			return true;
 		}
 		return false;
+	}
+
+	public double calcularPromedioSemestre(int semestre){
+		int suma = 0;
+		int cnt = 0;
+		for(CursoVisto cv: cursosvistosXsemestre.get(semestre)){
+			suma += cv.getNota();
+			cnt += 1;
+		}
+		return (double) suma/cnt;
 	}
 
 	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre(){
