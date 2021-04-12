@@ -59,7 +59,6 @@ public class HistoriaAcademica implements Serializable {
 		return cursosvistosXsemestre;
 	}
 
-<<<<<<< HEAD
 	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre() {
 		return cursosvistosXsemestre;
 	}
@@ -67,9 +66,6 @@ public class HistoriaAcademica implements Serializable {
 		this.cursosvistosXsemestre = cursosvistosXsemestre;
 	}
 	public void agregarCurso(Curso curso,Periodo periodo, float nota, int semestre){
-=======
-	public void agregarCurso(Curso curso,Periodo periodo, float nota, int semestre, Requerimiento req){
->>>>>>> 5cc8f09a88c4a4dab762fa52a56ae621905cb9a4
 		CursoVisto registro = new CursoVisto(curso, periodo, nota);
 		cursosvistosXsemestre.computeIfAbsent(semestre, k -> new ArrayList<>());
 		cursosvistosXsemestre.get(semestre).add(registro);
