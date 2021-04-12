@@ -19,46 +19,46 @@ public class ConsolaBanner {
 
 	public static void main(String[] args)
 	{
-//		Curso cursoejemplo = new Curso("Introducción a la Programación","ISIS1221","ISIS","16","Fundamentación", false);
-//
-//		ArrayList <Curso> arreglocursos = new ArrayList<Curso>();
-//		arreglocursos.add(cursoejemplo);
-//
-//		Requerimiento requerimiento1 = new Requerimiento("Programación1",1,arreglocursos);
-//
-//		ArrayList <Requerimiento> arreglorequerimiento = new ArrayList<Requerimiento>();
-//		arreglorequerimiento.add(requerimiento1);
-//
-//		Pensum pensumejemplo = new Pensum(160,"ISIS2020",arreglorequerimiento);
-//
-//		ArrayList <Pensum> arreglopensum = new ArrayList<Pensum>();
-//		arreglopensum.add(pensumejemplo);
-//
-//		Carrera carreraejemplo = new Carrera("Ingeniería de Sistemas y Computación","ISIS",arreglopensum);
-//
-//		List<Curso> cursos = new ArrayList<>();
-//		cursos.add(cursoejemplo);
-//
-//		List<Carrera> carreras = new ArrayList<>();
-//		carreras.add(carreraejemplo);
-//		
-//		HistoriaAcademica historia = new HistoriaAcademica();
-//
-//		Estudiante estudiantejemplo = new Estudiante("pe.yerson","vivamillonarios123","Pablo Esteban Yerso Nando","202014198",historia);
-//
-//		Coordinador coordinadorejemplo = new Coordinador("elcor.dinador","perritosdulces123","Elcor Dinador Martinez",carreraejemplo);
-//
-//		Map<String, Estudiante> estudiantes = new HashMap<>();
-//		Map<String, Coordinador> coordinadores = new HashMap<>();
-//		estudiantes.put(estudiantejemplo.getCodigo(),estudiantejemplo);
-//		coordinadores.put(coordinadorejemplo.getNombre(),coordinadorejemplo);
-//
-//		ProcesadorBanner procesador = new ProcesadorBanner(cursos,carreras,estudiantes,coordinadores);
-//
-//		LoaderData.guardarData(procesador);
+		Curso cursoejemplo = new Curso("Introducción a la Programación","ISIS1221","ISIS","16","Fundamentación", false);
+
+		ArrayList <Curso> arreglocursos = new ArrayList<Curso>();
+		arreglocursos.add(cursoejemplo);
+
+		Requerimiento requerimiento1 = new Requerimiento("Programación1",1,arreglocursos);
+
+		ArrayList <Requerimiento> arreglorequerimiento = new ArrayList<Requerimiento>();
+		arreglorequerimiento.add(requerimiento1);
+
+		Pensum pensumejemplo = new Pensum(160,"ISIS2020",arreglorequerimiento);
+
+		ArrayList <Pensum> arreglopensum = new ArrayList<Pensum>();
+		arreglopensum.add(pensumejemplo);
+
+		Carrera carreraejemplo = new Carrera("Ingeniería de Sistemas y Computación","ISIS",arreglopensum);
+
+		List<Curso> cursos = new ArrayList<>();
+		cursos.add(cursoejemplo);
+
+		List<Carrera> carreras = new ArrayList<>();
+		carreras.add(carreraejemplo);
 		
-		ConsolaBanner consola = new ConsolaBanner();
-		consola.ejecutarapp();
+		HistoriaAcademica historia = new HistoriaAcademica();
+
+		Estudiante estudiantejemplo = new Estudiante("pe.yerson","vivamillonarios123","Pablo Esteban Yerso Nando","202014198",pensumejemplo,historia);
+
+		Coordinador coordinadorejemplo = new Coordinador("elcor.dinador","perritosdulces123","Elcor Dinador Martinez",carreraejemplo);
+
+		Map<String, Estudiante> estudiantes = new HashMap<>();
+		Map<String, Coordinador> coordinadores = new HashMap<>();
+		estudiantes.put(estudiantejemplo.getCodigo(),estudiantejemplo);
+		coordinadores.put(coordinadorejemplo.getNombre(),coordinadorejemplo);
+
+		ProcesadorBanner procesador = new ProcesadorBanner(cursos,carreras,estudiantes,coordinadores);
+
+		LoaderData.guardarData(procesador);
+		
+//		ConsolaBanner consola = new ConsolaBanner();
+//		consola.ejecutarapp();
 	}
 
 	public void ejecutarapp() {
