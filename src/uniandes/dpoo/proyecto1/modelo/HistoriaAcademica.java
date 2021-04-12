@@ -19,17 +19,22 @@ public class HistoriaAcademica implements Serializable {
 	private float promedio;
 	private Map<Integer, ArrayList<CursoVisto>> cursosvistosXsemestre;
 	private Map<String, CursoVisto> cursosvistos;
-	private Map<Object, Curso> requerimientosCumplidos;
+	private Map<Requerimiento, RequerimientoHistoria> requerimientosRegistro;
 	private Map<String, Integer> cursosVreq;
 
 
 
-	public HistoriaAcademica() {
+	public HistoriaAcademica(Pensum pensum) {
 		super();
 		this.creditos = 0;
 		this.semestre = 0;
 		this.promedio = 0;
 		this.cursosvistos = Collections.emptyMap();;
+		this.requerimientosRegistro = Collections.emptyMap();
+		this.cursosVreq = Collections.emptyMap();
+		for( Requerimiento req: pensum.getRequerimientos()){
+			requerimientosRegistro.put(req, new RequerimientoHistoria(req));
+		}
 	}
 	public float getCreditos() {
 		return creditos;
@@ -59,43 +64,38 @@ public class HistoriaAcademica implements Serializable {
 		return cursosvistosXsemestre;
 	}
 
-	public void agregarCurso(Curso curso,Periodo periodo, float nota, int semestre, Requerimiento req){
+	public void agregarCurso(Curso curso,Periodo periodo, float nota, int semestre){
 		CursoVisto registro = new CursoVisto(curso, periodo, nota);
 		cursosvistosXsemestre.computeIfAbsent(semestre, k -> new ArrayList<>());
 		cursosvistosXsemestre.get(semestre).add(registro);
 		cursosvistos.put(curso.getCodigo(),registro);
-		
 	}
-	
-	public int agregarRequerimiento(String nombreCurso, RequerimientoCurso req){
+
+	public int validarRequerimiento(String nombreCurso, Requerimiento req){
 		CursoVisto cursoV = cursosvistos.get(nombreCurso);
-		if (cursoV == null){
+		RequerimientoHistoria reqRegistro = requerimientosRegistro.get(req);
+		if (cursoV == null || reqRegistro == null){
 			return -1;
 		}
-		if (cursoV.getNota()> 3 & !req.validar(cursoV.getCurso())){
-			return 0;
+		if(cursosVreq.containsKey(nombreCurso)){
+			return -2;
 		}
-		if (requerimientosCumplidos.get(req) != null){
-			return 2;
+		if(reqRegistro.agregarCurso(cursoV)){
+			cursosVreq.put(cursoV.getCurso().getCodigo(),1);
+			return 1;
 		}
-		requerimientosCumplidos.put(req,cursoV.getCurso());
-		cursosVreq.put(cursoV.getCurso().getCodigo(), 1);
-		return 1;
+		return 0;
+
 	}
-	public int validarRequerimientoBloque(Curso[] cursosOp, RequerimientoBloque req) {
-		for (Curso curso : cursosOp) {
-			if (cursosVreq.containsKey(curso.getCodigo())) {
-				return -2;
-			}
-			if (!cursosvistos.containsKey(curso.getCodigo())) {
-				return -1;
-			}
+
+
+	public boolean cambiarReq(String nombreCurso, Requerimiento reqInicial, Requerimiento reqCambio){
+		CursoVisto cursoV = cursosvistos.get(nombreCurso);
+		if (validarRequerimiento(nombreCurso, reqCambio) == 1){
+			RequerimientoHistoria reqRegistro = requerimientosRegistro.get(reqInicial);
+			reqRegistro.quitarCurso(cursoV);
+			return true;
 		}
-		if (!req.validar(cursosOp)) {
-			return 0;
-		}
-		return 1;
+		return false;
 	}
-	
-	
 }

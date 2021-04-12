@@ -15,7 +15,7 @@ public class Estudiante extends Usuario implements Serializable {
 		this.name = name;
 		this.codigo = codigo;
 		this.pensum = pensum;
-		this.HistoriaAcademica = new HistoriaAcademica();
+		this.HistoriaAcademica = new HistoriaAcademica(pensum);
 	}
 	public String getName() {
 		return name;

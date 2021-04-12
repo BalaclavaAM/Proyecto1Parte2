@@ -59,7 +59,6 @@ public class Curso implements Serializable {
 	public Restriccion[] getRestricciones() {
 		return restricciones;
 	}
-
 	public int getCreditos() {
 		return creditos;
 	}

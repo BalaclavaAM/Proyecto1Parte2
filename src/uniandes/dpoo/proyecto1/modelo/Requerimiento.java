@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Requerimiento implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7762431642880730439L;
 	private String nombre;
@@ -27,9 +27,15 @@ public abstract class Requerimiento implements Serializable {
 		this.cursos = cursos;
 	}
 
-	
 	public ArrayList<Curso> getCursos() {
 		return cursos;
 	}
 
+	public boolean validar(Curso cursoOp) {
+		return cursos.contains(cursoOp);
+	}
+
+	public int getCreditos() {
+		return creditos;
+	}
 }
