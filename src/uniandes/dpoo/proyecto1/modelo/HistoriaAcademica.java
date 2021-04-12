@@ -72,6 +72,9 @@ public class HistoriaAcademica implements Serializable {
 		if (!req.validar(cursoV.getCurso())){
 			return 0;
 		}
+		if (requerimientosCumplidos.get(req) != null){
+			return 2;
+		}
 		requerimientosCumplidos.put(req,cursoV.getCurso());
 		return 1;
 	}
