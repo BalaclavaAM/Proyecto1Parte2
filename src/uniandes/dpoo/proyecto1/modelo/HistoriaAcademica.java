@@ -64,6 +64,7 @@ public class HistoriaAcademica implements Serializable {
 		cursosvistosXsemestre.get(semestre).add(registro);
 		cursosvistos.put(curso.getCodigo(),registro);
 	}
+	
 	public int agregarRequerimiento(String nombreCurso, RequerimientoCurso req){
 		CursoVisto cursoV = cursosvistos.get(nombreCurso);
 		if (cursoV == null){
@@ -79,7 +80,7 @@ public class HistoriaAcademica implements Serializable {
 		return 1;
 	}
 
-
+	
 
 
 }
