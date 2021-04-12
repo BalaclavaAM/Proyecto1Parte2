@@ -2,6 +2,8 @@ package uniandes.dpoo.proyecto1.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 
 public class Carrera implements Serializable {
 	/**
@@ -10,21 +12,15 @@ public class Carrera implements Serializable {
 	private static final long serialVersionUID = -7300727299950071526L;
 	private String nombre;
 	private String diminutivo;
-	private ArrayList<Pensum> Pensum;
+	private Map<String,Estudiante> estudiantes;
 	
-	public Carrera(String nombre, String diminutivo, ArrayList<uniandes.dpoo.proyecto1.modelo.Pensum> pensum) {
+	public Carrera(String nombre, String diminutivo) {
 		super();
 		this.nombre = nombre;
 		this.diminutivo = diminutivo;
-		Pensum = pensum;
+		this.setEstudiantes(Collections.emptyMap());
 	}
 	
-	public ArrayList<Pensum> getPensum() {
-		return Pensum;
-	}
-	public void setPensum(ArrayList<Pensum> pensum) {
-		Pensum = pensum;
-	}
 	
 	
 	public String getDiminutivo() {
@@ -40,5 +36,17 @@ public class Carrera implements Serializable {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+
+
+	public Map<String,Estudiante> getEstudiantes() {
+		return estudiantes;
+	}
+
+
+
+	public void setEstudiantes(Map<String,Estudiante> estudiantes) {
+		this.estudiantes = estudiantes;
 	}
 }
