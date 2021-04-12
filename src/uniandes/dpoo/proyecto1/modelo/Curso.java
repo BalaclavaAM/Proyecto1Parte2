@@ -14,7 +14,7 @@ public class Curso implements Serializable {
 	private String duracion;
 	private String tipologia;
 	private int creditos;
-	private Restriccion[] restricciones;
+	private Map<String,List<Curso>> restricciones;
 			
 
 
@@ -56,14 +56,16 @@ public class Curso implements Serializable {
 		return notanumerica;
 	}
 
-	public Restriccion[] getRestricciones() {
+	public Map<String,List<Curso>> getRestricciones() {
 		return restricciones;
 	}
+
+	public void setRestricciones(Map<String,List<Curso>> restricciones) {
+		this.restricciones = restricciones;
+	}
+
 	public int getCreditos() {
 		return creditos;
 	}
 
-	public void setRestricciones(Restriccion[] restricciones) {
-		this.restricciones = restricciones;
-	}
 }
