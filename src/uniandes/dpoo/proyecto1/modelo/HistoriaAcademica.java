@@ -98,4 +98,8 @@ public class HistoriaAcademica implements Serializable {
 		}
 		return false;
 	}
+
+	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre(){
+		return cursosvistosXsemestre;
+	}
 }

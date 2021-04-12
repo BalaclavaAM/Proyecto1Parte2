@@ -1,11 +1,10 @@
 package uniandes.dpoo.proyecto1.modelo;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class Estudiante extends Usuario implements Serializable {
+public class Estudiante extends Usuario {
 	private static final long serialVersionUID = -232931508719866061L;
 	private String name;
 	private String codigo;
@@ -18,7 +17,6 @@ public class Estudiante extends Usuario implements Serializable {
 		this.name = name;
 		this.codigo = codigo;
 		this.pensum = pensum;
-		this.HistoriaAcademica = new HistoriaAcademica();
 		this.setPlan(Collections.emptyMap());
 		this.HistoriaAcademica = new HistoriaAcademica(pensum);
 	}

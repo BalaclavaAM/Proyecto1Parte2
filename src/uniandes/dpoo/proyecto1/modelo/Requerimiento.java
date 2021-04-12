@@ -38,4 +38,8 @@ public abstract class Requerimiento implements Serializable {
 	public int getCreditos() {
 		return creditos;
 	}
+	
+	public int getSemestreSugerido() {
+		return semestresugerido;
+	}
 }

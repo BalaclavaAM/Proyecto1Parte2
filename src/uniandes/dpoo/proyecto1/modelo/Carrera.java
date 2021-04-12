@@ -1,7 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 

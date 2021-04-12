@@ -37,6 +37,14 @@ public class RequerimientoHistoria {
             this.cumplido = false;
         }
     }
+
+    public boolean getCumplido(){
+        return cumplido;
+    }
+
+    public double getPorcentaje(){
+        return porcentaje;
+    }
     
     
 
