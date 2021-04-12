@@ -83,8 +83,7 @@ public class ConsolaBanner {
 		return null;
 	}
 	
-	
-	
+
 	private void ejecutarCargarInfo()
 	{
 		System.out.println("\n" + "Cargar los datos de la app" + "\n");
@@ -139,6 +138,7 @@ public class ConsolaBanner {
 		}
 
 	}
+
 	private void genemptyProc()
 	{
 		System.out.println("\n" + "Logeo de Usuario" + "\n");
@@ -157,6 +157,8 @@ public class ConsolaBanner {
 		}
 
 	}
+
+
 	private void createUser()
 	{
 		System.out.println("\n" + "Creación de Usuario" + "\n");

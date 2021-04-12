@@ -1,6 +1,8 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 public class Curso implements Serializable {
     /**
@@ -14,7 +16,7 @@ public class Curso implements Serializable {
 	private String duracion;
 	private String tipologia;
 	private int creditos;
-	private Map<String,List<Curso>> restricciones;
+	private Map<String, List<Curso>> restricciones;
 			
 
 

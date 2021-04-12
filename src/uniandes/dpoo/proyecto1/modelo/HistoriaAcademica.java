@@ -64,20 +64,24 @@ public class HistoriaAcademica implements Serializable {
 		return cursosvistosXsemestre;
 	}
 
-	public void agregarCurso(Curso curso,Periodo periodo, float nota, int semestre){
+	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre() {
+		return cursosvistosXsemestre;
+	}
+
+	public void agregarCurso(Curso curso, Periodo periodo, float nota, int semestre){
 		CursoVisto registro = new CursoVisto(curso, periodo, nota);
 		cursosvistosXsemestre.computeIfAbsent(semestre, k -> new ArrayList<>());
 		cursosvistosXsemestre.get(semestre).add(registro);
 		cursosvistos.put(curso.getCodigo(),registro);
 	}
 
-	public int validarRequerimiento(String nombreCurso, Requerimiento req){
-		CursoVisto cursoV = cursosvistos.get(nombreCurso);
+	public int validarRequerimiento(String codigoCurso, Requerimiento req){
+		CursoVisto cursoV = cursosvistos.get(codigoCurso);
 		RequerimientoHistoria reqRegistro = requerimientosRegistro.get(req);
 		if (cursoV == null || reqRegistro == null){
 			return -1;
 		}
-		if(cursosVreq.containsKey(nombreCurso)){
+		if(cursosVreq.containsKey(codigoCurso)){
 			return -2;
 		}
 		if(reqRegistro.agregarCurso(cursoV)){
@@ -89,9 +93,9 @@ public class HistoriaAcademica implements Serializable {
 	}
 
 
-	public boolean cambiarReq(String nombreCurso, Requerimiento reqInicial, Requerimiento reqCambio){
-		CursoVisto cursoV = cursosvistos.get(nombreCurso);
-		if (validarRequerimiento(nombreCurso, reqCambio) == 1){
+	public boolean cambiarReq(String codigoCurso, Requerimiento reqInicial, Requerimiento reqCambio){
+		CursoVisto cursoV = cursosvistos.get(codigoCurso);
+		if (validarRequerimiento(codigoCurso, reqCambio) == 1){
 			RequerimientoHistoria reqRegistro = requerimientosRegistro.get(reqInicial);
 			reqRegistro.quitarCurso(cursoV);
 			return true;
