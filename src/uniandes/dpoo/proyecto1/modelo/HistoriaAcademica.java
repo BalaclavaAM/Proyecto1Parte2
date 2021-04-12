@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 public class HistoriaAcademica implements Serializable {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -491840464239633611L;
 	private Pensum pensum;
@@ -73,14 +74,7 @@ public class HistoriaAcademica implements Serializable {
 		return 1;
 	}
 
-	public int actualizarRequerimiento(){
 
-	}
-
-
-	public boolean validarRequerimiento(Requerimiento req){
-
-	}
 
 
 }

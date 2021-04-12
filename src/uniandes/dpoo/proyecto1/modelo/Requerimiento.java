@@ -1,4 +1,5 @@
 package uniandes.dpoo.proyecto1.modelo;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class Requerimiento implements Serializable {

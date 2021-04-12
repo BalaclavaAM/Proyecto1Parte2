@@ -5,7 +5,7 @@ import java.util.Date;
 public class CursoVisto {
 	private Curso curso;
 	private float nota;
-	private Date fecha;
+	private Periodo periodo;
 	
 
 	public CursoVisto(Curso curso, Periodo periodo, float nota) {
