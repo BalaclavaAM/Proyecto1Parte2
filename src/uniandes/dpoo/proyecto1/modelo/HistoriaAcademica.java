@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +11,7 @@ public class HistoriaAcademica implements Serializable {
 	/**
 	 *
 	 */
+	@Serial
 	private static final long serialVersionUID = -491840464239633611L;
 	private Pensum pensum;
 	private float creditos;
