@@ -31,6 +31,7 @@ public class HistoriaAcademica implements Serializable {
 		this.promedio = 0;
 		this.cursosvistos = Collections.emptyMap();;
 		this.requerimientosRegistro = Collections.emptyMap();
+		this.cursosvistosXsemestre = Collections.emptyMap();
 		this.cursosVreq = Collections.emptyMap();
 		for( Requerimiento req: pensum.getRequerimientos()){
 			requerimientosRegistro.put(req, new RequerimientoHistoria(req));
@@ -57,9 +58,7 @@ public class HistoriaAcademica implements Serializable {
 	public Pensum getPensum() {
 		return pensum;
 	}
-	public void setPensum(Pensum pensum) {
-		this.pensum = pensum;
-	}
+
 	public Map<Integer, ArrayList<CursoVisto>> getCursosvistos() {
 		return cursosvistosXsemestre;
 	}
@@ -105,8 +104,18 @@ public class HistoriaAcademica implements Serializable {
 		int suma = 0;
 		int cnt = 0;
 		for(CursoVisto cv: cursosvistosXsemestre.get(semestre)){
-			suma += cv.getNota();
-			cnt += 1;
+			suma += cv.getNota()*cv.getCurso().getCreditos();
+			cnt += cv.getCurso().getCreditos();
+		}
+		return (double) suma/cnt;
+	}
+
+	public double calcularPromedioAcademico(){
+		int suma = 0;
+		int cnt = 0;
+		for(CursoVisto cv: cursosvistos.values()) {
+			suma += cv.getNota() * cv.getCurso().getCreditos();
+			cnt += cv.getCurso().getCreditos();
 		}
 		return (double) suma/cnt;
 	}
