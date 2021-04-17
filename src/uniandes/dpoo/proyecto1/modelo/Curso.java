@@ -8,6 +8,7 @@ public class Curso implements Serializable {
     /**
 	 * Suave
 	 */
+
 	private static final long serialVersionUID = -1708691240589592764L;
 	private final boolean notanumerica;
 	private String nombre;

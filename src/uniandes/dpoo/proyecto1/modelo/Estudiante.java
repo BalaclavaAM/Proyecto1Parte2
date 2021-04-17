@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +14,16 @@ public class Estudiante extends Usuario implements Serializable {
 	private HistoriaAcademica HistoriaAcademica;
 	private Map<String,List<Curso>> plan;
 	
-	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo, Pensum pensum) {
+	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo, Pensum pensum, Periodo periodo) {
 		super(nombredeusuario, contrasenha);
 		this.name = name;
 		this.codigo = codigo;
 		this.pensum = pensum;
-		this.HistoriaAcademica = new HistoriaAcademica(pensum);
-		this.setPlan(Collections.emptyMap());
-		this.HistoriaAcademica = new HistoriaAcademica(pensum);
+		this.HistoriaAcademica = new HistoriaAcademica(pensum, periodo);
+		this.plan = Collections.emptyMap();
+		ArrayList<Integer> d = new ArrayList<>();
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -35,15 +37,7 @@ public class Estudiante extends Usuario implements Serializable {
 	public HistoriaAcademica getHistoriaAcademica() {
 		return HistoriaAcademica;
 	}
-	public void setHistoriaAcademica(HistoriaAcademica historiaAcademica) {
-		HistoriaAcademica = historiaAcademica;
-	}
 	public Map<String,List<Curso>> getPlan() {
 		return plan;
 	}
-	public void setPlan(Map<String,List<Curso>> plan) {
-		this.plan = plan;
-	}
-	
-
 }

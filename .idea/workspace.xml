@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="f5">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Proyecto1Parte2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nivel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Plan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RequerimientoCurso.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/consola/ConsolaBanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/consola/ConsolaBanner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/HistoriaAcademica.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/HistoriaAcademica.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/consola/ConsolaBanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/consola/ConsolaBanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Curso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Curso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/CursoInscrito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Estudiante.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/HistoriaAcademica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/HistoriaAcademica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Pensum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Pensum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Periodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Periodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Requerimiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Requerimiento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RequerimientoHistoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroRequerimiento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/ProcesadorBanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/ProcesadorBanner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +26,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -44,6 +54,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -71,6 +82,12 @@
       <workItem from="1618272972650" duration="288000" />
       <workItem from="1618273387744" duration="4000" />
       <workItem from="1618274837193" duration="29000" />
+      <workItem from="1618275053758" duration="708000" />
+      <workItem from="1618276193257" duration="10468000" />
+      <workItem from="1618433805018" duration="34175000" />
+      <workItem from="1618624484440" duration="1152000" />
+      <workItem from="1618625664152" duration="523000" />
+      <workItem from="1618626206372" duration="433000" />
     </task>
     <task id="LOCAL-00001" summary="f1">
       <created>1618165373822</created>
