@@ -1,27 +1,29 @@
 package uniandes.dpoo.proyecto1.modelo;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class RequerimientoHistoria {
+public class RegistroRequerimiento {
     private Requerimiento req;
     private int creditosCumplidos;
     private boolean cumplido;
     private double porcentaje;
     private ArrayList<CursoVisto> cursos;
 
-    public RequerimientoHistoria(Requerimiento req){
+    public RegistroRequerimiento(Requerimiento req){
         this.req = req;
         this.creditosCumplidos = 0;
         this.cumplido = false;
         this.porcentaje = 0.0;
         this.cursos = new ArrayList<>();
     }
-    public boolean agregarCurso(CursoVisto curso){
-        if(req.validar(curso.getCurso()) & curso.getNota()>3){
+
+    public boolean agregarCurso(CursoVisto curso,   Map<String, Integer> cursosVreq){
+        if(req.validar(curso.getCurso(), cursosVreq) & curso.getNota()>3){
             cursos.add(curso);
             this.creditosCumplidos +=  curso.getCurso().getCreditos();
             this.porcentaje = (double)creditosCumplidos/req.getCreditos();
-            if(creditosCumplidos >= req.getCreditos()){
+            if (req.cumplio(curso.getCurso(), this)){
                 this.cumplido = true;
             }
             return true;
@@ -36,6 +38,14 @@ public class RequerimientoHistoria {
         if(creditosCumplidos < req.getCreditos()){
             this.cumplido = false;
         }
+    }
+
+    public int getCreditosCumplidos() {
+        return creditosCumplidos;
+    }
+
+    public Requerimiento getReq() {
+        return req;
     }
 
     public boolean getCumplido(){

@@ -1,5 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo;
 
+import jdk.jfr.Period;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,78 +16,77 @@ public class HistoriaAcademica implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -491840464239633611L;
 	private Pensum pensum;
-	private float creditos;
-	private int semestre;
-	private float promedio;
-	private Map<Integer, ArrayList<CursoVisto>> cursosvistosXsemestre;
+	private float creditos = 0;
+	private int semestre = 0;
+	private Periodo periodo;
+
 	private Map<String, CursoVisto> cursosvistos;
-	private Map<Requerimiento, RequerimientoHistoria> requerimientosRegistro;
+	private Map<Periodo, ArrayList<CursoVisto>> cursosvistosXperiodo;
 	private Map<String, Integer> cursosVreq;
+	private Map<String, RegistroRequerimiento> requerimientosRegistro;
+	private Map<Nivel, Map<String, RegistroRequerimiento>> reqOblXnivel;
 
 
-
-	public HistoriaAcademica(Pensum pensum) {
-		super();
-		this.creditos = 0;
-		this.semestre = 0;
-		this.promedio = 0;
-		this.cursosvistos = Collections.emptyMap();;
+	public HistoriaAcademica(Pensum pensum, Periodo periodo) {
+		this.pensum = pensum;
+		this.periodo = periodo;
+		this.cursosvistos = Collections.emptyMap();
 		this.requerimientosRegistro = Collections.emptyMap();
+		this.cursosvistosXperiodo = Collections.emptyMap();
 		this.cursosVreq = Collections.emptyMap();
-		for( Requerimiento req: pensum.getRequerimientos()){
-			requerimientosRegistro.put(req, new RequerimientoHistoria(req));
+		this.reqOblXnivel = Collections.emptyMap();
+
+		for (Requerimiento req : pensum.getRequerimientos()) {
+			RegistroRequerimiento rReq = new RegistroRequerimiento(req);
+			requerimientosRegistro.put(req.getNombre(), rReq);
+			reqOblXnivel.putIfAbsent(req.getNivel(), Collections.emptyMap());
+			reqOblXnivel.get(req.getNivel()).put(req.getNombre(), rReq);
 		}
+
 	}
+
 	public float getCreditos() {
 		return creditos;
-	}
-	public void setCreditos(float creditos) {
-		this.creditos = creditos;
 	}
 	public int getSemestre() {
 		return semestre;
 	}
-	public void setSemestre(int semestre) {
-		this.semestre = semestre;
-	}
-	public float getPromedio() {
-		return promedio;
-	}
-	public void setPromedio(float promedio) {
-		this.promedio = promedio;
-	}
 	public Pensum getPensum() {
 		return pensum;
 	}
-	public void setPensum(Pensum pensum) {
-		this.pensum = pensum;
+
+	public Map<Nivel, Map<String, RegistroRequerimiento>> getReqOblXnivel() {
+		return reqOblXnivel;
 	}
-	public Map<Integer, ArrayList<CursoVisto>> getCursosvistos() {
-		return cursosvistosXsemestre;
+	public Map<String, Integer> getCursosVreq() {
+		return cursosVreq;
+	}
+	public Map<String, RegistroRequerimiento> getRequerimientosRegistro() {
+		return requerimientosRegistro;
+	}
+	public Map<String, CursoVisto> getCursosvistos() {
+		return cursosvistos;
 	}
 
-	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre() {
-		return cursosvistosXsemestre;
+	public Map<Periodo, ArrayList<CursoVisto>> getCursosvistosXperiodo(){
+		return cursosvistosXperiodo;
 	}
 
-	public void agregarCurso(Curso curso, Periodo periodo, float nota, int semestre){
+	public void agregarCurso(Curso curso, Periodo periodo, float nota){
 		CursoVisto registro = new CursoVisto(curso, periodo, nota);
-		cursosvistosXsemestre.computeIfAbsent(semestre, k -> new ArrayList<>());
-		cursosvistosXsemestre.get(semestre).add(registro);
+		cursosvistosXperiodo.computeIfAbsent(periodo, k -> new ArrayList<>());
+		cursosvistosXperiodo.get(periodo).add(registro);
 		cursosvistos.put(curso.getCodigo(),registro);
+		creditos += curso.getCreditos();
 	}
 
-	public int validarRequerimiento(String codigoCurso, Requerimiento req){
+	public int validarRequerimiento(String codigoCurso, String reqS){
 		CursoVisto cursoV = cursosvistos.get(codigoCurso);
-		RequerimientoHistoria reqRegistro = requerimientosRegistro.get(req);
+		RegistroRequerimiento reqRegistro = requerimientosRegistro.get(reqS);
 		if (cursoV == null || reqRegistro == null){
 			return -1;
 		}
-		if(cursosVreq.containsKey(codigoCurso)){
-			return -2;
-		}
-		if(reqRegistro.agregarCurso(cursoV)){
-			cursosVreq.put(cursoV.getCurso().getCodigo(),1);
+		if(reqRegistro.agregarCurso(cursoV, cursosVreq)){
 			return 1;
 		}
 		return 0;
@@ -93,17 +94,33 @@ public class HistoriaAcademica implements Serializable {
 	}
 
 
-	public boolean cambiarReq(String codigoCurso, Requerimiento reqInicial, Requerimiento reqCambio){
+	public boolean cambiarReq(String codigoCurso, String reqInicial, String reqCambio){
 		CursoVisto cursoV = cursosvistos.get(codigoCurso);
 		if (validarRequerimiento(codigoCurso, reqCambio) == 1){
-			RequerimientoHistoria reqRegistro = requerimientosRegistro.get(reqInicial);
+			RegistroRequerimiento reqRegistro = requerimientosRegistro.get(reqInicial);
 			reqRegistro.quitarCurso(cursoV);
 			return true;
 		}
 		return false;
 	}
 
-	public Map<Integer, ArrayList<CursoVisto>> getCursosvistosXsemestre(){
-		return cursosvistosXsemestre;
+	public double calcularPromedioPeriodo(Periodo periodo){
+		int suma = 0;
+		int cnt = 0;
+		for(CursoVisto cv: cursosvistosXperiodo.get(periodo)){
+			suma += cv.getNota()*cv.getCurso().getCreditos();
+			cnt += cv.getCurso().getCreditos();
+		}
+		return (double) suma/cnt;
+	}
+
+	public double calcularPromedioAcademico(){
+		int suma = 0;
+		int cnt = 0;
+		for(CursoVisto cv: cursosvistos.values()) {
+			suma += cv.getNota() * cv.getCurso().getCreditos();
+			cnt += cv.getCurso().getCreditos();
+		}
+		return (double) suma/cnt;
 	}
 }

@@ -50,9 +50,6 @@ public class ProcesadorBanner implements Serializable {
 		return estudiantes;
 	}
 
-	public void setEstudiantes(Map<String, Estudiante> estudiantes) {
-		this.estudiantes = estudiantes;
-	}
 
 	public Map<String, Coordinador> getCoordinadores() {
 		return coordinadores;
@@ -72,23 +69,9 @@ public class ProcesadorBanner implements Serializable {
 
 		return nombres;
 	}
-	
-	public int authEstudiante(String user, String password) {
-		if (estudiantes.containsKey(user)) {
-			if (estudiantes.get(user).getContrasenha()==password) {
-				return 1;
-			}
-			else
-			{
-				return 0;
-			}
-		}
-		else
-		{
-			return -1;
-		}
-	}
-	
+
+
+
 	public int authCoordinador(String user, String password) {
 		if (coordinadores.containsKey(user)) {
 			if (coordinadores.get(user).getContrasenha()==password) {
@@ -129,11 +112,11 @@ public class ProcesadorBanner implements Serializable {
 		if (elcurso.getRestricciones().containsKey("prereq")) {
 			List<Curso> prerequisitos = elcurso.getRestricciones().get("prereq");
 			for (Curso prereq : prerequisitos) {
-				Map<Integer, ArrayList<CursoVisto>> cursosvistos = historia.getCursosvistosXsemestre();
-				for (Map.Entry<Integer,ArrayList<CursoVisto>> entrada : cursosvistos.entrySet()) {
+				Map<Periodo, ArrayList<CursoVisto>> cursosvistos = historia.getCursosvistosXperiodo();
+				for (Map.Entry<Periodo, ArrayList<CursoVisto>> entrada : cursosvistos.entrySet()) {
 					ArrayList<CursoVisto> cursossemestre = entrada.getValue();
 					for (CursoVisto cv : cursossemestre) {
-						if (!(cv.getCurso().getCodigo()==prereq.getNombre())) {
+						if (!(cv.getCurso().getCodigo().equals(prereq.getNombre()))) {
 							retorno=false;
 							break;
 						}

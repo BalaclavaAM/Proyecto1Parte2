@@ -52,7 +52,6 @@ public class ConsolaBanner {
 		}
 	}
 
-
 	public void mostrarMenu()
 	{
 		if (usuario!=null) {
@@ -82,7 +81,7 @@ public class ConsolaBanner {
 		}
 		return null;
 	}
-	
+
 
 	private void ejecutarCargarInfo()
 	{
@@ -175,6 +174,5 @@ public class ConsolaBanner {
 		{
 			System.out.println("ERROR: "+e);
 		}
-
 	}
 }
