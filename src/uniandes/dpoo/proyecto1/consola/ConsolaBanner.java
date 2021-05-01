@@ -1,7 +1,7 @@
 package uniandes.dpoo.proyecto1.consola;
 
+import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 import uniandes.dpoo.proyecto1.procesamiento.*;
-import uniandes.dpoo.proyecto1.modelo.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
