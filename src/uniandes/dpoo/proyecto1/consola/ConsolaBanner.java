@@ -2,6 +2,7 @@ package uniandes.dpoo.proyecto1.consola;
 
 import uniandes.dpoo.proyecto1.procesamiento.*;
 import uniandes.dpoo.proyecto1.modelo.*;
+import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,9 +55,9 @@ public class ConsolaBanner {
 
 	public void mostrarMenu()
 	{
-		if (usuario!=null) {
-			System.out.println("Estás logeado como "+usuario.getNombredeusuario());
-		}
+//		if (Usuario!=null) {
+//			System.out.println("Estás logeado como "+Usuario.getNombredeusuario());
+//		}
 		
 		System.out.println("\nOpciones de la aplicación\n");
 		System.out.println("1. Cargar la información");

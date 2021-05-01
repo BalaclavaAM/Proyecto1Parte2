@@ -1,4 +1,9 @@
-package uniandes.dpoo.proyecto1.modelo;
+package uniandes.dpoo.proyecto1.modelo.usuario;
+
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Pensum;
+import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +16,7 @@ public class Estudiante extends Usuario implements Serializable {
 	private String name;
 	private String codigo;
 	private Pensum pensum;
-	private HistoriaAcademica HistoriaAcademica;
+	private uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica HistoriaAcademica;
 	private Map<String,List<Curso>> plan;
 	
 	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo, Pensum pensum, Periodo periodo) {

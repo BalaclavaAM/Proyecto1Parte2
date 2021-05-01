@@ -1,5 +1,8 @@
-package uniandes.dpoo.proyecto1.modelo;
+package uniandes.dpoo.proyecto1.modelo.usuario;
 
+
+import uniandes.dpoo.proyecto1.modelo.Carrera;
+import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 
 public class Coordinador extends Usuario {
 	private static final long serialVersionUID = 8736824648617471317L;
