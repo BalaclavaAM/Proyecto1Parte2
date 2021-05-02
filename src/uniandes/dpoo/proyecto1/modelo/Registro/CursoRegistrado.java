@@ -7,11 +7,10 @@ import uniandes.dpoo.proyecto1.modelo.Registro.Nota.NotaCual;
 import uniandes.dpoo.proyecto1.modelo.Registro.Nota.calCual;
 
 public class CursoRegistrado {
-
 	private final Curso curso;
 	private final Periodo periodo;
 	private Nota nota = new NotaCual(calCual.pendiente);
-	private Estado estado = Estado.Pendiente;
+	private EstadoCurso estado = EstadoCurso.Pendiente;
 	private boolean epsilon = false;
 	private boolean numerica = false;
 
@@ -19,7 +18,7 @@ public class CursoRegistrado {
 		this.curso = curso;
 		this.periodo = periodo;
 		this.nota = nota;
-		this.estado = Estado.Finalizado;
+		this.estado = EstadoCurso.Finalizado;
 		this.numerica = nota.isNumeric();
 	}
 
@@ -29,7 +28,6 @@ public class CursoRegistrado {
 		this.nota = nota;
 		this.periodo = periodo;
 		this.epsilon = epsilon;
-		this.estado = Estado.Finalizado;
 		this.numerica = nota.isNumeric();
 	}
 
@@ -37,10 +35,16 @@ public class CursoRegistrado {
 		this.curso = curso;
 		this.periodo = periodo;
 	}
-	public CursoRegistrado(Curso curso, Periodo periodo, Estado estado){
+	public CursoRegistrado(Curso curso, Periodo periodo, EstadoCurso estado){
 		this.curso = curso;
 		this.periodo = periodo;
 		this.estado = estado;
+		if(estado == EstadoCurso.Inscrito){
+			this.nota = new NotaCual(calCual.pendiente);
+		}
+		if(estado == EstadoCurso.Planeado){
+			this.nota = new NotaCual(calCual.planeado);
+		}
 	}
 
 	public CursoRegistrado(Curso curso, Periodo periodo, boolean epsilon){
@@ -54,8 +58,12 @@ public class CursoRegistrado {
 		return curso;
 	}
 
-	public Estado getEstado() {
+	public EstadoCurso getEstado() {
 		return estado;
+	}
+
+	public void setEstado(EstadoCurso estado){
+		this.estado = estado;
 	}
 
 	public Nota getNota() {
@@ -64,6 +72,13 @@ public class CursoRegistrado {
 
 	public void setNota(Nota nota) {
 		this.nota = nota;
+		this.estado = EstadoCurso.Finalizado;
+	}
+
+	public void cambiarRegistro(Nota nota, boolean epsilon){
+		this.nota = nota;
+		this.epsilon = epsilon;
+		this.estado = EstadoCurso.Finalizado;
 	}
 
 	public void setEpsilon(boolean epsilon) {

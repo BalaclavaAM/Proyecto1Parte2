@@ -2,9 +2,7 @@ package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
-import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
-import uniandes.dpoo.proyecto1.modelo.Registro.PeriodoS;
-import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Registro.*;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -15,11 +13,13 @@ public abstract class MallaCursos {
     protected Pensum pensum;
     protected Periodo periodo;
     protected   int creditos = 0;
+
     protected Map<String, ArrayList<Periodo>> periodosMap; //es una mapa que agrupa los periodos en periodos simples
-    protected Map<String, Curso> cursos;
+    protected Map<String, CursoRegistrado> cursosRegistrados;
     protected Map<String, RequerimientoRegistrado> reqsRegistrados;
     protected Map<String, Curso> cursosValidados;
-    protected Map<Periodo, Map<String, Curso>> infoPeriodos; //informacion por periodos
+    protected Map<Periodo, Map<String, CursoRegistrado>> infoPeriodos; //informacion por periodos
+
 
     public void agregarPeriodo(Periodo periodo){
         String periodoS = PeriodoS.periodoS(periodo.getAnio(),periodo.getSemestre());
@@ -32,58 +32,84 @@ public abstract class MallaCursos {
         }
     }
 
-    public void modificarHistoria(Curso curso, Periodo periodo){
+    public int agregarCursoxPeriodo(Curso curso, EstadoCurso estadoC ,  ArrayList<Curso> cursosP, Periodo periodo){
         String codigo = curso.getCodigo();
+        CursoRegistrado cr = getCurReg(codigo);
+        if(cr != null){
+            int comp = periodo.compare(cr.getPeriodo());
+            if( comp == 0){
+                return 2;
+            }
+            if(comp == -1){
+                if(cr.getEstado() == EstadoCurso.Planeado){ // le dejamos planear dos veces el mismo curso
+                    return auxCursoXPeriodo(curso,cursosP,estadoC,periodo);
+                }
+                return -3; // no puedes planear o inscribirlo antes
+            }
+            if(cr.getEstado() == EstadoCurso.Planeado || !cr.getNota().aprobo()){
+                return auxCursoXPeriodo(curso,cursosP,estadoC,periodo);
+            }
+            return 2;
+        }
+        return auxCursoXPeriodo(curso,cursosP,estadoC,periodo);
+    }
+
+
+    public void modificarHistoria(CursoRegistrado cursoR, Periodo periodo){
+        Curso curso = cursoR.getCurso();
+        String codigo = cursoR.getCurso().getCodigo();
+
         String reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
         if(reqAsociado != null){
             validarRequerimiento(codigo,reqAsociado);
         }
-        Map<String,Curso> infoPerido =  infoPeriodos.computeIfAbsent(periodo, k-> new Hashtable<>());
-        infoPerido.putIfAbsent(codigo, curso);
+        Map<String,CursoRegistrado> infoPerido =  infoPeriodos.computeIfAbsent(periodo, k-> new Hashtable<>());
+        infoPerido.putIfAbsent(codigo, cursoR);
         creditos += curso.getCreditos();
     }
 
-    public int validarRequerimiento(String codigo, String reqN){
-        Requerimiento req = pensum.getRequerimientos().get(reqN);
 
-        if(cursos.get(codigo) == null || req == null){
-            return -1;
+    public abstract CursoRegistrado getCurReg(String codigo);
+
+
+    public int auxCursoXPeriodo(Curso curso,ArrayList<Curso> cursosP ,EstadoCurso estadoC, Periodo periodo){
+        int rest = revisarRestriciones(curso, cursosP, periodo);
+        if( rest != 1){
+            return rest;
         }
-        Curso curso = cursos.get(codigo);
-        return validarRequerimientoAux(curso, req);
-
+        CursoRegistrado regist = new CursoRegistrado(curso, periodo, estadoC);
+        cursosRegistrados.put(curso.getCodigo(),regist);
+        modificarHistoria(regist, periodo);
+        return 1;
     }
 
 
-    public int validarRequerimientoAux(Curso curso, Requerimiento req){
-        String codigo = curso.getCodigo();
 
+
+    public int validarRequerimiento(String codigo, String reqN){
+        Requerimiento req = pensum.getRequerimientos().get(reqN);
+        CursoRegistrado cursoR = cursosRegistrados.get(codigo);
+        if(cursoR == null || req == null){
+            return -1;
+        }
+        Periodo periodo = cursoR.getPeriodo();
         if(cursosValidados.containsKey(codigo)){
             return 2;
         }
         RequerimientoRegistrado reqR = reqsRegistrados.computeIfAbsent(req.getNombre(), k ->new RequerimientoRegistrado(req));
-        int valid = reqR.agregarCurso(curso);
+        int valid = reqR.agregarCurso(cursoR, periodo);
         if(valid == 1){
-            cursosValidados.put(codigo,curso);
+            cursosValidados.put(codigo,cursoR.getCurso());
         }
         return valid;
+
     }
 
 
-    static void formatAux(Map<Periodo, ArrayList<Curso>> cursosPeriodos, ArrayList<Periodo> Lperiodos, Periodo acperiodo,
-                          Curso accurso) {
-        ArrayList<Curso> cursosP = cursosPeriodos.get(acperiodo);
-        if(cursosP == null){
-            cursosP = new ArrayList<>();
-            cursosPeriodos.put(acperiodo,cursosP);
-            Lperiodos.add(acperiodo);
-        }
-        cursosP.add(accurso);
-    }
-
-    public EstadoAgregar formatoAgregar(ArrayList<Curso> cursos, ArrayList<Periodo> periodos,
+    public void formatoAgregar(ArrayList<Curso> cursos, ArrayList<Periodo> periodos,
                                         Map<Periodo, ArrayList<Curso>> cursosPeriodos,
-                                        Map<Curso, Integer> infoCursos, ArrayList<Periodo> Lperiodos){
+                                        Map<Curso, Integer> infoCursos, ArrayList<Periodo> Lperiodos,
+                                        ArrayList<EstadoAgregar> estado){
 
         Periodo acperiodo = null;
         Curso accurso = null;
@@ -92,18 +118,28 @@ public abstract class MallaCursos {
             acperiodo = periodos.get(i);
             accurso =  cursos.get(i);
             if(infoCursos.containsKey(accurso)){
-                return new EstadoAgregar(3,acperiodo,accurso);
+                estado.add(new EstadoAgregar(3,acperiodo,accurso));
+            }else{
+                infoCursos.put(accurso,i);
+                ArrayList<Curso> cursosP = cursosPeriodos.get(acperiodo);
+                if(cursosP == null){
+                    cursosP = new ArrayList<>();
+                    cursosPeriodos.put(acperiodo,cursosP);
+                    Lperiodos.add(acperiodo);
+                }
+                cursosP.add(accurso);
             }
-            infoCursos.put(accurso,i);
-            MallaCursos.formatAux(cursosPeriodos, Lperiodos, acperiodo, accurso);
+
         }
         Lperiodos.sort(Periodo::compare);
-        return new EstadoAgregar(1, acperiodo,accurso);
     }
 
 
     public abstract int revisarRestriciones(Curso curso, ArrayList<Curso> cursosP, Periodo periodo);
 
+/*
+    public abstract int revisarRestriciones(Curso curso, ArrayList<Curso> cursosP);
+*/
     public Pensum getPensum() {
         return pensum;
     }
@@ -116,8 +152,8 @@ public abstract class MallaCursos {
         return periodosMap;
     }
 
-    public Map<String, Curso> getCursos() {
-        return cursos;
+    public Map<String, CursoRegistrado> getCursosRegistrados() {
+        return cursosRegistrados;
     }
 
     public Map<String, RequerimientoRegistrado> getReqsRegistrados() {
@@ -128,7 +164,7 @@ public abstract class MallaCursos {
         return cursosValidados;
     }
 
-    public Map<Periodo, Map<String, Curso>> getInfoPeriodos() {
+    public Map<Periodo, Map<String, CursoRegistrado>> getInfoPeriodos() {
         return infoPeriodos;
     }
 }

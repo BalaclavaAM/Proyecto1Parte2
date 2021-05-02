@@ -16,26 +16,40 @@ public class Correquisito implements Restriccion {
     }
 
     @Override
-    public boolean cumple(Plan plan) { //posiblemente no lo vayamos a usar
+    public boolean cumple(Plan plan) {
             HistoriaAcademica h = plan.getHistoria();
             if (cumple(h)) {
                 return true;
             }
             for (String codigo : opciones) {
-                if (plan.getCursos().containsKey(codigo))
+                if (plan.getCursosRegistrados().containsKey(codigo))
                     return true;
             }
             return false;
     }
 
     @Override
-    public boolean cumple (Plan plan, Periodo periodo){
-        if (cumple(plan)) {
+    public boolean cumple(Plan plan, ArrayList<Curso> cursos) {
+        if (cumple(plan)){
             return true;
         }
+        for(String codigo: opciones){
+            for (Curso c:cursos) {
+                String codigoOp = c.getCodigo();
+                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c,plan.estadoPl,cursos, plan.getPeriodo()) == 1){
+                    // esto peta si por algun razon alguien pone de correquisito al mismo curso
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean cumple (Plan plan, Periodo periodo){
         for (String codigo : opciones) {
-            Periodo periodoP = plan.getCursosRegistrados().get(codigo);
-            if (periodoP != null && periodoP.compare(periodo) >= 0) {
+            CursoRegistrado cursoR = plan.getCursosRegistrados().get(codigo);
+            if (cursoR != null && cursoR.getPeriodo().compare(periodo) <= 0) {
                 return true;
             }
         }
@@ -51,7 +65,7 @@ public class Correquisito implements Restriccion {
         for(String codigo: opciones){
             for (Curso c:cursos) {
                 String codigoOp = c.getCodigo();
-                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c,periodo, cursos) == 1){
+                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c,plan.estadoPl ,cursos, periodo) == 1){
                     // esto peta si por algun razon alguien pone de correquisito al mismo curso
                     return true;
                 }
@@ -71,6 +85,11 @@ public class Correquisito implements Restriccion {
                 }
             }
         }
+        return false;
+    }
+
+    @Override
+    public boolean cumple(HistoriaAcademica historia, ArrayList<Curso> cursos) {
         return false;
     }
 
@@ -97,15 +116,13 @@ public class Correquisito implements Restriccion {
         for(String codigo: opciones){
             for (Curso c:cursos) {
                 String codigoOp = c.getCodigo();
-                if(codigoOp.equals(codigo) && historia.revisarYagregar(c,cursos,periodo)){ //se que se repite la revision;
+                if(codigoOp.equals(codigo) && historia.agregarCursoxPeriodo(c, historia.notaP,periodo,false,cursos) == 1){ //se que se repite la revision;
                     // esto peta si por algun razon alguien pone de correquisito al mismo curso
                     return true;
                 }
             }
         }
         return false;
-
-
     }
 
     @Override

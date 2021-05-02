@@ -17,14 +17,14 @@ public abstract class Requerimiento implements Serializable {
 	protected String tipologia;
 	protected int creditos;
 	protected int items;
-	protected String materia;
 
 	public String getNombre() {
 		return nombre;
 	}
-	public Requerimiento(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos, String materia){
-		this.nombre = nombre;
 
+	public Requerimiento(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos){
+		this.nombre = nombre;
+		this.items = items;
 		this.nivel = nivel;
 		this.semestresugerido = semestresugerido;
 		this.tipologia = tipologia;

@@ -12,13 +12,12 @@ public class RequerimientoCreditos extends Requerimiento {
     private final ArrayList<Curso> cursos;
 
     public RequerimientoCreditos(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos,
-                                 String materia, ArrayList<Curso> cursos) {
-        super(nombre, nivel, semestresugerido, tipologia, creditos,materia);
+                                  ArrayList<Curso> cursos) {
+        super(nombre, nivel, semestresugerido, tipologia, creditos);
         this.cursos = cursos;
         this.items = creditos;
         this.tipo = "Creditos";
     }
-
 
 
     @Override

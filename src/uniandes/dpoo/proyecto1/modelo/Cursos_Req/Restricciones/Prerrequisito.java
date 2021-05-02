@@ -27,20 +27,24 @@ public class Prerrequisito implements Restriccion {
             if (h.getCursosInscritos().containsKey(codigo)) {
                 return true;
             }
-            if(plan.getCursos().containsKey(codigo))
-                return true;
         }
         return false;
     }
 
     @Override
+    public boolean cumple(Plan plan, ArrayList<Curso> cursos) {
+        return cumple(plan);
+    }
+
+
+    @Override
     public boolean cumple(Plan plan, Periodo periodo) {
-        if(cumple(plan)){
+        if(cumple(plan.getHistoria())){
             return true;
         }
         for(String codigo: opciones) {
-            Periodo periodoP = plan.getCursosRegistrados().get(codigo);
-            if (periodoP != null && periodoP.compare(periodo) < 0) {
+            CursoRegistrado cursoR = plan.getCursosRegistrados().get(codigo);
+            if (cursoR != null && cursoR.getPeriodo().compare(periodo) < 0) {
                 return true;
                 }
         }
@@ -66,10 +70,15 @@ public class Prerrequisito implements Restriccion {
     }
 
     @Override
+    public boolean cumple(HistoriaAcademica historia, ArrayList<Curso> cursos) {
+        return cumple(historia);
+    }
+
+    @Override
     public boolean cumple(HistoriaAcademica historia, Periodo periodo) {
         for (String codigo : opciones) {
             CursoRegistrado cursoR = historia.getCursosRegistrados().get(codigo);
-            if (cursoR != null && cursoR.getNota().aprobo() && cursoR.getPeriodo().compare(periodo) > 0) {
+            if (cursoR != null && cursoR.getNota().aprobo() && cursoR.getPeriodo().compare(periodo) < 0) {
                 return true;
             }
         }

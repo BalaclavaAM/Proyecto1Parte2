@@ -12,7 +12,7 @@ public class RequerimientoBloque extends Requerimiento {
 
     public RequerimientoBloque(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos, String materia,
                                ArrayList<Curso> cursos , int items) {
-        super(nombre, nivel, semestresugerido, tipologia, creditos, materia);
+        super(nombre, nivel, semestresugerido, tipologia, creditos);
         this.items = items;
         this.cursos = cursos;
         this.tipo = "Bloque";

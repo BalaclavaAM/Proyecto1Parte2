@@ -5,12 +5,14 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
 
 public class RequerimietoMateria extends Requerimiento {
+    private String materia;
 
     public RequerimietoMateria(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos,
                                String materia, int items) {
-        super(nombre, nivel, semestresugerido, tipologia, creditos,materia);
+        super(nombre, nivel, semestresugerido, tipologia, creditos);
         this.tipo = "Materia";
         this.items = items;
+        this.materia = materia;
     }
 
     @Override
