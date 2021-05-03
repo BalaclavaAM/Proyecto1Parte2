@@ -39,16 +39,7 @@ public class Periodo {
         return compareL(this, oPeriodo);
     }
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
-=======
-
-
->>>>>>> Stashed changes
     public static int compareL(Periodo p1, Periodo p2) {
         int c1 = Integer.compare(p1.anio, p2.anio);
         if (c1 != 0) {

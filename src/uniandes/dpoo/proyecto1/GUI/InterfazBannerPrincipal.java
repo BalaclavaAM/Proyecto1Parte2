@@ -26,7 +26,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         setResizable( false );
         
         usuario = new JTextField( );
-        password = new JPasswordField( "Contraseña" );
+        password = new JPasswordField( "ContraseÃ±a" );
         opciones = new PanelOptions("Guest",this);
         botonLogin = new JButton("Login");
         

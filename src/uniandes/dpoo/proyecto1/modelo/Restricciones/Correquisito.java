@@ -2,6 +2,7 @@ package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
@@ -36,7 +37,7 @@ public class Correquisito implements Restriccion {
         for(String codigo: opciones){
             for (Curso c:cursos) {
                 String codigoOp = c.getCodigo();
-                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c,plan.estadoPl,cursos, plan.getPeriodo()) == 1){
+                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c, plan.notaPlan, plan.estadoPl,false,cursos, plan.getPeriodo()) == 1){
                     // esto peta si por algun razon alguien pone de correquisito al mismo curso
                     return true;
                 }
@@ -65,7 +66,7 @@ public class Correquisito implements Restriccion {
         for(String codigo: opciones){
             for (Curso c:cursos) {
                 String codigoOp = c.getCodigo();
-                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c,plan.estadoPl ,cursos, periodo) == 1){
+                if(codigoOp.equals(codigo) && plan.agregarCursoxPeriodo(c, plan.notaPlan, plan.estadoPl,false ,cursos, periodo) == 1){
                     // esto peta si por algun razon alguien pone de correquisito al mismo curso
                     return true;
                 }
@@ -116,7 +117,7 @@ public class Correquisito implements Restriccion {
         for(String codigo: opciones){
             for (Curso c:cursos) {
                 String codigoOp = c.getCodigo();
-                if(codigoOp.equals(codigo) && historia.agregarCursoxPeriodo(c, historia.notaP,periodo,false,cursos) == 1){ //se que se repite la revision;
+                if(codigoOp.equals(codigo) && historia.agregarCursoxPeriodo(c, historia.notaP,EstadoCurso.Pendiente,false,cursos,periodo) == 1){ //se que se repite la revision;
                     // esto peta si por algun razon alguien pone de correquisito al mismo curso
                     return true;
                 }

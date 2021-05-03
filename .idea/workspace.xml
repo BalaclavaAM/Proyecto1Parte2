@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="mundo nuevo">
+    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="reorganisacion  carpetas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/consola/ConsolaBanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/consola/ConsolaBanner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/consola/ConsolaBanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/consola/ConsolaBanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Carrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/usuario/Carrera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Curso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Curso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Requerimientos/Requerimiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Requerimientos/Requerimiento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Requerimientos/RequerimientoBloque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Requerimientos/RequerimientoBloque.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Requerimientos/RequerimientoCreditos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Requerimientos/RequerimientoCreditos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Requerimientos/RequerimietoMateria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Requerimientos/RequerimietoMateria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Restricciones/Correquisito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Correquisito.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Restricciones/Prerrequisito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Prerrequisito.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Restricciones/Restriccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Restriccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Restricciones/RestriccionNivel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/RestriccionNivel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Restricciones/RestriccionReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/RestriccionReq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/consola/ConsolaBanner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nota/Nota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nota/Nota.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/CursoRegistrado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/CursoRegistrado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/Nota/Nota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nota/Nota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/Nota/NotaCual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nota/NotaCual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/Nota/NotaNum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nota/NotaNum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/Nota/calCual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Nota/calCual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/EstadoCurso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/EstadoCurso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/Periodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/Periodo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/RequerimientoRegistrado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Registro/RequerimientoRegistrado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/HistoriaAcademica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/HistoriaAcademica.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/MallaCursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/MallaCursos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Pensum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Pensum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Plan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/usuario/Coordinador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/usuario/Coordinador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Correquisito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Correquisito.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/ProcesadorBanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/ProcesadorBanner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +129,9 @@
       <workItem from="1619395360906" duration="2369000" />
       <workItem from="1619484687942" duration="84480000" />
       <workItem from="1619800606004" duration="22583000" />
-      <workItem from="1619835282898" duration="66341000" />
+      <workItem from="1619835282898" duration="81427000" />
+      <workItem from="1620020586601" duration="1558000" />
+      <workItem from="1620049837660" duration="2620000" />
     </task>
     <task id="LOCAL-00001" summary="f1">
       <created>1618165373822</created>
@@ -235,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619945261276</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="reorganisacion  carpetas">
+      <created>1620003591858</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1620003591858</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +255,7 @@
     <MESSAGE value="f4" />
     <MESSAGE value="f5" />
     <MESSAGE value="mundo nuevo" />
-    <option name="LAST_COMMIT_MESSAGE" value="mundo nuevo" />
+    <MESSAGE value="reorganisacion  carpetas" />
+    <option name="LAST_COMMIT_MESSAGE" value="reorganisacion  carpetas" />
   </component>
 </project>
