@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.consola;
 
+import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 import uniandes.dpoo.proyecto1.procesamiento.*;
 import uniandes.dpoo.proyecto1.modelo.*;
 import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
@@ -155,7 +156,6 @@ public class ConsolaBanner {
 		{
 			System.out.println("ERROR: "+e);
 		}
-
 	}
 
 
