@@ -26,7 +26,7 @@ public class PanelOptions extends JPanel implements ActionListener {
 		bCP.setActionCommand("PO>CargaPensum");
 		botones.add(bCP);
 		
-		JButton bHA= new JButton("Historia Académica");
+		JButton bHA= new JButton("Historia AcadÃ©mica");
 		bHA.setActionCommand("PO>HAcademica");
 		botones.add(bHA);
 		
