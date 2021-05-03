@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 import uniandes.dpoo.proyecto1.modelo.*;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
@@ -18,6 +19,13 @@ import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
+import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
+import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+
+>>>>>>> Stashed changes
 
 public class ProcesadorBanner implements Serializable {
 
@@ -80,6 +88,7 @@ public class ProcesadorBanner implements Serializable {
 	public int authEstudiante(String user, String password) {
 		if (estudiantes.containsKey(user)) {
 			if (estudiantes.get(user).getContrasenha().equals(password)) {
+<<<<<<< Updated upstream
 				return 1;
 			} else {
 				return 0;
@@ -92,6 +101,8 @@ public class ProcesadorBanner implements Serializable {
 	public int authCoordinador(String user, String password) {
 		if (coordinadores.containsKey(user)) {
 			if (coordinadores.get(user).getContrasenha() == password) {
+=======
+>>>>>>> Stashed changes
 				return 1;
 			} else {
 				return 0;
@@ -101,6 +112,7 @@ public class ProcesadorBanner implements Serializable {
 		}
 	}
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 	public boolean crearEstudiante(String username, String contrasenha, String nombre, String codigo) 
 	{
@@ -142,21 +154,21 @@ public class ProcesadorBanner implements Serializable {
 //	}
 //	
 	public int authEstudiante(String user, String password) {
+=======
+	public int authCoordinador(String user, String password) {
+>>>>>>> Stashed changes
 		if (coordinadores.containsKey(user)) {
-			if (coordinadores.get(user).getContrasenha()==password) {
+			if (coordinadores.get(user).getContrasenha() == password) {
 				return 1;
-			}
-			else
-			{
+			} else {
 				return 0;
 			}
-		}
-		else
-		{
+		} else {
 			return -1;
 		}
 	}
 
+<<<<<<< Updated upstream
 //	public boolean checkPlan(Estudiante elestudiante) {
 //		boolean retorno = true;
 //		Map<String,List<Curso>> plan = elestudiante.getPlan();
@@ -178,11 +190,17 @@ public class ProcesadorBanner implements Serializable {
 //	}
 }
 =======
+=======
+>>>>>>> Stashed changes
 	public boolean crearEstudiante(String username, String contrasenha, String nombre, String codigo) {
 		return true;
 	}
 
 
 
+<<<<<<< Updated upstream
 }
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+}
+>>>>>>> Stashed changes

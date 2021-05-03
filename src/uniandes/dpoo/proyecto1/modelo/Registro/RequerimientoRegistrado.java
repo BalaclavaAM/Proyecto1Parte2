@@ -1,11 +1,15 @@
 package uniandes.dpoo.proyecto1.modelo.Registro;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
 =======
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
+>>>>>>> Stashed changes
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -15,6 +19,7 @@ public class RequerimientoRegistrado {
     private Requerimiento req;
     private int creditosCumplidos;
     private int itemsCumplidos;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     private boolean cumplido;
     private double porcentaje;
@@ -27,10 +32,17 @@ public class RequerimientoRegistrado {
     private Periodo ultimoPeriodo;
     private Map<String, CursoRegistrado> cursosR;
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+    private boolean validado = false;
+    private ArrayList<Object> validaciones;
+    private Periodo ultimoPeriodo;
+    private Map<String, CursoRegistrado> cursosR;
+>>>>>>> Stashed changes
 
     public RequerimientoRegistrado(Requerimiento req){
         this.req = req;
         this.creditosCumplidos = 0;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         this.cumplido = false;
         this.porcentaje = 0.0;
@@ -38,33 +50,53 @@ public class RequerimientoRegistrado {
 =======
         this.cursosR = new Hashtable<>();
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+        this.cursosR = new Hashtable<>();
+>>>>>>> Stashed changes
         this.itemsCumplidos = 0;
 
     }
 
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     public int agregarCurso(Curso curso){
+=======
+    public int agregarCurso(CursoRegistrado cursoR, Periodo periodo){
+        Curso curso = cursoR.getCurso();
+>>>>>>> Stashed changes
         String codigo = curso.getCodigo();
         int val = req.validar(curso);
-        if( val == 0){
+        if( val == 0 ){
             return 0;
         }
-        if(cursos.containsKey(codigo)){
+        if(cursosR.containsKey(codigo) || cumplio()){
             return 2;
         }
-        cursos.put(codigo,curso);
+        cursosR.put(codigo,cursoR);
         this.itemsCumplidos += val;
         this.creditosCumplidos += curso.getCreditos();
+        if(periodo.compare(ultimoPeriodo) == 1){
+            ultimoPeriodo = periodo;
+        }
         return 1;
     }
 
+    public boolean cumplio(){
+        return itemsCumplidos>req.getItems();
+    }
 
-    public void quitarCurso(Curso curso){
-        cursos.remove(curso.getCodigo());
+    public boolean quitarCurso(String codigo){
+        CursoRegistrado cursoR = cursosR.get(codigo);
+        if(cursoR == null){
+            return false;
+        }
+        Curso curso = cursoR.getCurso();
+        cursosR.remove(codigo);
         int val = req.validar(curso);
         itemsCumplidos -= val;
         creditosCumplidos -= curso.getCreditos();
+<<<<<<< Updated upstream
 =======
     public int agregarCurso(CursoRegistrado cursoR, Periodo periodo){
         Curso curso = cursoR.getCurso();
@@ -99,6 +131,8 @@ public class RequerimientoRegistrado {
         int val = req.validar(curso);
         itemsCumplidos -= val;
         creditosCumplidos -= curso.getCreditos();
+=======
+>>>>>>> Stashed changes
         if(cursoR.getPeriodo().compare(ultimoPeriodo) == 0){
             this.ultimoPeriodo = ultimoPeriodo();
         }
@@ -113,25 +147,34 @@ public class RequerimientoRegistrado {
             }
         }
         return mayor;
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
     }
 
     public int getCreditosCumplidos() {
         return creditosCumplidos;
     }
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     public Requerimiento getReq() {
         return req;
+=======
+    public int getItemsCumplidos() {
+        return itemsCumplidos;
+>>>>>>> Stashed changes
     }
 
-    public boolean getCumplido(){
-        return cumplido;
+    public Map<String, CursoRegistrado> getCursosR() {
+        return cursosR;
     }
 
-    public double getPorcentaje(){
-        return porcentaje;
+    public Requerimiento getReq() {
+        return req;
     }
+<<<<<<< Updated upstream
     
 =======
     public int getItemsCumplidos() {
@@ -149,6 +192,11 @@ public class RequerimientoRegistrado {
 
 
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+
+
+
+>>>>>>> Stashed changes
     
 
 }

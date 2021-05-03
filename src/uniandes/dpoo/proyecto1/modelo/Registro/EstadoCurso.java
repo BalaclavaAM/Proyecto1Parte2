@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.Registro;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 import uniandes.dpoo.proyecto1.modelo.Registro.Nota.Nota;
 import uniandes.dpoo.proyecto1.modelo.Registro.Nota.NotaNum;
@@ -71,4 +72,8 @@ public class EstadoCurso{
 public enum EstadoCurso {
     Finalizado, Pendiente ,Inscrito, Retirado, Planeado;
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+public enum EstadoCurso {
+    Finalizado, Pendiente ,Inscrito, Retirado, Planeado;
+>>>>>>> Stashed changes
 }

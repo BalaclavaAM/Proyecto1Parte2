@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Restricciones.Restriccion;
@@ -10,12 +11,18 @@ import uniandes.dpoo.proyecto1.modelo.Registro.Nota.calCual;
 
 =======
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+=======
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+>>>>>>> Stashed changes
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
 import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
 import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
 import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,6 +32,7 @@ import java.util.Map;
 
 
 public class HistoriaAcademica extends MallaCursos implements Serializable {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 	/**
 	 *
@@ -44,6 +52,15 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     private Map<String, Curso> cursosInscritos;
     public Nota notaP = new NotaCual(calCual.pendiente);
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+    /**
+     *
+     */
+    @Serial
+    private static final long serialVersionUID = -491840464239633611L;
+    private Map<String, Curso> cursosInscritos;
+    public Nota notaP = new NotaCual(calCual.pendiente);
+>>>>>>> Stashed changes
 
 
 
@@ -62,10 +79,13 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		return creditos;
 	}
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 
 =======
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
     public Map<String, CursoRegistrado> getCursosRegistrados() {
         return cursosRegistrados;
     }
@@ -78,6 +98,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         return cursosInscritos;
     }
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     public int inscribirCursoxPeriodo(Curso curso, Periodo periodo, ArrayList<Curso> cursosP){
         //auxiliar para agregar un conjunto de cursos
@@ -88,28 +109,49 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         int rest = revisarRestriciones(curso, cursosP, periodo);
         if( rest != 1){
             return rest;
+=======
+
+    public boolean actualizarNota(Curso curso, Periodo periodo, Nota nota, boolean epsilon) {
+        Map<String,CursoRegistrado> Mcr = infoPeriodos.get(periodo);
+        if(Mcr!=null){
+            CursoRegistrado cr = Mcr.get(curso.getCodigo());
+            if(cr !=null){
+                cr.setNota(nota);
+                cr.setEpsilon(epsilon);
+                return true;
+            }
+>>>>>>> Stashed changes
         }
-        CursoRegistrado regist = new CursoRegistrado(curso, periodo, Estado.Inscrito);
-        cursosRegistrados.put(curso.getCodigo(),regist);
-        cursosInscritos.put(curso.getCodigo(), curso);
-        creditos += curso.getCreditos();
-        return 1;
+        return false;
     }
 
 
-	public EstadoAgregar inscripcionCursos(ArrayList<Curso> cursos, Periodo periodo) {
-        int largo = cursos.size();
-        EstadoAgregar estado = new EstadoAgregar(1,periodo);
-        for (Curso c: cursos) {
-            int val = inscribirCursoxPeriodo(c,periodo,cursos);
-            if(val != 1){
-                return estado.cambiarEstado(val,periodo,c);
+	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<Curso> cursos, Periodo periodo) {
+        ArrayList<EstadoAgregar> estado = new ArrayList<>();
+        int cmp = periodo.compare(this.periodo);
+        if( cmp == -1) { // falta revisar otras cosas
+            estado.add(new EstadoAgregar(5,periodo));
+            return estado;
+        }
+        if( cmp> 1) {
+            if(!(periodo.getAnio() == this.periodo.getAnio()) || !(periodo.getSemestre() == this.periodo.getSemestre())) {
+                cursosInscritos = new Hashtable<>();
             }
         }
-        return estado.cambiarEstado(1,periodo);
+        agregarPeriodo(periodo);
+        for (Curso c: cursos) {
+            int val = agregarCursoxPeriodo(c, EstadoCurso.Inscrito,cursos, periodo);
+            if(val != 1){
+                estado.add(new EstadoAgregar(val,periodo,c));
+            }
+            cursosInscritos.put(c.getCodigo(),c);
+        }
+        return estado;
+
     }
 
 
+<<<<<<< Updated upstream
 =======
 
     public boolean actualizarNota(Curso curso, Periodo periodo, Nota nota, boolean epsilon) {
@@ -151,6 +193,8 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
+=======
+>>>>>>> Stashed changes
     public ArrayList<EstadoAgregar> agregarCursos(ArrayList<Curso> cursos, ArrayList<Nota> notas, ArrayList<Boolean> epsilon,
                                                   ArrayList<Periodo> periodos) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
@@ -176,72 +220,73 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         }
         return estado;
     }
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
 
 
     public int agregarCursoxPeriodo(Curso curso, Nota nota, Periodo periodo, boolean epsilon, ArrayList<Curso> cursosP){
         //auxiliar para agregar un conjunto de cursos
         CursoRegistrado cr = cursosRegistrados.get(curso.getCodigo());
         if(cr != null){
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             if(cr.getNota().notaCual() == calCual.pendiente){
                 cr.setNota(nota);
                 cr.setEpsilon(epsilon);
                 return 1;
+=======
+            Periodo pCr = cr.getPeriodo();
+            if(periodo.compare(pCr)== 0){
+                if(cr.getNota().notaCual() == calCual.pendiente){
+                    cr.setNota(nota);
+                    cr.setEpsilon(epsilon);
+                    return 1;
+                }
+                return 2;
+            }
+            if(periodo.compare(pCr) == -1){
+                if(!nota.aprobo()) {
+                    int val = revisarRestriciones(curso,cursosP,periodo);
+                    if(val == 1){
+                        cr = new CursoRegistrado(curso, periodo, nota, epsilon);
+                        modificarHistoria(cr, periodo);
+                        return 1;
+                    }
+                    return val;
+                }
+                return -3;     //incosistencia
+            }
+            if(!cr.getNota().aprobo()){
+                return auxCursoXPeriodo(curso,nota,periodo,epsilon,cursosP);
+>>>>>>> Stashed changes
             }
             return 2;
         }
-        int rest = revisarRestriciones(curso, cursosP, periodo);
-        if( rest != 1){
-            return rest;
-        }
-        CursoRegistrado regist = new CursoRegistrado(curso, periodo, nota, epsilon);
-        cursosRegistrados.put(curso.getCodigo(),regist);
-        modificarHistoria(curso, periodo);
-        return 1;
+        return auxCursoXPeriodo(curso,nota,periodo,epsilon,cursosP);
     }
 
-    public boolean revisarYagregar(Curso curso, ArrayList<Curso> cursos, Periodo periodo){
-        if(revisarRestriciones(curso,cursos, periodo)==1){
-            CursoRegistrado regist = new CursoRegistrado(curso, periodo);
-            cursosRegistrados.put(curso.getCodigo(),regist);
-            modificarHistoria(curso, periodo);
-            return true;
+    public int auxCursoXPeriodo(Curso curso, Nota nota, Periodo periodo, boolean epsilon, ArrayList<Curso> cursosP){
+        int val = revisarRestriciones(curso,cursosP,periodo);
+        if(val == 1){
+            CursoRegistrado cr = new CursoRegistrado(curso, periodo, nota, epsilon);
+            cursosRegistrados.put(curso.getCodigo(),cr);
+            modificarHistoria(cr, periodo);
+            return 1;
         }
-        return false;
-    }
-
-    public EstadoAgregar agregarCursos(ArrayList<Curso> cursos, ArrayList<Nota> notas, ArrayList<Boolean> epsilon,
-                                       ArrayList<Periodo> periodos) {
-        int largo = cursos.size();
-        EstadoAgregar estado = new EstadoAgregar(1,periodo);
-        if(largo == notas.size() && largo == periodos.size()){
-            return estado.cambiarEstado(4, periodo);
-        }
-        Map<Periodo, ArrayList<Curso>> cursosPeriodos = new Hashtable<>();
-        Map<Curso, Integer> infoCursos = new Hashtable<>();
-
-        ArrayList<Periodo> Lperiodos = new ArrayList<>();
-        estado = formatoAgregar(cursos,periodos, cursosPeriodos,infoCursos,Lperiodos);
-        if(estado.getError()!=1){
-            return estado;
-        }
-        for(Periodo p: Lperiodos){
-            ArrayList<Curso> cursosP = cursosPeriodos.get(p);
-            for (Curso c: cursosP) {
-                int indice = infoCursos.get(c);
-                int val = agregarCursoxPeriodo(c,notas.get(indice),p,epsilon.get(indice),cursosP);
-                if(val != 1){
-                    return estado.cambiarEstado(val,p,c);
-                }
-            }
-        }
-        return estado.cambiarEstado(1,Lperiodos.get(Lperiodos.size()-1));
+        return val;
     }
 
 
 
 
+    @Override
+    public CursoRegistrado getCurReg(String codigo) {
+         return cursosRegistrados.get(codigo);
+    }
+
+<<<<<<< Updated upstream
 	public int validarRequerimiento(String codigo, String reqN) {
 =======
             Periodo pCr = cr.getPeriodo();
@@ -294,6 +339,9 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     public int validarRequerimiento(String codigo, String reqN) {
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+    public int validarRequerimiento(String codigo, String reqN) {
+>>>>>>> Stashed changes
         if (!cursosRegistrados.get(codigo).getNota().aprobo()) {
             return -2;
         }
@@ -311,8 +359,11 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         return 1;
     }
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> Stashed changes
 /*
     @Override
     public int revisarRestriciones(Curso curso, ArrayList<Curso> cursosP) {
@@ -326,7 +377,10 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 */
 
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
 
     public double calcularPromedioSemestre(String periodoS) {
 		ArrayList<Periodo> periodos = periodosMap.get(periodoS);
@@ -334,6 +388,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		double puntosSemestre = 0;
 		for (Periodo periodo:
 			 periodos) {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 			Map<String,Curso> cursRegP = infoPeriodos.get(periodo);
 			for (Curso c: cursRegP.values()) {
@@ -341,11 +396,16 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
                 if (cursosRegistrados.get(c.getCodigo()).isNumerica()) {
 					int creditosCurso = c.getCreditos();
 =======
+=======
+>>>>>>> Stashed changes
 			Map<String, CursoRegistrado> cursRegP = infoPeriodos.get(periodo);
 			for (CursoRegistrado cr: cursRegP.values()) {
                 if (cr.isNumerica()) {
 					int creditosCurso = cr.getCurso().getCreditos();
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
 					creditosSemestre += creditosCurso;
 					puntosSemestre += creditosCurso * cr.getNota().notaNum();
 				}
@@ -354,14 +414,18 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		if(creditosSemestre >0){
 			return puntosSemestre/creditosSemestre;
 		}
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 
 =======
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
 		return 0;
 	}
 
 	public double calcularPromedioAcademico() {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 		int creditosSemestre = 0;
 		double puntosSemestre = 0;
@@ -373,6 +437,8 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 			}
 		}
 =======
+=======
+>>>>>>> Stashed changes
         double puntosSemestre = 0;
         double creditosSemestre = 0;
         for(Map<String, CursoRegistrado> mp: infoPeriodos.values()) {
@@ -384,7 +450,10 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
                 }
             }
         }
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
 		if(creditosSemestre >0){
 			return puntosSemestre/creditosSemestre;
 		}
@@ -394,16 +463,20 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     public int cambiarRequerimiento(String codigoCurso, String req1N, String req2N){
         RequerimientoRegistrado reqR1 =  reqsRegistrados.get(req1N);
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         Requerimiento req2 = pensum.getRequerimientos().get(req2N);
+=======
+>>>>>>> Stashed changes
         Curso curso = cursosRegistrados.get(codigoCurso).getCurso();
-        if(req1N == null || req2 == null || curso == null){
+        if(req1N == null  || curso == null){
             return -1;
         }
-        int val = validarRequerimientoAux(curso, req2);
-        if(val == 1){
-            reqR1.quitarCurso(curso);
+        int val = validarRequerimiento(codigoCurso, req2N);
+        if(val != 1){
+            return val;
         }
+<<<<<<< Updated upstream
         return val;
 =======
         Curso curso = cursosRegistrados.get(codigoCurso).getCurso();
@@ -414,11 +487,16 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         if(val != 1){
             return val;
         }
+=======
+>>>>>>> Stashed changes
         if(reqR1.quitarCurso(codigoCurso)){
             return 1;
         }
         return -2;
+<<<<<<< Updated upstream
 >>>>>>> 6580ca4ff77c3ec51f62719aaf850025599dfa8e
+=======
+>>>>>>> Stashed changes
     }
 }
 

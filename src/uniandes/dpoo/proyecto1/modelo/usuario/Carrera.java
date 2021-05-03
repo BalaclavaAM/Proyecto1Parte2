@@ -1,6 +1,9 @@
 package uniandes.dpoo.proyecto1.modelo.usuario;
+<<<<<<< Updated upstream:src/uniandes/dpoo/proyecto1/modelo/usuario/Carrera.java
 
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
+=======
+>>>>>>> Stashed changes:src/uniandes/dpoo/proyecto1/modelo/Carrera.java
 
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 
