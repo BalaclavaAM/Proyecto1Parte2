@@ -1,9 +1,8 @@
-package uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos;
+package uniandes.dpoo.proyecto1.modelo.Requerimientos;
 
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
 
 import java.util.ArrayList;
 

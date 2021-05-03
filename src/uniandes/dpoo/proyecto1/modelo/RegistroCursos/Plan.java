@@ -1,11 +1,11 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Restricciones.Restriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.NotaCual;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.calCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
 
 import java.util.ArrayList;

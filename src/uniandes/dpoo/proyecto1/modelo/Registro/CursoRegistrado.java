@@ -2,9 +2,9 @@ package uniandes.dpoo.proyecto1.modelo.Registro;
 
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.Nota;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.NotaCual;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.calCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 
 public class CursoRegistrado {
 	private final Curso curso;

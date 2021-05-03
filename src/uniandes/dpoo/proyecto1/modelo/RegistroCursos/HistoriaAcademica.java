@@ -1,11 +1,11 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Restricciones.Restriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.Nota;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.NotaCual;
-import uniandes.dpoo.proyecto1.modelo.Registro.Nota.calCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -53,6 +53,18 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
+    public boolean actualizarNota(Curso curso, Periodo periodo, Nota nota, boolean epsilon) {
+        Map<String,CursoRegistrado> Mcr = infoPeriodos.get(periodo);
+        if(Mcr!=null){
+            CursoRegistrado cr = Mcr.get(curso.getCodigo());
+            if(cr !=null){
+                cr.setNota(nota);
+                cr.setEpsilon(epsilon);
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<Curso> cursos, Periodo periodo) {
@@ -77,6 +89,33 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         }
         return estado;
 
+    }
+
+
+    public ArrayList<EstadoAgregar> agregarCursos(ArrayList<Curso> cursos, ArrayList<Nota> notas, ArrayList<Boolean> epsilon,
+                                                  ArrayList<Periodo> periodos) {
+        ArrayList<EstadoAgregar> estado = new ArrayList<>();
+        Map<Periodo, Map<String, intCurso>> cursosPeriodos = new Hashtable<>();
+        Map<Curso, Integer> infoCursos = new Hashtable<>();
+        ArrayList<Periodo> Lperiodos = new ArrayList<>();
+        formatoAgregar(cursos,periodos, cursosPeriodos,Lperiodos, estado);
+        for(Periodo p: Lperiodos){
+            ArrayList<Curso> cursosP = cursosPeriodos.get(p).values();
+            if(periodo.compare(p) == 1) {
+                agregarPeriodo(p);
+                for (Curso c : cursosP) {
+                    int indice = infoCursos.get(c);
+                    int val = agregarCursoxPeriodo(c, notas.get(indice), p, epsilon.get(indice), cursosP);
+                    if (val != 1) {
+                        estado.add(new EstadoAgregar(val, p, c));
+                    }
+                }
+            }else{
+                estado.add(new EstadoAgregar(5,p));
+                return estado;
+            }
+        }
+        return estado;
     }
 
 
@@ -125,31 +164,6 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-    public ArrayList<EstadoAgregar> agregarCursos(ArrayList<Curso> cursos, ArrayList<Nota> notas, ArrayList<Boolean> epsilon,
-                                       ArrayList<Periodo> periodos) {
-        ArrayList<EstadoAgregar> estado = new ArrayList<>();
-        Map<Periodo, ArrayList<Curso>> cursosPeriodos = new Hashtable<>();
-        Map<Curso, Integer> infoCursos = new Hashtable<>();
-        ArrayList<Periodo> Lperiodos = new ArrayList<>();
-        formatoAgregar(cursos,periodos, cursosPeriodos,infoCursos,Lperiodos, estado);
-        for(Periodo p: Lperiodos){
-            ArrayList<Curso> cursosP = cursosPeriodos.get(p);
-            if(periodo.compare(p) == 1) {
-                agregarPeriodo(p);
-                for (Curso c : cursosP) {
-                    int indice = infoCursos.get(c);
-                    int val = agregarCursoxPeriodo(c, notas.get(indice), p, epsilon.get(indice), cursosP);
-                    if (val != 1) {
-                        estado.add(new EstadoAgregar(val, p, c));
-                    }
-                }
-            }else{
-                estado.add(new EstadoAgregar(5,p));
-                return estado;
-            }
-        }
-        return estado;
-    }
 
 
     @Override

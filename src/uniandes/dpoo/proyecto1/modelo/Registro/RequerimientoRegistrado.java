@@ -1,7 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.Registro;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
+import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

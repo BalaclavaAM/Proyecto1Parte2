@@ -1,6 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.Cursos_Req;
 
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Restricciones.Restriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +9,6 @@ public class Curso implements Serializable {
     /**
 	 * Suave
 	 */
-
 	private static final long serialVersionUID = -1708691240589592764L;
 	private final boolean notanumerica; //meramente informativa o para validar;
 	private final String nombre;
@@ -42,11 +41,9 @@ public class Curso implements Serializable {
 		return codigo;
 	}
 	public String getMateria(){ return materia; }
-
 	public String getDescripcion() {
 		return descripcion;
 	}
-
 	public ArrayList<Restriccion> getRestricciones() {
 		return restricciones;
 	}

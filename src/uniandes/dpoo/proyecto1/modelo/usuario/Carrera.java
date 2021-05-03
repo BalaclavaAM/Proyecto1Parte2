@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto1.modelo;
+package uniandes.dpoo.proyecto1.modelo.usuario;
 
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 

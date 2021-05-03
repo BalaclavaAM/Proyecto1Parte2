@@ -154,7 +154,6 @@ public class ConsolaBanner {
 		{
 			System.out.println("ERROR: "+e);
 		}
-
 	}
 
 

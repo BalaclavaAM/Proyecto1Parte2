@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto1.modelo.Registro.Nota;
+package uniandes.dpoo.proyecto1.modelo.Nota;
 
 public class NotaCual implements Nota {
     private calCual nota;

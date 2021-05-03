@@ -1,7 +1,7 @@
  package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Requerimientos.Requerimiento;
+import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.io.Serializable;
 import java.util.ArrayList;

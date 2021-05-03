@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto1.modelo.Cursos_Req.Restricciones;
+package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
