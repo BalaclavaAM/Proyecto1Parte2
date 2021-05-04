@@ -20,7 +20,7 @@ public class PanelOptions extends JPanel implements ActionListener {
 	public PanelOptions ( String rol, InterfazBannerPrincipal pPrincipal ) {
 		setLayout(new GridLayout(10,0));
 		this.setBackground(Color.GRAY);
-		botones = new ArrayList<JButton>();
+		botones = new ArrayList<>();
 		
 		JButton bCP = new JButton("Cargar Pensum");
 		bCP.setActionCommand("PO>CargaPensum");
@@ -68,61 +68,9 @@ public class PanelOptions extends JPanel implements ActionListener {
 		for (JButton jButton : botones) {
 			String permiso = jButton.getActionCommand();
 			switch (permiso) {
-			case "PO>CargaPensum": 
-				if (permission == "Guest" ) {
-					jButton.setEnabled(false);
-				} else {
-					jButton.setEnabled(true);
-				}
-				
-			break;
-			
-			case "PO>HAcademica": 
-				if (permission == "Guest" ) {
-					jButton.setEnabled(false);
-				} else {
-					jButton.setEnabled(true);
-				}
-			break;
-			
-			case "PO>IMaterias":
-				if (permission == "Guest" ) {
-					jButton.setEnabled(false);
-				} else {
-					jButton.setEnabled(true);
-				}
-			break;
-			
-			case "PO>AHistoria":
-				if (permission == "Guest" ) {
-					jButton.setEnabled(false);
-				} else {
-					jButton.setEnabled(true);
-				}
-			break;
-			
-			case "PO>PSemestre":
-				if (permission == "Guest" ) {
-					jButton.setEnabled(false);
-				} else {
-					jButton.setEnabled(true);
-				}
-			break;
-			
-			case "PO>OCursos":
-				jButton.setEnabled(true);
-			break;
-			
-			case "PO>Programas":
-				jButton.setEnabled(true);
-			break;
-			
-			case "PO>Calendario":
-				jButton.setEnabled(true);
-			break;
-			
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + permiso);
+				case "PO>CargaPensum", "PO>IMaterias", "PO>HAcademica", "PO>PSemestre", "PO>AHistoria" -> jButton.setEnabled(!permission.equals("Guest"));
+				case "PO>OCursos", "PO>Programas", "PO>Calendario" -> jButton.setEnabled(true);
+				default -> throw new IllegalArgumentException("Unexpected value: " + permiso);
 			}
 		}
 	}
@@ -130,7 +78,7 @@ public class PanelOptions extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
-		if (comando=="PO>CargaPensum") {
+		if (comando.equals("PO>CargaPensum")) {
 			
 		}
 		

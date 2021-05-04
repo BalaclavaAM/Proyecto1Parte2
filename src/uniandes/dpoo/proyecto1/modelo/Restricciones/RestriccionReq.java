@@ -1,12 +1,15 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class RestriccionReq implements Restriccion{
     private String reqN;
@@ -15,85 +18,34 @@ public class RestriccionReq implements Restriccion{
         this.reqN = reqN;
     }
 
-    @Override
-    public boolean cumple(Plan plan) {
-        HistoriaAcademica h = plan.getHistoria();
-        RequerimientoRegistrado rR =  h.getReqsRegistrados().get(reqN);
-        int itemsC = 0;
-        if(rR != null){
-            if(rR.cumplio()){
-                return true;
-            }
-            itemsC += rR.getItemsCumplidos();
-        }
-        rR =  plan.getReqsRegistrados().get(reqN);
-        if(rR != null){
-            if(rR.cumplio()){
-                return true;
-            }
-            itemsC += rR.getItemsCumplidos();
-            return itemsC >= rR.getReq().getItems();
-        }
-        return false;
+
+    public static boolean cumpleReq(MallaCursos malla, Periodo periodo, String reqN){
+        return malla.itemsCumplidos(reqN,periodo) > malla.getPensum().getRequerimientos().get(reqN).getItems();
     }
 
-    @Override
-    public boolean cumple(Plan plan, ArrayList<Curso> cursos) {
-        return false;
-    }
-
-    @Override
-    public boolean cumple(Plan plan, Periodo periodo) {
-        return cumpleReq(plan,periodo,reqN);
-    }
-
-    public static boolean cumpleReq(Plan plan, Periodo periodo, String reqN){
-        HistoriaAcademica h = plan.getHistoria();
-        RequerimientoRegistrado rR =  h.getReqsRegistrados().get(reqN);
-        int itemsC = 0;
-        if(rR != null && rR.ultimoPeriodo().compare(periodo)== -1){
-            if(rR.cumplio()){
-                return true;
-            }
-            itemsC += rR.getItemsCumplidos();
-        }
-        rR =  plan.getReqsRegistrados().get(reqN);
-        if(rR != null && rR.ultimoPeriodo().compare(periodo)== -1){
-            if(rR.cumplio()){
-                return true;
-            }
-            itemsC += rR.getItemsCumplidos();
-            return itemsC >= rR.getReq().getItems();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean cumple(Plan plan, ArrayList<Curso> cursos, Periodo periodo) {
-        return cumple(plan,periodo);
-    }
-
-    @Override
-    public boolean cumple(HistoriaAcademica historia) {
-        RequerimientoRegistrado rR =  historia.getReqsRegistrados().get(reqN);
-        return rR != null && rR.cumplio();
-    }
-
-    @Override
-    public boolean cumple(HistoriaAcademica historia, ArrayList<Curso> cursos) {
-        return false;
-    }
-
-    @Override
-    public boolean cumple(HistoriaAcademica historia, Periodo periodo) {
-        RequerimientoRegistrado rR =  historia.getReqsRegistrados().get(reqN);
-        return rR != null && rR.ultimoPeriodo().compare(periodo) == -1 && rR.cumplio();
+    public static boolean cumpleReq(MallaCursos malla, String reqN){
+        return malla.itemsCumplidos(reqN) > malla.getPensum().getRequerimientos().get(reqN).getItems();
     }
 
 
     @Override
-    public boolean cumple(HistoriaAcademica historiaAcademica, ArrayList<Curso> cursos, Periodo periodo) {
-        return cumple(historiaAcademica,periodo);
+    public boolean cumple(MallaCursos malla) {
+        return cumpleReq(malla,reqN);
+    }
+
+    @Override
+    public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP) {
+        return cumpleReq(malla,reqN);
+    }
+
+    @Override
+    public boolean cumple(MallaCursos malla, Periodo periodo) {
+        return cumpleReq(malla,periodo,reqN);
+    }
+
+    @Override
+    public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP, Periodo periodo) {
+        return cumpleReq(malla,reqN);
     }
 
     @Override

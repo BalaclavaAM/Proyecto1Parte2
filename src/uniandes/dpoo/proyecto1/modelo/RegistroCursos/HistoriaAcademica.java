@@ -20,7 +20,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
      */
     @Serial
     private static final long serialVersionUID = -491840464239633611L;
-    private Map<String, Curso> cursosInscritos;
+    private Map<String, CursoRegistrado> cursosInscritos;
     public Nota notaP = new NotaCual(calCual.pendiente);
 
 
@@ -35,14 +35,6 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		this.cursosInscritos = new Hashtable<>();
 		this.infoPeriodos = new Hashtable<>();
 	}
-
-    public boolean setPeriodo(Periodo periodo) {
-		return false;
-	}
-
-    public Map<String, Curso> getCursosInscritos() {
-        return cursosInscritos;
-    }
 
 
     public boolean actualizarNota(Curso curso, Periodo periodo, Nota nota, boolean epsilon) {
@@ -64,11 +56,12 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<Curso> cursos, Periodo periodo) {
+	public ArrayList<EstadoAgregar> inscripcionCursos(Map<String, CursoRegistrado> cursosP) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
+        Periodo periodo = cursosP.get(0).getPeriodo();
         int cmp = periodo.compare(this.periodo);
         if( cmp == -1) { // falta revisar otras cosas
-            estado.add(new EstadoAgregar(5,periodo));
+            estado.add(new EstadoAgregar(EstadoRegistro.Inconsistente,periodo));
             return estado;
         }
         if( cmp> 1) {
@@ -76,33 +69,16 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
                 cursosInscritos = new Hashtable<>();
             }
         }
-        agregarPeriodo(periodo);
-        for (Curso c: cursos) {
-            cursos.remove(0);
-            int val = agregarCursoxPeriodo(c,notaP,EstadoCurso.Inscrito,false,cursos, periodo);
-            if(val != 1){
-                estado.add(new EstadoAgregar(val,periodo,c));
-            }
-            cursosInscritos.put(c.getCodigo(),c);
-        }
+        agregarCursosPeriodo(cursosP,periodo,estado);
         return estado;
     }
+
 
     @Override
     public CursoRegistrado getCurReg(String codigo) {
          return cursosRegistrados.get(codigo);
     }
-    
-    public int validarRequerimiento(String codigo, String reqN) {
-        int val = super.validarRequerimiento(codigo,reqN);
-        if (val != 1) {
-            return val;
-        }
-        if(cursosRegistrados.get(codigo).getNota().aprobo()) {
-            return 1;
-        }
-        return -2;
-    }
+
 
     public int cambiarRequerimiento(String codigoCurso, String req1N, String req2N){
         RequerimientoRegistrado reqR1 =  reqsRegistrados.get(req1N);
@@ -120,16 +96,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         return -2;
     }
 
-    @Override
-    public int revisarRestriciones(Curso curso, ArrayList<Curso> cursosP, Periodo periodo) {
-        ArrayList<Restriccion> restriccions = curso.getRestricciones();
-        for(Restriccion rst: restriccions){
-            if(!rst.cumple(this, cursosP, periodo)){
-                return 0;
-            }
-        }
-        return 1;
-    }
+
 
     public double calcularPromedioSemestre(String periodoS) {
 		ArrayList<Periodo> periodos = periodosMap.get(periodoS);
@@ -152,6 +119,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		return 0;
 	}
 
+
 	public double calcularPromedioAcademico() {
         double puntosSemestre = 0;
         double creditosSemestre = 0;
@@ -173,6 +141,15 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     public float getCreditos() {
         return creditos;
+    }
+
+
+    public boolean setPeriodo(Periodo periodo) {
+        return false;
+    }
+
+    public Map<String, CursoRegistrado> getCursosInscritos() {
+        return cursosInscritos;
     }
 
     @Override
@@ -201,6 +178,29 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
             return EstadoCurso.Pendiente;
         }
         return EstadoCurso.Finalizado;
+    }
+
+    @Override
+    public boolean aprovado(CursoRegistrado cursoR) {
+        return cursoR.getNota().aprobo() || cursoR.getEstado() == EstadoCurso.Inscrito;
+    }
+
+    @Override
+    public int itemsCumplidos(String reqN) {
+        RequerimientoRegistrado rR = reqsRegistrados.get(reqN);
+        if(rR != null && periodo.compare(rR.ultimoPeriodo()) == 1){
+            return rR.getItemsCumplidos();
+        }
+        return 0;
+    }
+
+    @Override
+    public int itemsCumplidos(String reqN, Periodo periodo) {
+        RequerimientoRegistrado rR = reqsRegistrados.get(reqN);
+        if(rR != null && periodo.compare(rR.ultimoPeriodo()) == 1){
+            return rR.getItemsCumplidos();
+        }
+        return 0;
     }
 
 }

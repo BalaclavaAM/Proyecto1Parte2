@@ -1,38 +1,45 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 
 public class EstadoAgregar {
-    private int error;
+    private EstadoRegistro error;
     private Periodo periodo;
     private Curso curso;
+    private Restriccion rest;
 
-    public EstadoAgregar(int error, Periodo periodo, Curso curso) {
-        this.error = error;
-        this.periodo = periodo;
-        this.curso = curso;
+
+    public EstadoAgregar(CursoRegistrado curso, Restriccion rest) {
+        this.error = curso.getEstadoAgregar().getError();
+        this.periodo = curso.getPeriodo();
+        this.curso = curso.getCurso();
+        this.rest = rest;
     }
 
-    public EstadoAgregar cambiarEstado(int error, Periodo periodo, Curso curso){
-        this.error = error;
-        this.periodo = periodo;
-        this.curso = curso;
-        return this;
-    }
-
-    public EstadoAgregar cambiarEstado(int error, Periodo periodo){
-        this.error = error;
-        this.periodo = periodo;
-        return this;
-    }
-
-    public EstadoAgregar(int error, Periodo periodo) {
-        this.error = error;
+    public EstadoAgregar(Periodo periodo) {
+        this.error = EstadoRegistro.Pendiente;
         this.periodo = periodo;
     }
 
-    public int getError() {
+    public void setRest(Restriccion rest) {
+        this.rest = rest;
+    }
+
+    public void setError(EstadoRegistro error) {
+        this.error = error;
+    }
+
+
+
+    public EstadoAgregar(EstadoRegistro error, Periodo periodo) {
+        this.error = error;
+        this.periodo = periodo;
+    }
+
+    public EstadoRegistro getError() {
         return error;
     }
 

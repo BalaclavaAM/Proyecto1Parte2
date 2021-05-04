@@ -2,6 +2,7 @@ package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
+import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
@@ -27,40 +28,26 @@ public class Plan extends MallaCursos {
     }
 
     public void validarInscritos(){
-        for(Curso ci: historia.getCursosInscritos().values()){
-            CursoRegistrado regist = new CursoRegistrado(ci,notaPlan,estadoPl, false, periodo);
-            cursosRegistrados.put(ci.getCodigo(), regist);
-            modificarHistoria(regist, periodo);
+        for(CursoRegistrado ci: historia.getCursosInscritos().values()){
+            boolean ep = ci.getEpsilon();
+            modificarHistoria(
+                    new CursoRegistrado(ci.getCurso(),notaPlan,EstadoCurso.Planeado,ep,ci.getPeriodo()), EstadoRegistro.Ok);
         }
     }
 
-    public ArrayList<EstadoAgregar> agregarCursos(ArrayList<Curso> cursos, ArrayList<Periodo> periodos){
-        return super.agregarCursos(cursos,periodos,auxnotas,auxbolean);
+    public ArrayList<EstadoAgregar> agregarCursos(ArrayList<CursoRegistrado> cursosR){
+        return super.agregarCursos(cursosR);
     }
 
     @Override
     public CursoRegistrado getCurReg(String codigo) {
-        CursoRegistrado c1 = historia.cursosRegistrados.get(codigo);
-        if (c1 != null){
-            CursoRegistrado c2 = cursosRegistrados.get(codigo);
-            if(c2 != null){
-                return c2;
-            }
-            return c1;
+        CursoRegistrado c2 = cursosRegistrados.get(codigo);
+        if (c2 != null) {
+            return c2;
         }
-        return null;
+        return cursosRegistrados.get(codigo);
     }
 
-    @Override
-    public int revisarRestriciones(Curso curso, ArrayList<Curso> cursosP, Periodo periodo) {
-        ArrayList<Restriccion> restriccions = curso.getRestricciones();
-        for(Restriccion rst: restriccions){
-            if(!rst.cumple(this, cursosP, periodo)){
-                return 0;
-            }
-        }
-        return 1;
-    }
 
 
     @Override
@@ -86,6 +73,39 @@ public class Plan extends MallaCursos {
     @Override
     public EstadoCurso getauxEsC(Nota nota) {
         return estadoPl;
+    }
+
+    @Override
+    public boolean aprovado(CursoRegistrado cursoR) {
+        return cursoR.getEstado() == EstadoCurso.Planeado || cursoR.getNota().aprobo() || cursoR.getEstado() == EstadoCurso.Inscrito;
+    }
+    @Override
+    public int itemsCumplidos(String reqN) {
+        int sum = 0;
+        RequerimientoRegistrado rR1 = historia.reqsRegistrados.get(reqN);
+        if(rR1 != null){
+            sum += rR1.getItemsCumplidos();
+        }
+        RequerimientoRegistrado rR2 = reqsRegistrados.get(reqN);
+        if(rR1 != null){
+            sum += rR2.getItemsCumplidos();
+        }
+        return sum;
+    }
+
+
+    @Override
+    public int itemsCumplidos(String reqN, Periodo periodo) {
+        int sum = 0;
+        RequerimientoRegistrado rR1 = historia.reqsRegistrados.get(reqN);
+        if(rR1 != null && periodo.compare(rR1.ultimoPeriodo()) == 1){
+            sum += rR1.getItemsCumplidos();
+        }
+        RequerimientoRegistrado rR2 = reqsRegistrados.get(reqN);
+        if(rR1 != null && periodo.compare(rR1.ultimoPeriodo()) == 1){
+            sum += rR2.getItemsCumplidos();
+        }
+        return sum;
     }
 
     public Map<String, CursoRegistrado> getCursosRegistrados() {

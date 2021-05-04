@@ -5,14 +5,17 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
 import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
 import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
-
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoRegistro;
 
 
 public class CursoRegistrado {
 	private final Curso curso;
 	private final Periodo periodo;
+	private EstadoAgregar estadoAgregar;
 	private Nota nota = new NotaCual(calCual.pendiente);
 	private EstadoCurso estado = EstadoCurso.Pendiente;
+	private boolean agregado = false;
 	private boolean epsilon = false;
 	private boolean numerica = false;
 
@@ -31,6 +34,7 @@ public class CursoRegistrado {
 		this.periodo = periodo;
 		this.epsilon = epsilon;
 		this.numerica = nota.isNumeric();
+		this.estadoAgregar = new EstadoAgregar(periodo);
 	}
 
 	public CursoRegistrado(Curso curso, Periodo periodo){
@@ -77,6 +81,11 @@ public class CursoRegistrado {
 		return estado;
 	}
 
+	public EstadoAgregar getEstadoAgregar() {
+		return estadoAgregar;
+	}
+
+
 	public void setEstado(EstadoCurso estado){
 		this.estado = estado;
 	}
@@ -84,6 +93,14 @@ public class CursoRegistrado {
 
 	public Nota getNota() {
 		return nota;
+	}
+
+	public boolean isAgregado() {
+		return agregado;
+	}
+
+	public void Agregado() {
+		this.agregado = true;
 	}
 
 	public boolean getEpsilon(){
