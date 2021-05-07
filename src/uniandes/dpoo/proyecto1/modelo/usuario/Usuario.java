@@ -2,37 +2,44 @@ package uniandes.dpoo.proyecto1.modelo.usuario;
 
 import java.io.Serializable;
 
-public class Usuario implements Serializable {
+public abstract class Usuario implements Serializable {
 	// ************************************************************************
 	// Atributos
 	// ************************************************************************
-	private static final long serialVersionUID = -1050671037655716152L;
-	private String nombredeusuario;
-	private String contrasenha;
-	
-	
+	protected static final long serialVersionUID = -1050671037655716152L;
+	protected String username;
+	protected String contrasenha;
+	protected String nombre;
 	
 	// ************************************************************************
 	// Elcons tructor
 	// ************************************************************************
-	public Usuario(String nombredeusuario, String contrasenha) {
-		this.nombredeusuario = nombredeusuario;
+	public Usuario(String username, String contrasenha, String nombre) {
+		this.username = username;
 		this.contrasenha = contrasenha;
+		this.nombre = nombre;
 	}
 
-	public String getContrasenha() {
-		return contrasenha;
+	public abstract String getPermission();
+
+	public boolean igualContrasenha(String intent){
+		return contrasenha.equals(intent);
 	}
-	
-	public void setContrasenha(String contrasenha) {
-		this.contrasenha = contrasenha;
+
+	public boolean cambiarContrasenha(String intent, String newPassword){
+		if(intent.equals(contrasenha)){
+			contrasenha = newPassword;
+			return true;
+		}
+		return false;
 	}
-	
-	public String getNombredeusuario() {
-		return nombredeusuario;
+
+	public String getUsername() {
+		return username;
 	}
-	
-	public void setNombredeusuario(String nombredeusuario) {
-		this.nombredeusuario = nombredeusuario;
+
+	public String getNombre() {
+		return nombre;
 	}
+
 }

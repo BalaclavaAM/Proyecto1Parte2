@@ -1,6 +1,8 @@
 package uniandes.dpoo.proyecto1.modelo.Registro;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoRegistro;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 
@@ -28,15 +30,18 @@ public class RequerimientoRegistrado {
     }
 
 
-    public int agregarCurso(CursoRegistrado cursoR, Periodo periodo){
+    public EstadoRegistro agregarCurso(CursoRegistrado cursoR, Periodo periodo){
         Curso curso = cursoR.getCurso();
         String codigo = curso.getCodigo();
         int val = req.validar(curso);
         if( val == 0 ){
-            return 0;
+            return EstadoRegistro.Inexistente;
         }
-        if(cursosR.containsKey(codigo) || cumplio()){
-            return 2;
+        if(cursosR.containsKey(codigo)){
+            return EstadoRegistro.Repetido;
+        }
+        if(cumplio()){
+            return EstadoRegistro.SobreInscripcion;
         }
         cursosR.put(codigo,cursoR);
         this.itemsCumplidos += val;
@@ -44,7 +49,10 @@ public class RequerimientoRegistrado {
         if(periodo.compare(ultimoPeriodo) == 1){
             ultimoPeriodo = periodo;
         }
-        return 1;
+        if(cumplio()){
+            validado = true;
+        }
+        return EstadoRegistro.Ok;
     }
 
     public boolean cumplio(){
@@ -63,6 +71,9 @@ public class RequerimientoRegistrado {
         creditosCumplidos -= curso.getCreditos();
         if(cursoR.getPeriodo().compare(ultimoPeriodo) == 0){
             this.ultimoPeriodo = ultimoPeriodo();
+        }
+        if(cumplio() != validado){
+            validado = !validado;
         }
         return true;
     }

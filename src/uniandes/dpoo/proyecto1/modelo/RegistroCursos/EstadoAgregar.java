@@ -2,7 +2,6 @@ package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 
 public class EstadoAgregar {
@@ -22,6 +21,16 @@ public class EstadoAgregar {
     public EstadoAgregar(Periodo periodo) {
         this.error = EstadoRegistro.Pendiente;
         this.periodo = periodo;
+    }
+
+    public EstadoAgregar(Periodo periodo, Curso curso){
+        this.periodo = periodo;
+        this.curso = curso;
+        this.error = EstadoRegistro.Pendiente;
+    }
+
+    public Restriccion getRest() {
+        return rest;
     }
 
     public void setRest(Restriccion rest) {

@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.usuario;
 
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Pensum;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 
 
@@ -17,16 +18,22 @@ public class Carrera implements Serializable {
 	private String nombre;
 	private String diminutivo;
 	private Map<String, Estudiante> estudiantes;
-	
+	private Pensum pensumActual;
+
 	public Carrera(String nombre, String diminutivo) {
-		super();
 		this.nombre = nombre;
 		this.diminutivo = diminutivo;
 		this.setEstudiantes(Collections.emptyMap());
 	}
-	
-	
-	
+
+	public void setPensumActual(Pensum pensumActual) {
+		this.pensumActual = pensumActual;
+	}
+
+	public Pensum getPensumActual() {
+		return pensumActual;
+	}
+
 	public String getDiminutivo() {
 		return diminutivo;
 	}

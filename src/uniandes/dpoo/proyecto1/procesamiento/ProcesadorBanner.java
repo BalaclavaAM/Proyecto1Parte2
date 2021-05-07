@@ -1,103 +1,123 @@
 package uniandes.dpoo.proyecto1.procesamiento;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
 import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
+import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class ProcesadorBanner implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4746963895960324815L;
 
-	private List<Curso> cursos;
+	private Map<String,Map<String,Curso>> catalogo; //catalogo por materia
 
-	private List<Carrera> carreras;
+	private Map<String,Carrera> carreras; //<nombreUsuario,Usuario>
 
-	private Map<String, Estudiante> estudiantes;
+	private Map<String, Usuario> usuarios; //<nombreUsuario,Usuario>
 
-	private Map<String, Coordinador> coordinadores;
+	private Periodo periodo;
 
-	public ProcesadorBanner(List<Curso> cursos, List<Carrera> carreras, Map<String, Estudiante> estudiantes,
-							Map<String, Coordinador> coordinadores) {
-		this.cursos = cursos;
-		this.carreras = carreras;
-		this.estudiantes = estudiantes;
-		this.coordinadores = coordinadores;
+	private int nEstSem; //numero de estudiantes durante el semestre
+
+	public ProcesadorBanner() {
+		this.catalogo = new HashMap<>();
+		this.carreras = new HashMap<>();
+		this.usuarios = new HashMap<>();
 	}
 
-	public List<Curso> getCursos() {
-		return cursos;
+	public Map<String, Map<String, Curso>> getCursos() {
+		return catalogo;
 	}
 
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
-
-	public List<Carrera> getCarreras() {
+	public Map<String,Carrera> getCarreras() {
 		return carreras;
 	}
 
-	public void setCarreras(List<Carrera> carreras) {
-		this.carreras = carreras;
+	public Map<String, Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public Map<String, Estudiante> getEstudiantes() {
-		return estudiantes;
-	}
-
-
-	public Map<String, Coordinador> getCoordinadores() {
-		return coordinadores;
-	}
-
-	public void setCoordinadores(Map<String, Coordinador> coordinadores) {
-		this.coordinadores = coordinadores;
-	}
 
 	public Collection<String> darNombresCarreras() {
-		Collection<String> nombres = new HashSet<String>();
-		for (Carrera carrera : carreras) {
-			nombres.add(carrera.getNombre());
-		}
-
-		return nombres;
+		return carreras.keySet();
 	}
 
-	public int authEstudiante(String user, String password) {
-		if (estudiantes.containsKey(user)) {
-			if (estudiantes.get(user).getContrasenha().equals(password)) {
-				return 1;
-			} else {
-				return 0;
+	public void avanzarPeriodo(){
+		periodo.avanzarPeriodo();
+	}
+
+	public Usuario authenticate(String user, String password) {
+		Usuario e = usuarios.get(user);
+		if (e != null) {
+			if (e.igualContrasenha(password)) {
+				return e;
 			}
-		} else {
-			return -1;
 		}
+		return null;
 	}
 
-	public int authCoordinador(String user, String password) {
-		if (coordinadores.containsKey(user)) {
-			if (coordinadores.get(user).getContrasenha() == password) {
-				return 1;
-			} else {
-				return 0;
+	private static String agregarCeros(int n){
+		String ns = String.valueOf(n);
+		int con = 4 - ns.length();
+		StringBuilder nb = new StringBuilder(ns);
+		for (int i = 0; i <con; i++) {
+			nb.insert(0, "0");
+		}
+		return nb.toString();
+	}
+
+	public boolean crearCordinador(String username, String contrasenha, String nombre, String carreraN){
+		Carrera carrera = carreras.get(carreraN);
+		if(usuarios.containsKey(username)) {
+			if (carreraN != null) {
+				String password = randomPassword();
+				Coordinador coordinador = new Coordinador(username, contrasenha, nombre,carrera);
+				usuarios.put(username, coordinador);
+				nEstSem++;
+				return true;
 			}
-		} else {
-			return -1;
 		}
+		return false;
+	}
+
+	public boolean crearEstudiante(String username, String nombre, String carreraN) {
+		Carrera carrera = carreras.get(carreraN);
+		if(usuarios.containsKey(nombre)) {
+			if (carreraN != null) {
+				String password = randomPassword();
+				String codigo = periodo.getAnio() + periodo.getSemestre() % 10 + agregarCeros(nEstSem);
+				Estudiante estudiante = new Estudiante(username, password, password, codigo, carrera.getPensumActual()
+						,carreraN,periodo);
+				usuarios.put(username, estudiante);
+				nEstSem++;
+				return true;
+			}
+		}
+		return false;
 	}
 
 
-	public boolean crearEstudiante(String username, String contrasenha, String nombre, String codigo) {
-		return true;
+	private static String randomPassword() {
+		StringBuilder contrasenha = new StringBuilder();
+		for (int i = 0; i < 9; i++) {
+			contrasenha.append((char) (Math.random() * (127 - 49) + 49));
+		}
+		return contrasenha.toString();
 	}
 
+	public static void main(String[] args) {
+		int r = 9;
+		System.out.println(agregarCeros(r));
+		System.out.println(randomPassword());
+		System.out.println((char) (126));
+	}
 }
 

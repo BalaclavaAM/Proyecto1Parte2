@@ -7,7 +7,7 @@ public class Coordinador extends Usuario {
 	private Carrera carrera;
 
 	public Coordinador(String nombredeusuario, String contrasenha, String nombre, Carrera race) {
-		super(nombredeusuario, contrasenha);
+		super(nombredeusuario, contrasenha,nombre);
 		this.nombre = nombre;
 		this.setCarrera(race);
 	}
@@ -27,5 +27,11 @@ public class Coordinador extends Usuario {
 	public void setCarrera(Carrera carrera) {
 		this.carrera = carrera;
 	}
-	
+
+	@Override
+	public String getPermission() {
+		return "Cordinador";
+
+	}
+
 }

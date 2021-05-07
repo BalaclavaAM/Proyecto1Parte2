@@ -19,9 +19,7 @@ public class Pensum implements Serializable {
 	private Map<String, String> cursosValidacionAuto;
 	private Map<String, Requerimiento> requerimientos;
 	private Map<Integer, ArrayList<Requerimiento>> requerimientosXsemestre;
-	private Map<Nivel, Map<String,ArrayList<Requerimiento>>>  reqsXNivelTipo;
-
-
+	private Map<Nivel, Map<String, ArrayList<Requerimiento>>> reqsXNivelXTipologia;
 
 
 	public Pensum(String nombre) {
@@ -30,22 +28,23 @@ public class Pensum implements Serializable {
 		this.requerimientos = new Hashtable<>();
 		this.requerimientosXsemestre = new Hashtable<>();
 		this.cursosValidacionAuto = new Hashtable<>();
-		this.reqsXNivelTipo = new Hashtable<>();
+		this.reqsXNivelXTipologia = new Hashtable<>();
 	}
+
 
 	public void agregarRequerimiento(Requerimiento req) {
 		String nombre = req.getNombre();
 		if(requerimientos.containsKey(nombre)){
-			String tipo = req.getTipo();
+			String tipologia = req.getTipologia();
 			Nivel nivel = req.getNivel();
 			int semestre = req.getSemestresugerido();
 			requerimientos.put(nombre, req);
 			requerimientosXsemestre.putIfAbsent(semestre, new ArrayList<>());
 			requerimientosXsemestre.get(semestre).add(req);
-			reqsXNivelTipo.putIfAbsent(nivel, new Hashtable<>());
-			Map<String, ArrayList<Requerimiento>> reqsxTipoN = reqsXNivelTipo.get(nivel);
-			reqsxTipoN.putIfAbsent(tipo, new ArrayList<>());
-			reqsxTipoN.get(tipo).add(req);
+			reqsXNivelXTipologia.putIfAbsent(nivel, new Hashtable<>());
+			Map<String, ArrayList<Requerimiento>> reqsxTipoN = reqsXNivelXTipologia.get(nivel);
+			reqsxTipoN.putIfAbsent(tipologia, new ArrayList<>());
+			reqsxTipoN.get(tipologia).add(req);
 			this.creditos += req.getCreditos();
 		}
 	}
@@ -57,6 +56,7 @@ public class Pensum implements Serializable {
 		}
 		return false;
 	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -75,7 +75,7 @@ public class Pensum implements Serializable {
 	}
 
 	public Map<Nivel, Map<String, ArrayList<Requerimiento>>> getReqsXNivelTipo() {
-		return reqsXNivelTipo;
+		return reqsXNivelXTipologia;
 	}
 
 	public Map<String, String> getCursosValidacionAuto() {

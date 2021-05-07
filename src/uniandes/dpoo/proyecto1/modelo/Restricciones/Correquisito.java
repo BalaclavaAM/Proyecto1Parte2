@@ -1,12 +1,8 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
-import uniandes.dpoo.proyecto1.modelo.Registro.Periodo;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,7 +19,9 @@ public class Correquisito implements Restriccion {
     public boolean cumple(MallaCursos malla) {
         for (String codigo : opciones) {
             CursoRegistrado cursoR = malla.getCurReg(codigo);
+            System.out.println(codigo);
             if (cursoR != null){
+                System.out.println(codigo);
                 if(malla.aprovado(cursoR)) {
                     return true;
                 }
@@ -65,7 +63,7 @@ public class Correquisito implements Restriccion {
 
     @Override
     public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP, Periodo periodo) {
-        if(periodo == malla.getPeriodo()){
+        if(periodo == malla.getPeridoSistema()){
             return cumple(malla, cursosP);
         }
         if(cumple(malla, periodo)){

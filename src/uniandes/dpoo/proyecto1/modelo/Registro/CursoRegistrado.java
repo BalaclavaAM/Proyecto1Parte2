@@ -2,11 +2,9 @@ package uniandes.dpoo.proyecto1.modelo.Registro;
 
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
-import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
-import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.*;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoRegistro;
 
 
 public class CursoRegistrado {
@@ -34,12 +32,13 @@ public class CursoRegistrado {
 		this.periodo = periodo;
 		this.epsilon = epsilon;
 		this.numerica = nota.isNumeric();
-		this.estadoAgregar = new EstadoAgregar(periodo);
+		this.estadoAgregar = new EstadoAgregar(periodo, curso);
 	}
 
 	public CursoRegistrado(Curso curso, Periodo periodo){
 		this.curso = curso;
 		this.periodo = periodo;
+		this.nota = new NotaCual(calCual.pendiente);
 	}
 
 
@@ -48,19 +47,14 @@ public class CursoRegistrado {
 		this.curso = curso;
 		this.periodo = periodo;
 		this.estado = estado;
-		if(estado == EstadoCurso.Inscrito){
-			this.nota = new NotaCual(calCual.pendiente);
-		}
-		if(estado == EstadoCurso.Planeado){
-			this.nota = new NotaCual(calCual.planeado);
-		}
-
+		this.nota = new NotaCual(calCual.pendiente);
 	}
 
-	public CursoRegistrado(Curso curso, Periodo periodo, boolean epsilon){
+	public CursoRegistrado(Curso curso, EstadoCurso estadoC, boolean epsilon,Periodo periodo){
 		this.curso = curso;
 		this.periodo = periodo;
 		this.epsilon = epsilon;
+		this.nota = new NotaCual(calCual.pendiente);
 	}
 
 	public CursoRegistrado(Curso curso, Periodo periodo, EstadoCurso estadoC, Nota nota, boolean epsilon) {
@@ -109,8 +103,9 @@ public class CursoRegistrado {
 
 	public void setNota(Nota nota) {
 		this.nota = nota;
-
-		this.estado = EstadoCurso.Finalizado;
+		if(nota.notaCual() != calCual.pendiente) {
+			this.estado = EstadoCurso.Finalizado;
+		}
 	}
 
 	public void cambiarRegistro(Nota nota, boolean epsilon){

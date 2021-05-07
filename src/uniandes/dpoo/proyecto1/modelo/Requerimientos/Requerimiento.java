@@ -24,7 +24,6 @@ public abstract class Requerimiento implements Serializable {
 
 	public Requerimiento(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos){
 		this.nombre = nombre;
-		this.items = items;
 		this.nivel = nivel;
 		this.semestresugerido = semestresugerido;
 		this.tipologia = tipologia;

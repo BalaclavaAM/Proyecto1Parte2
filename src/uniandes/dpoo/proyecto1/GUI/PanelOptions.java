@@ -1,7 +1,7 @@
 package uniandes.dpoo.proyecto1.GUI;
 
-import java.awt.Color;
-import java.awt.GridLayout;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -68,19 +68,38 @@ public class PanelOptions extends JPanel implements ActionListener {
 		for (JButton jButton : botones) {
 			String permiso = jButton.getActionCommand();
 			switch (permiso) {
-				case "PO>CargaPensum", "PO>IMaterias", "PO>HAcademica", "PO>PSemestre", "PO>AHistoria" -> jButton.setEnabled(!permission.equals("Guest"));
-				case "PO>OCursos", "PO>Programas", "PO>Calendario" -> jButton.setEnabled(true);
-				default -> throw new IllegalArgumentException("Unexpected value: " + permiso);
+				case "PO>CargaPensum":
+					jButton.setEnabled(!permission.equals("Guest"));
+					break;
+				case "PO>HAcademica":
+
+				case "PO>PSemestre":
+
+				case "PO>IMaterias":
+					jButton.setEnabled(permission.equals("Estudiante"));
+					break;
+				case "PO>AHistoria":
+					jButton.setEnabled(permission.equals("Guest"));
+					break;
+
+				case "PO>OCursos":
+
+				case "PO>Programas":
+					jButton.setEnabled(true);
+					break;
+
+				case "PO>Calendario":
+					jButton.setEnabled(true);
+					break;
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + permiso);
 			}
 		}
 	}
 
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String comando = e.getActionCommand();
-		if (comando.equals("PO>CargaPensum")) {
-			
-		}
-		
+
 	}
 }

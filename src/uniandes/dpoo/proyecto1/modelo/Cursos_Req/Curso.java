@@ -22,7 +22,7 @@ public class Curso implements Serializable {
 
 
 	public Curso(String nombre, String codigo, String programa, int creditos, int semanas,
-				 boolean notanumerica, String descripcion) {
+				 boolean notanumerica, String descripcion, ArrayList<Restriccion> restricciones) {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		//this.programa = programa;
@@ -30,6 +30,7 @@ public class Curso implements Serializable {
 		this.notanumerica = notanumerica;
 		//this.semanas = semanas; //no usado, serviria para corregir reqisitos cursos de 8 semanas con perrequistos cursos de 16 (poco comun)
 		this.descripcion = descripcion;
+		this.restricciones = restricciones;
 	}
 
 
