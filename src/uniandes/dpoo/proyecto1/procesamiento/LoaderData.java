@@ -4,14 +4,13 @@ import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LoaderData {
 	
-	public static ProcesadorBanner cargarData() {
+	public static Banner cargarData() {
 		try {
 			ObjectInputStream in=new ObjectInputStream(new FileInputStream("info.txt"));  
-			ProcesadorBanner s=(ProcesadorBanner)in.readObject(); 
+			Banner s=(Banner)in.readObject();
 			in.close();
 			return s;
 			
@@ -36,7 +35,7 @@ public class LoaderData {
 		}
 	}
 	
-	public static void guardarData(ProcesadorBanner procesador) {
+	public static void guardarData(Banner procesador) {
 		try {
 			FileOutputStream fout=new FileOutputStream("info.txt");  
 			ObjectOutputStream out=new ObjectOutputStream(fout);  

@@ -10,7 +10,7 @@ public class PanelSuperior extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = -6494690918335180464L;
 	public final static String RUTA = "./data/imagenes/andes.jpg";
-	private JLabel startbutton;
+	private JLabel logouniandes;
 	
 	public PanelSuperior (InterfazBannerPrincipal principal) {
 		setSize(principal.getWidth(),50);
@@ -20,9 +20,10 @@ public class PanelSuperior extends JPanel implements ActionListener {
 		op.setBackground(Color.decode("0xf1c132"));
 		op.setActionCommand("Home");
 		op.addActionListener(principal);
-		startbutton = new JLabel( );
-		startbutton.setIcon(new ImageIcon( new ImageIcon(RUTA).getImage().getScaledInstance(getWidth()/3,(int)(getHeight()), Image.SCALE_DEFAULT)));
-		add(startbutton, BorderLayout.WEST);
+		logouniandes = new JLabel( );
+		logouniandes.setBackground(Color.WHITE);
+		logouniandes.setIcon(new ImageIcon(RUTA));
+		add(logouniandes, BorderLayout.WEST);
 		add(op,BorderLayout.EAST);
 	}
 

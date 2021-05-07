@@ -22,19 +22,29 @@ public class Periodo {
         this.completo = true;
    }
     public boolean avanzarPeriodo(){
+        if(semestre == 19){
+            semestre = 20;
+            ciclo = 1;
+            return true;
+        }
         if(ciclo == 1){
             ciclo++;
             return true;
         }
-        if(semestre == 10){
-            ciclo--; semestre = 19;
-            return true;
+        if(ciclo == 2) {
+            if (semestre == 10) {
+                ciclo--;
+                semestre = 19;
+                return true;
+            }
+            if (semestre == 20) {
+                anio++;
+                semestre = 10;
+                ciclo = 1;
+                return true;
+            }
         }
-        if(semestre == 19){
-            ciclo--; semestre = 20;
-            return true;
-        }
-        anio++; semestre = 10; ciclo = 1;
+        System.out.println("pusieron mal los periodos");
         return false;
     }
 
@@ -52,10 +62,7 @@ public class Periodo {
         return compareL(p1,this);
     }
 
-    public void avanzarCiclo(){
-        ciclo +=1;
-    }
-    
+
 
     public static int compareL(Periodo p1, Periodo p2) {
         int c1 = Integer.compare(p1.anio, p2.anio);

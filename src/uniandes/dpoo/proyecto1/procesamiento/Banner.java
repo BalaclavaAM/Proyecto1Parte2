@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class ProcesadorBanner implements Serializable {
+public class Banner implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -4746963895960324815L;
@@ -27,10 +27,14 @@ public class ProcesadorBanner implements Serializable {
 
 	private int nEstSem; //numero de estudiantes durante el semestre
 
-	public ProcesadorBanner() {
+	public Banner(Periodo periodo) {
 		this.catalogo = new HashMap<>();
 		this.carreras = new HashMap<>();
 		this.usuarios = new HashMap<>();
+	}
+
+	public void cargarData(String filename){
+
 	}
 
 	public Map<String, Map<String, Curso>> getCursos() {
@@ -50,18 +54,8 @@ public class ProcesadorBanner implements Serializable {
 		return carreras.keySet();
 	}
 
-	public void avanzarPeriodo(){
-		periodo.avanzarPeriodo();
-	}
-
-	public Usuario authenticate(String user, String password) {
-		Usuario e = usuarios.get(user);
-		if (e != null) {
-			if (e.igualContrasenha(password)) {
-				return e;
-			}
-		}
-		return null;
+	public Periodo getPeriodo() {
+		return periodo;
 	}
 
 	private static String agregarCeros(int n){
@@ -72,6 +66,16 @@ public class ProcesadorBanner implements Serializable {
 			nb.insert(0, "0");
 		}
 		return nb.toString();
+	}
+
+	public Usuario authenticate(String user, String password) {
+		Usuario e = usuarios.get(user);
+		if (e != null) {
+			if (e.igualContrasenha(password)) {
+				return e;
+			}
+		}
+		return null;
 	}
 
 	public boolean crearCordinador(String username, String contrasenha, String nombre, String carreraN){
