@@ -18,13 +18,13 @@ public class PanelLogin extends PanelAux implements ActionListener {
         add(new JLabel());
         add(caja);
         add(new JLabel());
-        JTextField usuario = new JTextField("Usuario");
-        JPasswordField password = new JPasswordField("Contraseña");
+        userText = new JTextField("Usuario");
+        passwordText = new JPasswordField("Contraseña");
         JButton botonLogin = new JButton("Login");
         botonLogin.addActionListener(this);
         botonLogin.setActionCommand("main>LoginTry");
-        caja.add(usuario, BorderLayout.CENTER);
-        caja.add(password, BorderLayout.CENTER);
+        caja.add(userText, BorderLayout.CENTER);
+        caja.add(passwordText, BorderLayout.CENTER);
         caja.add(botonLogin, BorderLayout.CENTER);
     }
 

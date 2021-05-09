@@ -2,6 +2,7 @@ package uniandes.dpoo.proyecto1.modelo.Requerimientos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.ReqTipologia;
 
 import java.io.Serializable;
 
@@ -13,8 +14,9 @@ public abstract class Requerimiento implements Serializable {
 	protected String nombre;
 	protected Nivel nivel;
 	protected String tipo;
+	protected String [] mains;
 	protected int semestresugerido;
-	protected String tipologia;
+	protected ReqTipologia tipologia;
 	protected int creditos;
 	protected int items;
 
@@ -22,12 +24,13 @@ public abstract class Requerimiento implements Serializable {
 		return nombre;
 	}
 
-	public Requerimiento(String nombre, Nivel nivel, int semestresugerido, String tipologia, int creditos){
+	public Requerimiento(String nombre, Nivel nivel, int semestresugerido, ReqTipologia tipologia, int creditos, String[] mains){
 		this.nombre = nombre;
 		this.nivel = nivel;
 		this.semestresugerido = semestresugerido;
 		this.tipologia = tipologia;
 		this.creditos = creditos;
+		this.mains = mains;
 	}
 
 
@@ -45,7 +48,7 @@ public abstract class Requerimiento implements Serializable {
 		return semestresugerido;
 	}
 
-	public String getTipologia() {
+	public ReqTipologia getTipologia() {
 		return tipologia;
 	}
 
@@ -54,4 +57,8 @@ public abstract class Requerimiento implements Serializable {
 	}
 
 	public abstract int  validar(Curso curso); //devuelve la cantidad de items que cumple el curso
+
+	public String[] getMains() {
+		return mains;
+	}
 }

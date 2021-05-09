@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
@@ -154,13 +155,15 @@ public abstract class MallaCursos {
 
         if(eC == EstadoRegistro.Ok) {
             cursosRegistrados.put(curso.getCodigo(),cursoR);
-            String reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
+            Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
             if (reqAsociado != null) {
                 if (cursoR.getNota().aprobo()) {
                     validarRequerimiento(codigo, reqAsociado);
                 }
             }
         }
+
+
         cursoR.Agregado();
         infoSemestre.get(cursoR.getPeriodo().periodoS()).put(codigo, cursoR);
         creditos += curso.getCreditos();
@@ -169,8 +172,7 @@ public abstract class MallaCursos {
 
 
 
-    public EstadoRegistro validarRequerimiento(String codigo, String reqN){
-        Requerimiento req = pensum.getRequerimientos().get(reqN);
+    public EstadoRegistro validarRequerimiento(String codigo, Requerimiento req){
         CursoRegistrado cursoR = cursosRegistrados.get(codigo);
         if(cursoR == null || req == null){
             return EstadoRegistro.Inexistente;
@@ -201,7 +203,6 @@ public abstract class MallaCursos {
 
     public Restriccion revisarRestriciones(CursoRegistrado cursoR,Map<String,CursoRegistrado> cursosP, Periodo periodo) {
         ArrayList<Restriccion> restriccions = cursoR.getCurso().getRestricciones();
-        System.out.println(restriccions.get(0));
         for(Restriccion rst: restriccions){
             System.out.println("s");
             if(!rst.cumple(this, cursosP, periodo)){

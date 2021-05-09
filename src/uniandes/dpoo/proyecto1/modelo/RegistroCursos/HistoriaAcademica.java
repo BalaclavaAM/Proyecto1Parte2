@@ -1,8 +1,10 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Nota.*;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
+import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -38,7 +40,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
             if(cr !=null){
                 cr.setNota(nota);
                 String codigo = cr.getCurso().getCodigo();
-                String reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
+                Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
                 if (reqAsociado != null) {
                     validarRequerimiento(codigo, reqAsociado);
                     }
@@ -58,11 +60,17 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
 	public ArrayList<EstadoAgregar> inscripcionCursos(Map<String, CursoRegistrado> cursosP) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
+        infoSemestre.putIfAbsent(peridoSistema.periodoS(),new Hashtable<>());
         if(!ultimoPeriodo.periodoS().equals(peridoSistema.periodoS()) && !cursosInscritos.isEmpty()){
             vaciarInscritos();
-            infoSemestre.putIfAbsent(Periodo.periodoS(peridoSistema.getAnio(),peridoSistema.getSemestre()),new Hashtable<>());
         }
         agregarCursosPeriodo(cursosP,estado);
+        for(CursoRegistrado cr: cursosP.values()){
+            if(cr.getEstadoAgregar().getError() == EstadoRegistro.Ok){
+                cursosInscritos.put(cr.getCurso().getCodigo(),cr);
+            }
+        }
+
         return estado;
     }
 
@@ -73,10 +81,10 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-    public EstadoRegistro cambiarRequerimiento(String codigoCurso, String req1N, String req2N){
-        RequerimientoRegistrado reqR1 =  reqsRegistrados.get(req1N);
+    public EstadoRegistro cambiarRequerimiento(String codigoCurso, Requerimiento req, Requerimiento req2N){
+        RequerimientoRegistrado reqR1 =  reqsRegistrados.get(req.getNombre());
         Curso curso = cursosRegistrados.get(codigoCurso).getCurso();
-        if(req1N == null  || curso == null){
+        if(reqR1 == null  || curso == null){
             return EstadoRegistro.Inexistente;
         }
         EstadoRegistro val = validarRequerimiento(codigoCurso, req2N);

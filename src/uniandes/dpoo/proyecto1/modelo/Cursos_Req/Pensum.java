@@ -1,6 +1,5 @@
- package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
+ package uniandes.dpoo.proyecto1.modelo.Cursos_Req;
 
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.io.Serializable;
@@ -16,10 +15,10 @@ public class Pensum implements Serializable {
 	private int creditos;
 	private final String nombre;
 
-	private Map<String, String> cursosValidacionAuto;
+	private Map<String, Requerimiento> cursosValidacionAuto;
 	private Map<String, Requerimiento> requerimientos;
 	private Map<Integer, ArrayList<Requerimiento>> requerimientosXsemestre;
-	private Map<Nivel, Map<String, ArrayList<Requerimiento>>> reqsXNivelXTipologia;
+	private Map<Nivel, Map<ReqTipologia, ArrayList<Requerimiento>>> reqsXNivelXTipologia;
 
 
 	public Pensum(String nombre) {
@@ -35,27 +34,28 @@ public class Pensum implements Serializable {
 	public void agregarRequerimiento(Requerimiento req) {
 		String nombre = req.getNombre();
 		if(requerimientos.containsKey(nombre)){
-			String tipologia = req.getTipologia();
+			ReqTipologia tipologia = req.getTipologia();
 			Nivel nivel = req.getNivel();
 			int semestre = req.getSemestresugerido();
 			requerimientos.put(nombre, req);
 			requerimientosXsemestre.putIfAbsent(semestre, new ArrayList<>());
 			requerimientosXsemestre.get(semestre).add(req);
 			reqsXNivelXTipologia.putIfAbsent(nivel, new Hashtable<>());
-			Map<String, ArrayList<Requerimiento>> reqsxTipoN = reqsXNivelXTipologia.get(nivel);
+			Map<ReqTipologia, ArrayList<Requerimiento>> reqsxTipoN = reqsXNivelXTipologia.get(nivel);
 			reqsxTipoN.putIfAbsent(tipologia, new ArrayList<>());
 			reqsxTipoN.get(tipologia).add(req);
+			for(String codM: req.getMains()){
+				if(!cursosValidacionAuto.containsKey(codM)){
+					cursosValidacionAuto.put(codM, req);
+				}
+				else{
+					System.out.println("dos requerimientos con el mismo main");
+				}
+			}
 			this.creditos += req.getCreditos();
 		}
 	}
 
-	public boolean agregarCursoValidacion(String curs, String reqN) {
-		if(requerimientos.containsKey(reqN)) {
-			cursosValidacionAuto.put(curs, reqN);
-			return true;
-		}
-		return false;
-	}
 
 
 	public String getNombre() {
@@ -74,11 +74,11 @@ public class Pensum implements Serializable {
 		return requerimientosXsemestre;
 	}
 
-	public Map<Nivel, Map<String, ArrayList<Requerimiento>>> getReqsXNivelTipo() {
+	public Map<Nivel, Map<ReqTipologia, ArrayList<Requerimiento>>> getReqsXNivelTipo() {
 		return reqsXNivelXTipologia;
 	}
 
-	public Map<String, String> getCursosValidacionAuto() {
+	public Map<String, Requerimiento> getCursosValidacionAuto() {
 		return cursosValidacionAuto;
 	}
 }

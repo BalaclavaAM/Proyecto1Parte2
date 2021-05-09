@@ -1,10 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.usuario;
 
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Pensum;
-import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 
-
-import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 
 import java.io.Serializable;
 import java.util.Collections;

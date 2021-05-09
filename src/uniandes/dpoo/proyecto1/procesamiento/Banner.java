@@ -2,10 +2,7 @@ package uniandes.dpoo.proyecto1.procesamiento;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
-import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
-import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
-import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
-import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
+import uniandes.dpoo.proyecto1.modelo.usuario.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -25,16 +22,22 @@ public class Banner implements Serializable {
 
 	private Periodo periodo;
 
-	private int nEstSem; //numero de estudiantes durante el semestre
+	private int nEstSem = 0; //numero de estudiantes durante el semestre
 
 	public Banner(Periodo periodo) {
 		this.catalogo = new HashMap<>();
 		this.carreras = new HashMap<>();
 		this.usuarios = new HashMap<>();
+		this.periodo = periodo;
 	}
 
 	public void cargarData(String filename){
 
+	}
+
+	public void avanzarPeriodo(){
+		periodo.avanzarPeriodo();
+		nEstSem = 0;
 	}
 
 	public Map<String, Map<String, Curso>> getCursos() {
@@ -48,7 +51,6 @@ public class Banner implements Serializable {
 	public Map<String, Usuario> getUsuarios() {
 		return usuarios;
 	}
-
 
 	public Collection<String> darNombresCarreras() {
 		return carreras.keySet();
@@ -78,34 +80,34 @@ public class Banner implements Serializable {
 		return null;
 	}
 
-	public boolean crearCordinador(String username, String contrasenha, String nombre, String carreraN){
+	public String crearCordinador(String username, String nombre, String carreraN){
 		Carrera carrera = carreras.get(carreraN);
 		if(usuarios.containsKey(username)) {
 			if (carreraN != null) {
 				String password = randomPassword();
-				Coordinador coordinador = new Coordinador(username, contrasenha, nombre,carrera);
+				Coordinador coordinador = new Coordinador(username, password, nombre,carrera);
 				usuarios.put(username, coordinador);
 				nEstSem++;
-				return true;
+				return password;
 			}
 		}
-		return false;
+		return "";
 	}
 
-	public boolean crearEstudiante(String username, String nombre, String carreraN) {
+	public String crearEstudiante(String username, String nombre, String carreraN) {
 		Carrera carrera = carreras.get(carreraN);
 		if(usuarios.containsKey(nombre)) {
 			if (carreraN != null) {
 				String password = randomPassword();
-				String codigo = periodo.getAnio() + periodo.getSemestre() % 10 + agregarCeros(nEstSem);
+				String codigo = periodo.getAnio() + periodo.getSemestre() / 10 + agregarCeros(nEstSem);
 				Estudiante estudiante = new Estudiante(username, password, password, codigo, carrera.getPensumActual()
 						,carreraN,periodo);
 				usuarios.put(username, estudiante);
 				nEstSem++;
-				return true;
+				return password;
 			}
 		}
-		return false;
+		return "";
 	}
 
 

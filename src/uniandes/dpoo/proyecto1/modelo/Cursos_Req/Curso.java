@@ -16,21 +16,23 @@ public class Curso implements Serializable {
 	private final String descripcion;
 	//private final String programa; //puede ser redundante con materia exepto para los cbus
 	private String materia; // es lo mismo que aparece en la oferta de curso, se podria utilizar un enum(muy grande)
-	//private int semanas;
+	private boolean completo;
 	private final int creditos;
 	private ArrayList<Restriccion> restricciones;
 
 
-	public Curso(String nombre, String codigo, String programa, int creditos, int semanas,
+	public Curso(String nombre, String codigo, String programa, int creditos, boolean periodoC,
 				 boolean notanumerica, String descripcion, ArrayList<Restriccion> restricciones) {
 		this.nombre = nombre;
 		this.codigo = codigo;
 		//this.programa = programa;
+		this.completo = periodoC;
 		this.creditos = creditos;
 		this.notanumerica = notanumerica;
 		//this.semanas = semanas; //no usado, serviria para corregir reqisitos cursos de 8 semanas con perrequistos cursos de 16 (poco comun)
 		this.descripcion = descripcion;
 		this.restricciones = restricciones;
+		this.materia = programa;
 	}
 
 

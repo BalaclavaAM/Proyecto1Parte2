@@ -54,6 +54,7 @@ public class Periodo {
         return anio + "-" + semestre;
     }
 
+
     public static String periodoS(int anio, int semestre){
         return anio + "-" + semestre;
     }
@@ -94,4 +95,16 @@ public class Periodo {
     public int getCiclo() {
         return ciclo;
     }
+
+    public static Periodo copy(Periodo p){
+        return new Periodo(p.getAnio(),p.getSemestre(),p.ciclo);
+    }
+
+    public static Periodo copy(Periodo p, int ciclo){
+        if(p.completo){
+            return new Periodo(p.getAnio(),p.getSemestre());
+        }
+        return new Periodo(p.getAnio(),p.getSemestre(),p.ciclo);
+    }
+
 }

@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.ReqTipologia;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
@@ -19,7 +20,7 @@ public class RestriccionNivel implements Restriccion{
 
     @Override
     public boolean cumple(MallaCursos malla) {
-        ArrayList<Requerimiento> Lreqs = malla.getPensum().getReqsXNivelTipo().get(nivelS).get("Obligatorio");
+        ArrayList<Requerimiento> Lreqs = malla.getPensum().getReqsXNivelTipo().get(nivelS).get(ReqTipologia.Obligatorio);
         for (Requerimiento req: Lreqs){
             if(!RestriccionReq.cumpleReq(malla, req.getNombre())){
                 return false;

@@ -30,7 +30,7 @@ public class Coordinador extends Usuario {
 
 	@Override
 	public String getPermission() {
-		return "Cordinador";
+		return "Coordinador";
 
 	}
 

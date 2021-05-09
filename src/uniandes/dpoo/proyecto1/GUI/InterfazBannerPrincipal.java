@@ -1,7 +1,12 @@
 package uniandes.dpoo.proyecto1.GUI;
 
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
+import uniandes.dpoo.proyecto1.modelo.usuario.Admin;
+import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
+import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 import uniandes.dpoo.proyecto1.procesamiento.Banner;
+import uniandes.dpoo.proyecto1.procesamiento.Prueba;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +28,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 	private PanelAux principalUsuario;
 	private Usuario usuario;
 
+
 	
 	
 	public InterfazBannerPrincipal () {
@@ -33,12 +39,11 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         fondo = new PanelImagenFondo();
         superior = new PanelSuperior(this);
         panelLogin = new PanelLogin(this);
-
-
+        banner = new Banner(new Periodo(2021,10));
+        Prueba.cargarPrueba(banner);
         fondo.setLayout(new BorderLayout());
         panelLogin.mostrar(fondo);
         vistaAct = panelLogin;
-
         add(fondo,BorderLayout.CENTER);
         add(opciones,BorderLayout.WEST);
         add(superior,BorderLayout.NORTH);
@@ -53,13 +58,34 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     }
 
+    public void setVistaAct(PanelAux vistaAct) {
+        this.vistaAct = vistaAct;
+    }
+
     public void mostrarPrincipal(Usuario user){
         if(user!=null){
-            if(user.getPermission().equals("Estudiante")){
-                principalUsuario =  new PrincipalEstudiante(this,);
+            String permission = user.getPermission();
+            opciones.setPermissions(permission);
+            switch(permission){
+                case "Estudiante":
+                    principalUsuario = new PrincipalEstudiante(this, (Estudiante) user);
+                    break;
+                case "Coordinador":
+                    principalUsuario = new PrincipalCoordinador(this, (Coordinador) user);
+                    break;
+                case "Admin":
+                    principalUsuario = new PrincipalAdmin(this, (Admin) user);
+                    break;
+                default:
+                    System.out.println("wrong permision");
             }
+            if(principalUsuario != null) {
+                vistaAct.ocultar();
+                principalUsuario.mostrar(fondo);
+            }
+
         }else {
-            System.out.println("error ");
+            System.out.println("error de inicio");
         }
     }
 
@@ -71,7 +97,6 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) { //solo para mostrar y
-	    vistaAct.ocultar();
     }
 
     public Banner getBanner() {

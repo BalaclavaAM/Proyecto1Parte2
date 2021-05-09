@@ -17,53 +17,30 @@ public class CursoRegistrado {
 	private boolean epsilon = false;
 	private boolean numerica = false;
 
-	public CursoRegistrado(Curso curso, Periodo periodo, Nota nota){
-		this.curso = curso;
-		this.periodo = periodo;
-		this.nota = nota;
-		this.numerica = nota.isNumeric();
-	}
 
 
 	public CursoRegistrado(Curso curso, Nota nota, EstadoCurso estadoC, boolean epsilon,Periodo periodo){
 		this.curso = curso;
 		this.nota = nota;
-		this.estado = estadoC;
+		this.estado = EstadoCurso.Finalizado;
 		this.periodo = periodo;
 		this.epsilon = epsilon;
 		this.numerica = nota.isNumeric();
 		this.estadoAgregar = new EstadoAgregar(periodo, curso);
 	}
 
-	public CursoRegistrado(Curso curso, Periodo periodo){
-		this.curso = curso;
-		this.periodo = periodo;
-		this.nota = new NotaCual(calCual.pendiente);
-	}
 
 
-
-	public CursoRegistrado(Curso curso, Periodo periodo, EstadoCurso estado){
-		this.curso = curso;
-		this.periodo = periodo;
-		this.estado = estado;
-		this.nota = new NotaCual(calCual.pendiente);
-	}
 
 	public CursoRegistrado(Curso curso, EstadoCurso estadoC, boolean epsilon,Periodo periodo){
 		this.curso = curso;
 		this.periodo = periodo;
+		this.estado = estadoC;
 		this.epsilon = epsilon;
-		this.nota = new NotaCual(calCual.pendiente);
+		this.estadoAgregar = new EstadoAgregar(periodo, curso);
+
 	}
 
-	public CursoRegistrado(Curso curso, Periodo periodo, EstadoCurso estadoC, Nota nota, boolean epsilon) {
-		this.curso = curso;
-		this.periodo = periodo;
-		this.estado = estadoC;
-		this.nota = nota;
-		this.epsilon = epsilon;
-	}
 
 
 	public Curso getCurso() {
