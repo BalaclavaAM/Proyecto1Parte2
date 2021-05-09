@@ -47,7 +47,6 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         add(fondo,BorderLayout.CENTER);
         add(opciones,BorderLayout.WEST);
         add(superior,BorderLayout.NORTH);
-
 	}
 
 
