@@ -6,11 +6,13 @@ import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 import uniandes.dpoo.proyecto1.procesamiento.Banner;
+import uniandes.dpoo.proyecto1.procesamiento.LoaderData;
 import uniandes.dpoo.proyecto1.procesamiento.Prueba;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.Serial;
 
 import javax.swing.*;
@@ -40,6 +42,11 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         panelLogin = new PanelLogin(this);
         banner = new Banner(new Periodo(2021,10));
         Prueba.cargarPrueba(banner);
+        try {
+            LoaderData.CargaCursos(banner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         fondo.setLayout(new BorderLayout());
         panelLogin.mostrar(fondo);
         vistaAct = panelLogin;
