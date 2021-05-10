@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.usuario;
 
+import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
@@ -7,6 +8,7 @@ import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Estudiante extends Usuario implements Serializable {
@@ -23,6 +25,7 @@ public class Estudiante extends Usuario implements Serializable {
 		this.codigo = codigo;
 		this.HistoriaAcademica = new HistoriaAcademica(pensum, periodo);
 		this.carrera = carrera;
+		planes = new HashMap<>();
 		ArrayList<Integer> d = new ArrayList<>();
 	}
 
@@ -32,7 +35,7 @@ public class Estudiante extends Usuario implements Serializable {
 	}
 
 	public void nuevoPlan(String nombre, Periodo periodo) {
-		Plan np = new Plan(getHistoriaAcademica(), periodo);
+		Plan np = new Plan(getHistoriaAcademica(), nombre, periodo);
 		planes.put(nombre, np);
 	}
 
@@ -40,7 +43,12 @@ public class Estudiante extends Usuario implements Serializable {
 		return HistoriaAcademica;
 	}
 
-	public Map<String, Plan> getPlan() {
+	public Plan getPlan(String nombre){
+		return  planes.get(nombre);
+	}
+
+
+	public Map<String, Plan> getPlanes() {
 		return planes;
 	}
 

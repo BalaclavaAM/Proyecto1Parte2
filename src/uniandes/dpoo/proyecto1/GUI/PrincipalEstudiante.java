@@ -11,18 +11,20 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public class PrincipalEstudiante extends PanelAux{
+public class PrincipalEstudiante extends PrincipalUsusario{
     private Estudiante estudiante;
     public String RUTA = "./data/imagenes/usuarioGenerico.png";
 
     public PrincipalEstudiante(InterfazBannerPrincipal principal, Estudiante estudiante) {
         super(principal);
-
+        this.estudiante = estudiante;
         JPanel superior = new JPanel();
         JPanel superiorDatos = new JPanel();
         setLayout(new GridLayout(2, 1));
@@ -47,20 +49,10 @@ public class PrincipalEstudiante extends PanelAux{
         Map<String, CursoRegistrado> cursosInscritos = estudiante.getHistoriaAcademica().getCursosInscritos();
 
         JPanel inferior = new JPanel();
-            //prueba
-            String[][] data = new String[][]{{"DPOO","SISTEMAS","3"},{"ESCRITURA","LENGUAS","2"},{"FISICA","FISICA","3"}, {"CBUG","CBUG","2"}, {"INGLES","LENGUAS","0"}, {"INTEGRAL","MATEMATICAS","3"}};
             JPanel tablaCursosIns = new  JPanel();
             tablaCursosIns.setLayout(new GridLayout(cursosInscritos.size()+1,3));
             tablaCursosIns.add(new JLabel("Nombre"));tablaCursosIns.add(new JLabel("Materia"));tablaCursosIns.add(new JLabel("Creditos"));
-            /*
-            for (String[] datum : data) {
-                tablaCursosIns.add(new JLabel(datum[0]));
-                tablaCursosIns.add(new JLabel(datum[1]));
-                tablaCursosIns.add(new JLabel(datum[2]));
-            }
-            */
 
-        //Real
         for (CursoRegistrado cR: cursosInscritos.values()) {
             tablaCursosIns.add(new JLabel(cR.getCurso().getNombre()));
             tablaCursosIns.add(new JLabel(cR.getCurso().getMateria()));
@@ -110,7 +102,7 @@ public class PrincipalEstudiante extends PanelAux{
 
     @Override
     public void ocultar() {
-
+        setVisible(false);
     }
 
     @Override
@@ -122,6 +114,17 @@ public class PrincipalEstudiante extends PanelAux{
 
     @Override
     public void reset() {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("Planear")){
+             PanelPlanes pp = new PanelPlanes(principal,estudiante);
+             pp.mostrar(principal.getFondo());
+             principal.getVistaAct().ocultar();
+             principal.setVistaAct(pp);
+        }
 
     }
 }

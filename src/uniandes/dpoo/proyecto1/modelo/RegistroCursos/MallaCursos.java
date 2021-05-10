@@ -6,9 +6,7 @@ import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 public abstract class MallaCursos {
     protected static final long serialVersionUID = -491840464239633611L;
@@ -51,10 +49,12 @@ public abstract class MallaCursos {
     }
 
 
+
     public void agregarCursosPeriodo(Map<String, CursoRegistrado> cursosP, ArrayList<EstadoAgregar> estado){
+        HashMap<String, CursoRegistrado> cursosPaux = new HashMap<>(cursosP);
         for (CursoRegistrado cr : cursosP.values()) {
-            cursosP.remove(cr.getCurso().getCodigo());
-            agregarCurso(cr, cursosP);
+            cursosPaux.remove(cr.getCurso().getCodigo());
+            agregarCurso(cr, cursosPaux);
             EstadoAgregar ea = cr.getEstadoAgregar();
             if(ea.getError() != EstadoRegistro.Ok){
                 estado.add(ea);
@@ -63,6 +63,7 @@ public abstract class MallaCursos {
     }
 
     public boolean agregarCurso(CursoRegistrado cursoR, Map<String, CursoRegistrado> cursosP){
+
         if(cursoR.isAgregado()){
             return true;
         }
@@ -248,5 +249,12 @@ public abstract class MallaCursos {
         return infoSemestre;
     }
 
+    public Periodo getPeriodoInicio() {
+        return periodoInicio;
+    }
+
+    public Periodo getUltimoPeriodo() {
+        return ultimoPeriodo;
+    }
 }
 

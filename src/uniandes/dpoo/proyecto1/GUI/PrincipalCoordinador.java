@@ -3,7 +3,10 @@ package uniandes.dpoo.proyecto1.GUI;
 import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
 import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
 
-public class PrincipalCoordinador extends PanelAux{
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class PrincipalCoordinador extends PrincipalUsusario{
     private Carrera carrera;
     public PrincipalCoordinador(InterfazBannerPrincipal principal, Coordinador coordinador) {
         super(principal);
@@ -11,6 +14,11 @@ public class PrincipalCoordinador extends PanelAux{
 
     @Override
     public void mostrar(PanelImagenFondo fondo) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

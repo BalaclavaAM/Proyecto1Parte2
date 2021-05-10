@@ -25,11 +25,10 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 	private PanelImagenFondo fondo;
 	private PanelLogin panelLogin;
 	private PanelAux vistaAct;
-	private PanelAux principalUsuario;
+	private PrincipalUsusario principalUsuario;
 	private Usuario usuario;
 
 
-	
 	
 	public InterfazBannerPrincipal () {
 		setTitle( "Banner" );
@@ -57,6 +56,10 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     }
 
+    public PrincipalUsusario getPrincipalUsuario() {
+        return principalUsuario;
+    }
+
     public void setVistaAct(PanelAux vistaAct) {
         this.vistaAct = vistaAct;
     }
@@ -64,22 +67,24 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
     public void mostrarPrincipal(Usuario user){
         if(user!=null){
             String permission = user.getPermission();
-            opciones.setPermissions(permission);
-            switch(permission){
-                case "Estudiante":
+            switch (permission) {
+                case "Estudiante" -> {
                     principalUsuario = new PrincipalEstudiante(this, (Estudiante) user);
-                    break;
-                case "Coordinador":
+                    opciones.botonesEstudiant(principalUsuario);
+                }
+                case "Coordinador" -> {
                     principalUsuario = new PrincipalCoordinador(this, (Coordinador) user);
-                    break;
-                case "Admin":
+                    opciones.botonesAdmi(principalUsuario);
+                }
+                case "Admin" -> {
                     principalUsuario = new PrincipalAdmin(this, (Admin) user);
-                    break;
-                default:
-                    System.out.println("wrong permision");
+                    opciones.botonesAdmi(principalUsuario);
+                }
+                default -> System.out.println("wrong permision");
             }
             if(principalUsuario != null) {
                 vistaAct.ocultar();
+                setVistaAct(principalUsuario);
                 principalUsuario.mostrar(fondo);
             }
 
@@ -96,6 +101,11 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) { //solo para mostrar y
+    }
+
+
+    public PanelAux getVistaAct() {
+        return vistaAct;
     }
 
     public Banner getBanner() {

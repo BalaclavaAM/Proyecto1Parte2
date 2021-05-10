@@ -9,17 +9,23 @@ import java.util.Map;
 public class Plan extends MallaCursos {
     public final EstadoCurso estadoPl = EstadoCurso.Planeado;
     private final HistoriaAcademica historia;
+    private final String nombre;
 
-    public Plan(HistoriaAcademica historia, Periodo periodo) {
-        super(historia.peridoSistema, periodo);
+    public Plan(HistoriaAcademica historia, String nombre, Periodo periodoInicio) {
+        super(historia.peridoSistema, periodoInicio);
         this.pensum = historia.pensum;
         this.historia = historia;
+        this.nombre = nombre;
     }
 
     public void validarInscritos(){ //los cursos incritos se tomarian como aprovados
         for(CursoRegistrado ci: historia.getCursosInscritos().values()){
             validarInscrito(ci);
         }
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void validarInscrito(CursoRegistrado ci){

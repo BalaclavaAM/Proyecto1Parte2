@@ -22,7 +22,7 @@ public class LoaderData {
 		ArrayList<Requerimiento> listaRequerimientos = new ArrayList<>();
 
 		BufferedReader br = new BufferedReader(new FileReader(filename));
-		String titulos = br.readLine(); // Ignorar la primera línea porque tiene los títulos
+		String titulos = br.readLine();
 		String linea = br.readLine();
 
 		while (linea != null)

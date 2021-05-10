@@ -42,7 +42,7 @@ public class Prueba {
                 new ArrayList<>());
         Curso c2 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",
                 new ArrayList<>());
-        Curso c3 = new Curso("FISICA EXPERIMENTAL", "FISI-1019","ISIS",1,true,true,"laExprimentacion",
+        Curso c3 = new Curso("FISICA EXP 1", "FISI-1019","ISIS",1,true,true,"laExprimentacion",
                 new ArrayList<>(Arrays.asList(r21)));
         Periodo psis = banner.getPeriodo();
 
@@ -53,12 +53,11 @@ public class Prueba {
         Map<String,CursoRegistrado> cursosRegistrados = new HashMap<>();
         Periodo p = Periodo.copy(psis);
 
-        cursosRegistrados.put("IP",new CursoRegistrado(c1, new NotaCual(calCual.pendiente) {
-        }, EstadoCurso.Inscrito, false, p));
-        cursosRegistrados.put("FISICA 1",new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
-        cursosRegistrados.put("FISICA EXPERIMENTAL", new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
+        cursosRegistrados.put("ISIS-1221",new CursoRegistrado(c1, EstadoCurso.Inscrito, false, p));
+        cursosRegistrados.put("FISI-1019", new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
+        cursosRegistrados.put("FISI-1018",new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
 
-
+        e.nuevoPlan("miprimerplan :)",new Periodo(2022,10));
         e.getHistoriaAcademica().inscripcionCursos(cursosRegistrados);
         banner.getUsuarios().put("Admin", new Admin("Admin","soyAdmin", "eladmin"));
         banner.getUsuarios().put("C",new Coordinador("C","2","Elcordi",carreraPru));
