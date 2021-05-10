@@ -28,7 +28,6 @@ public abstract class MallaCursos {
         Periodo p = new Periodo(periodoI.getAnio(),periodoI.getSemestre());
         this.periodoInicio = p;
         this.ultimoPeriodo = p;
-
         this.cursosRegistrados = new Hashtable<>();
         this.reqsRegistrados = new Hashtable<>();
         this.cursosValidados = new Hashtable<>();

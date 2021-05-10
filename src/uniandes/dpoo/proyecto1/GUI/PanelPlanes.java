@@ -74,7 +74,8 @@ public class PanelPlanes extends PanelAux implements ActionListener {
             PanelAux panelvista = new InVerPlan(principal,plan);
             principal.ocultarYmostrar(panelvista);
         }else{
-            System.out.println(com[1]);
+            PanelAux panelEdicion = new InEdPlan(principal,plan);
+            principal.ocultarYmostrar(panelEdicion);
         }
         
 

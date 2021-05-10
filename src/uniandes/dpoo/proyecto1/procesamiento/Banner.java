@@ -14,7 +14,9 @@ public class Banner implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -4746963895960324815L;
 
-	private Map<String,Map<String,Curso>> catalogo; //catalogo por materia
+	private Map<String,Map<String,Curso>> catalogoDepartamentos; //catalogo por materia
+
+	private Map<String,Curso> catalogo;
 
 	private Map<String,Carrera> carreras; //<nombreUsuario,Usuario>
 
@@ -25,7 +27,7 @@ public class Banner implements Serializable {
 	private int nEstSem = 0; //numero de estudiantes durante el semestre
 
 	public Banner(Periodo periodo) {
-		this.catalogo = new HashMap<>();
+		this.catalogoDepartamentos = new HashMap<>();
 		this.carreras = new HashMap<>();
 		this.usuarios = new HashMap<>();
 		this.periodo = periodo;
@@ -41,7 +43,7 @@ public class Banner implements Serializable {
 	}
 
 	public Map<String, Map<String, Curso>> getCursos() {
-		return catalogo;
+		return catalogoDepartamentos;
 	}
 
 	public Map<String,Carrera> getCarreras() {
@@ -58,6 +60,14 @@ public class Banner implements Serializable {
 
 	public Periodo getPeriodo() {
 		return periodo;
+	}
+
+	public Map<String, Curso> getCatalogo() {
+		return catalogo;
+	}
+
+	public Map<String, Map<String, Curso>> getCatalogoDepartamentos() {
+		return catalogoDepartamentos;
 	}
 
 	private static String agregarCeros(int n){
