@@ -49,9 +49,9 @@ public class PrincipalEstudiante extends PrincipalUsusario{
         Map<String, CursoRegistrado> cursosInscritos = estudiante.getHistoriaAcademica().getCursosInscritos();
 
         JPanel inferior = new JPanel();
-            JPanel tablaCursosIns = new  JPanel();
-            tablaCursosIns.setLayout(new GridLayout(cursosInscritos.size()+1,3));
-            tablaCursosIns.add(new JLabel("Nombre"));tablaCursosIns.add(new JLabel("Materia"));tablaCursosIns.add(new JLabel("Creditos"));
+        JPanel tablaCursosIns = new  JPanel();
+        tablaCursosIns.setLayout(new GridLayout(cursosInscritos.size()+1,3));
+        tablaCursosIns.add(new JLabel("Nombre"));tablaCursosIns.add(new JLabel("Materia"));tablaCursosIns.add(new JLabel("Creditos"));
 
         for (CursoRegistrado cR: cursosInscritos.values()) {
             tablaCursosIns.add(new JLabel(cR.getCurso().getNombre()));
