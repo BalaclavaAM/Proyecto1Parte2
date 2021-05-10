@@ -104,6 +104,50 @@ public class Banner implements Serializable {
 		return "";
 	}
 
+	public ArrayList<Curso> filtrarCursos(String dpto, String codigo){
+		ArrayList<Curso> retornar = new ArrayList<>();
+		if (!(dpto.isEmpty()))
+		{
+			if (catalogo.containsKey(dpto))
+			{
+				Map<String, Curso> colecciondpto = catalogo.get(dpto);
+				if (!(codigo.isEmpty())){
+					if (colecciondpto.containsKey(codigo)){
+						retornar.add(colecciondpto.get(codigo));
+					}
+				} else {
+					for (Map.Entry<String, Curso> entry1 : colecciondpto.entrySet()){
+						retornar.add(entry1.getValue());
+					}
+				}
+			} else if (!(codigo.isEmpty())){
+				buscarAux(codigo, retornar);
+			}
+		}
+		else{
+			if (!(codigo.isEmpty())) {
+				buscarAux(codigo, retornar);
+			} else {
+				for (Map.Entry<String, Map<String,Curso>> entry1 : catalogo.entrySet()){
+					for (Map.Entry<String,Curso> entry : entry1.getValue().entrySet()){
+							retornar.add(entry.getValue());
+					}
+				}
+			}
+		}
+		return retornar;
+	}
+
+	private void buscarAux(String codigo, ArrayList<Curso> retornar) {
+		for (Map.Entry<String, Map<String,Curso>> entry1 : catalogo.entrySet()){
+			for (Map.Entry<String,Curso> entry : entry1.getValue().entrySet()){
+				if (entry.getKey().equals(codigo)){
+					retornar.add(entry.getValue());
+				}
+			}
+		}
+	}
+
 	public String crearEstudiante(String username, String nombre, String carreraN) {
 		Carrera carrera = carreras.get(carreraN);
 		if(usuarios.containsKey(nombre)) {

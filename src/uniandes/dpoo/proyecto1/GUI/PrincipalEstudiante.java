@@ -122,6 +122,9 @@ public class PrincipalEstudiante extends PrincipalUsusario{
         if(e.getActionCommand().equals("Planear")){
              PanelPlanes pp = new PanelPlanes(principal,estudiante);
              principal.ocultarYmostrar(pp);
+        } else if (e.getActionCommand().equals("PO>IMaterias")){
+            InterfazInscripcionCursos iic = new InterfazInscripcionCursos(principal,estudiante);
+            principal.ocultarYmostrar(iic);
         }
 
     }

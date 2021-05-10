@@ -6,9 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Curso implements Serializable {
-    /**
-	 * Suave
-	 */
 	private static final long serialVersionUID = -1708691240589592764L;
 	private final boolean notanumerica; //meramente informativa o para validar;
 	private final String nombre;

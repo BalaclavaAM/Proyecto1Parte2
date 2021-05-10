@@ -1,7 +1,6 @@
 package uniandes.dpoo.proyecto1.GUI;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 public abstract class PanelAux extends JPanel{
 

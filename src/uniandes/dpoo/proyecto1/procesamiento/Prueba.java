@@ -32,9 +32,9 @@ public class Prueba {
 
     public static void cargarPrueba(Banner banner){
         Pensum pensumPru = new Pensum("prueba");
-        Requerimiento req1 = new RequerimientoCreditos("IP", Nivel.uno,1, ReqTipologia.Obligatorio,3,
+        Requerimiento req1 = new RequerimientoCreditos("IP", Nivel.UNO,1, ReqTipologia.Obligatorio,3,
                 new ArrayList<>(Arrays.asList("ISIS-1221", "1121")),new String[]{"ISIS-1221"});
-        Requerimiento req2 = new RequerimientoCreditos("FISICA 1", Nivel.uno,2, ReqTipologia.Obligatorio,3,
+        Requerimiento req2 = new RequerimientoCreditos("FISICA 1", Nivel.UNO,2, ReqTipologia.Obligatorio,3,
                 new ArrayList<>(Arrays.asList("FISI-1018")),new String[]{"FISI-1018"});
         pensumPru.agregarRequerimiento(req1);
         pensumPru.agregarRequerimiento(req2);
