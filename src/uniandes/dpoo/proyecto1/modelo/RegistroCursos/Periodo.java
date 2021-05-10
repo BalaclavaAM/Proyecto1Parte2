@@ -60,7 +60,7 @@ public class Periodo {
     }
 
     public int compare(Periodo p1){
-        return compareL(p1,this);
+        return compareL(this,p1);
     }
 
 

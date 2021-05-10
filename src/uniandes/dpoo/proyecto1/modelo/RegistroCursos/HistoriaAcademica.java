@@ -25,12 +25,8 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     public HistoriaAcademica(Pensum pensum, Periodo periodo) {
         super(periodo,periodo);
 		this.pensum = pensum;
-		this.cursosRegistrados = new Hashtable<>();
-		this.reqsRegistrados = new Hashtable<>();
-		this.cursosValidados = new Hashtable<>();
-		this.cursosInscritos = new Hashtable<>();
-		this.infoSemestre = new Hashtable<>();
-	}
+        this.cursosInscritos = new Hashtable<>();
+    }
 
 
     public boolean actualizarNota(Curso curso, String periodoS, Nota nota) {

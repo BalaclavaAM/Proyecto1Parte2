@@ -55,6 +55,11 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         interfaz.setVisible(true) ;
 
     }
+    public void ocultarYmostrar(PanelAux pa){
+        pa.mostrar(fondo);
+        vistaAct.ocultar();
+        vistaAct = pa;
+    }
 
     public PrincipalUsusario getPrincipalUsuario() {
         return principalUsuario;

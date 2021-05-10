@@ -121,9 +121,7 @@ public class PrincipalEstudiante extends PrincipalUsusario{
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Planear")){
              PanelPlanes pp = new PanelPlanes(principal,estudiante);
-             pp.mostrar(principal.getFondo());
-             principal.getVistaAct().ocultar();
-             principal.setVistaAct(pp);
+             principal.ocultarYmostrar(pp);
         }
 
     }

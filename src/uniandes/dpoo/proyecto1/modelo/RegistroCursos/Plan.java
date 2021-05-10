@@ -4,6 +4,7 @@ import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Plan extends MallaCursos {
@@ -31,6 +32,7 @@ public class Plan extends MallaCursos {
     public void validarInscrito(CursoRegistrado ci){
         boolean ep = ci.getEpsilon();
         Periodo pi = ci.getPeriodo();
+        infoSemestre.putIfAbsent(pi.periodoS(),new HashMap<>());
         modificarHistoria(new CursoRegistrado(ci.getCurso(),estadoPl,ep,pi), EstadoRegistro.Ok);
     }
 
