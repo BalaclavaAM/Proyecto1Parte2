@@ -1,0 +1,73 @@
+Index: src/uniandes/dpoo/proyecto1/GUI/PanelAux.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package uniandes.dpoo.proyecto1.GUI;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.event.ActionListener;\r\n\r\npublic abstract class PanelAux extends JPanel{\r\n\r\n    protected final InterfazBannerPrincipal principal;\r\n\r\n    public PanelAux(InterfazBannerPrincipal principal) {\r\n        this.principal = principal;\r\n        setSize((int)(principal.getWidth()*0.9),(int)(principal.getHeight()*0.9));\r\n    }\r\n\r\n    public void ocultar() {setVisible(false);\r\n    }\r\n\r\n    public abstract void mostrar(PanelImagenFondo fondo);\r\n\r\n    public void reset() {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/uniandes/dpoo/proyecto1/GUI/PanelAux.java b/src/uniandes/dpoo/proyecto1/GUI/PanelAux.java
+--- a/src/uniandes/dpoo/proyecto1/GUI/PanelAux.java	
++++ b/src/uniandes/dpoo/proyecto1/GUI/PanelAux.java	
+@@ -1,7 +1,6 @@
+ package uniandes.dpoo.proyecto1.GUI;
+ 
+ import javax.swing.*;
+-import java.awt.event.ActionListener;
+ 
+ public abstract class PanelAux extends JPanel{
+ 
+Index: Proyecto1Parte2.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <output url=\"file://$MODULE_DIR$/bin\" />\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"jdk\" jdkName=\"JavaSE-15\" jdkType=\"JavaSDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"module-library\">\r\n      <library>\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/20.1.0/annotations-20.1.0.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Proyecto1Parte2.iml b/Proyecto1Parte2.iml
+--- a/Proyecto1Parte2.iml	
++++ b/Proyecto1Parte2.iml	
+@@ -6,7 +6,7 @@
+     <content url="file://$MODULE_DIR$">
+       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+     </content>
+-    <orderEntry type="jdk" jdkName="JavaSE-15" jdkType="JavaSDK" />
++    <orderEntry type="jdk" jdkName="16" jdkType="JavaSDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="module-library">
+       <library>
+Index: src/uniandes/dpoo/proyecto1/GUI/InterfazInscripcionCursos.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/uniandes/dpoo/proyecto1/GUI/InterfazInscripcionCursos.java b/src/uniandes/dpoo/proyecto1/GUI/InterfazInscripcionCursos.java
+new file mode 100644
+--- /dev/null	
++++ b/src/uniandes/dpoo/proyecto1/GUI/InterfazInscripcionCursos.java	
+@@ -0,0 +1,26 @@
++package uniandes.dpoo.proyecto1.GUI;
++
++import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
++import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
++import uniandes.dpoo.proyecto1.procesamiento.Banner;
++
++import javax.swing.*;
++import java.awt.*;
++import java.util.Map;
++
++public class InterfazInscripcionCursos extends PanelAux {
++    private Banner banner;
++
++    public InterfazInscripcionCursos(InterfazBannerPrincipal principal, Estudiante estudiante) {
++        super(principal);
++        setSize(principal.getPrincipalUsuario().getSize());
++
++        banner = principal.getBanner();
++        JButton momos = new JButton("")
++    }
++
++    @Override
++    public void mostrar(PanelImagenFondo fondo) {
++
++    }
++}
