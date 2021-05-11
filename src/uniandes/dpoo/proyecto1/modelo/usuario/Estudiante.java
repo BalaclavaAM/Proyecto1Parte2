@@ -34,8 +34,8 @@ public class Estudiante extends Usuario implements Serializable {
 		return codigo;
 	}
 
-	public void nuevoPlan(String nombre, Periodo periodo) {
-		Plan np = new Plan(getHistoriaAcademica(), nombre, periodo);
+	public void nuevoPlan(String nombre) {
+		Plan np = new Plan(nombre,getHistoriaAcademica());
 		planes.put(nombre, np);
 	}
 

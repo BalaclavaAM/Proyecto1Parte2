@@ -19,11 +19,16 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
      */
     @Serial
     private static final long serialVersionUID = -491840464239633611L;
+    private final Periodo primerPeriodo;
+    private Periodo ultimoPeriodo;
     private Map<String, CursoRegistrado> cursosInscritos;
 
 
     public HistoriaAcademica(Pensum pensum, Periodo periodo) {
-        super(periodo,periodo);
+        super(periodo);
+        Periodo p =  Periodo.copy(periodo);
+        this.primerPeriodo = p;
+        this.ultimoPeriodo = p;
 		this.pensum = pensum;
         this.cursosInscritos = new Hashtable<>();
     }
@@ -57,6 +62,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 	public ArrayList<EstadoAgregar> inscripcionCursos(Map<String, CursoRegistrado> cursosP) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
         infoSemestre.putIfAbsent(peridoSistema.periodoS(),new Hashtable<>());
+        ultimoPeriodo = Periodo.copy(peridoSistema);
         if(!ultimoPeriodo.periodoS().equals(peridoSistema.periodoS()) && !cursosInscritos.isEmpty()){
             vaciarInscritos();
         }
@@ -70,6 +76,11 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         return estado;
     }
 
+
+    @Override
+    public void agregarPeriodo(Periodo periodo) {
+        infoSemestre.putIfAbsent(periodo.periodoS(),new Hashtable<>());
+    }
 
     @Override
     public CursoRegistrado getCurReg(String codigo) {
@@ -144,7 +155,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     @Override
     public boolean dentroPeriodo(Periodo p) {
-        return peridoSistema.compare(p) == 1 && periodoInicio.compare(p) <= 0;
+        return peridoSistema.compare(p) == 1 && primerPeriodo.compare(p) <= 0;
     }
 
     @Override

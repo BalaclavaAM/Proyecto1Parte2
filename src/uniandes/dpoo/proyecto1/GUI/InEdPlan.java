@@ -53,23 +53,8 @@ public class InEdPlan extends PanelAux implements ActionListener {
 
     @Override
     public void mostrar(PanelImagenFondo fondo) {
-        setOpaque(false);
-        fondo.add(this);
-    }
 
-    public Periodo convertPeriodo(String pS){
-        Periodo p = null;
-        String[] pSa = pS.split("-");
-        if(pSa.length == 2){
-            p = new Periodo( Integer.parseInt(pSa[0]),Integer.parseInt(pSa[1]));
-        }else{
-            if(pSa.length == 3) {
-                p = new Periodo(Integer.parseInt(pSa[0]), Integer.parseInt(pSa[1]), Integer.parseInt(pSa[2]));
-            }
-        }
-        return p;
     }
-
     public void actualizarPanel(){
         data = new JPanel(new GridBagLayout());
         GridBagConstraints gb2 = new GridBagConstraints();
@@ -99,12 +84,13 @@ public class InEdPlan extends PanelAux implements ActionListener {
         if(e.getActionCommand().equals("agregar")){
             String codigo = this.codigo.getText();
             String periodoText = this.periodo.getText();
-            Periodo periodo = convertPeriodo(periodoText);
+            Periodo periodo = Periodo.stringToPeriodo(periodoText);
             Curso curso = catalogo.get(codigo);
             if(periodo != null && curso != null){
                 agregados.put(codigo,new CursoRegistrado(curso, EstadoCurso.Planeado,false,periodo));
                 nuevos.put(codigo,new CursoRegistrado(curso, EstadoCurso.Planeado,false,periodo));
                 actualizarPanel();
+
             }
         }
     }
