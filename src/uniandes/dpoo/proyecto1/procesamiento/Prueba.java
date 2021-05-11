@@ -4,9 +4,6 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.ReqTipologia;
-import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
-import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
-import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
@@ -15,7 +12,6 @@ import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.RequerimientoCreditos;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Prerrequisito;
-import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
 import uniandes.dpoo.proyecto1.modelo.usuario.Admin;
 import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
 import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
@@ -25,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Prueba {
 
@@ -64,8 +58,8 @@ public class Prueba {
         Curso c5 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",
                 new ArrayList<>());
 
-        e.nuevoPlan("miprimerplan :)",new Periodo(2022,10));
-        e.nuevoPlan("misecond :)",new Periodo(2022,20));
+        e.nuevoPlan("miprimerplan :)");
+        e.nuevoPlan("misecond :)");
 
         Plan plan1 = e.getPlan("miprimerplan :)");
         e.getHistoriaAcademica().inscripcionCursos(cursosRegistrados);

@@ -5,15 +5,19 @@ import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class Plan extends MallaCursos {
     public final EstadoCurso estadoPl = EstadoCurso.Planeado;
     private final HistoriaAcademica historia;
     private final String nombre;
+    private Periodo primerPeriodo;
+    private Periodo ultimoPeriodo;
 
-    public Plan(HistoriaAcademica historia, String nombre, Periodo periodoInicio) {
-        super(historia.peridoSistema, periodoInicio);
+
+    public Plan(String nombre, HistoriaAcademica historia) {
+        super(historia.getPeridoSistema());
         this.pensum = historia.pensum;
         this.historia = historia;
         this.nombre = nombre;
@@ -36,6 +40,23 @@ public class Plan extends MallaCursos {
         modificarHistoria(new CursoRegistrado(ci.getCurso(),estadoPl,ep,pi), EstadoRegistro.Ok);
     }
 
+
+    @Override
+    public void agregarPeriodo(Periodo periodo) {
+        infoSemestre.putIfAbsent(periodo.periodoS(),new Hashtable<>());
+        if(primerPeriodo == null){
+            primerPeriodo = periodo;
+            ultimoPeriodo = periodo;
+        }else{
+            if(primerPeriodo.compare(periodo) == 1){
+                primerPeriodo = periodo;
+            }else {
+                if (periodo.compare(ultimoPeriodo) == 1) {
+                    ultimoPeriodo = periodo;
+                }
+            }
+        }
+    }
 
     @Override
     public CursoRegistrado getCurReg(String codigo) {
@@ -97,6 +118,15 @@ public class Plan extends MallaCursos {
     public HistoriaAcademica getHistoria() {
         return historia;
     }
+
+    public Periodo getUltimoPeriodo() {
+        return ultimoPeriodo;
+    }
+
+    public Periodo getPrimerPeriodo() {
+        return primerPeriodo;
+    }
+
 }
 
 

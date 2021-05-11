@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="When ases tus momos en java">
-      <change afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/TablaSecciones.java" afterDir="false" />
+    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Pruebas">
+      <change afterPath="$PROJECT_DIR$/enlace.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/information/Cursinhos.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/information/Cursinhos.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InEdPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InEdPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InVerPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InVerPlan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazInscripcionCursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazInscripcionCursos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Seccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Seccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/Banner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/Banner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/LoaderData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/LoaderData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PanelPlanes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PanelPlanes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalEstudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalEstudiante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/HistoriaAcademica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/HistoriaAcademica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/MallaCursos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/MallaCursos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Periodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Periodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Plan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/usuario/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/usuario/Estudiante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/Prueba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/Prueba.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +43,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1r03WRa1e4Sf7KidYYcmnHfwHWt" />
   <component name="ProjectLevelVcsManager">
@@ -160,7 +164,7 @@
       <workItem from="1620401837355" duration="32424000" />
       <workItem from="1620515579329" duration="16642000" />
       <workItem from="1620543610883" duration="50263000" />
-      <workItem from="1620689553422" duration="11961000" />
+      <workItem from="1620689553422" duration="4750000" />
     </task>
     <task id="LOCAL-00001" summary="f1">
       <created>1618165373822</created>
@@ -330,14 +334,7 @@
       <option name="project" value="LOCAL" />
       <updated>1620642725829</updated>
     </task>
-    <task id="LOCAL-00025" summary="When ases tus momos en java">
-      <created>1620708845210</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1620708845210</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,11 +377,6 @@
           <url>file://$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/MallaCursos.java</url>
           <line>45</line>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/Plan.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/MallaCursos.java</url>

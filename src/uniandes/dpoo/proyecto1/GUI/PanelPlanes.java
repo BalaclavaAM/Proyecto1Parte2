@@ -1,63 +1,81 @@
 package uniandes.dpoo.proyecto1.GUI;
 
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 import uniandes.dpoo.proyecto1.procesamiento.Banner;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class PanelPlanes extends PanelAux implements ActionListener {
     private Banner banner;
     private Map<String,Plan> planes;
+    private JTable tablaPlanes;
+    private Estudiante estudiante;
+    private JPanel panelBotones;
 
 
     public PanelPlanes(InterfazBannerPrincipal principal, Estudiante estudiante) {
         super(principal);
-        setSize(principal.getPrincipalUsuario().getSize());
-
-        banner = principal.getBanner();
         setLayout(new GridBagLayout());
-        GridBagConstraints gb = new GridBagConstraints();
+        tablaPlanes = new JTable();
         planes = estudiante.getPlanes();
-        int n = planes.size();
-        JPanel data = new JPanel(new GridLayout(n,5));
-        for(Plan plan: planes.values()){
-            data.add(new JLabel(plan.getNombre())); data.add(new JLabel(plan.getPeriodoInicio().periodoS()));
-            data.add(new JLabel(plan.getUltimoPeriodo().periodoS()));
-            JButton b1 = new JButton("ver");
-            b1.setActionCommand("ver-"+plan.getNombre());
-            b1.addActionListener(this);
-            data.add(b1);
-            JButton b2 = new JButton("editar");
-            b2.setActionCommand("editar-"+plan.getNombre());
-            b2.addActionListener(this);
-            data.add(b2);
+        this.estudiante = estudiante;
+        panelBotones = new JPanel(new GridLayout(1,3));
+        JButton nuevo = new JButton("Nuevo Plan");nuevo.setActionCommand("Nuevo");nuevo.addActionListener(this);
+        JButton editar = new JButton("Editar Selecionado");editar.setActionCommand("Editar");editar.addActionListener(this);
+        JButton ver = new JButton("Ver seleccionado");ver.setActionCommand("Ver");ver.addActionListener(this);
+        panelBotones.add(nuevo);
+        panelBotones.add(ver);
+        panelBotones.add(editar);
+        actualizarPanel();
+    }
+
+    private void actualizarPanel(){
+        DefaultTableModel tableModel = new DefaultTableModel(crearData(planes),
+                new String[]{ "Nombre", "Periodo Inicio", "Periodo Fin" }) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tablaPlanes.setModel(tableModel);
+        int alto = Math.min(3,planes.size() + 1);
+        GridBagConstraints gb = new GridBagConstraints();
+        gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 9; gb.weightx = 1; gb.weighty = 9;gb.fill = 1;
+        add(new JLabel(),gb); // relleno 1
+        gb.gridx = 1; gb.gridy = 0; gb.gridwidth = 4; gb.gridheight = 3; gb.weightx = 4; gb.weighty = 3;gb.fill = 1;
+        add(new JLabel(),gb);
+        gb.gridx = 1; gb.gridy = 4; gb.gridwidth = 4; gb.gridheight = alto; gb.weightx = 4; gb.weighty = 3;gb.fill = 1;
+        add(new JScrollPane(tablaPlanes),gb);
+        gb.gridx = 1; gb.gridy = alto+1; gb.gridwidth = 4; gb.gridheight = 1; gb.weightx = 4; gb.weighty = 1;gb.fill = 1;
+        add(new JLabel(),gb);
+        gb.gridx = 1; gb.gridy = alto+3; gb.gridwidth = 4; gb.gridheight = 2;
+        add(panelBotones,gb);
+        gb.gridx = 1; gb.gridy = alto+5; gb.gridwidth = 4; gb.gridheight = 4-alto;
+        add(new JLabel(),gb);
+    }
+
+    private String[][] crearData(Map<String, Plan> planes) {
+        String[][] data = new String[planes.size()][3];
+        int i = 0;
+        for(Plan plan : planes.values()){
+            Periodo p1 = plan.getPrimerPeriodo(); String sp1;
+            Periodo p2 = plan.getUltimoPeriodo(); String sp2;
+            if(p1 == null){
+                 sp1 = "Sin definir";sp2 = "Sin definir";
+            }else{
+                sp1 = p1.periodoS();sp2 = p2.periodoS();
+            }
+            data[i] = new String[]{plan.getNombre(),sp1,sp2};
+            i++;
         }
-        JPanel encabezado = new JPanel( new GridLayout(1,4));
-        encabezado.add(new JLabel("Nombre")); encabezado.add(new JLabel("Periodo Inicio")); encabezado.add(new JLabel("Periodo final"));
-        encabezado.add(new JLabel("  "));
-        gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 7; gb.gridheight = 2; gb.weightx = 7; gb.weighty = 3;
-        add(new JLabel(),gb);
-        gb.gridx = 0; gb.gridy = 2; gb.gridwidth = 1; gb.gridheight = n; gb.weightx = 1; gb.weighty = n;
-        add(new JLabel(),gb);
-        gb.gridx = 1; gb.gridy = 2; gb.gridwidth = 4; gb.gridheight = 1; gb.weightx = 4; gb.weighty = 1; gb.fill = 1;
-        add(encabezado,gb);
-        gb.gridx = 1; gb.gridy = 3; gb.gridwidth = 4; gb.gridheight = n; gb.weightx = 2; gb.weighty =n ; gb.fill = 1;
-        add(new JScrollPane(data), gb);
-        gb.gridx = 5; gb.gridy = 3; gb.gridwidth = 2; gb.gridheight = n; gb.weightx = 2; gb.weighty = n;
-        add(new JLabel(),gb);
-        gb.gridx = 0; gb.gridy = n + 4; gb.gridwidth = 7; gb.gridheight = 1; gb.weightx = 7; gb.weighty = 2;
-        add(new JLabel(),gb);
+        return data;
     }
 
     @Override
@@ -66,18 +84,49 @@ public class PanelPlanes extends PanelAux implements ActionListener {
         fondo.add(this);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        String[] com = e.getActionCommand().split("-");
-        String accion = com[0];
-        Plan plan = planes.get(com[1]);
-        if(accion.equals("ver")){
-            PanelAux panelvista = new InVerPlan(principal,plan);
-            principal.ocultarYmostrar(panelvista);
-        }else{
-            PanelAux panelEdicion = new InEdPlan(principal,plan);
-            principal.ocultarYmostrar(panelEdicion);
+    class auxDlg extends JDialog implements ActionListener{
+        public JTextField nombre;
+        auxDlg(){
+            setSize(20,20);
+            setLayout(new BorderLayout());
+            setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            setVisible(true);
+            JLabel instrucc = new JLabel("Ingrese el nombre del plan");
+            nombre = new JTextField();
+            JButton agregar = new JButton("Agregar");
+            agregar.addActionListener(this);
+            add(instrucc, BorderLayout.NORTH);add(nombre, BorderLayout.CENTER);add(agregar, BorderLayout.EAST);
         }
-        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            estudiante.nuevoPlan(nombre.getText());
+            setVisible(false);
+            actualizarPanel();
+        }
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String accion = e.getActionCommand();
+        switch (accion) {
+            case "Ver" -> {
+                String planN = (String) tablaPlanes.getValueAt(tablaPlanes.getSelectedRow(), 0);
+                Plan plan = planes.get(planN);
+                PanelAux panelvista = new InVerPlan(principal, plan);
+                principal.ocultarYmostrar(panelvista);
+            }
+            case "Editar" -> {
+                String planN = (String) tablaPlanes.getValueAt(tablaPlanes.getSelectedRow(), 0);
+                Plan plan = planes.get(planN);
+                PanelAux panelEdicion = new InEdPlan(principal, plan);
+                principal.ocultarYmostrar(panelEdicion);
+            }
+            case "Nuevo" -> {
+                System.out.println("hh");
+                auxDlg nu = new auxDlg();
+                nu.setVisible(true);
+            }
+        }
+
 
     }
 }

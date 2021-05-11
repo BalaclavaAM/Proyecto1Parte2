@@ -4,13 +4,11 @@ import uniandes.dpoo.proyecto1.modelo.usuario.Admin;
 import uniandes.dpoo.proyecto1.procesamiento.Banner;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PrincipalAdmin extends PrincipalUsusario {
     private Banner banner;
     public PrincipalAdmin(InterfazBannerPrincipal principal, Admin admin) {
         super(principal);
-
     }
 
     @Override

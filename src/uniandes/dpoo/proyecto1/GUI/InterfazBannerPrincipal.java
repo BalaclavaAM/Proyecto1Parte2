@@ -35,7 +35,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 	public InterfazBannerPrincipal () {
 		setTitle( "Banner" );
         getContentPane( ).setLayout( new BorderLayout( ) );
-        setSize( 1000, 680 );
+        setSize( 700, 500 );
         opciones = new PanelOptions("Guest",this);
         fondo = new PanelImagenFondo();
         superior = new PanelSuperior(this);
@@ -64,7 +64,8 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     }
     public void ocultarYmostrar(PanelAux pa){
-        pa.mostrar(fondo);
+        pa.setOpaque(false);
+        fondo.add(pa);
         vistaAct.ocultar();
         vistaAct = pa;
     }

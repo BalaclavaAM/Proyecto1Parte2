@@ -59,6 +59,19 @@ public class Periodo {
         return anio + "-" + semestre;
     }
 
+    public static Periodo stringToPeriodo(String stringPeriodo){
+        Periodo p = null;
+        String[] pSa = stringPeriodo.split("-");
+        if(pSa.length == 2){
+            p = new Periodo( Integer.parseInt(pSa[0]),Integer.parseInt(pSa[1]));
+        }else{
+            if(pSa.length == 3) {
+                p = new Periodo(Integer.parseInt(pSa[0]), Integer.parseInt(pSa[1]), Integer.parseInt(pSa[2]));
+            }
+        }
+        return p;
+    }
+
     public int compare(Periodo p1){
         return compareL(this,p1);
     }

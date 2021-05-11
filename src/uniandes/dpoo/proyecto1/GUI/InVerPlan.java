@@ -43,7 +43,6 @@ public class InVerPlan extends PanelAux{
                 data.add(cursoP,gb2);
                 conty++;
                 cursoP.setBackground(Color.BLUE);
-
             }
             contx++;
         }

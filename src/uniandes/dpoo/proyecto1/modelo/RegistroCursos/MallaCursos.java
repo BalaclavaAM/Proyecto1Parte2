@@ -12,8 +12,6 @@ public abstract class MallaCursos {
     protected static final long serialVersionUID = -491840464239633611L;
     protected Pensum pensum;
     protected final Periodo peridoSistema;
-    protected final Periodo periodoInicio;
-    protected Periodo ultimoPeriodo;
 
     protected int creditos = 0;
 
@@ -23,11 +21,8 @@ public abstract class MallaCursos {
     protected Map<String, Map<String, CursoRegistrado>> infoSemestre; //dentro de un Semestre pueden haber dos periodos por los ciclos
     //se cuenta a semestre a los intersemestrales
 
-    public MallaCursos(Periodo periodoSis, Periodo periodoI){
+    public MallaCursos(Periodo periodoSis){
         this.peridoSistema = periodoSis;
-        Periodo p = new Periodo(periodoI.getAnio(),periodoI.getSemestre());
-        this.periodoInicio = p;
-        this.ultimoPeriodo = p;
         this.cursosRegistrados = new Hashtable<>();
         this.reqsRegistrados = new Hashtable<>();
         this.cursosValidados = new Hashtable<>();
@@ -42,7 +37,7 @@ public abstract class MallaCursos {
         for (Periodo p : Lperiodos) {
             Map<String,CursoRegistrado> cursosP = cursosPeriodos.get(p);
             if(dentroPeriodo(p)){
-                infoSemestre.putIfAbsent(p.periodoS(),new Hashtable<>());
+                agregarPeriodo(p);
                 agregarCursosPeriodo(cursosP,estado);
             }else{
             estado.add(new EstadoAgregar(EstadoRegistro.Inconsistente, p));
@@ -218,9 +213,8 @@ public abstract class MallaCursos {
         return null;
     }
 
-    public void agregarPeriodo(Periodo periodo){
+    public abstract void agregarPeriodo(Periodo periodo);
 
-    }
 
     public abstract CursoRegistrado getCurReg(String codigo);
     public abstract boolean dentroPeriodo(Periodo p);
@@ -253,12 +247,5 @@ public abstract class MallaCursos {
         return infoSemestre;
     }
 
-    public Periodo getPeriodoInicio() {
-        return periodoInicio;
-    }
-
-    public Periodo getUltimoPeriodo() {
-        return ultimoPeriodo;
-    }
 }
 
