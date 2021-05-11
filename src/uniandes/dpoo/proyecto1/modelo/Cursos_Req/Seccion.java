@@ -24,5 +24,40 @@ public class Seccion {
         this.NSeccion = NSeccion;
         this.ciclo = ciclo;
     }
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public Boolean getEpsilon() {
+        return epsilon;
+    }
+
+    public String getNrc() {
+        return nrc;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public ArrayList<String> getDias() {
+        return dias;
+    }
+
+    public String getProfesor() {
+        return profesor;
+    }
+
+    public Boolean getTipoE() {
+        return tipoE;
+    }
+
+    public Integer getNSeccion() {
+        return NSeccion;
+    }
+
+    public String getCiclo() {
+        return ciclo;
+    }
 
 }

@@ -2,6 +2,7 @@ package uniandes.dpoo.proyecto1.procesamiento;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class LoaderData {
 	private final static String rutacursos = "./data/information/Cursinhos.csv";
-	private final static String rutasecciones = "./data/information/Secciones.csv";
+	private final static String rutasecciones = "./data/information/Seccioninhas.csv";
 
 	public static Banner cargarData() {
 		try {
@@ -58,9 +59,13 @@ public class LoaderData {
 			ArrayList<String> dias = parseList2(horario.get(1));
 			String profesor = partes[4];
 			Boolean tipoe = Boolean.parseBoolean(partes[5]);
-			Integer seccion = Integer.parseInt(partes[6]);
+			Integer nseccion = Integer.parseInt(partes[6]);
 			String ciclo = partes[7];
+			Curso curso = banner.buscarCursoByCode(codigo);
+			Seccion seccion = new Seccion(curso,epsilon,nrc,horas,dias,profesor,tipoe,nseccion,ciclo);
+			banner.getSecciones().add(seccion);
 
+			linea=br.readLine();
 		}
 	}
 

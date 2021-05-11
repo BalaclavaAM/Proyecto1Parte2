@@ -44,6 +44,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         Prueba.cargarPrueba(banner);
         try {
             LoaderData.CargaCursos(banner);
+            LoaderData.CargaSecciones(banner);
         } catch (IOException e) {
             e.printStackTrace();
         }

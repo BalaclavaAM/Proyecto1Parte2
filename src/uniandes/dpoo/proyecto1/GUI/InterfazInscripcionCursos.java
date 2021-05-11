@@ -20,7 +20,7 @@ public class InterfazInscripcionCursos extends PanelAux implements ActionListene
     private JTextField codigomateria;
     private JButton inscribir;
     private GridLayout materias;
-    private JTable tablamaterias;
+    private TablaSecciones tablamaterias;
     private String[][] data;
 
     public InterfazInscripcionCursos(InterfazBannerPrincipal principal, Estudiante estudiante) {
@@ -61,25 +61,14 @@ public class InterfazInscripcionCursos extends PanelAux implements ActionListene
         panelarriba.add(crearVacio());
         panelarriba.add(crearVacio());
         add(panelarriba,BorderLayout.NORTH);
-        armarTabla(banner.getCursos());
+        tablamaterias = new TablaSecciones(banner);
         add(tablamaterias,BorderLayout.CENTER);
 
 
     }
     private void armarTabla(Map<String, Map<String, Curso>> mapCursos){
-        String[] columnas = {"Código","Materia","Créditos","Ciclo","Epsilon"};
+        String[] columnas = {"Código","NRC","Profesor","Horario","Materia","Créditos","Ciclo","Epsilon","Tipo E"};
         ArrayList<Curso> cursos = banner.filtrarCursos("",codigomateria.getText());
-        data = new String[cursos.size()][5];
-        Integer x = 0;
-        for (Curso curso:cursos){
-            data[x][0]=curso.getCodigo();
-            data[x][1]=curso.getNombre();
-            data[x][2]=Integer.toString(curso.getCreditos());
-            data[x][3]="No APLICA";
-            data[x][4]="No";
-            x++;
-        }
-        tablamaterias = new JTable(data,columnas);
     }
 
     private void actualizarTabla(){

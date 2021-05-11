@@ -30,6 +30,7 @@ public class Banner implements Serializable {
 	private int nEstSem = 0; //numero de estudiantes durante el semestre
 
 	public Banner(Periodo periodo) {
+		this.secciones = new ArrayList<>();
 		this.catalogoDepartamentos = new HashMap<>();
 		this.carreras = new HashMap<>();
 		this.usuarios = new HashMap<>();
@@ -43,6 +44,26 @@ public class Banner implements Serializable {
 	public void avanzarPeriodo(){
 		periodo.avanzarPeriodo();
 		nEstSem = 0;
+	}
+
+	public Object[][] getAllSeccionesForJTable()
+	{
+		Object[][] retorno = new Object[secciones.size()][9];
+		Integer e = 0;
+		for (Seccion s: secciones){
+			System.out.println(s.toString());
+			retorno[e][0]=s.getCurso().getCodigo();
+			retorno[e][1]=s.getNrc();
+			retorno[e][2]=s.getProfesor();
+			retorno[e][3]=s.getHorario();
+			retorno[e][4]=s.getCurso().getNombre();
+			retorno[e][5]=s.getCurso().getCreditos();
+			retorno[e][6]=s.getCiclo();
+			retorno[e][7]=s.getEpsilon();
+			retorno[e][8]=s.getTipoE();
+			e++;
+		}
+		return retorno;
 	}
 
 	public Map<String, Map<String, Curso>> getCursos() {
@@ -65,6 +86,9 @@ public class Banner implements Serializable {
 		return periodo;
 	}
 
+	public ArrayList<Seccion> getSecciones(){
+	return secciones;
+}
 	public Map<String, Curso> getCatalogo() {
 		return catalogo;
 	}
@@ -139,6 +163,16 @@ public class Banner implements Serializable {
 			}
 		}
 		return retornar;
+	}
+
+	public Curso buscarCursoByCode(String code) {
+		for (Map.Entry<String, Map<String, Curso>> entry1 : catalogoDepartamentos.entrySet())
+			for (Map.Entry<String, Curso> entry : entry1.getValue().entrySet()) {
+				if (entry.getKey().equals(code)) {
+					return entry.getValue();
+				}
+			}
+		return null;
 	}
 
 	private void buscarAux(String codigo, ArrayList<Curso> retornar) {
