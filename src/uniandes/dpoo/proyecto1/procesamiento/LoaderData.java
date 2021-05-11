@@ -7,12 +7,14 @@ import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoaderData {
 	private final static String rutacursos = "./data/information/Cursinhos.csv";
+	private final static String rutasecciones = "./data/information/Secciones.csv";
 
 	public static Banner cargarData() {
 		try {
@@ -39,6 +41,26 @@ public class LoaderData {
 			System.out.println(partes[0]);
 
 			linea = br.readLine();
+		}
+	}
+
+	public static void CargaSecciones(Banner banner) throws  IOException {
+		BufferedReader br  = new BufferedReader(new FileReader(rutasecciones));
+		br.readLine();
+		String linea = br.readLine();
+		while (linea != null){
+			String[] partes = linea.trim().split(",");
+			String codigo = partes[0];
+			Boolean epsilon = Boolean.parseBoolean(partes[1]);
+			String nrc = partes[2];
+			ArrayList<String> horario = parseList(partes[3]);
+			String horas = horario.get(0);
+			ArrayList<String> dias = parseList2(horario.get(1));
+			String profesor = partes[4];
+			Boolean tipoe = Boolean.parseBoolean(partes[5]);
+			Integer seccion = Integer.parseInt(partes[6]);
+			String ciclo = partes[7];
+
 		}
 	}
 

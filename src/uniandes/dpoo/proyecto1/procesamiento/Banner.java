@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.procesamiento;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
+import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.usuario.*;
 
@@ -23,6 +24,8 @@ public class Banner implements Serializable {
 	private Map<String, Usuario> usuarios; //<nombreUsuario,Usuario>
 
 	private Periodo periodo;
+
+	private ArrayList<Seccion> secciones;
 
 	private int nEstSem = 0; //numero de estudiantes durante el semestre
 
@@ -108,9 +111,9 @@ public class Banner implements Serializable {
 		ArrayList<Curso> retornar = new ArrayList<>();
 		if (!(dpto.isEmpty()))
 		{
-			if (catalogo.containsKey(dpto))
+			if (catalogoDepartamentos.containsKey(dpto))
 			{
-				Map<String, Curso> colecciondpto = catalogo.get(dpto);
+				Map<String, Curso> colecciondpto = catalogoDepartamentos.get(dpto);
 				if (!(codigo.isEmpty())){
 					if (colecciondpto.containsKey(codigo)){
 						retornar.add(colecciondpto.get(codigo));
@@ -128,7 +131,7 @@ public class Banner implements Serializable {
 			if (!(codigo.isEmpty())) {
 				buscarAux(codigo, retornar);
 			} else {
-				for (Map.Entry<String, Map<String,Curso>> entry1 : catalogo.entrySet()){
+				for (Map.Entry<String, Map<String,Curso>> entry1 : catalogoDepartamentos.entrySet()){
 					for (Map.Entry<String,Curso> entry : entry1.getValue().entrySet()){
 							retornar.add(entry.getValue());
 					}
@@ -139,7 +142,7 @@ public class Banner implements Serializable {
 	}
 
 	private void buscarAux(String codigo, ArrayList<Curso> retornar) {
-		for (Map.Entry<String, Map<String,Curso>> entry1 : catalogo.entrySet()){
+		for (Map.Entry<String, Map<String,Curso>> entry1 : catalogoDepartamentos.entrySet()){
 			for (Map.Entry<String,Curso> entry : entry1.getValue().entrySet()){
 				if (entry.getKey().equals(codigo)){
 					retornar.add(entry.getValue());

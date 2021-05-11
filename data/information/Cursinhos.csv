@@ -1,14 +1,15 @@
 nombre,codigo,creditos,departamento,numerica,correquisitos,prerequisitos,restriccionesnivel,requerimientos,completo,desc
-Introducción a la Programación,ISIS-1221,3,ISIS,true,null,null,null,null,true,When haces tus momos en Python
-Escritura Universitaria 1,LENG-1511,2,LENG,true,null,null,null,null,false,Sisas cucho yo sise escribir
-Escritura Universitaria 1,LITE-1621,2,LITE,true,null,null,null,null,false,Sisas cucho yo sise escribir
-Escritura Universitaria 2,LENG-1512,2,LENG,true,null,LENG-1511;LITE-1621,null,null,false,Sisas cucho yo sise escribir
-Escritura Universitaria 2,LITE-1622,2,LITE,true,null,LENG-1511;LITE-1621,null,null,false,Sisas cucho yo sise escribir
-Constitución y Democracia,DERE-1300,3,DERE,true,null,null,null,null,true,Viva la democrasia demi pais
-Colombia: Espacio Tiempo Diferencia,CBCC-1177,2,CBCC,true,null,null,null,null,false, COLOMBIA PA
-Introducción a la Ingeniería de Sistemas,ISIS-1001,3,ISIS,true,null,null,null,null,true, Appinventor
+Introducción a la Programación,ISIS-1221,3,ISIS,true,null,null,null,null,true,El curso IP (Introducción a la Programación) presenta los conceptos básicos de programación y enseña al estudiante a resolver problemas construyendo programas de computador. 
+Escritura Universitaria 1,LENG-1511,2,LENG,true,null,null,null,null,false,Introducción a la escritura universitaria
+Escritura Universitaria 1,LITE-1621,2,LITE,true,null,null,null,null,false,Introducción a la escritura universitaria
+Escritura Universitaria 2,LENG-1512,2,LENG,true,null,LENG-1511;LITE-1621,null,null,false,Introducción a la escritura universitaria
+Escritura Universitaria 2,LITE-1622,2,LITE,true,null,LENG-1511;LITE-1621,null,null,false,Introducción a la escritura universitaria
+Constitución y Democracia,DERE-1300,3,DERE,true,null,null,null,null,true,Introducción al pensamiento ciudadano
+Colombia: Espacio Tiempo Diferencia,CBCC-1177,2,CBCC,true,null,null,null,null,false,Pensamiento crítico en Colombia
+Introducción a la Ingeniería de Sistemas,ISIS-1001,3,ISIS,true,null,null,null,null,true,Appinventor
 Precálculo,ISIS-1201,3,MATE,false,null,null,null,null,true, f(x)?
 Cálculo Diferencial,MATE-1203,3,MATE,true,null,MATE-1201,null,null,true, f'(x)?
 Física I,FISI-1018,3,FISI,true,null,MATE-1203;MATE-1204;MATE-1203B;MATE-1202B;MATE-1202;MATE-1204B,null,null,true, vel=dis/tiem
 Física Experimental I,FISI-1019,1,FISI,true,null,FISI-1018,null,null,true,en efecto mi ermano
 Fisica II,FISI-1028,3,FISI,true,null,MATE-1203;MATE-1203B;MATE-1202;MATE-1202B;MATE-1204;MATE-1204B/FISI-1018;FISI-1018B/MATE-1205;MATE-1206;MATE-1214;MATE-1215/MATE-1108;MATE-1109;MATE-1105;MATE-1106;MATE-1207;MATE-1208,null,null,true,PAIN
+Matemática Estructural y Lógica,ISIS-1104,3,ISIS,true,null,ISIS-1221;ISIS-1207,null,null,false,Enseña los conceptos básicos de matemáticas discretas necesarios para la ingeniería de sistemas.
