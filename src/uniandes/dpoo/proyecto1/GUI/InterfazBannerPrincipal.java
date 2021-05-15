@@ -69,6 +69,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         fondo.add(pa);
         vistaAct.ocultar();
         vistaAct = pa;
+        vistaAct.setVisible(true);
     }
 
     public PrincipalUsusario getPrincipalUsuario() {
@@ -112,7 +113,14 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         return opciones;
     }
 
-
+    public void home(){
+	    if(principalUsuario != null) {
+            ocultarYmostrar(principalUsuario);
+        }else{
+	        ocultarYmostrar(panelLogin);
+	        panelLogin.actualizarPanel();
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) { //solo para mostrar y

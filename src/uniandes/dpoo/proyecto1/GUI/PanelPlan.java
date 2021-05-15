@@ -12,10 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 public class PanelPlan extends PanelAux {
     private Plan plan;
@@ -25,8 +22,6 @@ public class PanelPlan extends PanelAux {
     private JButton validar;
     private JPanel panelBotones;
     private DefaultTableModel tableModel;
-    private Map<String, CursoRegistrado> celdasCursos;
-    private Map<String,String> celdasQuitadas;
     private Map<String, CursoRegistrado> cursosAgregar;
     private Map<String, CursoRegistrado> cursosQuitar;
 
@@ -43,7 +38,7 @@ public class PanelPlan extends PanelAux {
         panelBotones = new JPanel(new GridLayout(1,4));
         cursosAgregar = new HashMap<>();
         cursosQuitar = new HashMap<>();
-        celdasQuitadas = new HashMap<>();
+        Map<String, String> celdasQuitadas = new HashMap<>();
         JButton mostrarIn = new JButton("Mostra Info"); mostrarIn.addActionListener(e->{
 
         });
@@ -61,7 +56,6 @@ public class PanelPlan extends PanelAux {
                 String periodoS = tablaPlan.getColumnName(tablaPlan.getSelectedColumn());
                 String cursoN = (String) tablaPlan.getValueAt(fila, col);
                 CursoRegistrado cr = plan.getInfoPeriodos().get(periodoS).get(cursoN);
-                celdasQuitadas.put(fila + "-" + col, "");
                 cursosQuitar.put(cr.getCurso().getCodigo(),cr);
                 SwingUtilities.updateComponentTreeUI(this);
             }catch(Exception ignored){ }
@@ -182,23 +176,18 @@ public class PanelPlan extends PanelAux {
                                                        int column)
         {
             super.getTableCellRendererComponent (table, value, isSelected, hasFocus, row, column);
-            if(isSelected){
-                this.setOpaque(true);
-                this.setBackground(Color.RED);
-                this.setForeground(Color.YELLOW);
-            }
-
-            if (celdasQuitadas.containsKey(row+"-"+column))
+            this.setOpaque(true);
+            if(cursosAgregar.containsKey((String) table.getValueAt(row,column))) {
+                this.setBackground(Color.GREEN);
+                this.setForeground(Color.BLUE);
+            }else if (cursosQuitar.containsKey((String) table.getValueAt(row,column)))
             {
-                this.setOpaque(true);
                 this.setBackground(Color.RED);
                 this.setForeground(Color.YELLOW);
             }else{
-                this.setOpaque(true);
                 this.setBackground(Color.WHITE);
                 this.setForeground(Color.BLACK);
             }
-            super.getTableCellRendererComponent (table, value,isSelected,hasFocus,row, column);
             return this;
         }
     }
@@ -228,16 +217,13 @@ public class PanelPlan extends PanelAux {
                     cursoN.setText(curso.getNombre());
                     Janio.setEnabled(true);
                     semestre.setEnabled(true);
-                    if(!curso.isCompleto()){
-                        ciclo.setEnabled(true);
-                    }
 
             }});
             agregar = new JButton("agregar");agregar.addActionListener((event)->{
                 Periodo p;
                 try {
                     int anio = Integer.parseInt(Janio.getText());
-                    if(ciclo.isVisible()){
+                    if(ciclo.isEnabled()){
                         p = new Periodo(anio, (Integer) semestre.getSelectedItem(), (Integer) ciclo.getSelectedItem());
                     }else{
                         p = new Periodo(anio, (Integer) semestre.getSelectedItem());
@@ -245,7 +231,7 @@ public class PanelPlan extends PanelAux {
                     String semestre = p.periodoS();
                     int indice = 0;
                     int np = tableModel.getColumnCount();
-                    ArrayList<String> columnNames = new ArrayList<>(np);
+                    Vector<String> columnNames = new Vector<>(np);
                     while(indice < np){
                         String header = tablaPlan.getColumnName(indice);
                         columnNames.add(header);
@@ -254,13 +240,31 @@ public class PanelPlan extends PanelAux {
                         }
                         indice++;
                     }
+
                     if(indice == np){
                         columnNames.add(semestre);
-                        tableModel.setColumnIdentifiers(columnNames.toArray());
-                        columnNames.sort(String::compareTo); //me dio pereza hacer un insert en orden
-                        int nuevoIn =  columnNames.indexOf(semestre);
-                        tableModel.setValueAt(curso.getCodigo(),0,indice);
-                        tablaPlan.moveColumn(indice ,nuevoIn);
+                        columnNames.sort(String::compareTo);
+                        indice =  columnNames.indexOf(semestre);
+                        int ultimoOcupado = tableModel.getRowCount() -1;
+                        while(ultimoOcupado >-1){
+                            if(tableModel.getValueAt(ultimoOcupado, indice) != null){
+                                break;
+                            }
+                            ultimoOcupado--;
+                        }
+
+                        Vector<Vector> data = tableModel.getDataVector();
+                        for (int i = 0; i < data.size(); i++) {
+                            data.get(i).insertElementAt(null,indice);
+                        }
+
+                        data.get(0).setElementAt(curso.getCodigo(),indice);
+                        tableModel = new DefaultTableModel(data,columnNames) {
+                            @Override
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        };
                     }else{
                         int ultimoOcupado = tableModel.getRowCount() -1;
                         while(ultimoOcupado >-1){
@@ -273,10 +277,12 @@ public class PanelPlan extends PanelAux {
                             String[] nuevaLinea = new String[np]; nuevaLinea[indice] = curso.getCodigo();
                             tableModel.addRow(nuevaLinea);
                         }else{
-                            tableModel.setValueAt(curso.getCodigo(),ultimoOcupado-1,indice);
+                            tableModel.setValueAt(curso.getCodigo(),ultimoOcupado+1,indice);
                         }
                     }
+                    tablaPlan.setModel(tableModel);
                     cursoR = new CursoRegistrado(curso, EstadoCurso.Planeado,epsilon.getState(),p);
+                    cursosAgregar.put(curso.getCodigo(),cursoR);
                 } catch (NumberFormatException numberFormatException) {
                     numberFormatException.printStackTrace();
                 }
@@ -289,7 +295,7 @@ public class PanelPlan extends PanelAux {
             cursoN = new JTextField();
             Janio = new JTextField("año");
             semestre = new JComboBox<>(new Integer[]{10,19,20});semestre.addItemListener((event)->{
-                ciclo.setEnabled((int) semestre.getSelectedItem() != 19);});
+                ciclo.setEnabled((int) semestre.getSelectedItem() != 19 && !curso.isCompleto());});
             epsilon = new Checkbox("epsilon.");
             GridBagConstraints gb = new GridBagConstraints();
             gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 4; gb.gridheight =1;gb.weightx = 4; gb.fill = 1;

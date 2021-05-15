@@ -12,12 +12,12 @@ public class PanelLogin extends PanelAux implements ActionListener {
 
     public PanelLogin(InterfazBannerPrincipal principal) {
         super(principal);
-        setLayout(new GridLayout(1, 3));
+        setLayout(new GridLayout(3, 3));
         JPanel caja = new JPanel();
         caja.setLayout(new GridLayout(3, 1));
-        add(new JLabel());
-        add(caja);
-        add(new JLabel());
+        add(new JLabel());add(new JLabel());add(new JLabel());add(new JLabel());
+        add(caja);add(new JLabel());
+        add(new JLabel());add(new JLabel());add(new JLabel());
         userText = new JTextField("Usuario");
         passwordText = new JPasswordField("Contraseña");
         JButton botonLogin = new JButton("Login");
@@ -26,8 +26,13 @@ public class PanelLogin extends PanelAux implements ActionListener {
         caja.add(userText, BorderLayout.CENTER);
         caja.add(passwordText, BorderLayout.CENTER);
         caja.add(botonLogin, BorderLayout.CENTER);
+
     }
 
+    public void actualizarPanel(){
+     userText.setText("Usuario");
+     passwordText.setText("Contraseña");
+    }
 
     public void ocultar() {
         setVisible(false);
@@ -36,7 +41,7 @@ public class PanelLogin extends PanelAux implements ActionListener {
     @Override
     public void mostrar(PanelImagenFondo fondo) {
         setOpaque(false);
-        fondo.add(this,BorderLayout.SOUTH);
+        fondo.add(this);
     }
 
     @Override
