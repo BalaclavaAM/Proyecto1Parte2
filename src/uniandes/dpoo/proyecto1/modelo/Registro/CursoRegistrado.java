@@ -10,7 +10,6 @@ import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
 public class CursoRegistrado {
 	private final Curso curso;
 	private final Periodo periodo;
-	private EstadoAgregar estadoAgregar;
 	private Nota nota = new NotaCual(calCual.pendiente);
 	private EstadoCurso estado = EstadoCurso.Pendiente;
 	private boolean agregado = false;
@@ -26,7 +25,6 @@ public class CursoRegistrado {
 		this.periodo = periodo;
 		this.epsilon = epsilon;
 		this.numerica = nota.isNumeric();
-		this.estadoAgregar = new EstadoAgregar(periodo, curso);
 	}
 
 
@@ -37,8 +35,6 @@ public class CursoRegistrado {
 		this.periodo = periodo;
 		this.estado = estadoC;
 		this.epsilon = epsilon;
-		this.estadoAgregar = new EstadoAgregar(periodo, curso);
-
 	}
 
 
@@ -52,9 +48,6 @@ public class CursoRegistrado {
 		return estado;
 	}
 
-	public EstadoAgregar getEstadoAgregar() {
-		return estadoAgregar;
-	}
 
 
 	public void setEstado(EstadoCurso estado){

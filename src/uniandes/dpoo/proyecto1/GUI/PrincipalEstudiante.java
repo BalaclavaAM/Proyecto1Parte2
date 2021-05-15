@@ -3,15 +3,12 @@ package uniandes.dpoo.proyecto1.GUI;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
-import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -19,54 +16,68 @@ import java.util.Map;
 public class PrincipalEstudiante extends PrincipalUsusario{
     private Estudiante estudiante;
     public String RUTA = "./data/imagenes/usuarioGenerico.png";
+    private final JTextField nombre;
+    private final JTextField codigo;
+    private final JTextField carrera;
 
     public PrincipalEstudiante(InterfazBannerPrincipal principal, Estudiante estudiante) {
         super(principal);
         this.estudiante = estudiante;
-        JPanel superior = new JPanel();
-        JPanel superiorDatos = new JPanel();
         setLayout(new GridBagLayout());
-        GridBagConstraints gb = new GridBagConstraints();
-        JTextField nombre = new JTextField(" " + estudiante.getNombre());nombre.setEditable(false);
-        JTextField codigo = new JTextField(" " + estudiante.getCodigo());codigo.setEditable(false);
-        JTextField carrera = new JTextField(" " + estudiante.getCarrera()); carrera.setEditable(false);
-        gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 15; gb.weightx = 1; gb.weighty = 15;gb.fill = 1;
-        add(new JLabel(),gb); // relleno 1
-        gb.gridx = 1; gb.gridy = 0; gb.gridwidth = 4; gb.gridheight = 1; gb.weightx = 4; gb.weighty = 1;gb.fill = 1;
-        add(new JLabel(),gb);
-        gb.gridx = 1; gb.gridy = 1; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
-        add(nombre,gb);
-        gb.gridx = 1; gb.gridy = 2; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
-        add(new JLabel(),gb);
-        gb.gridx = 1; gb.gridy = 3; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
-        add(codigo,gb);
-        gb.gridx = 1; gb.gridy = 4; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
-        add(new JLabel(),gb);
-        gb.gridx = 1; gb.gridy = 5; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
-        add(carrera,gb);
-        gb.gridx = 1; gb.gridy = 6; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
-        add(new JLabel(),gb);
-        gb.gridx = 3; gb.gridy = 1; gb.gridwidth = 2; gb.gridheight = 6; gb.weightx = 2; gb.weighty = 6;gb.fill = 1;
-        add(new JLabel(),gb);
-        gb.gridx = 5; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 15; gb.weightx = 1; gb.weighty = 15;gb.fill = 1;
-        add(new JLabel(),gb);
-        String[] columnNames = { "Nombre", "Codigo", "Creditos" };
+        nombre = new JTextField(estudiante.getNombre());nombre.setEditable(false);
+        codigo = new JTextField(estudiante.getCodigo());codigo.setEditable(false);
+        carrera = new JTextField(estudiante.getCarrera()); carrera.setEditable(false);
+        actualizarPanel();
+    }
+
+    public void actualizarPanel() {
         JTable tablaInscritos = new JTable();
+        GridBagConstraints gb = new GridBagConstraints();
         Map<String,CursoRegistrado> inscritos = estudiante.getHistoriaAcademica().getCursosInscritos();
 
-        DefaultTableModel tableModel = new DefaultTableModel(crearData(inscritos),columnNames) {
+        DefaultTableModel tableModel = new DefaultTableModel(new String[][]{}, new String[]{"Nombre", "Codigo", "Creditos"}) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-        };
-        tablaInscritos.setModel(tableModel);
-        gb.gridx = 1; gb.gridy = 7; gb.gridwidth = 4; gb.gridheight = inscritos.size() + 1;
-        add(new JScrollPane(tablaInscritos),gb);
-        gb.gridx = 1; gb.gridy = 14; gb.gridwidth = 4; gb.gridheight =7- inscritos.size(); gb.weightx = 4; gb.weighty = 7- inscritos.size();gb.fill = 1;
-        add(new JLabel(),gb);
 
+        };
+        for(CursoRegistrado cr: inscritos.values()){
+            Curso c = cr.getCurso();
+            tableModel.addRow(new String[]{c.getNombre(),c.getCodigo(), String.valueOf(c.getCreditos())});
+        }
+
+        tablaInscritos.setModel(tableModel);
+
+        int alto = Math.min(5,inscritos.size());
+        tablaInscritos.setAutoResizeMode(4);
+        tablaInscritos.setMaximumSize(new Dimension(4*getWidth()/6,alto*getHeight()/14));
+        gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 14; gb.weightx = 1; gb.weighty = 14;
+        add(new JLabel(),gb); // rellenos laterales
+        gb.gridx = 5;
+        add(new JLabel(),gb);
+        gb.gridx = 1; gb.gridy = 0; gb.gridwidth = 4; gb.gridheight = 1; gb.weightx = 4; gb.weighty = 1;
+        add(new JLabel(),gb);
+        gb.gridy = 2; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;
+        add(new JLabel(),gb);
+        gb.gridy = 4;
+        add(new JLabel(),gb);
+        gb.gridy = 6;
+        add(new JLabel(),gb);
+        gb.gridx = 3; gb.gridy = 1; gb.gridwidth = 2; gb.gridheight = 6; gb.weightx = 2; gb.weighty = 6;
+        add(new JLabel(),gb);
+        gb.gridx = 1;gb.gridheight = 1; gb.weighty = 1; gb.fill = 1;
+        add(nombre,gb);
+        gb.gridy = 3;
+        add(codigo,gb);
+        gb.gridy = 5;
+        add(carrera,gb);
+        gb.gridy = 7; gb.gridwidth = 4; gb.gridheight = alto;gb.weightx=4; gb.weighty = alto;
+        add(new JScrollPane(tablaInscritos),gb);
+        gb.gridy = 7+alto; gb.gridwidth = 4; gb.gridheight =7- alto; gb.weightx = 4; gb.weighty = 7- alto;
+        add(new JLabel(),gb);
     }
+
 
     public String[][] crearData(Map<String,CursoRegistrado> inscritos){
         String[][] data = new String[inscritos.size()][3];
@@ -92,7 +103,7 @@ public class PrincipalEstudiante extends PrincipalUsusario{
 
         if (image != null) {
             int d = (int) (0.2*Math.min(getWidth(), getHeight()));
-            g.drawImage(image, (int) (getWidth()*0.7), 10,d,d,this);
+            g.drawImage(image, (int) (getWidth()*0.7), (int) (getWidth()*0.1),d,d,this);
         }
 
     }

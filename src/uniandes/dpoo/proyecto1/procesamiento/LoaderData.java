@@ -7,8 +7,6 @@ import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -79,34 +77,42 @@ public class LoaderData {
 			String[] partes = linea.trim().split(",");
 			String nombre = partes[0];
 			String codigo = partes[1];
-			Integer creditos = Integer.parseInt(partes[2]);
+			int creditos = Integer.parseInt(partes[2]);
 			String dpto = partes[3];
-			Boolean numerica = Boolean.parseBoolean(partes[4]);
-			ArrayList<Restriccion> restricciones = armarRequerimientos(partes[5],partes[6],partes[7],partes[8]);
-			Boolean completo = Boolean.parseBoolean(partes[9]);
+			boolean numerica = Boolean.parseBoolean(partes[4]);
+			ArrayList<PreRestriccion> restricciones = armarRestricciones(partes[6],partes[7],partes[8]);
+			ArrayList<Correquisito> correquisitos = armarCorrequisitos(partes[5]);
+			boolean completo = Boolean.parseBoolean(partes[9]);
 			String desc = partes[10];
-			Curso curso = new Curso(nombre,codigo,dpto,creditos,completo,numerica,desc,restricciones);
-			if (banner.getCursos().containsKey(dpto)){
-				banner.getCursos().get(dpto).put(codigo,curso);
+			Curso curso = new Curso(nombre,codigo,dpto,creditos,completo,numerica,desc,restricciones,correquisitos);
+			if (banner.getCursosDepartamento().containsKey(dpto)){
+				banner.getCursosDepartamento().get(dpto).put(codigo,curso);
 			} else {
 				Map<String,Curso> mapadpto = new HashMap<>();
 				mapadpto.put(codigo,curso);
-				banner.getCursos().put(dpto,mapadpto);
+				banner.getCursosDepartamento().put(dpto,mapadpto);
 			}
+			banner.getCatalogo().put(codigo,curso);
 
 			linea = br.readLine();
 		}
 	}
-
-	private static ArrayList<Restriccion> armarRequerimientos(String correquisitos, String prerequisitos,
-																String restricciones, String nivel)
-	{
-		ArrayList<Restriccion> retorno = new ArrayList<>();
+	private static ArrayList<Correquisito> armarCorrequisitos(String correquisitos){
+		ArrayList<Correquisito> retorno = new ArrayList<>();
 		ArrayList<String> cCorrequisitos = parseList2(correquisitos);
 		for (String correq:cCorrequisitos)
 		{
 			retorno.add(new Correquisito(parseList(correq)));
 		}
+		return retorno;
+	}
+
+
+	private static ArrayList<PreRestriccion> armarRestricciones(String prerequisitos,
+																String restricciones, String nivel)
+	{
+		ArrayList<PreRestriccion> retorno = new ArrayList<>();
+
 		for (String prereq:parseList2(prerequisitos))
 		{
 			retorno.add(new Prerrequisito(parseList(prereq)));

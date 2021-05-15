@@ -5,9 +5,8 @@ import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-public class Prerrequisito implements Restriccion {
+public class Prerrequisito implements PreRestriccion {
     private final ArrayList<String> opciones; // esto es un supuesto
 
     public Prerrequisito(ArrayList<String> opciones){
@@ -26,10 +25,7 @@ public class Prerrequisito implements Restriccion {
         return false;
     }
 
-    @Override
-    public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP) {
-        return cumple(malla);
-    }
+
 
     @Override
     public boolean cumple(MallaCursos malla, Periodo periodo) {
@@ -42,17 +38,15 @@ public class Prerrequisito implements Restriccion {
         return false;
     }
 
-    @Override
-    public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP, Periodo periodo) {
-        if(periodo == malla.getPeridoSistema()){
-            return cumple(malla);
-        }
-        return cumple(malla,periodo);
-    }
 
     @Override
     public String tipo() {
         return "Prerrequisito";
+    }
+
+    @Override
+    public String nombre() {
+        return null;
     }
 
 }

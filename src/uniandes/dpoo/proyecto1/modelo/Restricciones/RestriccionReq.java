@@ -1,12 +1,9 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
-import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 
-import java.util.Map;
-
-public class RestriccionReq implements Restriccion{
+public class RestriccionReq implements PreRestriccion {
     private String reqN;
 
     public RestriccionReq(String reqN){
@@ -29,22 +26,18 @@ public class RestriccionReq implements Restriccion{
     }
 
     @Override
-    public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP) {
-        return cumpleReq(malla,reqN);
-    }
-
-    @Override
     public boolean cumple(MallaCursos malla, Periodo periodo) {
         return cumpleReq(malla,periodo,reqN);
     }
 
-    @Override
-    public boolean cumple(MallaCursos malla, Map<String, CursoRegistrado> cursosP, Periodo periodo) {
-        return cumpleReq(malla,reqN);
-    }
 
     @Override
     public String tipo() {
-        return null;
+        return "Restriccion Requerimiento";
+    }
+
+    @Override
+    public String nombre() {
+        return tipo() + " " + reqN ;
     }
 }

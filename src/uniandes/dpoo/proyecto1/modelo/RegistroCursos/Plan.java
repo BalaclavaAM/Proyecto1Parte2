@@ -3,6 +3,7 @@ package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -34,10 +35,15 @@ public class Plan extends MallaCursos {
     }
 
     public void validarInscrito(CursoRegistrado ci){
+        String codigo = ci.getCurso().getCodigo();
         boolean ep = ci.getEpsilon();
         Periodo pi = ci.getPeriodo();
-        infoSemestre.putIfAbsent(pi.periodoS(),new HashMap<>());
-        modificarHistoria(new CursoRegistrado(ci.getCurso(),estadoPl,ep,pi), EstadoRegistro.Ok);
+        CursoRegistrado cr = new CursoRegistrado(ci.getCurso(),EstadoCurso.Planeado,ep,pi);
+        cursosRegistrados.put(codigo,cr);
+        Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
+        if (reqAsociado != null) {
+            validarRequerimiento(cr, reqAsociado);
+        }
     }
 
 

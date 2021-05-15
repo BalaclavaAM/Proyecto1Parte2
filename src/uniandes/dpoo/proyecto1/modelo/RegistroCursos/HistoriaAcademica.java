@@ -26,10 +26,10 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     public HistoriaAcademica(Pensum pensum, Periodo periodo) {
         super(periodo);
-        Periodo p =  Periodo.copy(periodo);
+        Periodo p = Periodo.copy(periodo);
         this.primerPeriodo = p;
         this.ultimoPeriodo = p;
-		this.pensum = pensum;
+        this.pensum = pensum;
         this.cursosInscritos = new Hashtable<>();
     }
 
@@ -43,7 +43,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
                 String codigo = cr.getCurso().getCodigo();
                 Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
                 if (reqAsociado != null) {
-                    validarRequerimiento(codigo, reqAsociado);
+                    validarRequerimiento(cr, reqAsociado);
                     }
                 }
                 return true;
@@ -66,13 +66,10 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         if(!ultimoPeriodo.periodoS().equals(peridoSistema.periodoS()) && !cursosInscritos.isEmpty()){
             vaciarInscritos();
         }
-        agregarCursosPeriodo(cursosP,estado);
-        for(CursoRegistrado cr: cursosP.values()){
-            if(cr.getEstadoAgregar().getError() == EstadoRegistro.Ok){
-                cursosInscritos.put(cr.getCurso().getCodigo(),cr);
-            }
+        ArrayList<CursoRegistrado> cursosInscribir = agregarCursosPeriodo(cursosP,ultimoPeriodo,estado);
+        for(CursoRegistrado cr: cursosInscribir){
+            cursosInscritos.put(cr.getCurso().getCodigo(),cr);
         }
-
         return estado;
     }
 
@@ -88,22 +85,13 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-    public EstadoRegistro cambiarRequerimiento(String codigoCurso, Requerimiento req, Requerimiento req2N){
-        RequerimientoRegistrado reqR1 =  reqsRegistrados.get(req.getNombre());
-        Curso curso = cursosRegistrados.get(codigoCurso).getCurso();
-        if(reqR1 == null  || curso == null){
-            return EstadoRegistro.Inexistente;
+    public EstadoRegistro cambiarRequerimiento(CursoRegistrado cursoR, RequerimientoRegistrado reqR, Requerimiento req2N){
+        EstadoRegistro val = validarRequerimiento(cursoR, req2N);
+        if(val == EstadoRegistro.Ok){
+            return reqR.quitarCurso(cursoR.getCurso().getCodigo());
         }
-        EstadoRegistro val = validarRequerimiento(codigoCurso, req2N);
-        if(val != EstadoRegistro.Ok){
-            return val;
-        }
-        if(reqR1.quitarCurso(codigoCurso)){
-            return EstadoRegistro.Ok;
-        }
-        return EstadoRegistro.Inexistente;
+        return val;
     }
-
 
 
     public double calcularPromedioSemestre(String periodoS) {

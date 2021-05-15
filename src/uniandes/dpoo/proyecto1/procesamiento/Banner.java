@@ -15,11 +15,11 @@ public class Banner implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -4746963895960324815L;
 
-	private Map<String,Map<String,Curso>> catalogoDepartamentos; //catalogo por materia
+	private Map<String,Map<String,Curso>> catalogoDepartamentos; // <Departamento, <NombreCurso,Curso>>
 
-	private Map<String,Curso> catalogo;
+	private Map<String,Curso> catalogo;//<NombreCurso,Curso>
 
-	private Map<String,Carrera> carreras; //<nombreUsuario,Usuario>
+	private Map<String,Carrera> carreras; //<nombreCarrera,Carrera>
 
 	private Map<String, Usuario> usuarios; //<nombreUsuario,Usuario>
 
@@ -35,6 +35,7 @@ public class Banner implements Serializable {
 		this.carreras = new HashMap<>();
 		this.usuarios = new HashMap<>();
 		this.periodo = periodo;
+		this.catalogo = new HashMap<>();
 	}
 
 	public void cargarData(String filename){
@@ -66,9 +67,10 @@ public class Banner implements Serializable {
 		return retorno;
 	}
 
-	public Map<String, Map<String, Curso>> getCursos() {
+	public Map<String, Map<String, Curso>> getCursosDepartamento() {
 		return catalogoDepartamentos;
 	}
+
 
 	public Map<String,Carrera> getCarreras() {
 		return carreras;

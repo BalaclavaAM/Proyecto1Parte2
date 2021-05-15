@@ -12,12 +12,12 @@ import java.util.Map;
 
 public class RequerimientoRegistrado {
     private Requerimiento req;
-    private int creditosCumplidos;
-    private int itemsCumplidos;
+    private int creditosCumplidos = 0;
+    private int itemsCumplidos = 0;
     private boolean validado;
     private ArrayList<Object> validaciones;
     private Periodo ultimoPeriodo;
-    private final Map<String, CursoRegistrado> cursosR;
+    private Map<String, CursoRegistrado> cursosR;
 
 
     public RequerimientoRegistrado(Requerimiento req){
@@ -26,19 +26,30 @@ public class RequerimientoRegistrado {
         Map<String, Curso> cursos = new Hashtable<>();
         this.cursosR = new Hashtable<>();
         this.itemsCumplidos = 0;
-
     }
 
 
-    public EstadoRegistro agregarCurso(CursoRegistrado cursoR, Periodo periodo){
+
+
+    public EstadoRegistro agregarCurso(CursoRegistrado cursoR){
+        Periodo periodo = cursoR.getPeriodo();
         Curso curso = cursoR.getCurso();
         String codigo = curso.getCodigo();
         int val = req.validar(curso);
         if( val == 0 ){
             return EstadoRegistro.Inexistente;
         }
-        if(cursosR.containsKey(codigo)){
-            return EstadoRegistro.Repetido;
+        CursoRegistrado registroPrevio = cursosR.get(codigo);
+        if(registroPrevio != null) {
+            if (cursoR.getEstado() == EstadoCurso.Planeado) {
+                if(cursoR.getPeriodo().compare(registroPrevio.getPeriodo())== 1){
+                    quitarCurso(codigo);
+                }else{
+                    return EstadoRegistro.Repetido;
+                }
+            }else{
+                return EstadoRegistro.Repetido;
+            }
         }
         if(cumplio()){
             return EstadoRegistro.SobreInscripcion;
@@ -59,10 +70,10 @@ public class RequerimientoRegistrado {
         return itemsCumplidos>req.getItems();
     }
 
-    public boolean quitarCurso(String codigo){
+    public EstadoRegistro quitarCurso(String codigo){
         CursoRegistrado cursoR = cursosR.get(codigo);
         if(cursoR == null){
-            return false;
+            return EstadoRegistro.Inexistente;
         }
         cursosR.remove(codigo);
         Curso curso = cursoR.getCurso();
@@ -75,7 +86,7 @@ public class RequerimientoRegistrado {
         if(cumplio() != validado){
             validado = !validado;
         }
-        return true;
+        return EstadoRegistro.Ok;
     }
 
     public Periodo ultimoPeriodo(){

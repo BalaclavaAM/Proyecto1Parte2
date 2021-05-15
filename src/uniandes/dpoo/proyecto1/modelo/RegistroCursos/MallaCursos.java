@@ -4,7 +4,8 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
-import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.PreRestriccion;
 
 import java.util.*;
 
@@ -17,7 +18,7 @@ public abstract class MallaCursos {
 
     protected Map<String, CursoRegistrado> cursosRegistrados;
     protected Map<String, RequerimientoRegistrado> reqsRegistrados;
-    protected Map<String, CursoRegistrado> cursosValidados;
+    protected Map<String, String> cursosValidados; // <CodigoCurso,NombreRequerimiento>
     protected Map<String, Map<String, CursoRegistrado>> infoSemestre; //dentro de un Semestre pueden haber dos periodos por los ciclos
     //se cuenta a semestre a los intersemestrales
 
@@ -38,9 +39,9 @@ public abstract class MallaCursos {
             Map<String,CursoRegistrado> cursosP = cursosPeriodos.get(p);
             if(dentroPeriodo(p)){
                 agregarPeriodo(p);
-                agregarCursosPeriodo(cursosP,estado);
+                agregarCursosPeriodo(cursosP,p,estado);
             }else{
-            estado.add(new EstadoAgregar(EstadoRegistro.Inconsistente, p));
+            estado.add(new EstadoAgregar(p, EstadoRegistro.Inconsistente));
             return estado;
             }
         }
@@ -49,37 +50,43 @@ public abstract class MallaCursos {
 
 
 
-    public void agregarCursosPeriodo(Map<String, CursoRegistrado> cursosP, ArrayList<EstadoAgregar> estado){
-        HashMap<String, CursoRegistrado> cursosPaux = new HashMap<>(cursosP);
+    public ArrayList<CursoRegistrado> agregarCursosPeriodo(Map<String, CursoRegistrado> cursosP, Periodo periodo, ArrayList<EstadoAgregar> estado) {
+        Map<CursoRegistrado, ArrayList<Correquisito>> cursosCorreq = new HashMap<>();
+        Map<String, EstadoRegistro> estadosRegistros = new HashMap<>();
         for (CursoRegistrado cr : cursosP.values()) {
-            cursosPaux.remove(cr.getCurso().getCodigo());
-            agregarCurso(cr, cursosPaux);
-            EstadoAgregar ea = cr.getEstadoAgregar();
-            if(ea.getError() != EstadoRegistro.Ok){
-                estado.add(ea);
+            EstadoRegistro er = revisarConsistencia(cr, periodo);
+            String codigo = cr.getCurso().getCodigo();
+            if (er == EstadoRegistro.Ok || er == EstadoRegistro.Previo) {
+                estadosRegistros.put(codigo, er);
+                PreRestriccion rest = revisarRestriciones(cr, periodo);
+                if (rest == null) {
+                    ArrayList<Correquisito> corFaltantes = Correquisito.CorrequisitosEnRegistro(this, cr, periodo);
+                    cursosCorreq.put(cr,corFaltantes);
+                } else {
+                    estado.add(new EstadoAgregar(cr, rest.nombre()));
+                }
+            } else {
+                estado.add(new EstadoAgregar(cr, er));
             }
         }
+        ArrayList<CursoRegistrado> cursosAniadir = Correquisito.cumpleEnInscripcion(cursosCorreq, estado);
+        for (CursoRegistrado cr: cursosAniadir) {
+            agregarCurso(cr, estadosRegistros.get(cr.getCurso().getCodigo()));
+        }
+        return cursosAniadir;
     }
 
-    public boolean agregarCurso(CursoRegistrado cursoR, Map<String, CursoRegistrado> cursosP){
 
-        if(cursoR.isAgregado()){
-            return true;
+
+
+
+    public void agregarCurso(CursoRegistrado cursoR, EstadoRegistro er){
+        if (er == EstadoRegistro.Previo) {
+            modificarHistoria(cursoR, EstadoRegistro.Previo);
         }
-        if(cursoR.getEstadoAgregar().getError() == EstadoRegistro.Pendiente) {
-            EstadoAgregar ea = cursoR.getEstadoAgregar();
-            if (revisarRestAndCos(cursoR, cursosP)) {
-                if (ea.getError() == EstadoRegistro.Previo) {
-                    ea.setError(EstadoRegistro.Ok);
-                    modificarHistoria(cursoR, EstadoRegistro.Previo);
-                }
-                if (ea.getError()== EstadoRegistro.Ok){
-                    modificarHistoria(cursoR, EstadoRegistro.Ok);
-                }
-                return true;
-            }
+        if (er== EstadoRegistro.Ok){
+            modificarHistoria(cursoR, EstadoRegistro.Ok);
         }
-        return false;
     }
 
     public void formatoAgregar(ArrayList<CursoRegistrado> cursosR, Map<Periodo, Map<String,CursoRegistrado>> cursosPeriodos,
@@ -97,9 +104,7 @@ public abstract class MallaCursos {
                 Lperiodos.add(acperiodo);
             }
             if(cursosP.containsKey(codigo)){
-                EstadoAgregar ea = cr.getEstadoAgregar();
-                ea.setError(EstadoRegistro.Repetido);
-                estado.add(ea);
+                estado.add(new EstadoAgregar(cr,EstadoRegistro.Repetido));
             }else{
                 cursosP.put(codigo,cr);
                 Lperiodos.add(acperiodo);
@@ -108,26 +113,9 @@ public abstract class MallaCursos {
         Lperiodos.sort(Periodo::compare);
     }
 
-    public boolean revisarRestAndCos(CursoRegistrado cursoR, Map<String,CursoRegistrado> cursosP) {
-        EstadoRegistro er = revisarConsistencia(cursoR);
-        EstadoAgregar ea = cursoR.getEstadoAgregar();
-        if (er == EstadoRegistro.Previo || er == EstadoRegistro.Ok) {
-            Restriccion rest;
-            if ((rest = revisarRestriciones(cursoR, cursosP, cursoR.getPeriodo())) != null) {
-                ea.setError(EstadoRegistro.Restriccion);
-                ea.setRest(rest);
-                return false;
-            }
-            ea.setError(er);
-            return true;
-        }
-        ea.setError(er);
-        return false;
-    }
 
-    public EstadoRegistro revisarConsistencia(CursoRegistrado cursoR) {
+    public EstadoRegistro revisarConsistencia(CursoRegistrado cursoR, Periodo periodo) {
         CursoRegistrado cr = getCurReg(cursoR.getCurso().getCodigo());
-        Periodo periodo = cursoR.getPeriodo();
         if (cr != null) {
             int comp = periodo.compare(cr.getPeriodo());
             if (comp == 0) {
@@ -139,7 +127,7 @@ public abstract class MallaCursos {
                 }
                 return EstadoRegistro.Inconsistente; // incosistencia, si ya paso el curso no debe porque verlo en el periodo reciente
             }
-            if (!cr.getNota().aprobo()) {
+            if (!cr.getNota().aprobo()) { //perdio el curso y lo va a volver a ver
                 return EstadoRegistro.Ok;
             }
             return EstadoRegistro.Repetido;
@@ -152,18 +140,13 @@ public abstract class MallaCursos {
     public void modificarHistoria(CursoRegistrado cursoR, EstadoRegistro eC) {
         Curso curso = cursoR.getCurso();
         String codigo = curso.getCodigo();
-
         if(eC == EstadoRegistro.Ok) {
             cursosRegistrados.put(curso.getCodigo(),cursoR);
             Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
             if (reqAsociado != null) {
-                if (cursoR.getNota().aprobo()) {
-                    validarRequerimiento(codigo, reqAsociado);
-                }
+                validarRequerimiento(cursoR, reqAsociado);
             }
         }
-
-
         cursoR.Agregado();
         infoSemestre.get(cursoR.getPeriodo().periodoS()).put(codigo, cursoR);
         creditos += curso.getCreditos();
@@ -171,47 +154,39 @@ public abstract class MallaCursos {
 
 
 
-
-    public EstadoRegistro validarRequerimiento(String codigo, Requerimiento req){
-        CursoRegistrado cursoR = cursosRegistrados.get(codigo);
+    public EstadoRegistro validarRequerimiento(CursoRegistrado cursoR, Requerimiento req){
         if(cursoR == null || req == null){
             return EstadoRegistro.Inexistente;
         }
-        RequerimientoRegistrado reqR;
-        if(cursoR.getEstado() != EstadoCurso.Planeado){
-            if(!cursoR.getNota().aprobo()){
-                return EstadoRegistro.Restriccion;
-            }
-            if(cursosValidados.containsKey(codigo) ){
+        String reqN = req.getNombre();
+        String codigo = cursoR.getCurso().getCodigo();
+        RequerimientoRegistrado reqR = reqsRegistrados.getOrDefault(reqN,new RequerimientoRegistrado(req));
+        if(aprovado(cursoR)){
+            if(cursosValidados.get(cursoR.getCurso().getCodigo()).equals(reqN)){
                 return EstadoRegistro.Conflicto;
             }
-            reqR = reqsRegistrados.computeIfAbsent(req.getNombre(), k ->new RequerimientoRegistrado(req));
-
-        }else{
-            reqR = reqsRegistrados.computeIfAbsent(req.getNombre(), k ->new RequerimientoRegistrado(req));
-            CursoRegistrado cRR = reqR.getCursosR().get(codigo);
-            if(cRR != null && cRR.getPeriodo().compare(cursoR.getPeriodo()) == -1){
-                reqR.quitarCurso(codigo);
+            EstadoRegistro valid = reqR.agregarCurso(cursoR);
+            if(valid == EstadoRegistro.Ok){
+                reqsRegistrados.putIfAbsent(req.getNombre(),reqR);
+                cursosValidados.put(codigo,reqN);
             }
+            return valid;
+        }else{
+            return EstadoRegistro.Restriccion;
         }
-        EstadoRegistro valid = reqR.agregarCurso(cursoR, cursoR.getPeriodo());
-        if(valid == EstadoRegistro.Ok){
-            cursosValidados.put(codigo,cursoR);
-        }
-        return valid;
     }
 
-    public Restriccion revisarRestriciones(CursoRegistrado cursoR,Map<String,CursoRegistrado> cursosP, Periodo periodo) {
-        ArrayList<Restriccion> restriccions = cursoR.getCurso().getRestricciones();
-        for(Restriccion rst: restriccions){
-            System.out.println("s");
-            if(!rst.cumple(this, cursosP, periodo)){
-                System.out.println("s");
+    public PreRestriccion revisarRestriciones(CursoRegistrado cursoR, Periodo periodo) {
+        ArrayList<PreRestriccion> restriccions = cursoR.getCurso().getRestricciones();
+        for(PreRestriccion rst: restriccions){
+            if(!rst.cumple(this, periodo)){
                 return rst;
             }
         }
         return null;
     }
+
+
 
     public abstract void agregarPeriodo(Periodo periodo);
 
@@ -239,13 +214,15 @@ public abstract class MallaCursos {
         return reqsRegistrados;
     }
 
-    public Map<String, CursoRegistrado> getCursosValidados() {
+    public Map<String, String> getCursosValidados() {
         return cursosValidados;
     }
 
     public Map<String, Map<String, CursoRegistrado>> getInfoPeriodos() {
         return infoSemestre;
     }
+
+
 
 }
 

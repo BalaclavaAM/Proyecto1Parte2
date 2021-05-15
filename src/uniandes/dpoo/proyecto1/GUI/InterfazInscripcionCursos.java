@@ -36,7 +36,7 @@ public class InterfazInscripcionCursos extends PanelAux implements ActionListene
         codigomateria = new JTextField("");
         inscribir = new JButton("Inscribir");
         materias = new GridLayout(6,5);
-        Map<String, Map<String, Curso>> mapacursos = banner.getCursos();
+        Map<String, Map<String, Curso>> mapacursos = banner.getCursosDepartamento();
         alimentarComboBox(mapacursos);
         setBorder(new EmptyBorder(20,20,20,20));
         JPanel panelarriba = new JPanel();

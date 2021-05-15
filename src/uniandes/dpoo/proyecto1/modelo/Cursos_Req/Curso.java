@@ -1,34 +1,34 @@
 package uniandes.dpoo.proyecto1.modelo.Cursos_Req;
 
-import uniandes.dpoo.proyecto1.modelo.Restricciones.Restriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.PreRestriccion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Curso implements Serializable {
 	private static final long serialVersionUID = -1708691240589592764L;
-	private final boolean notanumerica; //meramente informativa o para validar;
 	private final String nombre;
-	private String codigo;
+	private final String codigo;
 	private final String descripcion;
-	//private final String programa; //puede ser redundante con materia exepto para los cbus
-	private String materia; // es lo mismo que aparece en la oferta de curso, se podria utilizar un enum(muy grande)
-	private boolean completo;
+	private final String materia; // es lo mismo que aparece en la oferta de curso, se podria utilizar un enum(muy grande)
+	private final boolean completo;
 	private final int creditos;
-	private ArrayList<Restriccion> restricciones;
+	private final ArrayList<PreRestriccion> restricciones;
+	private final ArrayList<Correquisito> correquisitos;
 
 
-	public Curso(String nombre, String codigo, String programa, int creditos, boolean periodoC,
-				 boolean notanumerica, String descripcion, ArrayList<Restriccion> restricciones) {
+	public Curso(String nombre, String codigo, String programa, int creditos, boolean periodoC, boolean notanumerica,
+				 String descripcion, ArrayList<PreRestriccion> restricciones, ArrayList<Correquisito> correquisitos) {
 		this.nombre = nombre;
 		this.codigo = codigo;
-		//this.programa = programa;
 		this.completo = periodoC;
 		this.creditos = creditos;
-		this.notanumerica = notanumerica;
+		//meramente informativa o para validar;
 		//this.semanas = semanas; //no usado, serviria para corregir reqisitos cursos de 8 semanas con perrequistos cursos de 16 (poco comun)
 		this.descripcion = descripcion;
 		this.restricciones = restricciones;
+		this.correquisitos = correquisitos;
 		this.materia = programa;
 	}
 
@@ -44,20 +44,18 @@ public class Curso implements Serializable {
 	public String getDescripcion() {
 		return descripcion;
 	}
-	public ArrayList<Restriccion> getRestricciones() {
+	public ArrayList<PreRestriccion> getRestricciones() {
 		return restricciones;
 	}
 
-	public void addRestriccion(String tipo, String[] opciones){
-		this.codigo = codigo;
-		
+
+	public ArrayList<Correquisito> getCorrequisitos() {
+		return correquisitos;
 	}
 
-	public boolean isNotanumerica() {
-		return notanumerica;
+	public boolean isCompleto() {
+		return completo;
 	}
-
-
 
 	public int getCreditos() {
 		return creditos;

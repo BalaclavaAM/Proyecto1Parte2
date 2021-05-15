@@ -35,11 +35,11 @@ public class Prueba {
         Correquisito r21 = new Correquisito(new ArrayList<>(Arrays.asList("FISI-1018")));
 
         Curso c1 = new Curso("IP","ISIS-1221","ISIS",3,true,true,"soloPythonlks",
-                new ArrayList<>());
+                new ArrayList<>(),new ArrayList<>());
         Curso c2 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",
-                new ArrayList<>());
+                new ArrayList<>(),new ArrayList<>());
         Curso c3 = new Curso("FISICA EXP 1", "FISI-1019","ISIS",1,true,true,"laExprimentacion",
-                new ArrayList<>(Arrays.asList(r21)));
+                new ArrayList<>(),new ArrayList<>(Arrays.asList(r21)));
         Periodo psis = banner.getPeriodo();
 
         Carrera carreraPru = new Carrera("CarrraPrueba","p");
@@ -53,10 +53,12 @@ public class Prueba {
         cursosRegistrados.put("FISI-1019", new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
         cursosRegistrados.put("FISI-1018",new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
         Curso c4 = new Curso("Estructura de Datos","ISIS-1206","ISIS",3,true,true,"EdamosfelicesYnolosabiamos",
-                new ArrayList<>(Arrays.asList(
-                        new Prerrequisito(new ArrayList<>(Arrays.asList("ISIS-1221", "ISIS-1021"))))));
+                new ArrayList<>(Arrays.asList(new Prerrequisito(new ArrayList<>(Arrays.asList("ISIS-1221", "ISIS-1021"))))), new ArrayList<>());
         Curso c5 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",
-                new ArrayList<>());
+                new ArrayList<>(), new ArrayList<>());
+
+        Curso c6 = new Curso("CBCC-1177","CBCC-1177","ISIS",3,true,true,"soloPythonlks",
+                new ArrayList<>(), new ArrayList<>());
 
         e.nuevoPlan("miprimerplan :)");
         e.nuevoPlan("misecond :)");
@@ -65,6 +67,7 @@ public class Prueba {
         e.getHistoriaAcademica().inscripcionCursos(cursosRegistrados);
         plan1.validarInscritos();
         plan1.agregarCursos(new ArrayList<>(Arrays.asList(
+                new CursoRegistrado(c6,EstadoCurso.Planeado,false,new Periodo(2023,19)),
                 new CursoRegistrado(c4,EstadoCurso.Planeado,false,new Periodo(2023,19)),
                 new CursoRegistrado(c5,EstadoCurso.Planeado, false, new Periodo(2024,20))
         )));

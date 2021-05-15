@@ -35,7 +35,8 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 	public InterfazBannerPrincipal () {
 		setTitle( "Banner" );
         getContentPane( ).setLayout( new BorderLayout( ) );
-        setSize( 700, 500 );
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize( 850, 550 );
         opciones = new PanelOptions("Guest",this);
         fondo = new PanelImagenFondo();
         superior = new PanelSuperior(this);

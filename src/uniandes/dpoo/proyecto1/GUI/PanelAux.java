@@ -8,7 +8,7 @@ public abstract class PanelAux extends JPanel{
 
     public PanelAux(InterfazBannerPrincipal principal) {
         this.principal = principal;
-        setSize((int)(principal.getWidth()*0.9),(int)(principal.getHeight()*0.9));
+        setSize(principal.getFondo().getWidth(), principal.getFondo().getHeight());
     }
 
     public void ocultar() {setVisible(false);
