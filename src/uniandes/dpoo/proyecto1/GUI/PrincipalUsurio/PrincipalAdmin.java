@@ -1,5 +1,7 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.PrincipalUsurio;
 
+import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
 import uniandes.dpoo.proyecto1.modelo.usuario.Admin;
 import uniandes.dpoo.proyecto1.procesamiento.Banner;
 

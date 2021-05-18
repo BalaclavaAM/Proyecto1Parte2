@@ -1,12 +1,12 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.PrincipalUsurio;
 
+import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
 import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class PrincipalCoordinador extends PrincipalUsusario{
+public class PrincipalCoordinador extends PrincipalUsusario {
     private Carrera carrera;
     public PrincipalCoordinador(InterfazBannerPrincipal principal, Coordinador coordinador) {
         super(principal);

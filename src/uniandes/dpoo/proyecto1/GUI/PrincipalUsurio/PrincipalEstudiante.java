@@ -1,13 +1,16 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.PrincipalUsurio;
 
 import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelHistoria;
 import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelPlanes;
+import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
+import uniandes.dpoo.proyecto1.GUI.InterfazInscripcionCursos;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public class PrincipalEstudiante extends PrincipalUsusario{
+public class PrincipalEstudiante extends PrincipalUsusario {
     private Estudiante estudiante;
     public String RUTA = "./data/imagenes/usuarioGenerico.png";
     private final JTextField nombre;
@@ -44,7 +47,24 @@ public class PrincipalEstudiante extends PrincipalUsusario{
                 }
 
             }
-        }; imagen.setOpaque(false);
+        };
+        setBorder(new Border() {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public Insets getBorderInsets(Component c) {
+                return new Insets(getHeight()/10,getWidth()/10, getHeight()/10,getWidth()/10);
+            }
+
+            @Override
+            public boolean isBorderOpaque() {
+                return false;
+            }
+        });
+        imagen.setOpaque(false);
         setLayout(new GridBagLayout());
         nombre = new JTextField(estudiante.getNombre());nombre.setEditable(false);
         codigo = new JTextField(estudiante.getCodigo());codigo.setEditable(false);
@@ -72,34 +92,22 @@ public class PrincipalEstudiante extends PrincipalUsusario{
 
         tablaInscritos.setModel(tableModel);
 
-        int alto = Math.min(5,inscritos.size());
-        tablaInscritos.setAutoResizeMode(4);
-        tablaInscritos.setMaximumSize(new Dimension(4*getWidth()/6,alto*getHeight()/14));
-        gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 15; gb.weightx = 1; gb.weighty = 14;
-        add(new JLabel(),gb); // rellenos laterales
-        gb.gridx = 5;
+        gb.gridx = 0; gb.gridy = 1; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;gb.fill = 1;
         add(new JLabel(),gb);
-
-        gb.gridx = 1; gb.gridy = 0; gb.gridwidth = 4; gb.gridheight = 1; gb.weightx = 4; gb.weighty = 1;
-        add(new JLabel(),gb);
-        gb.gridy = 2; gb.gridwidth = 2; gb.gridheight = 1; gb.weightx = 2; gb.weighty = 1;
-        add(new JLabel(),gb);
-        gb.gridy = 4;
-        add(new JLabel(),gb);
-        gb.gridy = 6;
-        add(new JLabel(),gb);
-        gb.gridx = 3; gb.gridy = 1; gb.gridwidth = 2; gb.gridheight = 6; gb.weightx = 2; gb.weighty = 6;gb.fill = 1;
-        add(imagen,gb);
-        gb.gridx = 1;gb.gridheight = 1; gb.weighty = 1;
-        add(nombre,gb);
         gb.gridy = 3;
-        add(codigo,gb);
-        gb.gridy = 5;
-        add(carrera,gb);
-        gb.gridy = 7; gb.gridwidth = 4; gb.gridheight = 5;gb.weightx=4; gb.weighty = 5;
-        add(new JScrollPane(tablaInscritos),gb);
-        gb.gridy = 13; gb.gridwidth = 4; gb.gridheight =2; gb.weightx = 4; gb.weighty = 2;
         add(new JLabel(),gb);
+        gb.gridy = 5;
+        add(new JLabel(),gb);
+        gb.gridy = 0;
+        add(nombre,gb);
+        gb.gridy = 2;
+        add(codigo,gb);
+        gb.gridy = 4;
+        add(carrera,gb);
+        gb.gridx = 2; gb.gridy = 0; gb.gridwidth = 2; gb.gridheight = 6; gb.weightx = 2; gb.weighty = 6;
+        add(imagen,gb);
+        gb.gridx = 0; gb.gridy = 6; gb.gridwidth = 4; gb.gridheight = 4;gb.weightx=4; gb.weighty = 4;
+        add(new JScrollPane(tablaInscritos),gb);
     }
 
 

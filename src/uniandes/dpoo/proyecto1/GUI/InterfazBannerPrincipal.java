@@ -1,5 +1,12 @@
 package uniandes.dpoo.proyecto1.GUI;
 
+import uniandes.dpoo.proyecto1.GUI.EstructuraVentana.PanelImagenFondo;
+import uniandes.dpoo.proyecto1.GUI.EstructuraVentana.PanelOptions;
+import uniandes.dpoo.proyecto1.GUI.EstructuraVentana.PanelSuperior;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalAdmin;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalCoordinador;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalEstudiante;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.usuario.Admin;
 import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
@@ -13,12 +20,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.Serial;
 
 import javax.swing.*;
 
 public class InterfazBannerPrincipal extends JFrame implements ActionListener {
-	@Serial
     private static final long serialVersionUID = 7466153715672542511L;
 	
 	private Banner banner;
@@ -62,7 +67,6 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
     {
         InterfazBannerPrincipal interfaz = new InterfazBannerPrincipal( );
         interfaz.setVisible(true) ;
-
     }
     public void ocultarYmostrar(PanelAux pa){
         pa.setVistaAnterior(vistaAct);

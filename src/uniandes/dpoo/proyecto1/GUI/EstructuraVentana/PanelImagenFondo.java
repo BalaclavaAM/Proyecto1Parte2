@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.EstructuraVentana;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

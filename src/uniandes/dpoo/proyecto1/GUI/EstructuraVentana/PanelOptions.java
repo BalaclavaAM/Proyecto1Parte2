@@ -1,5 +1,8 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.EstructuraVentana;
 
+
+import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

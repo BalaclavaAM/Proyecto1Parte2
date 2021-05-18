@@ -3,9 +3,11 @@ package uniandes.dpoo.proyecto1.GUI.HistAndPlan;
 import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.PanelAux;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,6 +30,22 @@ public class PanelPlan extends PanelAux {
     public PanelPlan(InterfazBannerPrincipal principal, Plan plan) {
         super(principal);
         setLayout(new GridBagLayout());
+        setBorder(new Border() {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public Insets getBorderInsets(Component c) {
+                return new Insets(getHeight()/8,getWidth()/8, getHeight()/8,getWidth()/8);
+            }
+
+            @Override
+            public boolean isBorderOpaque() {
+                return false;
+            }
+        });
         Jnombre = new JTextField(plan.getNombre());
         Jnombre.setEditable(false);
         agregando = false;
@@ -38,7 +56,7 @@ public class PanelPlan extends PanelAux {
         Map<String, ArrayList<CursoRegistrado>> cursosQuitar = new HashMap<>();
         posicionCursos = new ArrayList<>();
         posicionEstado = new  ArrayList<>();
-        aux = new AuxCambios(plan, this, posicionCursos, posicionEstado, cursosAgregar, cursosQuitar, new MiRender());
+        aux = new AuxCambios(plan, this, posicionCursos, posicionEstado, cursosAgregar, cursosQuitar);
         JButton mostrarIn = new JButton("Mostra Info"); mostrarIn.addActionListener(e-> aux.mostrarInfo(false));
         JButton agregar = new JButton("Agregar Curso"); agregar.addActionListener(e->{
             AgregarAux au = new AgregarAux(this, principal.getBanner(), posicionCursos, posicionEstado, cursosAgregar, tablaPlan,false);
@@ -59,11 +77,7 @@ public class PanelPlan extends PanelAux {
         GridBagConstraints gb = new GridBagConstraints();
         JPanel conNombre = AuxCambios.centrar(Jnombre,1,1,2,2);
         JPanel conValidar = AuxCambios.centrar(Jvalidar,1,1,2,1);
-        gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 11; gb.weightx = 1; gb.weighty = 11;gb.fill = 1;
-        add(new JLabel(""),gb);
-        gb.gridx = 5;
-        add(new JLabel(""),gb);
-        gb.gridx = 1; gb.gridwidth = 4; gb.gridheight = 3;  gb.weightx = 4; gb.weighty = 3;
+        gb.gridx = 1; gb.gridwidth = 4; gb.gridheight = 3;  gb.weightx = 4; gb.weighty = 3;gb.fill = 1;
         add(conNombre,gb);
         gb.gridy = 8;
         add(conValidar,gb);
@@ -87,12 +101,8 @@ public class PanelPlan extends PanelAux {
 
     class MiRender extends DefaultTableCellRenderer
     {
-        public Component getTableCellRendererComponent(JTable table,
-                                                       Object value,
-                                                       boolean isSelected,
-                                                       boolean hasFocus,
-                                                       int row,
-                                                       int column) {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
             super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             this.setOpaque(false);
             String estado = posicionEstado.get(row).get(column);

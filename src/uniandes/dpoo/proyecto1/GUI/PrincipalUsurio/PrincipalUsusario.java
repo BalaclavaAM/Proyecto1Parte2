@@ -1,4 +1,7 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.PrincipalUsurio;
+
+import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
+import uniandes.dpoo.proyecto1.GUI.PanelAux;
 
 import java.awt.event.ActionListener;
 

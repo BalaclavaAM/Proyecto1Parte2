@@ -1,5 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
@@ -37,7 +39,9 @@ public class Plan extends MallaCursos {
     }
 
     public void validarInscrito(CursoRegistrado ci){
-        agregarCurso(new CursoRegistrado(ci.getCurso(),EstadoCurso.Planeado,ci.getEpsilon(),ci.getPeriodo()),EstadoRegistro.Ok);
+        CursoRegistrado cp = new CursoRegistrado(ci.getCurso(),new NotaCual(calCual.A),ci.getEpsilon(),ci.getPeriodo());
+        cp.setEstado(EstadoCurso.Inscrito);
+        agregarCurso(cp,EstadoRegistro.Ok);
     }
 
 

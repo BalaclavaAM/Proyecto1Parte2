@@ -2,6 +2,7 @@ package uniandes.dpoo.proyecto1.GUI.HistAndPlan;
 
 import uniandes.dpoo.proyecto1.GUI.PanelAux;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 
 import javax.swing.*;
@@ -21,18 +22,16 @@ public class AuxCambios {
     private final ArrayList<ArrayList<String>> posicionEstado;
     private final Map<String, CursoRegistrado> cursosAgregar;
     private final Map<String, ArrayList<CursoRegistrado>> cursosQuitar;
-    private final DefaultTableCellRenderer render;
 
     public AuxCambios(MallaCursos malla, PanelAux exter, ArrayList<ArrayList<CursoRegistrado>> posicionCursos,
                       ArrayList<ArrayList<String>> posicionEstado, Map<String, CursoRegistrado> cursosAgregar,
-                      Map<String, ArrayList<CursoRegistrado>> cursosQuitar, DefaultTableCellRenderer render) {
+                      Map<String, ArrayList<CursoRegistrado>> cursosQuitar) {
         this.malla = malla;
         this.exter = exter;
         this.posicionCursos = posicionCursos;
         this.posicionEstado = posicionEstado;
         this.cursosAgregar = cursosAgregar;
         this.cursosQuitar = cursosQuitar;
-        this.render = render;
     }
 
 
@@ -61,8 +60,9 @@ public class AuxCambios {
                 }
             };
             tablaMalla.setModel(tableModel);
+            tablaMalla.getTableHeader().setReorderingAllowed(false);
             tablaMalla.setCellSelectionEnabled(true);
-            tablaMalla.setDefaultRenderer(Object.class, render);
+            tablaMalla.setDefaultRenderer(Object.class, new MiRender());
             SwingUtilities.updateComponentTreeUI(exter);
         return tablaMalla;
     }
@@ -216,5 +216,40 @@ public class AuxCambios {
             arraynull.add(null);
         }
         return arraynull;
+    }
+    class MiRender extends DefaultTableCellRenderer {
+        public Component getTableCellRendererComponent(JTable table,
+                                                       Object value,
+                                                       boolean isSelected,
+                                                       boolean hasFocus,
+                                                       int row,
+                                                       int column) {
+            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            this.setOpaque(false);
+            String estado = posicionEstado.get(row).get(column);
+            CursoRegistrado cr = posicionCursos.get(row).get(column);
+            if (estado != null) {
+                if (estado.equals("agregar")) {
+                    this.setOpaque(true);
+                    this.setBackground(Color.GREEN);
+                    this.setForeground(Color.BLUE);
+                } else if (estado.equals("quitar")) {
+                    this.setOpaque(true);
+                    this.setBackground(Color.RED);
+                    this.setForeground(Color.YELLOW);
+                } else if (cr.getEstado().equals(EstadoCurso.Inscrito)) {
+                    this.setOpaque(true);
+                    this.setBackground(Color.BLUE);
+                    this.setForeground(Color.BLACK);
+                } else {
+                    this.setBackground(Color.WHITE);
+                    this.setForeground(Color.BLACK);
+                }
+            } else {
+                this.setBackground(Color.WHITE);
+                this.setForeground(Color.BLACK);
+            }
+            return this;
+        }
     }
 }

@@ -3,10 +3,12 @@ package uniandes.dpoo.proyecto1.GUI.HistAndPlan;
 import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.PanelAux;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.io.File;
@@ -38,6 +40,22 @@ public class PanelHistoria extends PanelAux {
         super(principal);
         this.estudiante = estudiante;
         setLayout(new GridBagLayout());
+        setBorder(new Border() {
+            @Override
+            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+
+            }
+
+            @Override
+            public Insets getBorderInsets(Component c) {
+                return new Insets(getHeight()/10,getWidth()/10, getHeight()/10,getWidth()/10);
+            }
+
+            @Override
+            public boolean isBorderOpaque() {
+                return false;
+            }
+        });
         JTextField nombreJT = new JTextField(estudiante.getNombre());
         nombreJT.setEditable(false);
         JTextField codigoJT = new JTextField(estudiante.getCodigo());
@@ -62,7 +80,7 @@ public class PanelHistoria extends PanelAux {
                 }
 
                 if (image != null) {
-                    int d = (int) (0.65 * Math.min(getWidth(), getHeight()));
+                    int d = (int) (0.8 * Math.min(getWidth(), getHeight()));
                     g.drawImage(image, (getWidth() - d), 0, d, d, this);
                 }
 
@@ -70,7 +88,7 @@ public class PanelHistoria extends PanelAux {
         };
         imagen.setOpaque(false);
         aux = new AuxCambios(estudiante.getHistoriaAcademica(), this, posicionCursos, posicionEstado, cursosAgregar,
-                cursosQuitar, new MiRender());
+                cursosQuitar);
         JButton mostrarIn = new JButton("Mostra Info");
         mostrarIn.addActionListener(e -> aux.mostrarInfo(false));
         JButton agregar = new JButton("Agregar Curso");
@@ -127,27 +145,20 @@ public class PanelHistoria extends PanelAux {
 
 
     public void añadirElementos() {
+
         GridBagConstraints gb = new GridBagConstraints();
-        gb. gridx = 0; gb.gridy = 0;  gb.gridwidth = 1; gb.gridheight = 19; gb.weightx = 1; gb.weighty = 19; gb.fill =1;
-        add(new JLabel(),gb);
-        gb.gridx = 7;
-        add(new JLabel(),gb);
-        gb.gridx = 1; gb.gridwidth = 6; gb.gridheight = 1; gb.weightx = 6; gb.weighty = 1;
-        add(new JLabel(),gb);
-        gb.gridy = 1; gb.gridwidth = 2; gb.gridheight = 3; gb.weightx = 2; gb.weighty = 3;
+        gb.gridwidth = 2; gb.gridheight = 3; gb.weightx = 2; gb.weighty = 3;gb.fill= 1;
         add(panelDatos,gb);
-        gb.gridy = 4;
+        gb.gridy = 3;
         add(new JLabel(),gb);
-        gb.gridx = 3; gb.gridy = 1; gb.gridwidth = 4; gb.gridheight = 6; gb.weightx = 4; gb.weighty = 6;
+        gb.gridx = 2; gb.gridy = 0; gb.gridwidth = 4; gb.gridheight = 6; gb.weightx = 4; gb.weighty = 6;
         add(imagen,gb);
-        gb.gridy = 14; gb.gridheight = 3; gb.weighty = 3;
-        add(AuxCambios.centrar(Bvalidar,1,2,2,1),gb);
-        gb.gridx = 1; gb.gridy = 13; gb.gridwidth = 6; gb.gridheight = 1; gb.weightx = 6; gb.weighty = 1;
+        gb.gridx = 0; gb.gridy = 12; gb.gridwidth = 6; gb.gridheight = 1; gb.weightx = 6; gb.weighty = 1;
         add(panelBotones,gb);
-        gb.gridy = 17;
+        gb.gridy = 16;
         add(panelInfo,gb);
-        gb.gridy = 18;
-        add(new JLabel(),gb);
+        gb.gridy = 13; gb.gridwidth = 6; gb.gridheight = 3; gb.weightx = 6; gb.weighty = 3;
+        add(AuxCambios.centrar(Bvalidar,1,2,2,1),gb);
         agregando = true;
         actualizarPanel();
     }
@@ -162,7 +173,7 @@ public class PanelHistoria extends PanelAux {
             tablaHistoria = aux.crearTabla();
             actualizarInfo();
         }
-        gb.gridx = 1; gb.gridy = 7; gb.gridwidth = 6; gb.gridheight = 6; gb.weightx = 6; gb.weighty = 6; gb.fill = 1;
+        gb.gridx = 0; gb.gridy = 6; gb.gridwidth = 6; gb.gridheight = 6; gb.weightx = 6; gb.weighty = 6; gb.fill = 1;
         scrollTabla = new JScrollPane(tablaHistoria);
         add(scrollTabla, gb);
 
@@ -174,34 +185,4 @@ public class PanelHistoria extends PanelAux {
         creditosIIn.setText(String.valueOf(estudiante.getHistoriaAcademica().getCreditos()));
     }
 
-    class MiRender extends DefaultTableCellRenderer {
-        public Component getTableCellRendererComponent(JTable table,
-                                                       Object value,
-                                                       boolean isSelected,
-                                                       boolean hasFocus,
-                                                       int row,
-                                                       int column) {
-            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            this.setOpaque(false);
-            String estado = posicionEstado.get(row).get(column);
-            if (estado != null) {
-                if (estado.equals("agregar")) {
-                    this.setOpaque(true);
-                    this.setBackground(Color.GREEN);
-                    this.setForeground(Color.BLUE);
-                } else if (estado.equals("quitar")) {
-                    this.setOpaque(true);
-                    this.setBackground(Color.RED);
-                    this.setForeground(Color.YELLOW);
-                } else {
-                    this.setBackground(Color.WHITE);
-                    this.setForeground(Color.BLACK);
-                }
-            } else {
-                this.setBackground(Color.WHITE);
-                this.setForeground(Color.BLACK);
-            }
-            return this;
-        }
-    }
 }

@@ -1,4 +1,6 @@
-package uniandes.dpoo.proyecto1.GUI;
+package uniandes.dpoo.proyecto1.GUI.EstructuraVentana;
+
+import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
