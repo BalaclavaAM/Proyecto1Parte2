@@ -17,20 +17,17 @@ import java.util.Map;
 
 public class PanelHistoria extends PanelAux {
     public String RUTA = "./data/imagenes/usuarioGenerico.png";
-    private final JTextField nombreJT;
-    private final JTextField codigoJT;
-    private Estudiante estudiante;
-    private JLabel semestreIn;
-    private JLabel creditosIIn;
-    private JLabel creditosAIn;
-    private JLabel promedioIn;
+    private final Estudiante estudiante;
+    private final JLabel creditosIIn;
+    private final JLabel creditosAIn;
+    private final JLabel promedioIn;
     private final JPanel imagen;
     private JTable tablaHistoria;
     private JScrollPane scrollTabla;
-    private JButton Bvalidar;
-    private JPanel panelDatos;
-    private JPanel panelBotones;
-    private JPanel panelInfo;
+    private final JButton Bvalidar;
+    private final JPanel panelDatos;
+    private final JPanel panelBotones;
+    private final JPanel panelInfo;
     private boolean agregando;
     private final ArrayList<ArrayList<CursoRegistrado>> posicionCursos;
     private final ArrayList<ArrayList<String>> posicionEstado;
@@ -41,9 +38,9 @@ public class PanelHistoria extends PanelAux {
         super(principal);
         this.estudiante = estudiante;
         setLayout(new GridBagLayout());
-        nombreJT = new JTextField(estudiante.getNombre());
+        JTextField nombreJT = new JTextField(estudiante.getNombre());
         nombreJT.setEditable(false);
-        codigoJT = new JTextField(estudiante.getCodigo());
+        JTextField codigoJT = new JTextField(estudiante.getCodigo());
         codigoJT.setEditable(false);
         nombreJT.setEditable(false);
         agregando = false;
@@ -75,9 +72,7 @@ public class PanelHistoria extends PanelAux {
         aux = new AuxCambios(estudiante.getHistoriaAcademica(), this, posicionCursos, posicionEstado, cursosAgregar,
                 cursosQuitar, new MiRender());
         JButton mostrarIn = new JButton("Mostra Info");
-        mostrarIn.addActionListener(e -> {
-            aux.mostrarInfo(false);
-        });
+        mostrarIn.addActionListener(e -> aux.mostrarInfo(false));
         JButton agregar = new JButton("Agregar Curso");
         agregar.addActionListener(e -> {
             AgregarAux au = new AgregarAux(this, principal.getBanner(), posicionCursos, posicionEstado, cursosAgregar,
@@ -85,9 +80,7 @@ public class PanelHistoria extends PanelAux {
             au.setVisible(true);
         });
         JButton quitar = new JButton("Quitar");
-        quitar.addActionListener(e -> {
-            aux.quitar();
-        });
+        quitar.addActionListener(e -> aux.quitar());
         JButton Bnota = new JButton("Actualizar Nota");
         Bnota.addActionListener(e -> {
             int fila = tablaHistoria.getSelectedRow();
@@ -99,10 +92,8 @@ public class PanelHistoria extends PanelAux {
             }
         });
         JButton deshacer = new JButton("Deshacer accion");
-        deshacer.addActionListener(e -> {
-            aux.deshacer();
-        });
-        semestreIn = new JLabel();
+        deshacer.addActionListener(e -> aux.deshacer());
+        JLabel semestreIn = new JLabel();
         creditosIIn = new JLabel();
         creditosAIn = new JLabel();
         promedioIn = new JLabel();
