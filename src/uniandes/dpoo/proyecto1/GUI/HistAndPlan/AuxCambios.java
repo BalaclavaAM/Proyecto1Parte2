@@ -13,16 +13,15 @@ import java.util.Map;
 import java.util.Vector;
 
 public class AuxCambios {
-    private MallaCursos malla;
+    private final MallaCursos malla;
     private JTable tablaMalla;
     private DefaultTableModel tableModel;
-    private PanelAux exter;
-    private ArrayList<ArrayList<CursoRegistrado>> posicionCursos;
-    private ArrayList<ArrayList<String>> posicionEstado;
-    private Map<String, CursoRegistrado> cursosAgregar;
-    private Map<String, ArrayList<CursoRegistrado>> cursosQuitar;
-    private DefaultTableCellRenderer render;
-    private boolean agregando;
+    private final PanelAux exter;
+    private final ArrayList<ArrayList<CursoRegistrado>> posicionCursos;
+    private final ArrayList<ArrayList<String>> posicionEstado;
+    private final Map<String, CursoRegistrado> cursosAgregar;
+    private final Map<String, ArrayList<CursoRegistrado>> cursosQuitar;
+    private final DefaultTableCellRenderer render;
 
     public AuxCambios(MallaCursos malla, PanelAux exter, ArrayList<ArrayList<CursoRegistrado>> posicionCursos,
                       ArrayList<ArrayList<String>> posicionEstado, Map<String, CursoRegistrado> cursosAgregar,
@@ -80,7 +79,6 @@ public class AuxCambios {
         if (fila != -1 && cursoR != null) {
             String estado = posicionEstado.get(fila).get(col);
             if (!estado.equals("agregar")) {
-                String codigo = cursoR.getCurso().getCodigo();
                 ArrayList<CursoRegistrado> listP =  cursosQuitar.computeIfAbsent(cursoR.getPeriodo().toString(),k->new ArrayList<>());
                 listP.add(cursoR);
                 posicionEstado.get(fila).set(col,"quitar");
@@ -212,8 +210,8 @@ public class AuxCambios {
         }
         return vectornull;
     }
-    public static <t> ArrayList arrayNull(int n){
-        ArrayList<t> arraynull = new ArrayList();
+    public static ArrayList arrayNull(int n){
+        ArrayList arraynull = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             arraynull.add(null);
         }
