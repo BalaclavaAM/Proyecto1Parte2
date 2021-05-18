@@ -3,6 +3,8 @@ package uniandes.dpoo.proyecto1.GUI;
 import javax.swing.*;
 
 public abstract class PanelAux extends JPanel{
+    private PanelAux vistaAnterior;
+    private PanelAux vistaSiguiente;
 
     protected final InterfazBannerPrincipal principal;
 
@@ -11,10 +13,17 @@ public abstract class PanelAux extends JPanel{
         setSize(principal.getFondo().getWidth(), principal.getFondo().getHeight());
     }
 
-    public void ocultar() {setVisible(false);
+    public abstract void actualizarPanel();
+
+    public void setVistaAnterior(PanelAux vistaAnterior) {
+        this.vistaAnterior = vistaAnterior;
     }
 
-    public abstract void mostrar(PanelImagenFondo fondo);
+    public PanelAux getVistaAnterior(){
+        return vistaAnterior;
+    }
+
+
 
     public void reset() {
 

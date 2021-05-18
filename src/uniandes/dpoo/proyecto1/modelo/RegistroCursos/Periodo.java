@@ -120,4 +120,12 @@ public class Periodo {
         return new Periodo(p.getAnio(),p.getSemestre(),p.ciclo);
     }
 
+    @Override
+    public String toString() {
+        if (completo) {
+            return  anio + "-" + semestre;
+        }else{
+            return anio + "-" + semestre+"-"+ciclo;
+        }
+    }
 }

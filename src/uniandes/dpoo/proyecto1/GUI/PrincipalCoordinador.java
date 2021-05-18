@@ -12,13 +12,15 @@ public class PrincipalCoordinador extends PrincipalUsusario{
         super(principal);
     }
 
+
+
     @Override
-    public void mostrar(PanelImagenFondo fondo) {
+    public void actionPerformed(ActionEvent e) {
 
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actualizarPanel() {
 
     }
 }

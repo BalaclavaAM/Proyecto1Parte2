@@ -7,4 +7,5 @@ public abstract class PrincipalUsusario extends PanelAux implements ActionListen
     public PrincipalUsusario(InterfazBannerPrincipal principal) {
         super(principal);
     }
+
 }

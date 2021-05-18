@@ -17,8 +17,9 @@ public class InterfazHistoriaAcademica extends PanelAux {
         super(principal);
     }
 
+
     @Override
-    public void mostrar(PanelImagenFondo fondo) {
+    public void actualizarPanel() {
 
     }
 }

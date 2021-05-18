@@ -23,6 +23,6 @@ public class NotaCual implements Nota {
 
     @Override
     public boolean aprobo() {
-        return nota.equals(calCual.aprovado);
+        return nota.equals(calCual.A);
     }
 }

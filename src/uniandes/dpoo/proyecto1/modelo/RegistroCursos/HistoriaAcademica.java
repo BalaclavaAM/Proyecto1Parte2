@@ -1,6 +1,5 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
-import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Nota.*;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
@@ -34,22 +33,23 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-    public boolean actualizarNota(Curso curso, String periodoS, Nota nota) {
-        Map<String,CursoRegistrado> Mcr = infoSemestre.get(periodoS);
-        if(Mcr!=null){
-            CursoRegistrado cr = Mcr.get(curso.getCodigo());
-            if(cr !=null){
-                cr.setNota(nota);
-                String codigo = cr.getCurso().getCodigo();
-                Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
-                if (reqAsociado != null) {
-                    validarRequerimiento(cr, reqAsociado);
-                    }
-                }
-                return true;
+    public void actualizarNota(CursoRegistrado cursoR, Nota nota) {
+        String codigo = cursoR.getCurso().getCodigo();
+        String reqN = cursosValidados.get(codigo);
+        Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
+        cursoR.setNota(nota);
+        if (reqN != null) {
+            if(!nota.aprobo()) {
+                // se podria considerar actualizar la historia desde el periodo en adelante;
+                reqsRegistrados.get(reqN).quitarCurso(codigo);
             }
-        return false;
+        }else{
+            if(reqAsociado != null){
+                validarRequerimiento(cursoR,reqAsociado);
+            }
+        }
     }
+
 
     public void vaciarInscritos(){
         for(CursoRegistrado cursoR: cursosInscritos.values()) {
@@ -59,9 +59,9 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-	public ArrayList<EstadoAgregar> inscripcionCursos(Map<String, CursoRegistrado> cursosP) {
+	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
-        infoSemestre.putIfAbsent(peridoSistema.periodoS(),new Hashtable<>());
+        infoSemestre.putIfAbsent(peridoSistema.periodoS(),new ArrayList<>());
         ultimoPeriodo = Periodo.copy(peridoSistema);
         if(!ultimoPeriodo.periodoS().equals(peridoSistema.periodoS()) && !cursosInscritos.isEmpty()){
             vaciarInscritos();
@@ -76,7 +76,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     @Override
     public void agregarPeriodo(Periodo periodo) {
-        infoSemestre.putIfAbsent(periodo.periodoS(),new Hashtable<>());
+        infoSemestre.putIfAbsent(periodo.periodoS(),new ArrayList<>());
     }
 
     @Override
@@ -95,11 +95,11 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
 
     public double calcularPromedioSemestre(String periodoS) {
-		Map<String,CursoRegistrado> cursosPs = infoSemestre.get(periodoS);
+		ArrayList<CursoRegistrado> cursosPs = infoSemestre.get(periodoS);
 		int creditosSemestre = 0;
 		double puntosSemestre = 0;
 
-        for (CursoRegistrado cr: cursosPs.values()) {
+        for (CursoRegistrado cr: cursosPs) {
             if (cr.isNumerica()) {
                 int creditosCurso = cr.getCurso().getCreditos();
                 creditosSemestre += creditosCurso;
@@ -117,9 +117,9 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 	public double calcularPromedioAcademico() {
         double puntosSemestre = 0;
         double creditosSemestre = 0;
-        for(Map<String, CursoRegistrado> mp: infoSemestre.values()) {
-            for (CursoRegistrado cr : mp.values()) {
-                if (cr.isNumerica()) {
+        for(ArrayList<CursoRegistrado> lp: infoSemestre.values()) {
+            for (CursoRegistrado cr : lp) {
+                if (cr.getNota().isNumeric()) {
                     int creditosCurso = cr.getCurso().getCreditos();
                     creditosSemestre += creditosCurso;
                     puntosSemestre += creditosCurso * cr.getNota().notaNum();
@@ -133,8 +133,13 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		return 0;
 	}
 
-    public float getCreditos() {
-        return creditos;
+    public Periodo getPrimerPeriodo() {
+        return primerPeriodo;
+    }
+
+
+    public Periodo getUltimoPeriodo() {
+        return ultimoPeriodo;
     }
 
     public Map<String, CursoRegistrado> getCursosInscritos() {

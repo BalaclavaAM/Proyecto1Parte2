@@ -1,5 +1,7 @@
 package uniandes.dpoo.proyecto1.GUI;
 
+import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelHistoria;
+import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelPlanes;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
@@ -19,6 +21,7 @@ public class PrincipalEstudiante extends PrincipalUsusario{
     private final JTextField nombre;
     private final JTextField codigo;
     private final JTextField carrera;
+    private PanelPlanes panelPlanes;
     private final JPanel imagen;
 
     public PrincipalEstudiante(InterfazBannerPrincipal principal, Estudiante estudiante) {
@@ -114,16 +117,6 @@ public class PrincipalEstudiante extends PrincipalUsusario{
 
 
 
-    @Override
-    public void ocultar() {
-        setVisible(false);
-    }
-
-    @Override
-    public void mostrar(PanelImagenFondo fondo) {
-        setOpaque(false);
-        fondo.add(this);
-    }
 
 
     @Override
@@ -134,11 +127,18 @@ public class PrincipalEstudiante extends PrincipalUsusario{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Planear")){
-             PanelPlanes pp = new PanelPlanes(principal,estudiante);
-             principal.ocultarYmostrar(pp);
+            if(panelPlanes == null){
+                panelPlanes = new PanelPlanes(principal,estudiante);
+            }else{
+                panelPlanes.actualizarPanel();
+            }
+            principal.ocultarYmostrar(panelPlanes);
         } else if (e.getActionCommand().equals("PO>IMaterias")){
             InterfazInscripcionCursos iic = new InterfazInscripcionCursos(principal,estudiante);
             principal.ocultarYmostrar(iic);
+        }else if(e.getActionCommand().equals("PO>AHistoria")){
+            PanelHistoria ph = new PanelHistoria(principal,estudiante);
+            principal.ocultarYmostrar(ph);
         }
 
     }

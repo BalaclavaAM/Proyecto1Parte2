@@ -11,10 +11,14 @@ public class PrincipalAdmin extends PrincipalUsusario {
         super(principal);
     }
 
+
+
     @Override
-    public void mostrar(PanelImagenFondo fondo) {
+    public void actualizarPanel() {
 
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -4,21 +4,21 @@ package uniandes.dpoo.proyecto1.modelo.Registro;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Nota.*;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
 
 
 public class CursoRegistrado {
 	private final Curso curso;
 	private final Periodo periodo;
-	private Nota nota = new NotaCual(calCual.pendiente);
+	private Nota nota = new NotaCual(calCual.P);
 	private EstadoCurso estado = EstadoCurso.Pendiente;
+	private boolean repetido = false;
 	private boolean agregado = false;
 	private boolean epsilon = false;
 	private boolean numerica = false;
 
 
 
-	public CursoRegistrado(Curso curso, Nota nota, EstadoCurso estadoC, boolean epsilon,Periodo periodo){
+	public CursoRegistrado(Curso curso, Nota nota, boolean epsilon,Periodo periodo){
 		this.curso = curso;
 		this.nota = nota;
 		this.estado = EstadoCurso.Finalizado;
@@ -73,7 +73,7 @@ public class CursoRegistrado {
 
 	public void setNota(Nota nota) {
 		this.nota = nota;
-		if(nota.notaCual() != calCual.pendiente) {
+		if(nota.notaCual() != calCual.P) {
 			this.estado = EstadoCurso.Finalizado;
 		}
 	}
@@ -95,5 +95,9 @@ public class CursoRegistrado {
 
 	public Periodo getPeriodo() {
 		return periodo;
+	}
+
+	public boolean isRepetido() {
+		return repetido;
 	}
 }

@@ -46,12 +46,12 @@ public class Prueba {
         carreraPru.setPensumActual(pensumPru);
         Estudiante e = new Estudiante("E","1","pedrito","10230", pensumPru, "CarrraPrueba", psis);
         banner.getUsuarios().put("E",e);
-        Map<String,CursoRegistrado> cursosRegistrados = new HashMap<>();
+        ArrayList<CursoRegistrado> cursosRegistrados = new ArrayList<>();
         Periodo p = Periodo.copy(psis);
 
-        cursosRegistrados.put("ISIS-1221",new CursoRegistrado(c1, EstadoCurso.Inscrito, false, p));
-        cursosRegistrados.put("FISI-1019", new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
-        cursosRegistrados.put("FISI-1018",new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
+        cursosRegistrados.add(new CursoRegistrado(c1, EstadoCurso.Inscrito, false, p));
+        cursosRegistrados.add(new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
+        cursosRegistrados.add(new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
         Curso c4 = new Curso("Estructura de Datos","ISIS-1206","ISIS",3,true,true,"EdamosfelicesYnolosabiamos",
                 new ArrayList<>(Arrays.asList(new Prerrequisito(new ArrayList<>(Arrays.asList("ISIS-1221", "ISIS-1021"))))), new ArrayList<>());
         Curso c5 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",

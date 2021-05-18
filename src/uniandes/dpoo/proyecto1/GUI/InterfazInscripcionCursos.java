@@ -96,16 +96,17 @@ public class InterfazInscripcionCursos extends PanelAux implements ActionListene
         return momos;
     }
 
-    @Override
-    public void mostrar(PanelImagenFondo fondo) {
-        setOpaque(false);
-        fondo.add(this);
-    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("buscarMateria")){
             actualizarTabla();
         }
+    }
+
+    @Override
+    public void actualizarPanel() {
+
     }
 }

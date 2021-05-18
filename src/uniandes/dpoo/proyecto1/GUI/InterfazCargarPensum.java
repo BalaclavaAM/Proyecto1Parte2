@@ -15,8 +15,9 @@ public class InterfazCargarPensum extends PanelAux {
         super(principal);
     }
 
+
     @Override
-    public void mostrar(PanelImagenFondo fondo) {
+    public void actualizarPanel() {
 
     }
 }

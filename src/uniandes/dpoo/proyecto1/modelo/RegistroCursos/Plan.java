@@ -5,12 +5,12 @@ import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class Plan extends MallaCursos {
-    public final EstadoCurso estadoPl = EstadoCurso.Planeado;
     private final HistoriaAcademica historia;
     private final String nombre;
     private Periodo primerPeriodo;
@@ -22,9 +22,11 @@ public class Plan extends MallaCursos {
         this.pensum = historia.pensum;
         this.historia = historia;
         this.nombre = nombre;
+        validarInscritos();
     }
 
     public void validarInscritos(){ //los cursos incritos se tomarian como aprovados
+        infoSemestre.putIfAbsent(historia.getUltimoPeriodo().periodoS(),new ArrayList<>());
         for(CursoRegistrado ci: historia.getCursosInscritos().values()){
             validarInscrito(ci);
         }
@@ -35,31 +37,21 @@ public class Plan extends MallaCursos {
     }
 
     public void validarInscrito(CursoRegistrado ci){
-        String codigo = ci.getCurso().getCodigo();
-        boolean ep = ci.getEpsilon();
-        Periodo pi = ci.getPeriodo();
-        CursoRegistrado cr = new CursoRegistrado(ci.getCurso(),EstadoCurso.Planeado,ep,pi);
-        cursosRegistrados.put(codigo,cr);
-        Requerimiento reqAsociado = pensum.getCursosValidacionAuto().get(codigo);
-        if (reqAsociado != null) {
-            validarRequerimiento(cr, reqAsociado);
-        }
+        agregarCurso(new CursoRegistrado(ci.getCurso(),EstadoCurso.Planeado,ci.getEpsilon(),ci.getPeriodo()),EstadoRegistro.Ok);
     }
 
 
     @Override
     public void agregarPeriodo(Periodo periodo) {
-        infoSemestre.putIfAbsent(periodo.periodoS(),new Hashtable<>());
+        infoSemestre.putIfAbsent(periodo.periodoS(),new ArrayList<>());
         if(primerPeriodo == null){
             primerPeriodo = periodo;
             ultimoPeriodo = periodo;
         }else{
             if(primerPeriodo.compare(periodo) == 1){
                 primerPeriodo = periodo;
-            }else {
-                if (periodo.compare(ultimoPeriodo) == 1) {
+            }else if (periodo.compare(ultimoPeriodo) == 1) {
                     ultimoPeriodo = periodo;
-                }
             }
         }
     }
@@ -70,7 +62,7 @@ public class Plan extends MallaCursos {
         if (c2 != null) {
             return c2;
         }
-        return cursosRegistrados.get(codigo);
+        return historia.cursosRegistrados.get(codigo);
     }
 
 
@@ -97,7 +89,7 @@ public class Plan extends MallaCursos {
             sum += rR1.getItemsCumplidos();
         }
         RequerimientoRegistrado rR2 = reqsRegistrados.get(reqN);
-        if(rR1 != null){
+        if(rR2 != null){
             sum += rR2.getItemsCumplidos();
         }
         return sum;
@@ -112,15 +104,13 @@ public class Plan extends MallaCursos {
             sum += rR1.getItemsCumplidos();
         }
         RequerimientoRegistrado rR2 = reqsRegistrados.get(reqN);
-        if(rR1 != null && periodo.compare(rR1.ultimoPeriodo()) == 1){
+        if(rR2 != null && periodo.compare(rR2.ultimoPeriodo()) == 1){
             sum += rR2.getItemsCumplidos();
         }
         return sum;
     }
 
-    public Map<String, CursoRegistrado> getCursosRegistrados() {
-        return cursosRegistrados;
-    }
+
     public HistoriaAcademica getHistoria() {
         return historia;
     }

@@ -50,11 +50,11 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         fondo.setLayout(new BorderLayout());
-        panelLogin.mostrar(fondo);
         vistaAct = panelLogin;
         add(fondo,BorderLayout.CENTER);
         add(opciones,BorderLayout.WEST);
         add(superior,BorderLayout.NORTH);
+        ocultarYmostrar(panelLogin);
 	}
 
 
@@ -65,11 +65,28 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     }
     public void ocultarYmostrar(PanelAux pa){
+        pa.setVistaAnterior(vistaAct);
+        vistaAct.setVisible(false);
+        mostrar(pa);
+    }
+
+    public void mostrar(PanelAux pa){
+        vistaAct = pa;
         pa.setOpaque(false);
         fondo.add(pa);
-        vistaAct.ocultar();
-        vistaAct = pa;
-        vistaAct.setVisible(true);
+        pa.setVisible(true);
+    }
+
+    public void siguiente(){
+
+    }
+
+    public void anterior(){
+
+    }
+
+    public void cerrarSeccion(){
+
     }
 
     public PrincipalUsusario getPrincipalUsuario() {
@@ -99,9 +116,8 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
                 default -> System.out.println("wrong permision");
             }
             if(principalUsuario != null) {
-                vistaAct.ocultar();
+                ocultarYmostrar(principalUsuario);
                 setVistaAct(principalUsuario);
-                principalUsuario.mostrar(fondo);
             }
 
         }else {

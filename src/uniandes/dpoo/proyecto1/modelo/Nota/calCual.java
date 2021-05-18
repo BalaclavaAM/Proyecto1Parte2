@@ -1,5 +1,11 @@
 package uniandes.dpoo.proyecto1.modelo.Nota;
 
 public enum calCual {
-    aprovado,reprovado,pendiente,incompleto;
+    A, R, P, I;
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
