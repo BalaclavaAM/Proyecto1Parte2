@@ -133,6 +133,29 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		return 0;
 	}
 
+	public double calcularPromedioAcademicoAntesdeP(String semestre){
+        ArrayList<String> semestres = new ArrayList<>(infoSemestre.keySet());
+        semestres.sort(String::compareTo);
+        int indice = semestres.indexOf(semestre);
+        double puntosSemestre = 0;
+        double creditosSemestre = 0;
+        for (int i = 0; i < indice; i++) {
+            ArrayList<CursoRegistrado> lp = infoSemestre.get(semestres.get(i));
+            for (CursoRegistrado cr : lp) {
+                if (cr.getNota().isNumeric()) {
+                    int creditosCurso = cr.getCurso().getCreditos();
+                    creditosSemestre += creditosCurso;
+                    puntosSemestre += creditosCurso * cr.getNota().notaNum();
+                }
+            }
+        }
+        if(creditosSemestre >0){
+            return puntosSemestre/creditosSemestre;
+        }
+
+        return 0;
+    }
+
     public Periodo getPrimerPeriodo() {
         return primerPeriodo;
     }
@@ -180,6 +203,9 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         return 0;
     }
 
+    public boolean limiteValido(String periodo){
+        return true;
+    }
 
     /*public static void main(String[] args) {
         Pensum psm = new Pensum("Sistemas");

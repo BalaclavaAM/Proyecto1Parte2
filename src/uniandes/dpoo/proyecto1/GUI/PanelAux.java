@@ -23,7 +23,13 @@ public abstract class PanelAux extends JPanel{
         return vistaAnterior;
     }
 
+    public PanelAux getVistaSiguiente() {
+        return vistaSiguiente;
+    }
 
+    public void setVistaSiguiente(PanelAux vistaSiguiente) {
+        this.vistaSiguiente = vistaSiguiente;
+    }
 
     public void reset() {
 

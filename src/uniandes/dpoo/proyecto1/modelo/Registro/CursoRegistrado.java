@@ -100,4 +100,8 @@ public class CursoRegistrado {
 	public boolean isRepetido() {
 		return repetido;
 	}
+
+	public void setRepetido(boolean repetido) {
+		this.repetido = repetido;
+	}
 }

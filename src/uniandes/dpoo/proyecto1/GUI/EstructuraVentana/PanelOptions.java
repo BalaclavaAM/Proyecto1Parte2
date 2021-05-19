@@ -61,12 +61,12 @@ public class PanelOptions extends JPanel implements ActionListener {
 		JButton bIM = new JButton("Inscribir Materias"); bIM.setActionCommand("PO>IMaterias");
 		botones.add(bIM);
 
-		JButton bAH = new JButton("Actualizar Historia"); bAH.setActionCommand("PO>AHistoria");
+		JButton bAH = new JButton("Validar Requerimientos"); bAH.setActionCommand("PO>Validar");
 		botones.add(bAH);
 
-		JButton pSM = new JButton("Planeacion"); pSM.setActionCommand("Planear");
+		JButton pSM = new JButton("Planeacion"); pSM.setActionCommand("PO>Planear");
 		botones.add(pSM);
-		diseño(pe,4,botones.size());
+		diseño(pe,3,botones.size());
 
 	}
 
@@ -74,16 +74,18 @@ public class PanelOptions extends JPanel implements ActionListener {
 	public void diseño(ActionListener al, int s, int f){
 		for (int i = s; i < f; i++) {
 			JButton b = botones.get(i);
-			add(b);
 			b.setBackground(Color.LIGHT_GRAY);
 			b.addActionListener(al);
+			add(b);
 		}
 	}
 
 	public void quitarBotones(){
 		int size = botones.size();
-		for (int i = 2; i < size; i++) {
-			botones.remove(3);
+		for (int i = size - 1; i > 2; i--) {
+			JButton b = botones.get(i);
+			remove(b);
+			botones.remove(i);
 		}
 	}
 

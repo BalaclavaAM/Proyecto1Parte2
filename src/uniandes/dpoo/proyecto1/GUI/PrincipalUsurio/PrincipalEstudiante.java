@@ -134,19 +134,23 @@ public class PrincipalEstudiante extends PrincipalUsusario {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Planear")){
-            if(panelPlanes == null){
-                panelPlanes = new PanelPlanes(principal,estudiante);
-            }else{
-                panelPlanes.actualizarPanel();
+        switch (e.getActionCommand()) {
+            case "PO>Planear" -> {
+                if (panelPlanes == null) {
+                    panelPlanes = new PanelPlanes(principal, estudiante);
+                } else {
+                    panelPlanes.actualizarPanel();
+                }
+                principal.ocultarYmostrar(panelPlanes);
             }
-            principal.ocultarYmostrar(panelPlanes);
-        } else if (e.getActionCommand().equals("PO>IMaterias")){
-            InterfazInscripcionCursos iic = new InterfazInscripcionCursos(principal,estudiante);
-            principal.ocultarYmostrar(iic);
-        }else if(e.getActionCommand().equals("PO>AHistoria")){
-            PanelHistoria ph = new PanelHistoria(principal,estudiante);
-            principal.ocultarYmostrar(ph);
+            case "PO>IMaterias" -> {
+                InterfazInscripcionCursos iic = new InterfazInscripcionCursos(principal, estudiante);
+                principal.ocultarYmostrar(iic);
+            }
+            case "PO>HAcademica" -> {
+                PanelHistoria ph = new PanelHistoria(principal, estudiante);
+                principal.ocultarYmostrar(ph);
+            }
         }
 
     }

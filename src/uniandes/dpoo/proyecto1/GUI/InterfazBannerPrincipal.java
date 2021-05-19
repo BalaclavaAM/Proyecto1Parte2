@@ -55,11 +55,10 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         fondo.setLayout(new BorderLayout());
-        vistaAct = panelLogin;
         add(fondo,BorderLayout.CENTER);
         add(opciones,BorderLayout.WEST);
         add(superior,BorderLayout.NORTH);
-        ocultarYmostrar(panelLogin);
+        mostrar(panelLogin);
 	}
 
 
@@ -68,7 +67,10 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         InterfazBannerPrincipal interfaz = new InterfazBannerPrincipal( );
         interfaz.setVisible(true) ;
     }
+
+
     public void ocultarYmostrar(PanelAux pa){
+	    vistaAct.setVistaSiguiente(pa);
         pa.setVistaAnterior(vistaAct);
         vistaAct.setVisible(false);
         mostrar(pa);
@@ -82,15 +84,33 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
     }
 
     public void siguiente(){
-
+        PanelAux pa = vistaAct.getVistaSiguiente();
+        if(pa != null){
+            ocultarYmostrar(pa);
+        }
     }
 
     public void anterior(){
+        PanelAux pa = vistaAct.getVistaAnterior();
+        if(pa != null){
+            vistaAct.setVisible(false);
+            mostrar(pa);
+        }
+    }
 
+    public void actualizarPanel() {
+	    panelLogin.actualizarPanel();
+	    mostrar(panelLogin);
     }
 
     public void cerrarSeccion(){
-
+        if(principalUsuario != null){
+            opciones.quitarBotones();
+            vistaAct.setVisible(false);
+            principalUsuario = null;
+            vistaAct = null;
+            actualizarPanel();
+        }
     }
 
     public PrincipalUsusario getPrincipalUsuario() {
@@ -120,11 +140,13 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
                 default -> System.out.println("wrong permision");
             }
             if(principalUsuario != null) {
-                ocultarYmostrar(principalUsuario);
+                panelLogin.setVisible(false);
+                mostrar(principalUsuario);
                 setVistaAct(principalUsuario);
             }
 
         }else {
+            actualizarPanel();
             System.out.println("error de inicio");
         }
     }

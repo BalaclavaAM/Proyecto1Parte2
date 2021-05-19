@@ -1,12 +1,10 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
-
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.PreRestriccion;
-
 import java.util.*;
 
 public abstract class MallaCursos {
@@ -19,6 +17,7 @@ public abstract class MallaCursos {
     protected Map<String, RequerimientoRegistrado> reqsRegistrados;
     protected Map<String, String> cursosValidados; // <CodigoCurso,NombreRequerimiento>
     protected Map<String,  ArrayList<CursoRegistrado>> infoSemestre; //dentro de un Semestre pueden haber dos periodos por los ciclos
+    protected Map<String,Integer> conteoSemestre;
     //se cuenta a semestre a los intersemestrales
 
     public MallaCursos(Periodo periodoSis){
@@ -99,6 +98,8 @@ public abstract class MallaCursos {
                                ArrayList<Periodo> Lperiodos,
                                ArrayList<EstadoAgregar> estado){
 
+        Map<String,Integer> conteoSemestreLocal = new HashMap<>();
+
         Periodo acperiodo;
         for(CursoRegistrado cr: cursosR){
             acperiodo = cr.getPeriodo();
@@ -108,8 +109,8 @@ public abstract class MallaCursos {
                 cursosPeriodos.put(acperiodo, cursosP);
                 Lperiodos.add(acperiodo);
             }
-            if(existeList(cursosP,cr)){
-                estado.add(new EstadoAgregar(cr,EstadoRegistro.Repetido));
+            if(existeList(cursosP,cr)) {
+                estado.add(new EstadoAgregar(cr, EstadoRegistro.Repetido));
             }else{
                 cursosP.add(cr);
                 Lperiodos.add(acperiodo);
@@ -142,6 +143,7 @@ public abstract class MallaCursos {
                 return EstadoRegistro.Inconsistente; // incosistencia, si ya paso el curso no debe porque verlo en el periodo reciente
             }
             if (!aprovado(registro)) { //perdio el curso y lo va a volver a ver
+                cursoR.setRepetido(true);
                 return EstadoRegistro.Ok;
             }
             return EstadoRegistro.Repetido;
@@ -216,6 +218,28 @@ public abstract class MallaCursos {
         return  agregarCursos(queue);
     }
 
+
+    public CursoRegistrado buscarAnterior(CursoRegistrado cursoR) {
+        ArrayList<String> semestres = new ArrayList<>(infoSemestre.keySet());
+        CursoRegistrado anterior = null;
+        semestres.sort(String::compareTo);
+        for (int i = semestres.size()-1; i > -1; i--) {
+            ArrayList<CursoRegistrado> cursoS =  infoSemestre.get(semestres.get(i));
+            for(CursoRegistrado cr : cursoS) {
+                if(cr.getCurso().getCodigo().equals(cursoR.getCurso().getNombre())){
+                    if(anterior == null || anterior.getPeriodo().getCiclo() > cr.getPeriodo().getCiclo()){
+                        anterior = cr;
+                    }
+                }
+            }
+            if(anterior != null){
+                return anterior;
+            }
+        }
+        return null;
+    }
+
+
     public abstract void agregarPeriodo(Periodo periodo);
 
 
@@ -258,25 +282,6 @@ public abstract class MallaCursos {
         return infoSemestre;
     }
 
-    public CursoRegistrado buscarAnterior(CursoRegistrado cursoR) {
-        ArrayList<String> semestres = new ArrayList<>(infoSemestre.keySet());
-        CursoRegistrado anterior = null;
-        semestres.sort(String::compareTo);
-        for (int i = semestres.size()-1; i > -1; i--) {
-            ArrayList<CursoRegistrado> cursoS =  infoSemestre.get(semestres.get(i));
-            for(CursoRegistrado cr : cursoS) {
-                if(cr.getCurso().getCodigo().equals(cursoR.getCurso().getNombre())){
-                    if(anterior == null || anterior.getPeriodo().getCiclo() > cr.getPeriodo().getCiclo()){
-                        anterior = cr;
-                    }
-                }
-            }
-            if(anterior != null){
-                return anterior;
-            }
-        }
-        return null;
-    }
 
 
 }

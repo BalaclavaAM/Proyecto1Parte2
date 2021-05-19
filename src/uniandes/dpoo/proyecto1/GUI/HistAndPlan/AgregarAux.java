@@ -25,7 +25,6 @@ public class AgregarAux extends JDialog{
     private Vector<Vector> data;
     private JTextField Jcodigo;
     private JTextField cursoN;
-    private JButton buscar;
     private JTextField Janio;
     private JTextField Jnota;
     private JComboBox<Integer> semestre;
@@ -33,7 +32,6 @@ public class AgregarAux extends JDialog{
     private Checkbox epsilon;
     private JButton agregar;
     private Curso curso;
-    private CursoRegistrado cursoR;
     private boolean nota;
 
     public AgregarAux(JPanel exter, Banner banner, ArrayList<ArrayList<CursoRegistrado>> posicionCursos,
@@ -50,7 +48,8 @@ public class AgregarAux extends JDialog{
         setLayout(new BorderLayout());
         JLabel codlab = new JLabel("Codigo:");
         Jcodigo = new JTextField();
-        buscar = new JButton("Buscar"); buscar.addActionListener((event)->{
+        JButton buscar = new JButton("Buscar");
+        buscar.addActionListener((event)->{
             curso = this.banner.getCatalogo().get(Jcodigo.getText());
             if(curso != null){                agregar.setEnabled(true);
                 cursoN.setText(curso.getNombre());
@@ -125,6 +124,7 @@ public class AgregarAux extends JDialog{
                 } else {
                     p = new Periodo(anio, (Integer) semestre.getSelectedItem());
                 }
+                CursoRegistrado cursoR;
                 if(nota){
                     Nota notaR;
                     String notaIn = Jnota.getText();
@@ -169,7 +169,7 @@ public class AgregarAux extends JDialog{
                     }
 
                     data.get(0).setElementAt(curso.getCodigo(), col);
-                    posicionCursos.get(0).set(col,cursoR);
+                    posicionCursos.get(0).set(col, cursoR);
                     posicionEstado.get(0).set(col,"agregar");
 
                 } else {
@@ -187,7 +187,7 @@ public class AgregarAux extends JDialog{
                         posicionEstado.add(AuxCambios.arrayNull(np));
                     }
                     data.get(fila).setElementAt(curso.getCodigo(), col);
-                    posicionCursos.get(fila).set(col,cursoR);
+                    posicionCursos.get(fila).set(col, cursoR);
                     posicionEstado.get(fila).set(col,"agregar");
                 }
 
