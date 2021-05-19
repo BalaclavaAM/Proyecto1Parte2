@@ -20,20 +20,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.Serial;
 
 import javax.swing.*;
 
 public class InterfazBannerPrincipal extends JFrame implements ActionListener {
+    @Serial
     private static final long serialVersionUID = 7466153715672542511L;
 	
-	private Banner banner;
-	private PanelOptions opciones;
-	private PanelSuperior superior;
-	private PanelImagenFondo fondo;
-	private PanelLogin panelLogin;
+	private final Banner banner;
+	private final PanelOptions opciones;
+    private final PanelImagenFondo fondo;
+	private final PanelLogin panelLogin;
 	private PanelAux vistaAct;
 	private PrincipalUsusario principalUsuario;
-	private Usuario usuario;
 
 
 	
@@ -42,9 +42,9 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         getContentPane( ).setLayout( new BorderLayout( ) );
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize( 850, 550 );
-        opciones = new PanelOptions("Guest",this);
+        opciones = new PanelOptions(this);
         fondo = new PanelImagenFondo();
-        superior = new PanelSuperior(this);
+        PanelSuperior superior = new PanelSuperior(this);
         panelLogin = new PanelLogin(this);
         banner = new Banner(new Periodo(2021,10));
         Prueba.cargarPrueba(banner);
@@ -151,10 +151,6 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         }
     }
 
-    public PanelOptions getOpciones() {
-        return opciones;
-    }
-
     public void home(){
 	    if(principalUsuario != null) {
             ocultarYmostrar(principalUsuario);
@@ -168,10 +164,6 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) { //solo para mostrar y
     }
 
-
-    public PanelAux getVistaAct() {
-        return vistaAct;
-    }
 
     public Banner getBanner() {
         return banner;

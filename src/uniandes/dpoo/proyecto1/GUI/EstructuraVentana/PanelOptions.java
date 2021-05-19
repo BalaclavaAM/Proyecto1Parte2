@@ -4,23 +4,22 @@ package uniandes.dpoo.proyecto1.GUI.EstructuraVentana;
 import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 public class PanelOptions extends JPanel  {
 
+	@Serial
 	private static final long serialVersionUID = 5506885411509118415L;
 	
-	private InterfazBannerPrincipal principal;
-	private ArrayList<JButton> botones;
+	private final InterfazBannerPrincipal principal;
+	private final ArrayList<JButton> botones;
 	
 	
-	public PanelOptions ( String rol, InterfazBannerPrincipal pPrincipal ) {
+	public PanelOptions (InterfazBannerPrincipal pPrincipal ) {
 		setLayout(new GridLayout(10,0));
 		this.setBackground(Color.GRAY);
 		botones = new ArrayList<>();
@@ -35,7 +34,7 @@ public class PanelOptions extends JPanel  {
 		JButton bCP = new JButton("Cargar Pensum");
 		bCP.setActionCommand("PO>CargaPensum");
 		botones.add(bCP);
-		diseño(pa, 3, botones.size());
+		disenio(pa, 3, botones.size());
 	}
 
 
@@ -51,7 +50,7 @@ public class PanelOptions extends JPanel  {
 			b.setBackground(Color.LIGHT_GRAY);
 			b.addActionListener(principal);
 		}
-		diseño(principal,0,botones.size());
+		disenio(principal,0,botones.size());
 	}
 
 	public void botonesEstudiant(PrincipalUsusario pe){
@@ -66,12 +65,11 @@ public class PanelOptions extends JPanel  {
 
 		JButton pSM = new JButton("Planeacion"); pSM.setActionCommand("PO>Planear");
 		botones.add(pSM);
-		diseño(pe,3,botones.size());
+		disenio(pe,3,botones.size());
 
 	}
 
-
-	public void diseño(ActionListener al, int s, int f){
+	public void disenio(ActionListener al, int s, int f){
 		for (int i = s; i < f; i++) {
 			JButton b = botones.get(i);
 			b.setBackground(Color.LIGHT_GRAY);
