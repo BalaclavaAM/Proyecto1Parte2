@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Historia v1">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/opencsv_5_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/libraries/opencsv-5.4.jar" afterDir="false" />
+    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Librería y Cartelera añadidos">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_opencsv_opencsv_5_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/opencsv_5_4__2_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/TablaSecciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/TablaSecciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyecto1Parte2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto1Parte2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cartelerautf8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/information/cartelerautf8.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/libraries/opencsv-5.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/LoaderData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/LoaderData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +78,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -85,6 +89,8 @@
       <recent name="C:\Users\juan5\IdeaProjects\Proyecto1Parte2\data\librarys" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\juan5\IdeaProjects\Proyecto1Parte2\data\information" />
+      <recent name="C:\Users\juan5\IdeaProjects\Proyecto1Parte2\data" />
       <recent name="C:\Users\juan5\IdeaProjects\Proyecto1Parte2\data\libraries" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -426,7 +432,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621380179466</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Librería y Cartelera añadidos">
+      <created>1621609981779</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1621609981779</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -458,7 +471,8 @@
     <MESSAGE value="trasnoches" />
     <MESSAGE value="correquistos,colores y locuras" />
     <MESSAGE value="Historia v1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Historia v1" />
+    <MESSAGE value="Librería y Cartelera añadidos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Librería y Cartelera añadidos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

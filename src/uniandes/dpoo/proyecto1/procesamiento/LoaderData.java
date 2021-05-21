@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.procesamiento;
 
+import com.opencsv.CSVReader;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
@@ -7,13 +8,16 @@ import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LoaderData {
 	private final static String rutacursos = "./data/information/Cursinhos.csv";
 	private final static String rutasecciones = "./data/information/Seccioninhas.csv";
+	private final static String rutacartelera = "./data/information/cartelerautf8.csv";
 
 	public static Banner cargarData() {
 		try {
@@ -25,6 +29,22 @@ public class LoaderData {
 		}catch(Exception a){System.out.println(a);}
 		return null;  
 	}
+
+
+	public static List<String[]> cargarSeccionesNativas() throws Exception {
+		Reader reader = new FileReader(rutacartelera, StandardCharsets.UTF_8);
+		List<String[]> list = new ArrayList<>();
+		CSVReader csvReader = new CSVReader(reader);
+		String[] line;
+		while ((line = csvReader.readNext()) != null) {
+			list.add(line);
+		}
+		reader.close();
+		csvReader.close();
+		return list;
+	}
+
+
 
 	public static void CargaPensum(String  filename) throws IOException {
 		ArrayList<Requerimiento> listaRequerimientos = new ArrayList<>();
@@ -176,6 +196,7 @@ public class LoaderData {
 
 		}catch(Exception a){System.out.println(a);}  
 	}
+
 
 	public static void main(String[] args) throws IOException {
 	}

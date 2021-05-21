@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -51,7 +52,13 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         try {
             LoaderData.CargaCursos(banner);
             LoaderData.CargaSecciones(banner);
+            List<String[]> xd = LoaderData.cargarSeccionesNativas();
+            for (String[] asd: xd) {
+                System.out.println(asd[0]);
+            }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         fondo.setLayout(new BorderLayout());
@@ -64,7 +71,8 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
     public static void main( String[] args )
     {
-        InterfazBannerPrincipal interfaz = new InterfazBannerPrincipal( );
+        InterfazBannerPrincipal interfaz = null;
+        interfaz = new InterfazBannerPrincipal( );
         interfaz.setVisible(true) ;
     }
 
