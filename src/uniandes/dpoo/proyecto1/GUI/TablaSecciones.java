@@ -2,7 +2,6 @@ package uniandes.dpoo.proyecto1.GUI;
 
 import uniandes.dpoo.proyecto1.procesamiento.Banner;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,7 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class TablaSecciones extends JPanel {
     private Banner banner;
-    private boolean DEBUG = false;
+    private boolean DEBUG = true;
 
     public TablaSecciones(Banner bBanner) {
         super(new GridLayout(1,0));
