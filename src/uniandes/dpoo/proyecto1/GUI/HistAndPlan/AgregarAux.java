@@ -66,7 +66,7 @@ public class AgregarAux extends JDialog{
         cursoN = new JTextField();
         Janio = new JTextField("año");
         semestre = new JComboBox<>(new Integer[]{10,19,20});semestre.addItemListener((event)->{
-            ciclo.setEnabled((int) semestre.getSelectedItem() != 19 && !curso.isCompleto());});
+            ciclo.setEnabled((int) semestre.getSelectedItem() != 19);});
         epsilon = new Checkbox("epsilon.");
         if(nota){ Jnota = new JTextField(); Jnota.setText("0.0");}
         GridBagConstraints gb = new GridBagConstraints();

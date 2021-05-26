@@ -4,6 +4,7 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvValidationException;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
@@ -48,7 +49,7 @@ public class LoaderData {
 			if (!(line[0].equals("**** Fin datos ****")))
 			{
 				int Numero = Integer.parseInt(line[0]);
-				int NRC = Integer.parseInt(line[1]);
+				String NRC = (line[1]);
 				String Parte = line[2];
 				String Codigo = line[4].strip();
 				int Seccion = Integer.parseInt(line[5]);
@@ -73,7 +74,11 @@ public class LoaderData {
 					infosemanas[semana][(i+1)-(11*semana)]=line[i];
 				}
 				Curso curso = banner.buscarCursoByCode(Codigo);
-				Seccion seccionactual = new Seccion(curso,false,NRC,);
+				Seccion seccionactual = new Seccion(curso,false,NRC,infosemanas,"NO HAY INFO",false,Seccion,Parte);
+				seccionactual.setNombre(nombreMateria);
+				seccionactual.setCodigo(Codigo);
+				seccionactual.setCreditos(Creditos);
+				banner.getSecciones().add(seccionactual);
 
 			}
 		}
@@ -95,31 +100,39 @@ public class LoaderData {
 		{
 
 			String[] partes = linea.trim().split(",");
-			System.out.println(partes[0]);
 
 			linea = br.readLine();
 		}
 	}
 
-	public static void CargaSecciones(Banner banner) throws  IOException {
-		BufferedReader br  = new BufferedReader(new FileReader(rutasecciones));
-		br.readLine();
-		String linea = br.readLine();
-		while (linea != null){
-			String[] partes = linea.trim().split(",");
-			String codigo = partes[0];
-			Boolean epsilon = Boolean.parseBoolean(partes[1]);
-			String nrc = partes[2];
-			String profesor = partes[3];
-			Boolean tipoe = Boolean.parseBoolean(partes[4]);
-			Integer nseccion = Integer.parseInt(partes[5]);
-			String ciclo = partes[6];
+	public static void CargaSecciones(Banner banner) throws IOException, CsvValidationException {
+		Reader reader  = new FileReader(rutasecciones);
+		CSVParser parsero = new CSVParserBuilder().withSeparator(',').build();
+		CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(parsero).build();
+		String[] linea;
+		csvReader.readNext();
+		while ((linea = csvReader.readNext()) != null){
+			String codigo = linea[0];
+			Boolean epsilon = Boolean.parseBoolean(linea[1]);
+			String nrc = linea[2];
+			String profesor = linea[3];
+			Boolean tipoe = Boolean.parseBoolean(linea[4]);
+			Integer nseccion = Integer.parseInt(linea[5]);
+			String ciclo = linea[6];
 			Curso curso = banner.buscarCursoByCode(codigo);
-			Seccion seccion = new Seccion(curso,epsilon,nrc,profesor,tipoe,nseccion,ciclo);
+			String[][] infosemanas = new String[28][11];
+			for (int i = 1; i <= 297; i++)
+			{
+				double numero = i/11; double parteDecimal = numero % 1; int semana = (int) (numero - parteDecimal);
+				infosemanas[semana][i-(11*semana)]=linea[i+6];
+			}
+
+			Seccion seccion = new Seccion(curso,epsilon,nrc,infosemanas,profesor,tipoe,nseccion,ciclo);
 			banner.getSecciones().add(seccion);
 
-			linea=br.readLine();
 		}
+		reader.close();
+		csvReader.close();
 	}
 
 	public static void CargaCursos(Banner banner) throws IOException {

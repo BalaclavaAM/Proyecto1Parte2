@@ -34,11 +34,11 @@ public class Prueba {
         pensumPru.agregarRequerimiento(req2);
         Correquisito r21 = new Correquisito(new ArrayList<>(Arrays.asList("FISI-1018")));
 
-        Curso c1 = new Curso("IP","ISIS-1221","ISIS",3,true,true,"soloPythonlks",
+        Curso c1 = new Curso("IP","ISIS-1221","ISIS",3,true,
                 new ArrayList<>(),new ArrayList<>());
-        Curso c2 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",
+        Curso c2 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,
                 new ArrayList<>(),new ArrayList<>());
-        Curso c3 = new Curso("FISICA EXP 1", "FISI-1019","ISIS",1,true,true,"laExprimentacion",
+        Curso c3 = new Curso("FISICA EXP 1", "FISI-1019","ISIS",1,true,
                 new ArrayList<>(),new ArrayList<>(Arrays.asList(r21)));
         Periodo psis = banner.getPeriodo();
 
@@ -52,12 +52,12 @@ public class Prueba {
         cursosRegistrados.add(new CursoRegistrado(c1, EstadoCurso.Inscrito, false, p));
         cursosRegistrados.add(new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
         cursosRegistrados.add(new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
-        Curso c4 = new Curso("Estructura de Datos","ISIS-1206","ISIS",3,true,true,"EdamosfelicesYnolosabiamos",
+        Curso c4 = new Curso("Estructura de Datos","ISIS-1206","ISIS",3,true,
                 new ArrayList<>(Arrays.asList(new Prerrequisito(new ArrayList<>(Arrays.asList("ISIS-1221", "ISIS-1021"))))), new ArrayList<>());
-        Curso c5 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,true,"soloPythonlks",
+        Curso c5 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,
                 new ArrayList<>(), new ArrayList<>());
 
-        Curso c6 = new Curso("CBCC-1177","CBCC-1177","ISIS",3,true,true,"soloPythonlks",
+        Curso c6 = new Curso("CBCC-1177","CBCC-1177","ISIS",3,true,
                 new ArrayList<>(), new ArrayList<>());
 
         e.nuevoPlan("miprimerplan :)");

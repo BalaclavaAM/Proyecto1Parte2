@@ -53,12 +53,19 @@ public class Banner implements Serializable {
 		Integer e = 0;
 		for (Seccion s: secciones){
 			System.out.println(s.toString());
-			retorno[e][0]=s.getCurso().getCodigo();
+			if (!(s.getCurso()==null))
+			{
+				retorno[e][0]=s.getCurso().getCodigo();
+				retorno[e][4]=s.getCurso().getNombre();
+				retorno[e][5]=s.getCurso().getCreditos();
+			} else {
+				retorno[e][0]=s.getCodigo();
+				retorno[e][4]=s.getNombre();
+				retorno[e][5]=s.getCreditos();
+			}
 			retorno[e][1]=s.getNrc();
 			retorno[e][2]=s.getProfesor();
 			retorno[e][3]=s.getHorario();
-			retorno[e][4]=s.getCurso().getNombre();
-			retorno[e][5]=s.getCurso().getCreditos();
 			retorno[e][6]=s.getCiclo();
 			retorno[e][7]=s.getEpsilon();
 			retorno[e][8]=s.getTipoE();

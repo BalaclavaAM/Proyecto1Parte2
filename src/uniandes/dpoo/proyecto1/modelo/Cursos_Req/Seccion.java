@@ -11,6 +11,33 @@ public class Seccion {
     private Boolean tipoE;
     private Integer NSeccion;
     private String ciclo;
+    private String nombre;
+    private String codigo;
+    private float creditos;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public float getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(float creditos) {
+        this.creditos = creditos;
+    }
 
     public Seccion(Curso curso, Boolean epsilon, String nrc,String[][] horario, String profesor, Boolean tipoE, Integer NSeccion, String ciclo) {
         this.curso = curso;
