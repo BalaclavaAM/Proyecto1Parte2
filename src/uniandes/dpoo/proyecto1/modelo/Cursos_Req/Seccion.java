@@ -6,19 +6,17 @@ public class Seccion {
     private Curso curso;
     private Boolean epsilon;
     private String nrc;
-    private String horario;
-    private ArrayList<String> dias;
+    private String[][] horarios;
     private String profesor;
     private Boolean tipoE;
     private Integer NSeccion;
     private String ciclo;
 
-    public Seccion(Curso curso, Boolean epsilon, String nrc, String horario, ArrayList<String> dias, String profesor, Boolean tipoE, Integer NSeccion, String ciclo) {
+    public Seccion(Curso curso, Boolean epsilon, String nrc,String[][] horario, String profesor, Boolean tipoE, Integer NSeccion, String ciclo) {
         this.curso = curso;
         this.epsilon = epsilon;
         this.nrc = nrc;
-        this.horario = horario;
-        this.dias = dias;
+        this.horarios = horario;
         this.profesor = profesor;
         this.tipoE = tipoE;
         this.NSeccion = NSeccion;
@@ -36,13 +34,10 @@ public class Seccion {
         return nrc;
     }
 
-    public String getHorario() {
-        return horario;
+    public String[][] getHorario() {
+        return horarios;
     }
 
-    public ArrayList<String> getDias() {
-        return dias;
-    }
 
     public String getProfesor() {
         return profesor;

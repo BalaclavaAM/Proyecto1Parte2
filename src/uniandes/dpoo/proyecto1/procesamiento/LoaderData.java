@@ -1,6 +1,9 @@
 package uniandes.dpoo.proyecto1.procesamiento;
 
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
@@ -9,6 +12,7 @@ import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +35,47 @@ public class LoaderData {
 	}
 
 
-	public static List<String[]> cargarSeccionesNativas() throws Exception {
+	public static List<String[]> cargarSeccionesNativas(Banner banner) throws Exception {
 		Reader reader = new FileReader(rutacartelera, StandardCharsets.UTF_8);
 		List<String[]> list = new ArrayList<>();
-		CSVReader csvReader = new CSVReader(reader);
+		CSVParser parsero = new CSVParserBuilder().withSeparator(';').build();
+		CSVReader csvReader = new CSVReaderBuilder(reader).withCSVParser(parsero).build();
 		String[] line;
+		csvReader.readNext();
+		csvReader.readNext();
+		csvReader.readNext();
 		while ((line = csvReader.readNext()) != null) {
-			list.add(line);
+			if (!(line[0].equals("**** Fin datos ****")))
+			{
+				int Numero = Integer.parseInt(line[0]);
+				int NRC = Integer.parseInt(line[1]);
+				String Parte = line[2];
+				String Codigo = line[4].strip();
+				int Seccion = Integer.parseInt(line[5]);
+				float Creditos = Float.parseFloat(line[6]);
+				String nombreMateria = line[7];
+				int Cupo = Integer.parseInt(line[8]);
+				int Inscritos = Integer.parseInt(line[9]);
+				int Disponibles = Integer.parseInt(line[10]);
+				String[][] infosemanas = new String[28][11];
+				for (int i = 11; i <= 131; i++)
+				{
+					double numero = i/11; double parteDecimal = numero % 1; int semana = (int) (numero - parteDecimal);
+					infosemanas[semana][i-(11*semana)]=line[i];
+				}
+				infosemanas[12][0]="";
+				for (int i = 132; i <= 141 ; i++) {
+					infosemanas[12][i-131]=line[i];
+				}
+				for (int i = 142; i<=306; i++)
+				{
+					double numero = (i+1)/11; double parteDecimal = numero % 1; int semana = (int) (numero - parteDecimal);
+					infosemanas[semana][(i+1)-(11*semana)]=line[i];
+				}
+				Curso curso = banner.buscarCursoByCode(Codigo);
+				Seccion seccionactual = new Seccion(curso,false,NRC,);
+
+			}
 		}
 		reader.close();
 		csvReader.close();
@@ -72,15 +110,12 @@ public class LoaderData {
 			String codigo = partes[0];
 			Boolean epsilon = Boolean.parseBoolean(partes[1]);
 			String nrc = partes[2];
-			ArrayList<String> horario = parseList(partes[3]);
-			String horas = horario.get(0);
-			ArrayList<String> dias = parseList2(horario.get(1));
-			String profesor = partes[4];
-			Boolean tipoe = Boolean.parseBoolean(partes[5]);
-			Integer nseccion = Integer.parseInt(partes[6]);
-			String ciclo = partes[7];
+			String profesor = partes[3];
+			Boolean tipoe = Boolean.parseBoolean(partes[4]);
+			Integer nseccion = Integer.parseInt(partes[5]);
+			String ciclo = partes[6];
 			Curso curso = banner.buscarCursoByCode(codigo);
-			Seccion seccion = new Seccion(curso,epsilon,nrc,horas,dias,profesor,tipoe,nseccion,ciclo);
+			Seccion seccion = new Seccion(curso,epsilon,nrc,profesor,tipoe,nseccion,ciclo);
 			banner.getSecciones().add(seccion);
 
 			linea=br.readLine();
@@ -102,9 +137,7 @@ public class LoaderData {
 			boolean numerica = Boolean.parseBoolean(partes[4]);
 			ArrayList<PreRestriccion> restricciones = armarRestricciones(partes[6],partes[7],partes[8]);
 			ArrayList<Correquisito> correquisitos = armarCorrequisitos(partes[5]);
-			boolean completo = Boolean.parseBoolean(partes[9]);
-			String desc = partes[10];
-			Curso curso = new Curso(nombre,codigo,dpto,creditos,completo,numerica,desc,restricciones,correquisitos);
+			Curso curso = new Curso(nombre,codigo,dpto,creditos,numerica,restricciones,correquisitos);
 			if (banner.getCursosDepartamento().containsKey(dpto)){
 				banner.getCursosDepartamento().get(dpto).put(codigo,curso);
 			} else {

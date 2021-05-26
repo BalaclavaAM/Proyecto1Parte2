@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Librería y Cartelera añadidos">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_opencsv_opencsv_5_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/opencsv_5_4__2_.xml" beforeDir="false" />
+    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="JBalvinMen ahora con MAVEN">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proyecto1Parte2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyecto1Parte2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cartelerautf8.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/information/cartelerautf8.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/libraries/opencsv-5.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/information/Seccioninhas.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/information/Seccioninhas.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Curso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Curso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Seccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Cursos_Req/Seccion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/LoaderData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/procesamiento/LoaderData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -214,6 +212,10 @@
       <workItem from="1621379029003" duration="246000" />
       <workItem from="1621379491149" duration="6152000" />
       <workItem from="1621404983772" duration="3276000" />
+      <workItem from="1621806858206" duration="602000" />
+      <workItem from="1621878508593" duration="4264000" />
+      <workItem from="1621907118367" duration="595000" />
+      <workItem from="1621993501153" duration="6020000" />
     </task>
     <task id="LOCAL-00001" summary="f1">
       <created>1618165373822</created>
@@ -439,7 +441,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621609981779</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="JBalvinMen ahora con MAVEN">
+      <created>1621611185684</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1621611185684</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -472,7 +481,8 @@
     <MESSAGE value="correquistos,colores y locuras" />
     <MESSAGE value="Historia v1" />
     <MESSAGE value="Librería y Cartelera añadidos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Librería y Cartelera añadidos" />
+    <MESSAGE value="JBalvinMen ahora con MAVEN" />
+    <option name="LAST_COMMIT_MESSAGE" value="JBalvinMen ahora con MAVEN" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
