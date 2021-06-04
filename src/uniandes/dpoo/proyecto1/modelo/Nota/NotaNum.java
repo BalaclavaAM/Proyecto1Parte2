@@ -26,4 +26,9 @@ public class NotaNum implements Nota {
     public boolean aprobo() {
         return nota>=3;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(notaNum());
+    }
 }

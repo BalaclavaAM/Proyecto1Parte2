@@ -31,5 +31,7 @@ public class InfoAux extends JDialog {
         JList<String> infoList = new JList<>(info);
 
         add(infoList);
+        add(new JLabel());
+        add(new JTextArea(cursoR.getCurso().getDescripcion()));
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Correquisito{
+public class Correquisito implements Restriccion{
     private final ArrayList<String> opciones;
 
     public Correquisito(ArrayList<String> opciones) {
@@ -115,4 +115,8 @@ public class Correquisito{
         return "Correquisito";
     }
 
+    @Override
+    public String nombre() {
+        return opciones.toString();
+    }
 }

@@ -15,10 +15,12 @@ public class Curso implements Serializable {
 	private final int creditos;
 	private final ArrayList<PreRestriccion> restricciones;
 	private final ArrayList<Correquisito> correquisitos;
+	private final String descripcion;
 
 
 	public Curso(String nombre, String codigo, String programa, int creditos,
-				 boolean notaNumerica, ArrayList<PreRestriccion> restricciones, ArrayList<Correquisito> correquisitos)
+				 boolean notaNumerica, ArrayList<PreRestriccion> restricciones, ArrayList<Correquisito> correquisitos,
+				 String descripcion)
 	{
 		this.nombre = nombre;
 		this.codigo = codigo;
@@ -29,6 +31,7 @@ public class Curso implements Serializable {
 		this.restricciones = restricciones;
 		this.correquisitos = correquisitos;
 		this.materia = programa;
+		this.descripcion = descripcion;
 	}
 
 
@@ -40,6 +43,9 @@ public class Curso implements Serializable {
 		return codigo;
 	}
 	public String getMateria(){ return materia; }
+	public String getDescripcion(){
+		return descripcion;
+	}
 	public ArrayList<PreRestriccion> getRestricciones() {
 		return restricciones;
 	}

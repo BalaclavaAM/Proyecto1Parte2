@@ -21,9 +21,8 @@ public class PanelSuperior extends JPanel implements ActionListener {
 		JButton home = new JButton("Home");
 		JButton anterior = new JButton("anterior");
 		JButton siguiente = new JButton("siguiente");
-		JButton cerrar = new JButton("Cerrar seccion");
+		JButton cerrar = new JButton("Cerrar sesión");
 		cerrar.setBackground(Color.decode("0xf1c132")); cerrar.addActionListener(e->principal.cerrarSeccion());
-
 		siguiente.setBackground(Color.decode("0xf1c132")); siguiente.addActionListener(e->principal.siguiente());
 		anterior.setBackground(Color.decode("0xf1c132")); anterior.addActionListener(e->principal.anterior());
 		home.setBackground(Color.decode("0xf1c132"));home.addActionListener(e->principal.home());

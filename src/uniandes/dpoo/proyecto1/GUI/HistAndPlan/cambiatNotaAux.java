@@ -13,7 +13,8 @@ import java.awt.*;
 
 public class cambiatNotaAux extends JDialog {
 
-    public cambiatNotaAux(CursoRegistrado cursoR, HistoriaAcademica historia){
+    public cambiatNotaAux(PanelHistoria panel, CursoRegistrado cursoR, HistoriaAcademica historia){
+        setSize(150,100);
         setLayout(new GridLayout(3,1));
         JLabel notaAct = new JLabel("Nota actual");
         JTextField notaActJT = new JTextField(); notaActJT.setEditable(false);
@@ -41,6 +42,7 @@ public class cambiatNotaAux extends JDialog {
                 notaR = new NotaNum(calN);
             }
             historia.actualizarNota(cursoR,notaR);
+            panel.reiniciarPanel();
         });
         add(cambiatNota);
     }

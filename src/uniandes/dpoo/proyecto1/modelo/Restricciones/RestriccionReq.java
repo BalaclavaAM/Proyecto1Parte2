@@ -1,5 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
+import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 
@@ -19,17 +20,15 @@ public class RestriccionReq implements PreRestriccion {
         return malla.itemsCumplidos(reqN) > malla.getPensum().getRequerimientos().get(reqN).getItems();
     }
 
-
     @Override
-    public boolean cumple(MallaCursos malla) {
+    public boolean cumple(MallaCursos malla){
         return cumpleReq(malla,reqN);
     }
 
     @Override
-    public boolean cumple(MallaCursos malla, Periodo periodo) {
+    public boolean cumple(CursoRegistrado cursoR,MallaCursos malla, Periodo periodo) {
         return cumpleReq(malla,periodo,reqN);
     }
-
 
     @Override
     public String tipo() {

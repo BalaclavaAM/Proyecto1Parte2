@@ -26,12 +26,11 @@ public class Prerrequisito implements PreRestriccion {
     }
 
 
-
     @Override
-    public boolean cumple(MallaCursos malla, Periodo periodo) {
+    public boolean cumple(CursoRegistrado cursoR, MallaCursos malla, Periodo periodo) {
         for(String codigo: opciones) {
-            CursoRegistrado cursoR = malla.getCurReg(codigo);
-            if (cursoR != null && (malla.aprovado(cursoR) && cursoR.getPeriodo().compare(periodo) < 0)) {
+            CursoRegistrado registro = malla.getCurReg(codigo);
+            if (registro != null && (malla.aprovado(registro) && registro.getPeriodo().compare(periodo) < 0)) {
                 return true;
             }
         }

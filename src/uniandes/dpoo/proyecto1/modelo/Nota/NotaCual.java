@@ -25,4 +25,9 @@ public class NotaCual implements Nota {
     public boolean aprobo() {
         return nota.equals(calCual.A);
     }
+
+    @Override
+    public String toString() {
+        return notaCual().toString();
+    }
 }

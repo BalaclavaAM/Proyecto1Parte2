@@ -6,5 +6,5 @@ public interface  Nota {
     public float notaNum();
     public calCual notaCual();
     public boolean aprobo();
-
+    public String toString();
 }

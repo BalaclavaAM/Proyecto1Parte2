@@ -10,8 +10,8 @@ public class CursoRegistrado {
 	private final Curso curso;
 	private final Periodo periodo;
 	private Nota nota = new NotaCual(calCual.P);
-	private EstadoCurso estado = EstadoCurso.Pendiente;
-	private boolean repetido = false;
+	private EstadoCurso estado;
+	private CursoRegistrado anterior = null;
 	private boolean agregado = false;
 	private boolean epsilon = false;
 	private boolean numerica = false;
@@ -71,22 +71,20 @@ public class CursoRegistrado {
 		return epsilon;
 	}
 
+	public void setAnterior(CursoRegistrado anterior) {
+		this.anterior = anterior;
+	}
+
+	public CursoRegistrado getAnterior() {
+		return anterior;
+	}
+
 	public void setNota(Nota nota) {
 		this.nota = nota;
-		if(nota.notaCual() != calCual.P) {
-			this.estado = EstadoCurso.Finalizado;
-		}
 	}
 
-	public void cambiarRegistro(Nota nota, boolean epsilon){
-		this.nota = nota;
-		this.epsilon = epsilon;
-		this.estado = EstadoCurso.Finalizado;
-
-	}
-
-	public void setEpsilon(boolean epsilon) {
-		this.epsilon = epsilon;
+	public int compareT(CursoRegistrado cr){
+		return getPeriodo().compare(cr.getPeriodo());
 	}
 
 	public boolean isNumerica() {
@@ -98,10 +96,7 @@ public class CursoRegistrado {
 	}
 
 	public boolean isRepetido() {
-		return repetido;
+		return anterior != null;
 	}
 
-	public void setRepetido(boolean repetido) {
-		this.repetido = repetido;
-	}
 }

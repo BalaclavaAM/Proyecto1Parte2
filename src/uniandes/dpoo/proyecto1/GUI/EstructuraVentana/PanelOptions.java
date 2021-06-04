@@ -65,6 +65,7 @@ public class PanelOptions extends JPanel  {
 
 		JButton pSM = new JButton("Planeacion"); pSM.setActionCommand("PO>Planear");
 		botones.add(pSM);
+
 		disenio(pe,3,botones.size());
 
 	}

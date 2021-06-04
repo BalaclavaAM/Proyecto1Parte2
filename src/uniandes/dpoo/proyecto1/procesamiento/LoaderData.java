@@ -13,11 +13,7 @@ import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LoaderData {
 	private final static String rutacursos = "./data/information/Cursinhos.csv";
@@ -30,7 +26,6 @@ public class LoaderData {
 			Banner s=(Banner)in.readObject();
 			in.close();
 			return s;
-			
 		}catch(Exception a){System.out.println(a);}
 		return null;  
 	}
@@ -150,7 +145,7 @@ public class LoaderData {
 			boolean numerica = Boolean.parseBoolean(partes[4]);
 			ArrayList<PreRestriccion> restricciones = armarRestricciones(partes[6],partes[7],partes[8]);
 			ArrayList<Correquisito> correquisitos = armarCorrequisitos(partes[5]);
-			Curso curso = new Curso(nombre,codigo,dpto,creditos,numerica,restricciones,correquisitos);
+			Curso curso = new Curso(nombre,codigo,dpto,creditos,numerica,restricciones,correquisitos, "descripcion");
 			if (banner.getCursosDepartamento().containsKey(dpto)){
 				banner.getCursosDepartamento().get(dpto).put(codigo,curso);
 			} else {
@@ -188,24 +183,14 @@ public class LoaderData {
 			retorno.add(new RestriccionReq(restr));
 		}
 		if (!(nivel.equals("null"))){
-		Nivel nNivel;
-		switch (nivel){
-			case "1":
-				nNivel=Nivel.UNO;
-			break;
-			case "2":
-				nNivel=Nivel.DOS;
-				break;
-			case "3":
-				nNivel=Nivel.TRES;
-				break;
-			case "4":
-				nNivel=Nivel.CUATRO;
-				break;
-			default:
-				nNivel=Nivel.CERO;
-		}
-		retorno.add(new RestriccionNivel(nNivel));
+		Nivel nNivel = switch (nivel) {
+			case "1" -> Nivel.UNO;
+			case "2" -> Nivel.DOS;
+			case "3" -> Nivel.TRES;
+			case "4" -> Nivel.CUATRO;
+			default -> Nivel.CERO;
+		};
+			retorno.add(new RestriccionNivel(nNivel));
 		}
 		return retorno;
 	}
@@ -214,9 +199,7 @@ public class LoaderData {
 		ArrayList<String> retorno = new ArrayList<>();
 		if (!(string.equals("null"))) {
 			String[] lista = string.split("/");
-			for (String e : lista) {
-				retorno.add(e);
-			}
+			retorno.addAll(Arrays.asList(lista));
 		}
 		return retorno;
 	}
@@ -225,9 +208,7 @@ public class LoaderData {
 		ArrayList<String> retorno = new ArrayList<>();
 		if (!(string.equals("null"))) {
 			String[] lista = string.split(";");
-			for (String e : lista) {
-				retorno.add(e);
-			}
+			Collections.addAll(retorno, lista);
 		}
 		return retorno;
 	}
