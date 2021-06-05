@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class PrincipalEstudiante extends PrincipalUsusario {
-    private Estudiante estudiante;
+    private final Estudiante estudiante;
     public String RUTA = "./data/imagenes/usuarioGenerico.png";
     private final JTextField nombre;
     private final JTextField codigo;
