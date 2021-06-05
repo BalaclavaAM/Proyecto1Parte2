@@ -61,7 +61,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
 	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
-        infoSemestre.putIfAbsent(peridoSistema.periodoS(),new ArrayList<>());
+        infoSemestres.putIfAbsent(peridoSistema.periodoS(),new ArrayList<>());
         ultimoPeriodo = Periodo.copy(peridoSistema);
         if(!ultimoPeriodo.periodoS().equals(peridoSistema.periodoS()) && !cursosInscritos.isEmpty()){
             vaciarInscritos();
@@ -76,7 +76,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     @Override
     public void agregarPeriodo(Periodo periodo) {
-        infoSemestre.putIfAbsent(periodo.periodoS(),new ArrayList<>());
+        infoSemestres.putIfAbsent(periodo.periodoS(),new ArrayList<>());
     }
 
     @Override
@@ -111,7 +111,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
     public double calcularPromedioSemestre(String periodoS) {
-		ArrayList<CursoRegistrado> cursosPs = infoSemestre.get(periodoS);
+		ArrayList<CursoRegistrado> cursosPs = infoSemestres.get(periodoS);
 		int creditosSemestre = 0;
 		double puntosSemestre = 0;
 
@@ -133,7 +133,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 	public double calcularPromedioAcademico() {
         double puntosSemestre = 0;
         double creditosSemestre = 0;
-        for(ArrayList<CursoRegistrado> lp: infoSemestre.values()) {
+        for(ArrayList<CursoRegistrado> lp: infoSemestres.values()) {
             for (CursoRegistrado cr : lp) {
                 if (cr.getNota().isNumeric()) {
                     int creditosCurso = cr.getCurso().getCreditos();
@@ -150,13 +150,13 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 	}
 
 	public double calcularPromedioAcademicoAntesdeP(String semestre){
-        ArrayList<String> semestres = new ArrayList<>(infoSemestre.keySet());
+        ArrayList<String> semestres = new ArrayList<>(infoSemestres.keySet());
         semestres.sort(String::compareTo);
         int indice = semestres.indexOf(semestre);
         double puntosSemestre = 0;
         double creditosSemestre = 0;
         for (int i = 0; i < indice; i++) {
-            ArrayList<CursoRegistrado> lp = infoSemestre.get(semestres.get(i));
+            ArrayList<CursoRegistrado> lp = infoSemestres.get(semestres.get(i));
             for (CursoRegistrado cr : lp) {
                 if (cr.getNota().isNumeric()) {
                     int creditosCurso = cr.getCurso().getCreditos();

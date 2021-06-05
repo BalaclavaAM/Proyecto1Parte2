@@ -8,8 +8,8 @@ import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelRequerimientos extends PanelAux {
-    private TablaReq tablaCursos;
+public class PanelValidaciones extends PanelAux {
+    private TablaCursosReq tablaCursos;
     private JScrollPane scrollTabla;
     private final JButton vR;
     private final JButton cR;
@@ -17,12 +17,12 @@ public class PanelRequerimientos extends PanelAux {
     private HistoriaAcademica historia;
     private JPanel panelBotones;
 
-    public PanelRequerimientos(InterfazBannerPrincipal principal, HistoriaAcademica historia) {
+    public PanelValidaciones(InterfazBannerPrincipal principal, HistoriaAcademica historia) {
         super(principal);
         this.historia = historia;
         Utilidades.agregarBorder(this,0.1,0.1,0.1,0.1);
         setLayout(new GridBagLayout());
-        tablaCursos = new TablaReq(this,historia);
+        tablaCursos = new TablaCursosReq(this,historia);
         vR = new JButton("Validar"); vR.addActionListener(e-> tablaCursos.validar());
         vR.setEnabled(false);
         cR = new JButton("Cambiar"); cR.addActionListener(e-> tablaCursos.cambiar());
@@ -51,7 +51,7 @@ public class PanelRequerimientos extends PanelAux {
 
     private void nuevaTabla() {
         GridBagConstraints gb = new GridBagConstraints();
-        tablaCursos = new TablaReq(this,historia);
+        tablaCursos = new TablaCursosReq(this,historia);
         scrollTabla = new JScrollPane(tablaCursos);
         gb.gridx = 0; gb.gridy = 0; gb.gridwidth = 1; gb.gridheight = 7; gb.weightx = 1; gb.weighty = 7; gb.fill = 1;
         add(scrollTabla, gb);

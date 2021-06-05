@@ -4,6 +4,8 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.ReqTipologia;
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaNum;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
@@ -47,9 +49,6 @@ public class Prueba {
         ArrayList<CursoRegistrado> cursosRegistrados = new ArrayList<>();
         Periodo p = Periodo.copy(psis);
 
-        cursosRegistrados.add(new CursoRegistrado(c1, EstadoCurso.Inscrito, false, p));
-        cursosRegistrados.add(new CursoRegistrado(c3, EstadoCurso.Inscrito,false,p));
-        cursosRegistrados.add(new CursoRegistrado(c2, EstadoCurso.Inscrito,false,p));
         Curso c4 = new Curso("Estructura de Datos","ISIS-1206","ISIS",3,true,
                 new ArrayList<>(Arrays.asList(new Prerrequisito(new ArrayList<>(Arrays.asList("ISIS-1221", "ISIS-1021"))))), new ArrayList<>(), "descripcion");
         Curso c5 = new Curso("FISICA 1","FISI-1018","ISIS",3,true,
@@ -60,15 +59,23 @@ public class Prueba {
 
         e.nuevoPlan("miprimerplan :)");
         e.nuevoPlan("misecond :)");
-
+        banner.avanzarPeriodo();
         Plan plan1 = e.getPlan("miprimerplan :)");
+        e.getHistoriaAcademica().agregarCursos(new ArrayList<>(Arrays.asList(new CursoRegistrado(c1, new NotaNum(4.0f), false, p))));
+        cursosRegistrados.add(new CursoRegistrado(c3, EstadoCurso.Inscrito,false,psis));
+        cursosRegistrados.add(new CursoRegistrado(c2, EstadoCurso.Inscrito,false,psis));
+        banner.avanzarPeriodo();
+        banner.avanzarPeriodo();
+        banner.avanzarPeriodo();
+
         e.getHistoriaAcademica().inscripcionCursos(cursosRegistrados);
         plan1.validarInscritos();
         plan1.agregarCursos(new ArrayList<>(Arrays.asList(
-                new CursoRegistrado(c6,EstadoCurso.Planeado,false,new Periodo(2023,19)),
-                new CursoRegistrado(c4,EstadoCurso.Planeado,false,new Periodo(2023,19)),
-                new CursoRegistrado(c5,EstadoCurso.Planeado, false, new Periodo(2024,20))
+                new CursoRegistrado(c6,EstadoCurso.Planeado,false, Periodo.copy(banner.getPeriodo())),
+                new CursoRegistrado(c4,EstadoCurso.Planeado,false,Periodo.copy(banner.getPeriodo())),
+                new CursoRegistrado(c5,EstadoCurso.Planeado, false, Periodo.copy(banner.getPeriodo()))
         )));
+
         banner.getUsuarios().put("Admin", new Admin("Admin","soyAdmin", "eladmin"));
         banner.getUsuarios().put("C",new Coordinador("C","2","Elcordi",carreraPru));
     }

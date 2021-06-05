@@ -72,10 +72,9 @@ public class Periodo {
         return p;
     }
 
-    public int compare(Periodo p1){
-        return compareL(this,p1);
+    public int compare(Periodo p2){
+        return compareL(this,p2);
     }
-
 
 
     public static int compareL(Periodo p1, Periodo p2) {

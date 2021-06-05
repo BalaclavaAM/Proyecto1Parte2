@@ -14,13 +14,14 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
-public class TablaReq extends JTable {
+public class TablaCursosReq extends JTable {
     private HistoriaAcademica historia;
     private DefaultTableModel model;
     private ArrayList<CursoRegistrado> posicionCursos;
-    private PanelRequerimientos exter;
+    private JDialog auxAc;
+    private PanelValidaciones exter;
 
-    TablaReq(PanelRequerimientos exter, HistoriaAcademica historia){
+    TablaCursosReq(PanelValidaciones exter, HistoriaAcademica historia){
         this.historia = historia;
         this.exter = exter;
         posicionCursos = new ArrayList<>();
@@ -40,14 +41,23 @@ public class TablaReq extends JTable {
     }
 
     public void cambiar() {
-
+        int fila = getSelectedRow();
+        if(fila != -1) {
+            if(auxAc != null) {
+                auxAc.dispose();
+            }
+            CursoRegistrado cr = posicionCursos.get(fila);
+            auxAc = new auxCambiarReq(exter, cr,historia.getCursosValidados().get(cr.getCurso().getCodigo()) ,historia);
+        }
     }
 
     public void validar() {
         int fila = getSelectedRow();
         if(fila != -1) {
-            CursoRegistrado cr = posicionCursos.get(fila);
-            new auxValidarReq(exter, cr, historia);
+            if(auxAc != null) {
+                auxAc.dispose();
+            }            CursoRegistrado cr = posicionCursos.get(fila);
+            auxAc = new auxValidarReq(exter, cr, historia);
         }
     }
 

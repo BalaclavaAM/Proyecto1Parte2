@@ -28,9 +28,6 @@ public class RequerimientoRegistrado {
         this.itemsCumplidos = 0;
     }
 
-
-
-
     public EstadoRegistro agregarCurso(CursoRegistrado cursoR){
         Periodo periodo = cursoR.getPeriodo();
         Curso curso = cursoR.getCurso();
@@ -57,7 +54,7 @@ public class RequerimientoRegistrado {
         cursosR.put(codigo,cursoR);
         this.itemsCumplidos += val;
         this.creditosCumplidos += curso.getCreditos();
-        if(periodo.compare(ultimoPeriodo) == 1){
+        if(ultimoPeriodo == null || periodo.compare(ultimoPeriodo) == 1){
             ultimoPeriodo = periodo;
         }
         if(cumplio()){
@@ -102,27 +99,14 @@ public class RequerimientoRegistrado {
     public int getCreditosCumplidos() {
         return creditosCumplidos;
     }
-
-
-
-
     public int getItemsCumplidos() {
         return itemsCumplidos;
     }
-
-
-
     public Requerimiento getReq() {
         return req;
     }
-
-
     public Map<String, CursoRegistrado> getCursosR() {
         return cursosR;
     }
-
-
-
-
 
 }

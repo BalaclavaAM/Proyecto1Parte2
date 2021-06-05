@@ -24,7 +24,7 @@ public class Plan extends MallaCursos {
     }
 
     public void validarInscritos(){ //los cursos incritos se tomarian como aprovados
-        infoSemestre.putIfAbsent(historia.getUltimoPeriodo().periodoS(),new ArrayList<>());
+        infoSemestres.putIfAbsent(historia.getUltimoPeriodo().periodoS(),new ArrayList<>());
         for(CursoRegistrado ci: historia.getCursosInscritos().values()){
             validarInscrito(ci);
         }
@@ -43,7 +43,7 @@ public class Plan extends MallaCursos {
 
     @Override
     public void agregarPeriodo(Periodo periodo) {
-        infoSemestre.putIfAbsent(periodo.periodoS(),new ArrayList<>());
+        infoSemestres.putIfAbsent(periodo.periodoS(),new ArrayList<>());
         if(primerPeriodo == null){
             primerPeriodo = periodo;
             ultimoPeriodo = periodo;

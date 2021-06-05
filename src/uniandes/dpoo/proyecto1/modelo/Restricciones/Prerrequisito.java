@@ -13,7 +13,6 @@ public class Prerrequisito implements PreRestriccion {
         this.opciones = opciones;
     }
 
-
     @Override
     public boolean cumple(MallaCursos malla) {
         for(String codigo: opciones) {

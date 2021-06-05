@@ -33,7 +33,7 @@ public class Pensum implements Serializable {
 
 	public void agregarRequerimiento(Requerimiento req) {
 		String nombre = req.getNombre();
-		if(requerimientos.containsKey(nombre)){
+		if(!requerimientos.containsKey(nombre)){
 			ReqTipologia tipologia = req.getTipologia();
 			Nivel nivel = req.getNivel();
 			int semestre = req.getSemestresugerido();

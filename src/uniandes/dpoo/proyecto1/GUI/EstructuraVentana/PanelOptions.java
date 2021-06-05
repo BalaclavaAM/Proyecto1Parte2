@@ -63,6 +63,9 @@ public class PanelOptions extends JPanel  {
 		JButton bAH = new JButton("Validar Requerimientos"); bAH.setActionCommand("PO>Validar");
 		botones.add(bAH);
 
+		JButton bP = new JButton("Pensum"); bP.setActionCommand("PO>Pensum");
+		botones.add(bP);
+
 		JButton pSM = new JButton("Planeacion"); pSM.setActionCommand("PO>Planear");
 		botones.add(pSM);
 

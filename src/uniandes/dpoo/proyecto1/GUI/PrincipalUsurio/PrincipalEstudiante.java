@@ -4,7 +4,8 @@ import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelHistoria;
 import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelPlanes;
 import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.InterfazInscripcionCursos;
-import uniandes.dpoo.proyecto1.GUI.Validaciones.PanelRequerimientos;
+import uniandes.dpoo.proyecto1.GUI.Pensum.PanelPensum;
+import uniandes.dpoo.proyecto1.GUI.Validaciones.PanelValidaciones;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
@@ -144,8 +145,13 @@ public class PrincipalEstudiante extends PrincipalUsusario {
                 PanelHistoria ph = new PanelHistoria(principal, estudiante);
                 principal.ocultarYmostrar(ph);
             }
+            case  "PO>Pensum" ->{
+                PanelPensum pp = new PanelPensum(principal,estudiante.getHistoriaAcademica());
+                principal.ocultarYmostrar(pp);
+            }
+
             case "PO>Validar" ->{
-                PanelRequerimientos pv = new PanelRequerimientos(principal,estudiante.getHistoriaAcademica());
+                PanelValidaciones pv = new PanelValidaciones(principal,estudiante.getHistoriaAcademica());
                 principal.ocultarYmostrar(pv);
             }
 
