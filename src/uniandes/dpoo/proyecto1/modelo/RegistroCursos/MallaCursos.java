@@ -291,16 +291,6 @@ public abstract class MallaCursos {
         return mr;
     }
 
-    public abstract boolean limiteValido(double creditos, Periodo periodo);
-
-
-    public abstract void agregarPeriodo(Periodo periodo);
-    public abstract CursoRegistrado getCurReg(String codigo);
-    public abstract boolean dentroPeriodo(Periodo p);
-    public abstract Periodo getPHis();
-    public abstract boolean aprovado(CursoRegistrado cursoR);
-    public abstract int itemsCumplidos(String reqN, Periodo periodo);
-    public abstract int itemsCumplidos(String reqN);
     public double getCreditos() {
         return creditos;
     }
@@ -325,6 +315,15 @@ public abstract class MallaCursos {
     public Map<String, ArrayList<CursoRegistrado>> getInfoSemestres() {
         return infoSemestres;
     }
+
+    public abstract boolean limiteValido(double creditos, Periodo periodo);
+    public abstract void agregarPeriodo(Periodo periodo);
+    public abstract CursoRegistrado getCurReg(String codigo);
+    public abstract boolean dentroPeriodo(Periodo p);
+    public abstract Periodo getPHis();
+    public abstract boolean aprovado(CursoRegistrado cursoR);
+    public abstract int itemsCumplidos(String reqN, Periodo periodo);
+    public abstract int itemsCumplidos(String reqN);
 
 }
 

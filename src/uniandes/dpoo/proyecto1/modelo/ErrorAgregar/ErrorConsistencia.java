@@ -24,11 +24,11 @@ public class ErrorConsistencia implements ErrorAgregar{
     @Override
     public String getMesage() {
         if( er==EstadoRegistro.Inconsistente) {
-            return String.format("El curso %s aprovado en %s ,registros posteriores en %s",
+            return String.format("Iconsistencia en el curso %s aprovado en %s , conflicto con registros posteriores en %s",
                     cr.getCurso().getCodigo(), cr.getPeriodo().toString(), p.toString());
         }
         else{
-            return String.format("El curso %s en %s ya se encuentro registrado y/o aprovado en %s",
+            return String.format("Repeticion en el curso %s en %s ya se encuentro registrado y/o aprovado en %s",
                     cr.getCurso().getCodigo(), cr.getPeriodo().toString(), p.toString());
         }
     }

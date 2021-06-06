@@ -8,9 +8,12 @@ import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
 import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class HistoriaAcademica extends MallaCursos implements Serializable {
@@ -21,11 +24,13 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     private static final long serialVersionUID = -491840464239633611L;
     private final Periodo primerPeriodo;
     private Periodo ultimoPeriodo;
+    private String name;
 
 
-    public HistoriaAcademica(Pensum pensum, Periodo periodo) {
+    public HistoriaAcademica(Pensum pensum, Periodo periodo, String name) {
         super(periodo);
         Periodo p = Periodo.copy(periodo);
+        this.name = name;
         this.primerPeriodo = p;
         this.ultimoPeriodo = p;
         this.pensum = pensum;
@@ -63,6 +68,57 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
                     cr.setEstado(EstadoCurso.Finalizado);
                 }
             }
+        }
+    }
+
+    public void reporteAcademico(){
+        String fileName = "./data/"+ name+"_"+"Reporte_Ac.txt";
+        String encoding = "UTF-8";
+        try {
+            PrintWriter writer = new PrintWriter(fileName, encoding);
+            writer.println("Estudiante: " + name+"\n");
+            writer.println("Creditos: " + creditos+"\n");
+            writer.println("Creditos Aprovados: " + creditosAprovados+"\n");
+            writer.println("Promedio: " + calcularPromedioAcademico()+"\n");
+            writer.println("Cursos vistos: "+"\n");
+            writer.println("Codigo,Nombre,Creditos,Periodo,Nota");
+            ArrayList<String> semestres = new ArrayList<>(infoSemestres.keySet());
+            semestres.sort(String::compareTo);
+            for (String semestre : semestres) {
+                ArrayList<CursoRegistrado> lp = infoSemestres.get(semestre);
+                for (CursoRegistrado cr : lp) {
+                    writer.println(cr.getCurso().getCodigo() + "," + cr.getCurso().getNombre() + "," +
+                            cr.getCurso().getCreditos() + ","+ cr.getPeriodo() + ","+ cr.getNota());
+                }
+            }
+            writer.close();
+        }
+        catch (IOException e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void reporteGrado(){
+        String fileName = "./data/"+ name+"_"+"Reporte_Gr.txt";
+        String encoding = "UTF-8";
+        try {
+            PrintWriter writer = new PrintWriter(fileName, encoding);
+            writer.println("Estudiante: " + name+"\n");
+            writer.println("Creditos Aprovados: " + creditosAprovados+"\n");
+            writer.println("Promedio: " + calcularPromedioAcademico()+"\n");
+            writer.println("Requrimientos: "+"\n");
+            writer.println("Nombre,Tipologia,Semestre sugerido, nivel, avance");
+            Map<Requerimiento,Double> reqAv = avanceReq();
+            for(Requerimiento req: reqAv.keySet()){
+                writer.println(req.getNombre()+","+req.getTipologia()+","+req.getSemestresugerido()+","+req.getNivel() +","
+                        + reqAv.get(req));
+            }
+            writer.close();
+        }
+        catch (IOException e){
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 

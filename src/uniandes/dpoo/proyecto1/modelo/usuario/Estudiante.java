@@ -22,7 +22,7 @@ public class Estudiante extends Usuario implements Serializable {
 					  Periodo periodo) {
 		super(nombredeusuario, contrasenha, name);
 		this.codigo = codigo;
-		this.HistoriaAcademica = new HistoriaAcademica(pensum, periodo);
+		this.HistoriaAcademica = new HistoriaAcademica(pensum, periodo, name);
 		this.carrera = carrera;
 		planes = new HashMap<>();
 		ArrayList<Integer> d = new ArrayList<>();

@@ -1,7 +1,6 @@
 package uniandes.dpoo.proyecto1.modelo.ErrorAgregar;
 
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 
 public class ErrorLimite implements ErrorAgregar{
     private CursoRegistrado cursoRegistrado;

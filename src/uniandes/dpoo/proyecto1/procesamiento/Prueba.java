@@ -79,7 +79,8 @@ public class Prueba {
                 new CursoRegistrado(c4,EstadoCurso.Planeado,false,p2),
                 new CursoRegistrado(c5,EstadoCurso.Planeado, false, p2)
         )));
-
+        e.getHistoriaAcademica().reporteAcademico();
+        e.getHistoriaAcademica().reporteGrado();
         banner.getUsuarios().put("Admin", new Admin("Admin","soyAdmin", "eladmin"));
         banner.getUsuarios().put("C",new Coordinador("C","2","Elcordi",carreraPru));
     }

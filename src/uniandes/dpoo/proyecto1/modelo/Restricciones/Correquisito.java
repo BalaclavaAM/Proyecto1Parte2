@@ -54,6 +54,7 @@ public class Correquisito implements Restriccion{
     private static boolean cumpletodos(CursoRegistrado cursoR, MallaCursos malla, Map<String,Nodo> nodoMap,Periodo periodo){
         Nodo nac = nodoMap.get(cursoR.getCurso().getCodigo());
         if(nac.recorrido && nac.estado == Estado.pendiente){
+            // TODO correquisitos ciclicos
             return false;
         }
 
