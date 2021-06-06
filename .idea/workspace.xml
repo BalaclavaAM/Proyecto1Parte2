@@ -4,32 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="reportes">
-      <change afterPath="$PROJECT_DIR$/modelo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/~$cumentoDiseño.docx" afterDir="false" />
+    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Documento VF">
+      <change afterPath="$PROJECT_DIR$/Texto Reflexion.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/~$xto Reflexion.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelHistoria$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelHistoria$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelHistoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelHistoria.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelPlanes$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelPlanes$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelPlanes.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelPlanes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/PrincipalUsurio/PrincipalEstudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/GUI/PrincipalUsurio/PrincipalEstudiante.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/RegistroCursos/EstadoAgregar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/RegistroCursos/HistoriaAcademica.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/RegistroCursos/HistoriaAcademica.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/RegistroCursos/RestriccionExp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/Restricciones/PreRestriccion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/Restricciones/Prerrequisito.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/uniandes/dpoo/proyecto1/modelo/Restricciones/Prerrequisito.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pedrito_Reporte_Gr.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/pedrito_Reporte_Gr.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/null_Reporte_Ac.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedrito_Reporte_Ac.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelHistoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelHistoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelPlanes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/HistAndPlan/PanelPlanes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/InterfazBannerPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DocumentoDiseño.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DocumentoDiseño.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalUsurio/PrincipalEstudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalUsurio/PrincipalEstudiante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/EstadoAgregar.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/RegistroCursos/RestriccionExp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/PreRestriccion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Prerrequisito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/modelo/Restricciones/Prerrequisito.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$cumentoDiseño.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +95,7 @@
       <module name="Proyecto1Parte2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="uniandes.dpoo.proyecto1.GUI.HistAndPlan.*" />
+          <option name="PATTERN" value="uniandes.dpoo.proyecto1.GUI.Pensum.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -157,6 +138,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -233,7 +225,7 @@
       <workItem from="1622965321576" duration="1322000" />
       <workItem from="1622966679411" duration="7864000" />
       <workItem from="1622975752701" duration="8446000" />
-      <workItem from="1623006968484" duration="1001000" />
+      <workItem from="1623006968484" duration="3241000" />
     </task>
     <task id="LOCAL-00001" summary="f1">
       <created>1618165373822</created>
@@ -515,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622978108173</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Documento VF">
+      <created>1623009083956</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1623009083957</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +551,8 @@
     <MESSAGE value="extcreditacion" />
     <MESSAGE value="edd" />
     <MESSAGE value="reportes" />
-    <option name="LAST_COMMIT_MESSAGE" value="reportes" />
+    <MESSAGE value="Documento VF" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documento VF" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

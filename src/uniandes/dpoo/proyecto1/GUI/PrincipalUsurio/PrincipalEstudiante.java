@@ -6,7 +6,6 @@ import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.InterfazInscripcionCursos;
 import uniandes.dpoo.proyecto1.GUI.Pensum.PanelPensum;
 import uniandes.dpoo.proyecto1.GUI.Pensum.PanelValidaciones;
-import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
 import uniandes.dpoo.proyecto1.GUI.Utilidades;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
