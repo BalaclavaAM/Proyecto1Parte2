@@ -140,7 +140,7 @@ public class LoaderData {
 			String[] partes = linea.trim().split(",");
 			String nombre = partes[0];
 			String codigo = partes[1];
-			int creditos = Integer.parseInt(partes[2]);
+			Double creditos = Double.parseDouble(partes[2]);
 			String dpto = partes[3];
 			boolean numerica = Boolean.parseBoolean(partes[4]);
 			Curso curso = new Curso(nombre,codigo,dpto,creditos,numerica,armarPerrequisitos(partes[6])

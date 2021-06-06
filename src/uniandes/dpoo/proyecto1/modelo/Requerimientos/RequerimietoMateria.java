@@ -16,7 +16,7 @@ public class RequerimietoMateria extends Requerimiento {
     }
 
     @Override
-    public int validar(Curso curso) {
+    public double validar(Curso curso) {
         if(materia.equals(curso.getMateria())){
             return 1;
         }

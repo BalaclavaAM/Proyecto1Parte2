@@ -80,6 +80,9 @@ public class Periodo {
     public static int compareL(Periodo p1, Periodo p2) {
         int c1 = Integer.compare(p1.anio, p2.anio);
         if (c1 == 0) {
+            if((p1.semestre == 19 && p2.semestre == 18) || (p1.semestre == 18 && p2.semestre == 19)){
+                return 0;
+            }
             int c2 = Integer.compare(p1.semestre, p2.semestre);
             if (c2 == 0) {
                 int c3 = Integer.compare(p1.ciclo, p2.ciclo);

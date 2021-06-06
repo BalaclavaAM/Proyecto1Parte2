@@ -32,7 +32,7 @@ public class RequerimientoRegistrado {
         Periodo periodo = cursoR.getPeriodo();
         Curso curso = cursoR.getCurso();
         String codigo = curso.getCodigo();
-        int val = req.validar(curso);
+        double val = req.validar(curso);
         if( val == 0 ){
             return EstadoRegistro.Inexistente;
         }
@@ -74,7 +74,7 @@ public class RequerimientoRegistrado {
         }
         cursosR.remove(codigo);
         Curso curso = cursoR.getCurso();
-        int val = req.validar(curso);
+        double val = req.validar(curso);
         itemsCumplidos -= val;
         creditosCumplidos -= curso.getCreditos();
         if(cursoR.getPeriodo().compare(ultimoPeriodo) == 0){

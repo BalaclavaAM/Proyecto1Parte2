@@ -33,6 +33,7 @@ public class PrincipalEstudiante extends PrincipalUsusario {
     public PrincipalEstudiante(InterfazBannerPrincipal principal, Estudiante estudiante) {
         super(principal);
         this.estudiante = estudiante;
+        estudiante.getHistoriaAcademica().actualizarPeriodo();
         this.imagen = new JPanel(){
             @Override
             public void paint(Graphics g) {

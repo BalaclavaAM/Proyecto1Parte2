@@ -45,6 +45,7 @@ public class TablaHorMod extends JTable{
         setDefaultRenderer(Object.class,new MiRender());
     }
 
+
     public void agregar(CursoRegistrado cursoR){
         Vector<String> fila = nuevaFila(cursoR, nota);
         int pos = calcularPosicion(cursoR.getPeriodo().periodoS());
@@ -131,8 +132,7 @@ public class TablaHorMod extends JTable{
         CursoRegistrado cursoR = posicionCursos.get(fila);
         if(fila != -1 && cursoR != null) {
             String estado = posicionEstado.get(fila);
-            InfoAux ia = new InfoAux(cursoR,estado,nota);
-            ia.setVisible(true);
+            new InfoAux(cursoR,estado,nota);
         }
     }
 

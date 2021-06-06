@@ -44,7 +44,7 @@ public class PanelHistoria extends PanelAux {
         this.imagen = imagen();
 
         JButton mostrarIn = new JButton("Mostra Info");
-        mostrarIn.addActionListener(e -> {});
+        mostrarIn.addActionListener(e -> tablaHistoria.mostrarInfo(true));
         JButton agregar = new JButton("Agregar Curso");
         agregar.addActionListener(e -> {
             AgregarAux au = new AgregarAux(tablaHistoria,principal.getBanner(),true);

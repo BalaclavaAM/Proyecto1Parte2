@@ -21,7 +21,7 @@ public class RequerimientoCreditos extends Requerimiento {
 
 
     @Override
-    public int validar(Curso curso){
+    public double validar(Curso curso){
         if (codigos.contains(curso.getCodigo())){
             return curso.getCreditos();
         }

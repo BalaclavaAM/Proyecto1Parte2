@@ -32,7 +32,7 @@ public class PanelPlan extends PanelAux {
         infoSemestres = plan.getInfoSemestres();
 
         JButton mostrarIn = new JButton("Mostra Info"); mostrarIn.addActionListener(e->{
-
+            tablaPlan.mostrarInfo(false);
         });
         JButton agregar = new JButton("Agregar Curso"); agregar.addActionListener(e->{
                 AgregarAux au = new AgregarAux(tablaPlan,principal.getBanner(),false);
@@ -53,12 +53,12 @@ public class PanelPlan extends PanelAux {
         GridBagConstraints gb = new GridBagConstraints();
         JPanel conNombre = Utilidades.centrarV(new JComponent[]{Jnombre},1,1, false,false);
         JPanel conValidar = Utilidades.centrarV(new JComponent[]{Jvalidar},1,0, true,false);
+        Utilidades.agregarBorder(conValidar,0.25,0,0.1,0.1);
         gb.gridy = 0; gb.gridx = 1; gb.gridwidth = 4; gb.gridheight = 3;  gb.weightx = 4; gb.weighty = 3;gb.fill = 1;
         add(conNombre,gb);
         Utilidades.agregarBorder(conNombre,0.1,0.1,0.2,0.2);
-        gb.gridy = 11;
+        gb.gridy = 11; gb.gridheight = 2; gb.weighty = 2;
         add(conValidar,gb);
-        Utilidades.agregarBorder(conValidar,0.25,0.25,0.1,0.1);
         gb.gridx = 1; gb.gridy=10; gb.gridwidth = 4; gb.gridheight = 1;  gb.weightx = 4; gb.weighty = 0;
         add(panelBotones,gb);
         nuevaTabla(gb);

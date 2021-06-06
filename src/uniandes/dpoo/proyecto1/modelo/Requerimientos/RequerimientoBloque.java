@@ -19,7 +19,7 @@ public class RequerimientoBloque extends Requerimiento {
     }
 
     @Override
-    public int validar(Curso curso) {
+    public double validar(Curso curso) {
         if(codigos.contains(curso.getCodigo())){
             return 1;
         }

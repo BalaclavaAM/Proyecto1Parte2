@@ -59,7 +59,7 @@ public class PanelValidaciones extends PanelAux {
 
 
     public void actualizarPanel(){
-        //no hacer nada
+        reiniciarPanel();
     }
 
     public void reiniciarPanel(){

@@ -66,7 +66,18 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
     @Override
+    public boolean limiteValido(double creditos, Periodo periodo) {
+        double prom = calcularPromedioAcademicoHastaP(ultimoPeriodo.periodoS());
+        if(prom >= 4){
+            return conteoSemestres.get(periodo.periodoS()) + creditos <= 25;
+        }else{
+            return conteoSemestres.get(periodo.periodoS()) + creditos <= 20.5;
+        }
+    }
+
+    @Override
     public void agregarPeriodo(Periodo periodo) {
+        conteoSemestres.putIfAbsent(periodo.periodoS(),0.0);
         infoSemestres.putIfAbsent(periodo.periodoS(),new ArrayList<>());
     }
 
@@ -108,7 +119,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
         for (CursoRegistrado cr: cursosPs) {
             if (cr.isNumerica()) {
-                int creditosCurso = cr.getCurso().getCreditos();
+                double creditosCurso = cr.getCurso().getCreditos();
                 creditosSemestre += creditosCurso;
                 puntosSemestre += creditosCurso * cr.getNota().notaNum();
             }
@@ -127,7 +138,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         for(ArrayList<CursoRegistrado> lp: infoSemestres.values()) {
             for (CursoRegistrado cr : lp) {
                 if (cr.getNota().isNumeric()) {
-                    int creditosCurso = cr.getCurso().getCreditos();
+                    double creditosCurso = cr.getCurso().getCreditos();
                     creditosSemestre += creditosCurso;
                     puntosSemestre += creditosCurso * cr.getNota().notaNum();
                 }
@@ -140,7 +151,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 		return 0;
 	}
 
-	public double calcularPromedioAcademicoAntesdeP(String semestre){
+	public double calcularPromedioAcademicoHastaP(String semestre){
         ArrayList<String> semestres = new ArrayList<>(infoSemestres.keySet());
         semestres.sort(String::compareTo);
         int indice = semestres.indexOf(semestre);
@@ -150,7 +161,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
             ArrayList<CursoRegistrado> lp = infoSemestres.get(semestres.get(i));
             for (CursoRegistrado cr : lp) {
                 if (cr.getNota().isNumeric()) {
-                    int creditosCurso = cr.getCurso().getCreditos();
+                    double creditosCurso = cr.getCurso().getCreditos();
                     creditosSemestre += creditosCurso;
                     puntosSemestre += creditosCurso * cr.getNota().notaNum();
                 }
@@ -208,10 +219,6 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
             return rR.getItemsCumplidos();
         }
         return 0;
-    }
-
-    public boolean limiteValido(String periodo){
-        return true;
     }
 
     /*public static void main(String[] args) {

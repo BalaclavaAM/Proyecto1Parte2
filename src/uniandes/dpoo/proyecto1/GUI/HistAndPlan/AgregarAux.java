@@ -15,19 +15,17 @@ import java.awt.*;
 import java.util.Map;
 
 public class AgregarAux extends JDialog {
-    private Banner banner;
-    private Map<String, CursoRegistrado> cursosAgregar;
-    private JTextField Jcodigo;
+    private final JTextField Jcodigo;
     private JTextField cursoN;
     private JTextField Janio;
     private JTextField Jnota;
     private JComboBox<Integer> semestre;
     private JComboBox<Integer> ciclo;
-    private Checkbox epsilon;
+    private final Checkbox epsilon;
     private JButton agregar;
     private Curso curso;
-    private boolean nota;
-    private TablaHorMod table;
+    private final boolean nota;
+    private final TablaHorMod table;
 
 
     public AgregarAux(TablaHorMod table, Banner banner, boolean nota) {
@@ -35,7 +33,6 @@ public class AgregarAux extends JDialog {
         setDefaultCloseOperation(1);
         this.table = table;
         this.nota = nota;
-        this.banner = banner;
         setSize(600, 100);
         setLayout(new BorderLayout());
         JLabel codlab = new JLabel("Codigo:");
@@ -48,8 +45,9 @@ public class AgregarAux extends JDialog {
                 cursoN.setText(curso.getNombre());
                 Janio.setEnabled(true);
                 semestre.setEnabled(true);
-                if (nota) {
-                    Jnota.setEnabled(true);
+                if(!curso.isCompleto()) {
+                    int item = (int) semestre.getSelectedItem();
+                    ciclo.setEnabled(!(item == 19 || item == 18));
                 }
             }
         });
@@ -62,9 +60,12 @@ public class AgregarAux extends JDialog {
         ciclo = new JComboBox<>(new Integer[]{1, 2});
         cursoN = new JTextField();
         Janio = new JTextField("año");
-        semestre = new JComboBox<>(new Integer[]{10, 19, 20});
+        semestre = new JComboBox<>(new Integer[]{10, 18, 19, 20});
         semestre.addItemListener((event) -> {
-            ciclo.setEnabled((int) semestre.getSelectedItem() != 19);
+            if(!curso.isCompleto()) {
+                int item = (int) semestre.getSelectedItem();
+                ciclo.setEnabled(!(item == 19 || item == 18));
+            }
         });
         epsilon = new Checkbox("epsilon.");
         if (nota) {
@@ -73,36 +74,19 @@ public class AgregarAux extends JDialog {
         }
         GridBagConstraints gb = new GridBagConstraints();
         JPanel superior = new JPanel(new GridBagLayout());
-        gb.gridx = 0;
-        gb.gridy = 0;
-        gb.gridwidth = 4;
-        gb.gridheight = 1;
-        gb.weightx = 4;
-        gb.fill = 1;
+        gb.gridx = 0;gb.gridy = 0;gb.gridwidth = 4;gb.gridheight = 1;gb.weightx = 4;gb.fill = 1;
         superior.add(codlab, gb);
-        gb.gridx = 4;
-        gb.gridwidth = 5;
-        gb.weightx = 5;
+        gb.gridx = 4;gb.gridwidth = 5;gb.weightx = 5;
         superior.add(Jcodigo, gb);
-        gb.gridx = 9;
-        gb.gridwidth = 3;
-        gb.weightx = 3;
+        gb.gridx = 9;gb.gridwidth = 3;gb.weightx = 3;
         superior.add(buscar, gb);
-        gb.gridx = 12;
-        gb.gridwidth = 2;
-        gb.weightx = 1;
+        gb.gridx = 12;gb.gridwidth = 2;gb.weightx = 1;
         superior.add(new JLabel(), gb);
         JPanel inferior = new JPanel(new GridBagLayout());
         gb = new GridBagConstraints();
-        gb.gridx = 0;
-        gb.gridy = 0;
-        gb.gridwidth = 3;
-        gb.weightx = 3;
-        gb.fill = 1;
+        gb.gridx = 0;gb.gridy = 0;gb.gridwidth = 3;gb.weightx = 3;gb.fill = 1;
         inferior.add(cursoN, gb);
-        gb.gridx = 3;
-        gb.gridwidth = 2;
-        gb.weightx = 2;
+        gb.gridx = 3;gb.gridwidth = 2;gb.weightx = 2;
         inferior.add(Janio, gb);
         gb.gridx += gb.weightx;
         inferior.add(semestre, gb);
@@ -138,10 +122,11 @@ public class AgregarAux extends JDialog {
 
         try {
             int anio = Integer.parseInt(Janio.getText());
+            int itemS = (int) semestre.getSelectedItem();
             if (ciclo.isEnabled()) {
-                p = new Periodo(anio, (Integer) semestre.getSelectedItem(), (Integer) ciclo.getSelectedItem());
+                p = new Periodo(anio, itemS , (Integer) ciclo.getSelectedItem());
             } else {
-                p = new Periodo(anio, (Integer) semestre.getSelectedItem());
+                p = new Periodo(anio, itemS);
             }
             CursoRegistrado cursoR;
             if (nota) {

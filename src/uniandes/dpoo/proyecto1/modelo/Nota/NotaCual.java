@@ -28,6 +28,6 @@ public class NotaCual implements Nota {
 
     @Override
     public String toString() {
-        return notaCual().toString();
+        return  notaCual().toString();
     }
 }

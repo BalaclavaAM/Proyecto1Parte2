@@ -61,12 +61,12 @@ public class Prueba {
 
         banner.avanzarPeriodo();
         e.getHistoriaAcademica().agregarCursos(new ArrayList<>(Arrays.asList(new CursoRegistrado(c1, new NotaNum(4.0f), false, p))));
-        cursosRegistrados.add(new CursoRegistrado(c3, EstadoCurso.Inscrito,false,psis));
-        cursosRegistrados.add(new CursoRegistrado(c2, EstadoCurso.Inscrito,false,psis));
+        cursosRegistrados.add(new CursoRegistrado(c3, EstadoCurso.Inscrito,false,Periodo.copy(psis)));
+        cursosRegistrados.add(new CursoRegistrado(c2, EstadoCurso.Inscrito,false,Periodo.copy(psis)));
+        e.getHistoriaAcademica().inscripcionCursos(cursosRegistrados);
         banner.avanzarPeriodo();
         banner.avanzarPeriodo();
 
-        e.getHistoriaAcademica().inscripcionCursos(cursosRegistrados);
         e.nuevoPlan("miprimerplan :)");
         e.nuevoPlan("misecond :)");
         banner.avanzarPeriodo();

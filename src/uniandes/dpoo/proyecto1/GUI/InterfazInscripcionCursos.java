@@ -76,7 +76,7 @@ public class InterfazInscripcionCursos extends PanelAux implements ActionListene
         for (Curso curso:cursos){
             data[x][0]=curso.getCodigo();
             data[x][1]=curso.getNombre();
-            data[x][2]=Integer.toString(curso.getCreditos());
+            data[x][2]=Double.toString(curso.getCreditos());
             data[x][3]="e";
             data[x][4]="a";
             x++;

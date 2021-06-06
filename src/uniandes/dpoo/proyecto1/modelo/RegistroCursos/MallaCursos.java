@@ -12,16 +12,18 @@ public abstract class MallaCursos {
     protected static final long serialVersionUID = -491840464239633611L;
     protected Pensum pensum;
     protected Periodo peridoSistema;
-    protected int creditos = 0;
-    protected int creditosAprovados = 0;
+    protected double creditos = 0;
+    protected double creditosAprovados = 0;
     protected Map<String, CursoRegistrado> cursosRegistrados;
     protected Map<String, RequerimientoRegistrado> reqsRegistrados;
-    protected Map<String, String> cursosValidados; // <CodigoCurso,NombreRequerimiento>
+    protected Map<String, String> cursosValidados;// <CodigoCurso,NombreRequerimiento>
+    protected Map<String, Double> conteoSemestres;
     protected Map<String,  ArrayList<CursoRegistrado>> infoSemestres; //dentro de un Semestre pueden haber dos periodos por los ciclos
     //se cuenta a semestre a los intersemestrales
 
     public MallaCursos(Periodo periodoSis){
         this.peridoSistema = periodoSis;
+        this.conteoSemestres = new HashMap<>();
         this.cursosRegistrados = new Hashtable<>();
         this.reqsRegistrados = new Hashtable<>();
         this.cursosValidados = new Hashtable<>();
@@ -40,6 +42,7 @@ public abstract class MallaCursos {
         formatoAgregar(cursosR, cursosPeriodos, Lperiodos, estado);
         for (String p : Lperiodos) {
             ArrayList<CursoRegistrado> cursosP = cursosPeriodos.get(p);
+
             Periodo pc = Periodo.stringToPeriodo(p);
             if (dentroPeriodo(pc) || (ins && dentroIns(pc))) {
                 agregarPeriodo(Periodo.stringToPeriodo(p));
@@ -70,7 +73,13 @@ public abstract class MallaCursos {
         RestriccionNivel.cursosCumple(cursosP, this, periodo, estado);
         Correquisito.cursosCumple(cursosP, this, periodo, estado);
         for(CursoRegistrado cr: cursosP){
-            agregarCurso(cr,estadosRegistros.get(cr));
+            if(limiteValido(cr.getCurso().getCreditos(),periodo)) {
+                double conteo =conteoSemestres.get(periodo.periodoS());
+                conteoSemestres.put(periodo.periodoS(), conteo +cr.getCurso().getCreditos());
+                agregarCurso(cr, estadosRegistros.get(cr));
+            }else{
+                estado.add(new EstadoAgregar(cr,EstadoRegistro.SobreInscripcion));
+            }
         }
         return cursosP;
     }
@@ -263,9 +272,8 @@ public abstract class MallaCursos {
         return mr;
     }
 
-    public boolean cumplioReq(Requerimiento rq){
-        return itemsCumplidos(rq.getNombre(),peridoSistema) >= rq.getItems();
-    }
+    public abstract boolean limiteValido(double creditos, Periodo periodo);
+
 
     public abstract void agregarPeriodo(Periodo periodo);
     public abstract CursoRegistrado getCurReg(String codigo);
@@ -274,10 +282,10 @@ public abstract class MallaCursos {
     public abstract boolean aprovado(CursoRegistrado cursoR);
     public abstract int itemsCumplidos(String reqN, Periodo periodo);
     public abstract int itemsCumplidos(String reqN);
-    public int getCreditos() {
+    public double getCreditos() {
         return creditos;
     }
-    public int getCreditosAprovados() {
+    public double getCreditosAprovados() {
         return creditosAprovados;
     }
     public Pensum getPensum() {

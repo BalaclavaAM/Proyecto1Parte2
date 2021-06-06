@@ -60,7 +60,7 @@ public abstract class Requerimiento implements Serializable {
 		return Integer.compare(semestresugerido,req.semestresugerido);
 	}
 
-	public abstract int  validar(Curso curso); //devuelve la cantidad de items que cumple el curso
+	public abstract double  validar(Curso curso); //devuelve la cantidad de items que cumple el curso
 
 	public String[] getMains() {
 		return mains;

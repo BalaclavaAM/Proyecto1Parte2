@@ -4,15 +4,14 @@ import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Curso implements Serializable {
 	private static final long serialVersionUID = -1708691240589592764L;
 	private final String nombre;
 	private final String codigo;
-	private final boolean NotaNumerica;
+	private final boolean completo;
 	private final String materia; // es lo mismo que aparece en la oferta de curso, se podria utilizar un enum(muy grande)
-	private final int creditos;
+	private final double creditos;
 	private final ArrayList<Correquisito> correquisitos;
 	private final ArrayList<Prerrequisito> prerrequisitos;
 	private final ArrayList<RestriccionReq> restriccionesReqs;
@@ -22,7 +21,7 @@ public class Curso implements Serializable {
 
 
 
-	public Curso(String nombre, String codigo, String programa, int creditos, boolean notaNumerica,
+	public Curso(String nombre, String codigo, String programa, double creditos, boolean notaNumerica,
 				 ArrayList<Prerrequisito> prerrequisitos, ArrayList<Correquisito> correquisitos,
 				 ArrayList<RestriccionReq> restriccionesReqs, RestriccionNivel restriccionNivel, String descripcion)
 	{
@@ -31,7 +30,7 @@ public class Curso implements Serializable {
 		this.creditos = creditos;
 		//meramente informativa o para validar;
 		//this.semanas = semanas; //no usado, serviria para corregir reqisitos cursos de 8 semanas con perrequistos cursos de 16 (poco comun)
-		NotaNumerica = notaNumerica;
+		completo = notaNumerica;
 		this.correquisitos = correquisitos;
 		this.prerrequisitos = prerrequisitos;
 		this.restriccionesReqs = restriccionesReqs;
@@ -70,8 +69,11 @@ public class Curso implements Serializable {
 		return RestriccionNivel;
 	}
 
-	public int getCreditos() {
+	public Double getCreditos() {
 		return creditos;
 	}
 
+	public boolean isCompleto() {
+		return completo;
+	}
 }

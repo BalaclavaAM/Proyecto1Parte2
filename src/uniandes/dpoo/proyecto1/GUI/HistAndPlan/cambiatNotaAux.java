@@ -17,15 +17,10 @@ public class cambiatNotaAux extends JDialog {
         setSize(150,100);
         setLayout(new GridLayout(3,1));
         JLabel notaAct = new JLabel("Nota actual");
-        JTextField notaActJT = new JTextField(); notaActJT.setEditable(false);
+        JTextField notaActJT = new JTextField(cursoR.getNota().toString()); notaActJT.setEditable(false);
         JPanel na = new JPanel(new GridLayout(1,2));
         na.add(notaAct);na.add(notaActJT);
         add(na);
-        if(cursoR.getNota().isNumeric()){
-            notaActJT.setText(String.valueOf(cursoR.getNota().notaNum()));
-        }else{
-            notaActJT.setText(cursoR.getNota().notaCual().toString());
-        }
         JLabel notaNuv = new JLabel("Nota nueva");
         JTextField notaNuvJT = new JTextField("0.0");
         JPanel nn = new JPanel(new GridLayout(1,2));

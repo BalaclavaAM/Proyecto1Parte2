@@ -27,7 +27,6 @@ import javax.swing.*;
 public class InterfazBannerPrincipal extends JFrame implements ActionListener {
     @Serial
     private static final long serialVersionUID = 7466153715672542511L;
-	
 	private final Banner banner;
 	private final PanelOptions opciones;
     private final PanelImagenFondo fondo;
@@ -36,12 +35,11 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 	private PrincipalUsusario principalUsuario;
 
 
-	
 	public InterfazBannerPrincipal () {
 		setTitle( "Banner" );
         getContentPane( ).setLayout( new BorderLayout( ) );
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize( 850, 550 );
+        setSize( 1000, 650 );
         opciones = new PanelOptions(this);
         fondo = new PanelImagenFondo();
         PanelSuperior superior = new PanelSuperior(this);
@@ -52,8 +50,6 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
             LoaderData.CargaCursos(banner);
             LoaderData.CargaSecciones(banner);
             LoaderData.cargarSeccionesNativas(banner);
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

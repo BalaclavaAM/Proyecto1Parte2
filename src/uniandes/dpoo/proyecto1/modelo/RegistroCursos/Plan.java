@@ -25,8 +25,10 @@ public class Plan extends MallaCursos {
 
     public void validarInscritos(){ //los cursos incritos se tomarian como aprovados
         infoSemestres.putIfAbsent(Periodo.copy(peridoSistema).periodoS(),new ArrayList<>());
-        for(CursoRegistrado ci: historia.getCursosInscritos()){
-            validarInscrito(ci);
+        if(historia.getCursosInscritos() != null) {
+            for (CursoRegistrado ci : historia.getCursosInscritos()) {
+                validarInscrito(ci);
+            }
         }
     }
 
@@ -42,7 +44,18 @@ public class Plan extends MallaCursos {
 
 
     @Override
+    public boolean limiteValido(double creditos, Periodo periodo) {
+        double prom = historia.calcularPromedioAcademicoHastaP(ultimoPeriodo.periodoS());
+        if(prom >= 4){
+            return conteoSemestres.get(ultimoPeriodo.periodoS()) + creditos <= 25;
+        }else{
+            return conteoSemestres.get(ultimoPeriodo.periodoS()) + creditos <= 20.5;
+        }
+    }
+
+    @Override
     public void agregarPeriodo(Periodo periodo) {
+        conteoSemestres.putIfAbsent(periodo.periodoS(),0.0);
         infoSemestres.putIfAbsent(periodo.periodoS(),new ArrayList<>());
         if(primerPeriodo == null){
             primerPeriodo = periodo;
