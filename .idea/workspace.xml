@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Documento VF">
-      <change afterPath="$PROJECT_DIR$/Texto Reflexion.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/~$xto Reflexion.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DocumentoDiseño.docx" beforeDir="false" afterPath="$PROJECT_DIR$/DocumentoDiseño.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalUsurio/PrincipalEstudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/uniandes/dpoo/proyecto1/GUI/PrincipalUsurio/PrincipalEstudiante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$cumentoDiseño.docx" beforeDir="false" />
-    </list>
+    <list default="true" id="ba16f909-cfc8-4957-9da7-ff3ca4abedc5" name="Default Changelist" comment="Texto reflexivo, estoy practiacamente solo." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,7 +218,7 @@
       <workItem from="1622965321576" duration="1322000" />
       <workItem from="1622966679411" duration="7864000" />
       <workItem from="1622975752701" duration="8446000" />
-      <workItem from="1623006968484" duration="3241000" />
+      <workItem from="1623006968484" duration="3922000" />
     </task>
     <task id="LOCAL-00001" summary="f1">
       <created>1618165373822</created>
@@ -514,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623009083957</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Texto reflexivo, estoy practiacamente solo.">
+      <created>1623017827584</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1623017827584</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +552,8 @@
     <MESSAGE value="edd" />
     <MESSAGE value="reportes" />
     <MESSAGE value="Documento VF" />
-    <option name="LAST_COMMIT_MESSAGE" value="Documento VF" />
+    <MESSAGE value="Texto reflexivo, estoy practiacamente solo." />
+    <option name="LAST_COMMIT_MESSAGE" value="Texto reflexivo, estoy practiacamente solo." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
