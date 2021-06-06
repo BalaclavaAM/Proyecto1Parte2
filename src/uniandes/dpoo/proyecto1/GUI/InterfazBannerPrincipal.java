@@ -3,9 +3,9 @@ package uniandes.dpoo.proyecto1.GUI;
 import uniandes.dpoo.proyecto1.GUI.EstructuraVentana.PanelImagenFondo;
 import uniandes.dpoo.proyecto1.GUI.EstructuraVentana.PanelOptions;
 import uniandes.dpoo.proyecto1.GUI.EstructuraVentana.PanelSuperior;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalEstudiante;
 import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalAdmin;
 import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalCoordinador;
-import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalEstudiante;
 import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.usuario.Admin;
@@ -140,7 +140,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
 
         }else {
             actualizarPanel();
-            System.out.println("error de inicio");
+            JOptionPane.showMessageDialog(this, "Error de Inicio");
         }
     }
 

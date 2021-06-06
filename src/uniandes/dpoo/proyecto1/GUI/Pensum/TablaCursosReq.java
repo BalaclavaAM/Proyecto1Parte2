@@ -1,4 +1,4 @@
-package uniandes.dpoo.proyecto1.GUI.Validaciones;
+package uniandes.dpoo.proyecto1.GUI.Pensum;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;

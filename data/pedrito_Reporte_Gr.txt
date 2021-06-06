@@ -4,7 +4,7 @@ Creditos Aprovados: 3.0
 
 Promedio: 4.0
 
-Requrimiento: 
+Requrimientos: 
 
 Nombre,Tipologia,Semestre sugerido, nivel, avance
 IP,Obligatorio,1,UNO,1.0

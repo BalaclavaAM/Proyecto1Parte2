@@ -1,6 +1,5 @@
-package uniandes.dpoo.proyecto1.GUI.Validaciones;
+package uniandes.dpoo.proyecto1.GUI.Pensum;
 
-import uniandes.dpoo.proyecto1.GUI.Pensum.TablaReq;
 import uniandes.dpoo.proyecto1.GUI.Utilidades;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;

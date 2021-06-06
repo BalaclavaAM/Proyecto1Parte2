@@ -3,7 +3,6 @@ package uniandes.dpoo.proyecto1.modelo.Restricciones;
 import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorAgregar;
 import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorRestriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 

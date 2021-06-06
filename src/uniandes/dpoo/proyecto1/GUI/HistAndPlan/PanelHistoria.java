@@ -4,19 +4,16 @@ import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.PanelAux;
 import uniandes.dpoo.proyecto1.GUI.Utilidades;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
 public class PanelHistoria extends PanelAux {
     public String RUTA = "./data/imagenes/usuarioGenerico.png";
-    private final Estudiante estudiante;
     private final JLabel creditosIIn;
     private final JLabel creditosAIn;
     private final JLabel promedioIn;
@@ -25,22 +22,23 @@ public class PanelHistoria extends PanelAux {
     private JScrollPane scrollTabla;
     private final JButton Bvalidar;
     private final JPanel panelBotones;
+    private final JPanel panelDatos;
     private final JPanel panelInfo;
-    private final Map<String,ArrayList<CursoRegistrado>> infoSemestres;
+    private final HistoriaAcademica historia;
 
 
-    public PanelHistoria(InterfazBannerPrincipal principal, Estudiante estudiante) {
+    public PanelHistoria(InterfazBannerPrincipal principal, HistoriaAcademica historiaAcademica, String codigo,
+                         String name) {
         super(principal);
-        this.estudiante = estudiante;
         setLayout(new GridBagLayout());
         Utilidades.agregarBorder(this,0.05,0.05,0.03,0.03);
-        JTextField nombreJT = new JTextField(estudiante.getNombre());
+        JTextField nombreJT = new JTextField(name);
         nombreJT.setEditable(false);
-        JTextField codigoJT = new JTextField(estudiante.getCodigo());
+        JTextField codigoJT = new JTextField(codigo);
         codigoJT.setEditable(false);
         nombreJT.setEditable(false);
         nombreJT.setHorizontalAlignment(0);
-        infoSemestres = estudiante.getHistoriaAcademica().getInfoSemestres();
+        historia = historiaAcademica;
         this.imagen = imagen();
 
         JButton mostrarIn = new JButton("Mostra Info");
@@ -56,7 +54,7 @@ public class PanelHistoria extends PanelAux {
         Bnota.addActionListener(e -> {
             CursoRegistrado cursoR = tablaHistoria.getSelecteCursoR();
             if(cursoR != null) {
-                cambiatNotaAux cna = new cambiatNotaAux(this,cursoR, estudiante.getHistoriaAcademica());
+                cambiatNotaAux cna = new cambiatNotaAux(this,cursoR, historia);
                 cna.setVisible(true);
                 reiniciarPanel();
             }
@@ -85,10 +83,14 @@ public class PanelHistoria extends PanelAux {
         panelBotones.add(quitar);
         panelBotones.add(deshacer);
         panelBotones.add(Bnota);
+        JTextField Jnombre = new JTextField("Nombre: " + name); Jnombre.setEditable(false);
+        JTextField Jcodigo = new JTextField("Codigo: " + codigo); Jcodigo.setEditable(false);
+        JTextField pi = new JTextField("Periodo Ingreso: " + historiaAcademica.getPrimerPeriodo()); pi.setEditable(false);
+        panelDatos = Utilidades.centrarV(new JComponent[]{Jnombre,Jcodigo,pi}, 2,1,false,false);
 
         Bvalidar = new JButton("Validar");
         Bvalidar.addActionListener(e -> {
-            estudiante.getHistoriaAcademica().actulizarMalla(tablaHistoria.getCursosAgregar(),tablaHistoria.getCursosQuitar());
+            historia.actulizarMalla(tablaHistoria.getCursosAgregar(),tablaHistoria.getCursosQuitar());
             reiniciarPanel();
         });
         aniadirElementos();
@@ -118,11 +120,6 @@ public class PanelHistoria extends PanelAux {
     }
 
     public void aniadirElementos() {
-        JTextField nombre = new JTextField("Nombre: " + estudiante.getNombre()); nombre.setEditable(false);
-        JTextField codigo = new JTextField("Codigo: " + estudiante.getCodigo()); codigo.setEditable(false);
-        JTextField pi = new JTextField("Periodo Ingreso: " + estudiante.getHistoriaAcademica().getPrimerPeriodo()); pi.setEditable(false);
-        JPanel panelDatos = Utilidades.centrarV(new JComponent[]{nombre,codigo,pi}, 2,1,false,false);
-
         Utilidades.agregarBorder(panelDatos,0,0.1,0,0);
         JPanel Jvalidar = Utilidades.centrarV(new JComponent[]{Bvalidar},1,0,true,false);
         Utilidades.agregarBorder(Jvalidar,0.25,0.25,0.1,0.1);
@@ -143,7 +140,7 @@ public class PanelHistoria extends PanelAux {
         actualizarInfo();
     }
     private void nuevaTabla(GridBagConstraints gb) {
-        tablaHistoria = new TablaHorMod(infoSemestres,true);
+        tablaHistoria = new TablaHorMod(historia.getInfoSemestres(),true);
         scrollTabla = new JScrollPane(tablaHistoria);
         gb.gridx = 0; gb.gridy = 3; gb.gridwidth = 6; gb.gridheight = 11; gb.weightx = 6; gb.weighty = 11; gb.fill = 1;
         add(scrollTabla, gb);
@@ -166,9 +163,9 @@ public class PanelHistoria extends PanelAux {
     }
 
     public void actualizarInfo(){
-        promedioIn.setText(String.valueOf(estudiante.getHistoriaAcademica().calcularPromedioAcademico()));
-        creditosAIn.setText(String.valueOf(estudiante.getHistoriaAcademica().getCreditosAprovados()));
-        creditosIIn.setText(String.valueOf(estudiante.getHistoriaAcademica().getCreditos()));
+        promedioIn.setText(String.valueOf(historia.calcularPromedioAcademico()));
+        creditosAIn.setText(String.valueOf(historia.getCreditosAprovados()));
+        creditosIIn.setText(String.valueOf(historia.getCreditos()));
     }
 
 }

@@ -13,18 +13,18 @@ import java.awt.*;
 import java.util.Map;
 
 public class PanelPlanes extends PanelAux {
-    private final Map<String,Plan> planes;
     private JTable tablaPlanes;
     private JScrollPane scrollTabla;
-    private final Estudiante estudiante;
     private final JPanel panelBotones;
+    private final Estudiante estudiante;
+    private final Map<String,Plan> planes;
 
 
-    public PanelPlanes(InterfazBannerPrincipal principal, Estudiante estudiante) {
+    public PanelPlanes(InterfazBannerPrincipal principal, Estudiante estudiante, Map<String,Plan> planes) {
         super(principal);
         setLayout(new GridBagLayout());
         this.estudiante = estudiante;
-        planes = estudiante.getPlanes();
+        this.planes = planes;
         panelBotones = new JPanel(new GridLayout(1,3));
         setBorder(new Border() {
             @Override

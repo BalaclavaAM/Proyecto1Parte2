@@ -5,14 +5,15 @@ import uniandes.dpoo.proyecto1.GUI.HistAndPlan.PanelPlanes;
 import uniandes.dpoo.proyecto1.GUI.InterfazBannerPrincipal;
 import uniandes.dpoo.proyecto1.GUI.InterfazInscripcionCursos;
 import uniandes.dpoo.proyecto1.GUI.Pensum.PanelPensum;
-import uniandes.dpoo.proyecto1.GUI.Validaciones.PanelValidaciones;
+import uniandes.dpoo.proyecto1.GUI.Pensum.PanelValidaciones;
+import uniandes.dpoo.proyecto1.GUI.PrincipalUsurio.PrincipalUsusario;
+import uniandes.dpoo.proyecto1.GUI.Utilidades;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -52,22 +53,7 @@ public class PrincipalEstudiante extends PrincipalUsusario {
 
             }
         };
-        setBorder(new Border() {
-            @Override
-            public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-
-            }
-
-            @Override
-            public Insets getBorderInsets(Component c) {
-                return new Insets(getHeight()/10,getWidth()/10, getHeight()/10,getWidth()/10);
-            }
-
-            @Override
-            public boolean isBorderOpaque() {
-                return false;
-            }
-        });
+        Utilidades.agregarBorder(this,0.1,0.1,0.1,0.1);
         imagen.setOpaque(false);
         setLayout(new GridBagLayout());
         nombre = new JTextField(estudiante.getNombre());nombre.setEditable(false);
@@ -135,7 +121,7 @@ public class PrincipalEstudiante extends PrincipalUsusario {
         switch (e.getActionCommand()) {
             case "PO>Planear" -> {
                 if (panelPlanes == null) {
-                    panelPlanes = new PanelPlanes(principal, estudiante);
+                    panelPlanes = new PanelPlanes(principal,estudiante,estudiante.getPlanes());
                 } else {
                     panelPlanes.actualizarPanel();
                 }
@@ -146,7 +132,8 @@ public class PrincipalEstudiante extends PrincipalUsusario {
                 principal.ocultarYmostrar(iic);
             }
             case "PO>HAcademica" -> {
-                PanelHistoria ph = new PanelHistoria(principal, estudiante);
+                PanelHistoria ph = new PanelHistoria(principal, estudiante.getHistoriaAcademica(),estudiante.getCodigo()
+                ,estudiante.getNombre());
                 principal.ocultarYmostrar(ph);
             }
             case  "PO>Pensum" ->{
@@ -158,7 +145,6 @@ public class PrincipalEstudiante extends PrincipalUsusario {
                 PanelValidaciones pv = new PanelValidaciones(principal,estudiante.getHistoriaAcademica());
                 principal.ocultarYmostrar(pv);
             }
-
         }
 
     }
