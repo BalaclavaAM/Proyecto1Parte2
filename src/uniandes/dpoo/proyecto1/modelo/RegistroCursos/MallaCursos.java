@@ -28,9 +28,12 @@ public abstract class MallaCursos {
         this.infoSemestres = new Hashtable<>();
     }
 
-
-
     public ArrayList<EstadoAgregar> agregarCursos(ArrayList<CursoRegistrado> cursosR) {
+        return agregarCursos(cursosR,false);
+    }
+
+
+    protected ArrayList<EstadoAgregar> agregarCursos(ArrayList<CursoRegistrado> cursosR, boolean ins) {
         ArrayList<EstadoAgregar> estado = new ArrayList<>();
         Map<String, ArrayList<CursoRegistrado>> cursosPeriodos = new Hashtable<>();
         ArrayList<String> Lperiodos = new ArrayList<>();
@@ -38,7 +41,7 @@ public abstract class MallaCursos {
         for (String p : Lperiodos) {
             ArrayList<CursoRegistrado> cursosP = cursosPeriodos.get(p);
             Periodo pc = Periodo.stringToPeriodo(p);
-            if (dentroPeriodo(pc)) {
+            if (dentroPeriodo(pc) || (ins && dentroIns(pc))) {
                 agregarPeriodo(Periodo.stringToPeriodo(p));
                 agregarCursosPeriodo(cursosP, pc, estado);
                 if (infoSemestres.get(pc.periodoS()).size() == 0) {
@@ -52,6 +55,12 @@ public abstract class MallaCursos {
         return estado;
     }
 
+    private boolean dentroIns(Periodo p){
+        if(p.periodoS().equals(peridoSistema.periodoS())){
+            return p.getCiclo() >= peridoSistema.getCiclo();
+        }
+        return false;
+    }
 
     public ArrayList<CursoRegistrado> agregarCursosPeriodo(ArrayList<CursoRegistrado> cursosP, Periodo periodo, ArrayList<EstadoAgregar> estado) {
         Map<CursoRegistrado, ArrayList<Correquisito>> cursosCorreq = new HashMap<>();
@@ -202,7 +211,7 @@ public abstract class MallaCursos {
         if(primerCambio != null){
             queue.addAll(vaciarDesde(primerCambio));
         }
-        return  agregarCursos(queue);
+        return  agregarCursos(queue,false);
     }
 
     public ArrayList<CursoRegistrado> vaciarDesde(Periodo primerCambio){

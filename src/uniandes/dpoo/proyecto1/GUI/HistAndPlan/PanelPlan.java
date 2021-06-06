@@ -38,25 +38,18 @@ public class PanelPlan extends PanelAux {
                 AgregarAux au = new AgregarAux(tablaPlan,principal.getBanner(),false);
                 au.setVisible(true);
             });
-        JButton quitar = new JButton("Quitar Seleccionado"); quitar.addActionListener(e ->{
-            tablaPlan.quitar();
-        });
-        JButton deshacer = new JButton("Deshacer accion");deshacer.addActionListener(e -> {
-            tablaPlan.deshacer();
-        });
-
+        JButton quitar = new JButton("Quitar Seleccionado"); quitar.addActionListener(e -> tablaPlan.quitar());
+        JButton deshacer = new JButton("Deshacer accion");deshacer.addActionListener(e -> tablaPlan.deshacer());
         panelBotones.add(mostrarIn);panelBotones.add(agregar);panelBotones.add(quitar);panelBotones.add(deshacer);
         Jvalidar = new JButton("Validar");Jvalidar.addActionListener(e-> {
                     plan.actulizarMalla(tablaPlan.getCursosAgregar(),tablaPlan.getCursosQuitar());
-                    reiniciarPanel();
-        }
-        );
-        añadirElementos();
+                    reiniciarPanel(); });
+        aniadirElementos();
     }
 
 
 
-    public void añadirElementos(){
+    private void aniadirElementos(){
         GridBagConstraints gb = new GridBagConstraints();
         JPanel conNombre = Utilidades.centrarV(new JComponent[]{Jnombre},1,1, false,false);
         JPanel conValidar = Utilidades.centrarV(new JComponent[]{Jvalidar},1,0, true,false);
@@ -90,6 +83,4 @@ public class PanelPlan extends PanelAux {
             SwingUtilities.updateComponentTreeUI(this);
         }catch(Exception ignored) { }
     }
-
-
 }

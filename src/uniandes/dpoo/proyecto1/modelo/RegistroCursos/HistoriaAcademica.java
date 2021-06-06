@@ -50,11 +50,9 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
 
 
-
-
-	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
+    public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
         ultimoPeriodo = Periodo.copy(peridoSistema);
-        return agregarCursos(cursosP);
+        return agregarCursos(cursosP, true);
     }
 
     public void actualizarPeriodo(){
@@ -180,9 +178,6 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
     @Override
     public boolean dentroPeriodo(Periodo p) {
-        if(p.periodoS().equals(peridoSistema.periodoS())){
-            return p.getCiclo() >= peridoSistema.getCiclo();
-        }
         return peridoSistema.compare(p) == 1 && primerPeriodo.compare(p) <= 0;
     }
 

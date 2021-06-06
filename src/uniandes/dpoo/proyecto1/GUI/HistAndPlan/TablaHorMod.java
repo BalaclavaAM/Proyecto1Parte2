@@ -12,12 +12,12 @@ import java.util.*;
 
 public class TablaHorMod extends JTable{
     private final ArrayList<CursoRegistrado> posicionCursos;
-    private DefaultTableModel model;
+    private final DefaultTableModel model;
     private final ArrayList<String> posicionEstado;
     private final  ArrayList<CursoRegistrado> cursosAgregar;
     private final   ArrayList<CursoRegistrado> cursosQuitar;
     private final boolean nota;
-    private int colSemestre;
+    private final int colSemestre;
 
     public TablaHorMod(Map<String,ArrayList<CursoRegistrado>> infoSemestres, boolean nota){
         this.posicionCursos = new ArrayList<>();
@@ -91,7 +91,7 @@ public class TablaHorMod extends JTable{
         }
     }
 
-    public int calcularPosicion(String semestre){
+    private int calcularPosicion(String semestre){
         for (int i = 0; i < getRowCount(); i++) {
             String sc = (String) getValueAt(i,colSemestre);
             if(sc.compareTo(semestre) > 0){
@@ -102,7 +102,7 @@ public class TablaHorMod extends JTable{
     }
 
 
-    public Vector<Vector<String>> crearDataTablaHor(Map<String,ArrayList<CursoRegistrado>> infoSemestres){
+    private Vector<Vector<String>> crearDataTablaHor(Map<String,ArrayList<CursoRegistrado>> infoSemestres){
         Vector<Vector<String>> data = new Vector<>();
         ArrayList<String> semestres = new ArrayList<>(infoSemestres.keySet());
         semestres.sort(String::compareTo);
@@ -136,9 +136,6 @@ public class TablaHorMod extends JTable{
         }
     }
 
-
-
-
     /**
     private  Vector<Vector<String>> crearData(Map<String, ArrayList<CursoRegistrado>> infoPeriodos, Vector<String> semestres){
         int np = malla.getInfoPeriodos().size();
@@ -163,6 +160,7 @@ public class TablaHorMod extends JTable{
         return data;
     }
      */
+
     public CursoRegistrado getSelecteCursoR(){
         int fila = getSelectedRow();
         if(fila != -1) {
