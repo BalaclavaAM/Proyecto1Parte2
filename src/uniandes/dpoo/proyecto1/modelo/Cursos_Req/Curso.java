@@ -1,10 +1,10 @@
 package uniandes.dpoo.proyecto1.modelo.Cursos_Req;
 
-import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
-import uniandes.dpoo.proyecto1.modelo.Restricciones.PreRestriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Curso implements Serializable {
 	private static final long serialVersionUID = -1708691240589592764L;
@@ -13,14 +13,18 @@ public class Curso implements Serializable {
 	private final boolean NotaNumerica;
 	private final String materia; // es lo mismo que aparece en la oferta de curso, se podria utilizar un enum(muy grande)
 	private final int creditos;
-	private final ArrayList<PreRestriccion> restricciones;
 	private final ArrayList<Correquisito> correquisitos;
+	private final ArrayList<Prerrequisito> prerrequisitos;
+	private final ArrayList<RestriccionReq> restriccionesReqs;
+	private final RestriccionNivel RestriccionNivel;
 	private final String descripcion;
 
 
-	public Curso(String nombre, String codigo, String programa, int creditos,
-				 boolean notaNumerica, ArrayList<PreRestriccion> restricciones, ArrayList<Correquisito> correquisitos,
-				 String descripcion)
+
+
+	public Curso(String nombre, String codigo, String programa, int creditos, boolean notaNumerica,
+				 ArrayList<Prerrequisito> prerrequisitos, ArrayList<Correquisito> correquisitos,
+				 ArrayList<RestriccionReq> restriccionesReqs, RestriccionNivel restriccionNivel, String descripcion)
 	{
 		this.nombre = nombre;
 		this.codigo = codigo;
@@ -28,11 +32,14 @@ public class Curso implements Serializable {
 		//meramente informativa o para validar;
 		//this.semanas = semanas; //no usado, serviria para corregir reqisitos cursos de 8 semanas con perrequistos cursos de 16 (poco comun)
 		NotaNumerica = notaNumerica;
-		this.restricciones = restricciones;
 		this.correquisitos = correquisitos;
+		this.prerrequisitos = prerrequisitos;
+		this.restriccionesReqs = restriccionesReqs;
+		RestriccionNivel = restriccionNivel;
 		this.materia = programa;
 		this.descripcion = descripcion;
 	}
+
 
 
 
@@ -46,13 +53,21 @@ public class Curso implements Serializable {
 	public String getDescripcion(){
 		return descripcion;
 	}
-	public ArrayList<PreRestriccion> getRestricciones() {
-		return restricciones;
-	}
-
 
 	public ArrayList<Correquisito> getCorrequisitos() {
 		return correquisitos;
+	}
+
+	public ArrayList<Prerrequisito> getPrerrequisitos() {
+		return prerrequisitos;
+	}
+
+	public ArrayList<RestriccionReq> getRestriccionesReqs() {
+		return restriccionesReqs;
+	}
+
+	public RestriccionNivel getRestriccionNivel() {
+		return RestriccionNivel;
 	}
 
 	public int getCreditos() {

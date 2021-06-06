@@ -35,7 +35,6 @@ public class PanelImagenFondo extends JPanel {
         } else {
             setOpaque(true);
         }
-
         super.paint(g);
     }
 

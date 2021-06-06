@@ -4,8 +4,8 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 import uniandes.dpoo.proyecto1.modelo.Registro.*;
-import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
-import uniandes.dpoo.proyecto1.modelo.Restricciones.PreRestriccion;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
+
 import java.util.*;
 
 public abstract class MallaCursos {
@@ -55,28 +55,15 @@ public abstract class MallaCursos {
 
     public ArrayList<CursoRegistrado> agregarCursosPeriodo(ArrayList<CursoRegistrado> cursosP, Periodo periodo, ArrayList<EstadoAgregar> estado) {
         Map<CursoRegistrado, ArrayList<Correquisito>> cursosCorreq = new HashMap<>();
-        Map<String, EstadoRegistro> estadosRegistros = new HashMap<>();
-        for (CursoRegistrado cr : cursosP) {
-            EstadoRegistro er = revisarConsistencia(cr, periodo);
-            String codigo = cr.getCurso().getCodigo();
-            if (er == EstadoRegistro.Ok || er == EstadoRegistro.Previo) {
-                estadosRegistros.put(codigo, er);
-                PreRestriccion rest = revisarRestriciones(cr, periodo);
-                if (rest == null) {
-                    ArrayList<Correquisito> corFaltantes = Correquisito.CorrequisitosEnRegistro(this, cr, periodo);
-                    cursosCorreq.put(cr,corFaltantes);
-                } else {
-                    estado.add(new EstadoAgregar(cr, rest.nombre()));
-                }
-            } else {
-                estado.add(new EstadoAgregar(cr, er));
-            }
+        Map<CursoRegistrado, EstadoRegistro> estadosRegistros = revisarConsistenciaPeriodo(cursosP, estado, periodo);
+        Prerrequisito.cursosCumple(cursosP, this, periodo, estado);
+        RestriccionReq.cursosCumple(cursosP, this, periodo, estado);
+        RestriccionNivel.cursosCumple(cursosP, this, periodo, estado);
+        Correquisito.cursosCumple(cursosP, this, periodo, estado);
+        for(CursoRegistrado cr: cursosP){
+            agregarCurso(cr,estadosRegistros.get(cr));
         }
-        ArrayList<CursoRegistrado> cursosAniadir = Correquisito.cumpleEnInscripcion(cursosCorreq, estado);
-        for (CursoRegistrado cr: cursosAniadir) {
-            agregarCurso(cr, estadosRegistros.get(cr.getCurso().getCodigo()));
-        }
-        return cursosAniadir;
+        return cursosP;
     }
 
     public void agregarCurso(CursoRegistrado cursoR, EstadoRegistro er){
@@ -130,6 +117,23 @@ public abstract class MallaCursos {
         return false;
     }
 
+    private Map<CursoRegistrado,EstadoRegistro> revisarConsistenciaPeriodo(ArrayList<CursoRegistrado> cursosP,
+                                                                           ArrayList<EstadoAgregar> estado,
+                                                                           Periodo periodo) {
+        Map<CursoRegistrado,EstadoRegistro> mapCrEr = new HashMap<>();
+        for (int i = cursosP.size()-1; i > -1 ; i--) {
+            CursoRegistrado cr = cursosP.get(i);
+            EstadoRegistro ea = revisarConsistencia(cr,periodo);
+            if(ea == EstadoRegistro.Ok || ea == EstadoRegistro.Previo){
+                mapCrEr.put(cr,ea);
+            }else{
+                cursosP.remove(i);
+                estado.add(new EstadoAgregar(cr, ea));
+            }
+        }
+        return mapCrEr;
+    }
+
     public EstadoRegistro revisarConsistencia(CursoRegistrado cursoR, Periodo periodo) {
         CursoRegistrado registro = getCurReg(cursoR.getCurso().getCodigo());
         if (registro != null) {
@@ -176,15 +180,6 @@ public abstract class MallaCursos {
         }
     }
 
-    public PreRestriccion revisarRestriciones(CursoRegistrado cursoR, Periodo periodo) {
-        ArrayList<PreRestriccion> restriccions = cursoR.getCurso().getRestricciones();
-        for(PreRestriccion rst: restriccions){
-            if(!rst.cumple(cursoR,this, periodo)){
-                return rst;
-            }
-        }
-        return null;
-    }
 
 
     public Periodo quitarCursos(ArrayList<CursoRegistrado> cursosQuitar){

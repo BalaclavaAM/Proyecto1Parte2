@@ -24,8 +24,8 @@ public class Plan extends MallaCursos {
     }
 
     public void validarInscritos(){ //los cursos incritos se tomarian como aprovados
-        infoSemestres.putIfAbsent(historia.getUltimoPeriodo().periodoS(),new ArrayList<>());
-        for(CursoRegistrado ci: historia.getCursosInscritos().values()){
+        infoSemestres.putIfAbsent(Periodo.copy(peridoSistema).periodoS(),new ArrayList<>());
+        for(CursoRegistrado ci: historia.getCursosInscritos()){
             validarInscrito(ci);
         }
     }

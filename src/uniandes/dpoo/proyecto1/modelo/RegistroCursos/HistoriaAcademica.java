@@ -1,15 +1,15 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
-import uniandes.dpoo.proyecto1.modelo.Nota.*;
-import uniandes.dpoo.proyecto1.modelo.Registro.*;
+import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
+import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
+import uniandes.dpoo.proyecto1.modelo.Registro.RequerimientoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 
 
 public class HistoriaAcademica extends MallaCursos implements Serializable {
@@ -20,7 +20,6 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     private static final long serialVersionUID = -491840464239633611L;
     private final Periodo primerPeriodo;
     private Periodo ultimoPeriodo;
-    private Map<String, CursoRegistrado> cursosInscritos;
 
 
     public HistoriaAcademica(Pensum pensum, Periodo periodo) {
@@ -29,7 +28,6 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         this.primerPeriodo = p;
         this.ultimoPeriodo = p;
         this.pensum = pensum;
-        this.cursosInscritos = new Hashtable<>();
     }
 
 
@@ -51,28 +49,23 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
     }
 
 
-    public void vaciarInscritos(){
-        for(CursoRegistrado cursoR: cursosInscritos.values()) {
-            cursoR.setEstado(EstadoCurso.Finalizado);
-            cursosInscritos.remove(cursoR.getCurso().getCodigo());
-        }
-    }
+
 
 
 	public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
-        ArrayList<EstadoAgregar> estado = new ArrayList<>();
-        infoSemestres.putIfAbsent(peridoSistema.periodoS(),new ArrayList<>());
         ultimoPeriodo = Periodo.copy(peridoSistema);
-        if(!ultimoPeriodo.periodoS().equals(peridoSistema.periodoS()) && !cursosInscritos.isEmpty()){
-            vaciarInscritos();
-        }
-        ArrayList<CursoRegistrado> cursosInscribir = agregarCursosPeriodo(cursosP,ultimoPeriodo,estado);
-        for(CursoRegistrado cr: cursosInscribir){
-            cursosInscritos.put(cr.getCurso().getCodigo(),cr);
-        }
-        return estado;
+        return agregarCursos(cursosP);
     }
 
+    public void actualizarPeriodo(){
+        if(peridoSistema.compare(ultimoPeriodo) == 1){
+            for(CursoRegistrado cr: infoSemestres.get(ultimoPeriodo.periodoS())){
+                if(peridoSistema.compare(cr.getPeriodo()) == 1){ //solo finalizar los del ciclo 1 si estamos en
+                    cr.setEstado(EstadoCurso.Finalizado);
+                }
+            }
+        }
+    }
 
     @Override
     public void agregarPeriodo(Periodo periodo) {
@@ -181,12 +174,15 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
         return ultimoPeriodo;
     }
 
-    public Map<String, CursoRegistrado> getCursosInscritos() {
-        return cursosInscritos;
+    public ArrayList<CursoRegistrado> getCursosInscritos() {
+        return infoSemestres.get(peridoSistema.periodoS());
     }
 
     @Override
     public boolean dentroPeriodo(Periodo p) {
+        if(p.periodoS().equals(peridoSistema.periodoS())){
+            return p.getCiclo() >= peridoSistema.getCiclo();
+        }
         return peridoSistema.compare(p) == 1 && primerPeriodo.compare(p) <= 0;
     }
 

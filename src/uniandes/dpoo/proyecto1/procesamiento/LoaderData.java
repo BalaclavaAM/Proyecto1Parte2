@@ -143,9 +143,9 @@ public class LoaderData {
 			int creditos = Integer.parseInt(partes[2]);
 			String dpto = partes[3];
 			boolean numerica = Boolean.parseBoolean(partes[4]);
-			ArrayList<PreRestriccion> restricciones = armarRestricciones(partes[6],partes[7],partes[8]);
-			ArrayList<Correquisito> correquisitos = armarCorrequisitos(partes[5]);
-			Curso curso = new Curso(nombre,codigo,dpto,creditos,numerica,restricciones,correquisitos, "descripcion");
+			Curso curso = new Curso(nombre,codigo,dpto,creditos,numerica,armarPerrequisitos(partes[6])
+					,armarCorrequisitos(partes[5]),armarRestriccionesReq(partes[7]), convRestriccionNivel(partes[8]),
+					"descripcion");
 			if (banner.getCursosDepartamento().containsKey(dpto)){
 				banner.getCursosDepartamento().get(dpto).put(codigo,curso);
 			} else {
@@ -168,21 +168,31 @@ public class LoaderData {
 		return retorno;
 	}
 
-
-	private static ArrayList<PreRestriccion> armarRestricciones(String prerequisitos,
-																String restricciones, String nivel)
-	{
-		ArrayList<PreRestriccion> retorno = new ArrayList<>();
-
-		for (String prereq:parseList2(prerequisitos))
+	private static ArrayList<Prerrequisito> armarPerrequisitos(String prerrequisitos){
+		ArrayList<Prerrequisito> retorno = new ArrayList<>();
+		ArrayList<String> cCorrequisitos = parseList2(prerrequisitos);
+		for (String correq:cCorrequisitos)
 		{
-			retorno.add(new Prerrequisito(parseList(prereq)));
+			retorno.add(new Prerrequisito(parseList(correq)));
 		}
-		for (String restr:parseList(restricciones))
+		return retorno;
+	}
+
+
+	public static ArrayList<RestriccionReq> armarRestriccionesReq(String restriccionesreq){
+		ArrayList<RestriccionReq> retorno = new ArrayList<>();
+		ArrayList<String> cCorrequisitos = parseList2(restriccionesreq);
+		for (String correq:cCorrequisitos)
 		{
-			retorno.add(new RestriccionReq(restr));
+			retorno.add(new RestriccionReq(correq));
 		}
-		if (!(nivel.equals("null"))){
+		return retorno;
+	}
+
+
+
+	public static RestriccionNivel convRestriccionNivel(String nivel){
+
 		Nivel nNivel = switch (nivel) {
 			case "1" -> Nivel.UNO;
 			case "2" -> Nivel.DOS;
@@ -190,10 +200,9 @@ public class LoaderData {
 			case "4" -> Nivel.CUATRO;
 			default -> Nivel.CERO;
 		};
-			retorno.add(new RestriccionNivel(nNivel));
-		}
-		return retorno;
+		return new RestriccionNivel(nNivel);
 	}
+
 
 	private static ArrayList<String> parseList2(String string){
 		ArrayList<String> retorno = new ArrayList<>();

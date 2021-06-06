@@ -69,7 +69,7 @@ public class TablaReq extends JTable {
                 this.setForeground(Color.WHITE);
             }
             if (row == table.getSelectedRow()) {
-                this.setBackground(getBackground().darker());
+                this.setBackground(Color.cyan);
             }
             return this;
         }

@@ -1,19 +1,19 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 
 import java.util.ArrayList;
 
-public class Prerrequisito implements PreRestriccion {
+public class Prerrequisito implements Restriccion{
     private final ArrayList<String> opciones; // esto es un supuesto
 
     public Prerrequisito(ArrayList<String> opciones){
         this.opciones = opciones;
     }
 
-    @Override
     public boolean cumple(MallaCursos malla) {
         for(String codigo: opciones) {
             CursoRegistrado cursoR = malla.getCurReg(codigo);
@@ -25,17 +25,32 @@ public class Prerrequisito implements PreRestriccion {
     }
 
 
-    @Override
-    public boolean cumple(CursoRegistrado cursoR, MallaCursos malla, Periodo periodo) {
+    public CursoRegistrado cumple(MallaCursos malla, Periodo periodo) {
         for(String codigo: opciones) {
             CursoRegistrado registro = malla.getCurReg(codigo);
             if (registro != null && (malla.aprovado(registro) && registro.getPeriodo().compare(periodo) < 0)) {
-                return true;
+                return registro;
             }
         }
-        return false;
+        return null;
     }
 
+    public static void cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,Periodo periodo,ArrayList<EstadoAgregar> estado) {
+
+        for (int i = cursosP.size() - 1; i > -1; i--) {
+            CursoRegistrado cr = cursosP.get(i);
+            for (Prerrequisito pre : cr.getCurso().getPrerrequisitos()) {
+                CursoRegistrado dependencia = pre.cumple(malla, periodo);
+                if (dependencia != null) {
+                    //vincular cursos
+                } else {
+                    cursosP.remove(i);
+                    estado.add(new EstadoAgregar(cr, pre.nombre()));
+                    break;
+                }
+            }
+        }
+    }
 
     @Override
     public String tipo() {

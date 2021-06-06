@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class PrincipalEstudiante extends PrincipalUsusario {
@@ -78,7 +79,7 @@ public class PrincipalEstudiante extends PrincipalUsusario {
     public void actualizarPanel() {
         JTable tablaInscritos = new JTable();
         GridBagConstraints gb = new GridBagConstraints();
-        Map<String,CursoRegistrado> inscritos = estudiante.getHistoriaAcademica().getCursosInscritos();
+        ArrayList<CursoRegistrado> inscritos = estudiante.getHistoriaAcademica().getCursosInscritos();
 
         DefaultTableModel tableModel = new DefaultTableModel(new String[][]{}, new String[]{"Nombre", "Codigo", "Creditos"}) {
             @Override
@@ -87,9 +88,11 @@ public class PrincipalEstudiante extends PrincipalUsusario {
             }
 
         };
-        for(CursoRegistrado cr: inscritos.values()){
-            Curso c = cr.getCurso();
-            tableModel.addRow(new String[]{c.getNombre(),c.getCodigo(), String.valueOf(c.getCreditos())});
+        if(inscritos != null) {
+            for (CursoRegistrado cr : inscritos) {
+                Curso c = cr.getCurso();
+                tableModel.addRow(new String[]{c.getNombre(), c.getCodigo(), String.valueOf(c.getCreditos())});
+            }
         }
 
         tablaInscritos.setModel(tableModel);

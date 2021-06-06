@@ -46,7 +46,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         fondo = new PanelImagenFondo();
         PanelSuperior superior = new PanelSuperior(this);
         panelLogin = new PanelLogin(this);
-        banner = new Banner(new Periodo(2021,10));
+        banner = new Banner(new Periodo(2021,10,1));
         Prueba.cargarPrueba(banner);
         try {
             LoaderData.CargaCursos(banner);
