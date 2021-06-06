@@ -2,6 +2,7 @@
 
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -11,14 +12,15 @@ public class Pensum implements Serializable {
 	/**
 	 *
 	 */
+	@Serial
 	private static final long serialVersionUID = 5299770356142552116L;
 	private int creditos;
 	private final String nombre;
 
-	private Map<String, Requerimiento> cursosValidacionAuto;
-	private Map<String, Requerimiento> requerimientos;
-	private Map<Integer, ArrayList<Requerimiento>> requerimientosXsemestre;
-	private Map<Nivel, Map<ReqTipologia, ArrayList<Requerimiento>>> reqsXNivelXTipologia;
+	private final Map<String, Requerimiento> cursosValidacionAuto;
+	private final Map<String, Requerimiento> requerimientos;
+	private final Map<Integer, ArrayList<Requerimiento>> requerimientosXsemestre;
+	private final Map<Nivel, Map<ReqTipologia, ArrayList<Requerimiento>>> reqsXNivelXTipologia;
 
 
 	public Pensum(String nombre) {

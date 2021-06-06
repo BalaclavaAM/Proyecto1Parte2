@@ -1,8 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.usuario;
 
-import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Plan;
 
@@ -13,15 +12,15 @@ import java.util.Map;
 
 public class Estudiante extends Usuario implements Serializable {
 	private static final long serialVersionUID = -232931508719866061L;
-	private String codigo;
-	private HistoriaAcademica HistoriaAcademica;
-	private Map<String, Plan> planes;
-	private String carrera;
+	private final String codigo;
+	private final HistoriaAcademica HistoriaAcademica;
+	private final Map<String, Plan> planes;
+	private final String carrera;
 
 
-	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo, Pensum pensum,String carrera,
+	public Estudiante(String nombredeusuario, String contrasenha, String name, String codigo, Pensum pensum, String carrera,
 					  Periodo periodo) {
-		super(nombredeusuario, contrasenha,name);
+		super(nombredeusuario, contrasenha, name);
 		this.codigo = codigo;
 		this.HistoriaAcademica = new HistoriaAcademica(pensum, periodo);
 		this.carrera = carrera;

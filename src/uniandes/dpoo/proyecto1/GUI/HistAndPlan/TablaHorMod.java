@@ -8,7 +8,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Vector;
 
 public class TablaHorMod extends JTable{
     private final ArrayList<CursoRegistrado> posicionCursos;

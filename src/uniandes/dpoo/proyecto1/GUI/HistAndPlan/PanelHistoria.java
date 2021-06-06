@@ -91,7 +91,7 @@ public class PanelHistoria extends PanelAux {
             estudiante.getHistoriaAcademica().actulizarMalla(tablaHistoria.getCursosAgregar(),tablaHistoria.getCursosQuitar());
             reiniciarPanel();
         });
-        añadirElementos();
+        aniadirElementos();
     }
 
     private JPanel imagen(){
@@ -117,7 +117,7 @@ public class PanelHistoria extends PanelAux {
         return it;
     }
 
-    public void añadirElementos() {
+    public void aniadirElementos() {
         JTextField nombre = new JTextField("Nombre: " + estudiante.getNombre()); nombre.setEditable(false);
         JTextField codigo = new JTextField("Codigo: " + estudiante.getCodigo()); codigo.setEditable(false);
         JTextField pi = new JTextField("Periodo Ingreso: " + estudiante.getHistoriaAcademica().getPrimerPeriodo()); pi.setEditable(false);

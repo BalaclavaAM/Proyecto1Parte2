@@ -52,7 +52,7 @@ public class Utilidades {
         return panel;
     }
 
-    public static Vector vectorNull(int n){
+    public static Vector vectorNull( int n){
         Vector vectornull = new Vector<>();
         for (int i = 0; i < n; i++) {
             vectornull.add(null);
@@ -67,7 +67,7 @@ public class Utilidades {
         return arraynull;
     }
 
-    public static JPanel agregarBorder(JPanel panel, double top, double bottom, double left, double right) {
+    public static void agregarBorder(JPanel panel, double top, double bottom, double left, double right) {
          panel.setBorder(new Border() {
             @Override
             public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
@@ -84,7 +84,6 @@ public class Utilidades {
                 return false;
             }
         });
-        return panel;
     }
 
 }

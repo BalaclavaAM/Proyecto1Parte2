@@ -1,11 +1,16 @@
 package uniandes.dpoo.proyecto1.modelo.Cursos_Req;
 
-import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Prerrequisito;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.RestriccionNivel;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.RestriccionReq;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Curso implements Serializable {
+	@Serial
 	private static final long serialVersionUID = -1708691240589592764L;
 	private final String nombre;
 	private final String codigo;

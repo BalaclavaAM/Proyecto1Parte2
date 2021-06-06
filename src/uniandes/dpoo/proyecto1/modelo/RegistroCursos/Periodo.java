@@ -5,7 +5,7 @@ public class Periodo {
     private int anio;
     private int semestre; // los formatos son 10 19 20, tal cual aparece en baner.
     private int ciclo;
-    private  boolean completo;
+    private final boolean completo;
 
 
     public Periodo(int anio, int semestre, int ciclo) {

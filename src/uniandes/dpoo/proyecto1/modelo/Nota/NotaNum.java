@@ -1,7 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.Nota;
 
 public class NotaNum implements Nota {
-    private float nota;
+    private final float nota;
 
     public NotaNum(float nota){
         this.nota = nota;

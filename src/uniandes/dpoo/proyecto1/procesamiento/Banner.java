@@ -3,11 +3,17 @@ package uniandes.dpoo.proyecto1.procesamiento;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
-import uniandes.dpoo.proyecto1.modelo.usuario.*;
+import uniandes.dpoo.proyecto1.modelo.usuario.Carrera;
+import uniandes.dpoo.proyecto1.modelo.usuario.Coordinador;
+import uniandes.dpoo.proyecto1.modelo.usuario.Estudiante;
+import uniandes.dpoo.proyecto1.modelo.usuario.Usuario;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Banner implements Serializable {
@@ -15,17 +21,17 @@ public class Banner implements Serializable {
 	@Serial
 	private static final long serialVersionUID = -4746963895960324815L;
 
-	private Map<String,Map<String,Curso>> catalogoDepartamentos; // <Departamento, <NombreCurso,Curso>>
+	private final Map<String, Map<String, Curso>> catalogoDepartamentos; // <Departamento, <NombreCurso,Curso>>
 
-	private Map<String,Curso> catalogo;//<NombreCurso,Curso>
+	private final Map<String, Curso> catalogo;//<NombreCurso,Curso>
 
-	private Map<String,Carrera> carreras; //<nombreCarrera,Carrera>
+	private final Map<String, Carrera> carreras; //<nombreCarrera,Carrera>
 
-	private Map<String, Usuario> usuarios; //<nombreUsuario,Usuario>
+	private final Map<String, Usuario> usuarios; //<nombreUsuario,Usuario>
 
-	private Periodo periodo;
+	private final Periodo periodo;
 
-	private ArrayList<Seccion> secciones;
+	private final ArrayList<Seccion> secciones;
 
 	private int nEstSem = 0; //numero de estudiantes durante el semestre
 

@@ -17,7 +17,7 @@ public class PanelPlan extends PanelAux {
     private TablaHorMod tablaPlan;
     private JScrollPane scrollTabla;
     private final JPanel panelBotones;
-    private Map<String,ArrayList<CursoRegistrado>> infoSemestres;
+    private final Map<String, ArrayList<CursoRegistrado>> infoSemestres;
 
 
 
@@ -31,9 +31,7 @@ public class PanelPlan extends PanelAux {
         panelBotones = new JPanel(new GridLayout(1,4));
         infoSemestres = plan.getInfoSemestres();
 
-        JButton mostrarIn = new JButton("Mostra Info"); mostrarIn.addActionListener(e->{
-            tablaPlan.mostrarInfo(false);
-        });
+        JButton mostrarIn = new JButton("Mostra Info"); mostrarIn.addActionListener(e-> tablaPlan.mostrarInfo(false));
         JButton agregar = new JButton("Agregar Curso"); agregar.addActionListener(e->{
                 AgregarAux au = new AgregarAux(tablaPlan,principal.getBanner(),false);
                 au.setVisible(true);

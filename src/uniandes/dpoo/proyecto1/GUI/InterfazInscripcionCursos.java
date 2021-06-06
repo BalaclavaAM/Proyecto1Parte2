@@ -13,18 +13,18 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class InterfazInscripcionCursos extends PanelAux implements ActionListener {
-    private Banner banner;
-    private JButton buscar;
-    private JComboBox departamento;
-    private JTextField codigomateria;
-    private JButton inscribir;
-    private GridLayout materias;
-    private TablaSecciones tablamaterias;
+    private final Banner banner;
+    private final JButton buscar;
+    private final JComboBox departamento;
+    private final JTextField codigomateria;
+    private final JButton inscribir;
+    private final GridLayout materias;
+    private final TablaSecciones tablamaterias;
     private String[][] data;
 
     public InterfazInscripcionCursos(InterfazBannerPrincipal principal, Estudiante estudiante) {
         super(principal);
-        setSize(principal.getPrincipalUsuario().getSize());
+        setSize(principal.getFondo().getSize());
         banner = principal.getBanner();
         setLayout(new BorderLayout());
 

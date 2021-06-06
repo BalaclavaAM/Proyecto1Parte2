@@ -1,7 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.Nota;
 
 public class NotaCual implements Nota {
-    private calCual nota;
+    private final calCual nota;
 
     public NotaCual(calCual nota){
         this.nota = nota;

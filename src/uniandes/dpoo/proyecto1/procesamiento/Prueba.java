@@ -4,7 +4,6 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.ReqTipologia;
-import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
 import uniandes.dpoo.proyecto1.modelo.Nota.NotaNum;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;

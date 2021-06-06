@@ -20,10 +20,10 @@ public class PanelPensum extends PanelAux {
         setLayout(new GridBagLayout());
         Utilidades.agregarBorder(this,0.05,0.05,0.05, 0.05);
         tablaReq = new TablaReq(historia.avanceReq());
-        añadirElementos();
+        aniadirElementos();
     }
 
-    private void añadirElementos(){
+    private void aniadirElementos(){
         nuevaTabla();
     }
 
@@ -38,7 +38,7 @@ public class PanelPensum extends PanelAux {
 
 
     public void actualizarPanel(){
-        //no hacer nada
+        reiniciarPanel();
     }
 
     public void reiniciarPanel(){

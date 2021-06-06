@@ -4,8 +4,8 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 
 public class EstadoAgregar {
-    private EstadoRegistro error;
-    private Periodo periodo;
+    private final EstadoRegistro error;
+    private final Periodo periodo;
     private Curso curso;
     private String rest;
 

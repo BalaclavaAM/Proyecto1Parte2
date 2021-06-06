@@ -2,7 +2,9 @@ package uniandes.dpoo.proyecto1.modelo.Registro;
 
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.Nota.*;
+import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
+import uniandes.dpoo.proyecto1.modelo.Nota.NotaCual;
+import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 
 
@@ -13,7 +15,7 @@ public class CursoRegistrado {
 	private EstadoCurso estado;
 	private CursoRegistrado anterior = null;
 	private boolean agregado = false;
-	private boolean epsilon = false;
+	private final boolean epsilon;
 	private boolean numerica = false;
 
 

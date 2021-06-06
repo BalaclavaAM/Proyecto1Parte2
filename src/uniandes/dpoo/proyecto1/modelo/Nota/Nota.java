@@ -1,10 +1,14 @@
 package uniandes.dpoo.proyecto1.modelo.Nota;
 
-public interface  Nota {
+public interface Nota {
 
-    public boolean isNumeric ();
-    public float notaNum();
-    public calCual notaCual();
-    public boolean aprobo();
-    public String toString();
+    boolean isNumeric();
+
+    float notaNum();
+
+    calCual notaCual();
+
+    boolean aprobo();
+
+    String toString();
 }

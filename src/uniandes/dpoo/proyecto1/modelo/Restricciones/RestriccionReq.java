@@ -1,14 +1,15 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorAgregar;
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorRestriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 
 import java.util.ArrayList;
 
 public class RestriccionReq implements Restriccion {
-    private String reqN;
+    private final String reqN;
 
     public RestriccionReq(String reqN){
         this.reqN = reqN;
@@ -33,18 +34,17 @@ public class RestriccionReq implements Restriccion {
     }
 
 
-    public static ArrayList<CursoRegistrado> cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,
-                                                   Periodo periodo, ArrayList<EstadoAgregar> estado) {
+    public static void cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,
+                                    Periodo periodo, ArrayList<ErrorAgregar> estado) {
 
         for (int i = cursosP.size() - 1; i > -1; i--) {
             CursoRegistrado cursoR = cursosP.get(i);
             RestriccionReq incumplida = cumpleTodos(cursoR,malla,periodo);
             if(incumplida != null){
                 cursosP.remove(i);
-                estado.add(new EstadoAgregar(cursoR,incumplida.nombre()));
+                estado.add(new ErrorRestriccion(incumplida,cursoR));
             }
         }
-        return cursosP;
     }
 
     @Override

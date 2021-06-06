@@ -9,7 +9,10 @@ import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Nivel;
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Seccion;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
-import uniandes.dpoo.proyecto1.modelo.Restricciones.*;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Correquisito;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.Prerrequisito;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.RestriccionNivel;
+import uniandes.dpoo.proyecto1.modelo.Restricciones.RestriccionReq;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

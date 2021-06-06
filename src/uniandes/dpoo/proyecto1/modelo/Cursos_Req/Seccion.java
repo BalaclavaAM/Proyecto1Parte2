@@ -1,16 +1,14 @@
 package uniandes.dpoo.proyecto1.modelo.Cursos_Req;
 
-import java.util.ArrayList;
-
 public class Seccion {
-    private Curso curso;
-    private Boolean epsilon;
-    private String nrc;
-    private String[][] horarios;
-    private String profesor;
-    private Boolean tipoE;
-    private Integer NSeccion;
-    private String ciclo;
+    private final Curso curso;
+    private final Boolean epsilon;
+    private final String nrc;
+    private final String[][] horarios;
+    private final String profesor;
+    private final Boolean tipoE;
+    private final Integer NSeccion;
+    private final String ciclo;
     private String nombre;
     private String codigo;
     private float creditos;

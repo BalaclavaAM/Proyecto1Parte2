@@ -16,28 +16,26 @@ import uniandes.dpoo.proyecto1.procesamiento.Banner;
 import uniandes.dpoo.proyecto1.procesamiento.LoaderData;
 import uniandes.dpoo.proyecto1.procesamiento.Prueba;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.io.Serial;
-
-import javax.swing.*;
 
 public class InterfazBannerPrincipal extends JFrame implements ActionListener {
     @Serial
     private static final long serialVersionUID = 7466153715672542511L;
-	private final Banner banner;
-	private final PanelOptions opciones;
+    private final Banner banner;
+    private final PanelOptions opciones;
     private final PanelImagenFondo fondo;
-	private final PanelLogin panelLogin;
-	private PanelAux vistaAct;
-	private PrincipalUsusario principalUsuario;
+    private final PanelLogin panelLogin;
+    private PanelAux vistaAct;
+    private PrincipalUsusario principalUsuario;
 
 
-	public InterfazBannerPrincipal () {
-		setTitle( "Banner" );
-        getContentPane( ).setLayout( new BorderLayout( ) );
+    public InterfazBannerPrincipal () {
+        setTitle("Banner");
+        getContentPane().setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize( 1000, 650 );
         opciones = new PanelOptions(this);
@@ -75,7 +73,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         mostrar(pa);
     }
 
-    public void mostrar(PanelAux pa){
+    private void mostrar(PanelAux pa) {
         vistaAct = pa;
         pa.setOpaque(false);
         fondo.add(pa);
@@ -112,11 +110,7 @@ public class InterfazBannerPrincipal extends JFrame implements ActionListener {
         }
     }
 
-    public PrincipalUsusario getPrincipalUsuario() {
-        return principalUsuario;
-    }
-
-    public void setVistaAct(PanelAux vistaAct) {
+    private void setVistaAct(PanelAux vistaAct) {
         this.vistaAct = vistaAct;
     }
 

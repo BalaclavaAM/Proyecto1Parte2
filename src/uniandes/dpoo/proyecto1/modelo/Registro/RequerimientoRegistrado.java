@@ -1,23 +1,21 @@
 package uniandes.dpoo.proyecto1.modelo.Registro;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Curso;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoRegistro;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
-
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class RequerimientoRegistrado {
-    private Requerimiento req;
-    private int creditosCumplidos = 0;
-    private int itemsCumplidos = 0;
+    private final Requerimiento req;
+    private int creditosCumplidos;
+    private int itemsCumplidos;
     private boolean validado;
-    private ArrayList<Object> validaciones;
     private Periodo ultimoPeriodo;
-    private Map<String, CursoRegistrado> cursosR;
+    private final Map<String, CursoRegistrado> cursosR;
 
 
     public RequerimientoRegistrado(Requerimiento req){

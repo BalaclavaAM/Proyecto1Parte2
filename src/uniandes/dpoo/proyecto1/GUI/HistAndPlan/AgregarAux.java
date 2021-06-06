@@ -12,7 +12,6 @@ import uniandes.dpoo.proyecto1.procesamiento.Banner;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 
 public class AgregarAux extends JDialog {
     private final JTextField Jcodigo;

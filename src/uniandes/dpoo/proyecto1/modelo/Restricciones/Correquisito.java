@@ -1,9 +1,10 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorAgregar;
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorRestriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class Correquisito implements Restriccion{
                 return null;
             }
             else{
-                if (cumpletodos(cursoR, malla, nodoMap, periodo)) {
+                if (cumpletodos(dependencia.cursoR, malla, nodoMap, periodo)) {
                     return dependencia.cursoR;
                 }
             }
@@ -53,7 +54,6 @@ public class Correquisito implements Restriccion{
     private static boolean cumpletodos(CursoRegistrado cursoR, MallaCursos malla, Map<String,Nodo> nodoMap,Periodo periodo){
         Nodo nac = nodoMap.get(cursoR.getCurso().getCodigo());
         if(nac.recorrido && nac.estado == Estado.pendiente){
-            //excepcion correquisitos ciclicos
             return false;
         }
 
@@ -63,6 +63,8 @@ public class Correquisito implements Restriccion{
             if(cr.cumple(cursoR,malla,nodoMap,periodo) == null){
                 nac.setRechazado();
                 return false;
+            }else {
+                //realizar asociacion
             }
         }
         nac.setValidado();
@@ -71,8 +73,8 @@ public class Correquisito implements Restriccion{
 
 
 
-    public static ArrayList<CursoRegistrado> cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,
-                                                   Periodo periodo,ArrayList<EstadoAgregar> estado) {
+    public static void cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,
+                                    Periodo periodo, ArrayList<ErrorAgregar> estado) {
         Map<String,Nodo> nodoMap = new HashMap<>();
         for(CursoRegistrado cr: cursosP){
             nodoMap.put(cr.getCurso().getCodigo(),new Nodo(cr));
@@ -86,11 +88,10 @@ public class Correquisito implements Restriccion{
                 if (e == Estado.rechazado ||  !cumpletodos(cursoR, malla, nodoMap, periodo)) {
                     cursosP.remove(i);
                     nodoMap.remove(cursoR.getCurso().getCodigo());
-                    estado.add(new EstadoAgregar(cursoR, nac.temp.nombre()));
+                    estado.add(new ErrorRestriccion(nac.temp,cursoR));
                 }
             }
         }
-        return cursosP;
     }
 
 

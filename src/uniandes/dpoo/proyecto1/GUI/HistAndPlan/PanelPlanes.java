@@ -54,10 +54,10 @@ public class PanelPlanes extends PanelAux {
         });
         panelBotones.add(nuevo);
         panelBotones.add(ver);
-        añadirElementos();
+        aniadirElementos();
     }
 
-    private void añadirElementos(){
+    private void aniadirElementos(){
         GridBagConstraints gb = new GridBagConstraints();
         gb.gridy = 6; gb.gridwidth = 4; gb.gridheight = 1;  gb.weightx = 4; gb.weighty = 0;gb.fill = 1;
         add(panelBotones,gb);
@@ -128,7 +128,6 @@ public class PanelPlanes extends PanelAux {
             JButton agregar = new JButton("Agregar");
             agregar.addActionListener((event)->{
                 estudiante.nuevoPlan(nombre.getText());
-                ;
                 setVisible(false);
                 actualizarPanel();
             });

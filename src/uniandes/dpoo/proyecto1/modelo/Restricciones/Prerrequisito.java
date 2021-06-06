@@ -1,9 +1,11 @@
 package uniandes.dpoo.proyecto1.modelo.Restricciones;
 
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorAgregar;
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorRestriccion;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.EstadoAgregar;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
+import uniandes.dpoo.proyecto1.modelo.RegistroCursos.Periodo;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,8 @@ public class Prerrequisito implements Restriccion{
         return null;
     }
 
-    public static void cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,Periodo periodo,ArrayList<EstadoAgregar> estado) {
+    public static void cursosCumple(ArrayList<CursoRegistrado> cursosP, MallaCursos malla,Periodo periodo,
+                                    ArrayList<ErrorAgregar> estado) {
 
         for (int i = cursosP.size() - 1; i > -1; i--) {
             CursoRegistrado cr = cursosP.get(i);
@@ -45,7 +48,7 @@ public class Prerrequisito implements Restriccion{
                     //vincular cursos
                 } else {
                     cursosP.remove(i);
-                    estado.add(new EstadoAgregar(cr, pre.nombre()));
+                    estado.add(new ErrorRestriccion(pre,cr));
                     break;
                 }
             }

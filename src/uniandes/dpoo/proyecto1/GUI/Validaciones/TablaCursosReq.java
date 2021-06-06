@@ -15,11 +15,11 @@ import java.util.Map;
 import java.util.Vector;
 
 public class TablaCursosReq extends JTable {
-    private HistoriaAcademica historia;
+    private final HistoriaAcademica historia;
     private DefaultTableModel model;
-    private ArrayList<CursoRegistrado> posicionCursos;
+    private final ArrayList<CursoRegistrado> posicionCursos;
     private JDialog auxAc;
-    private PanelValidaciones exter;
+    private final PanelValidaciones exter;
 
     TablaCursosReq(PanelValidaciones exter, HistoriaAcademica historia){
         this.historia = historia;

@@ -6,7 +6,6 @@ import uniandes.dpoo.proyecto1.modelo.Nota.NotaNum;
 import uniandes.dpoo.proyecto1.modelo.Nota.calCual;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.MallaCursos;
 
 import javax.swing.*;
 import java.awt.*;

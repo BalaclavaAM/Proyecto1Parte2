@@ -14,18 +14,20 @@ public class PanelValidaciones extends PanelAux {
     private final JButton vR;
     private final JButton cR;
     private final JButton qR;
-    private HistoriaAcademica historia;
-    private JPanel panelBotones;
+    private final HistoriaAcademica historia;
+    private final JPanel panelBotones;
 
     public PanelValidaciones(InterfazBannerPrincipal principal, HistoriaAcademica historia) {
         super(principal);
         this.historia = historia;
-        Utilidades.agregarBorder(this,0.1,0.1,0.1,0.1);
+        Utilidades.agregarBorder(this, 0.1, 0.1, 0.1, 0.1);
         setLayout(new GridBagLayout());
-        tablaCursos = new TablaCursosReq(this,historia);
-        vR = new JButton("Validar"); vR.addActionListener(e-> tablaCursos.validar());
+        tablaCursos = new TablaCursosReq(this, historia);
+        vR = new JButton("Validar");
+        vR.addActionListener(e -> tablaCursos.validar());
         vR.setEnabled(false);
-        cR = new JButton("Cambiar"); cR.addActionListener(e-> tablaCursos.cambiar());
+        cR = new JButton("Cambiar");
+        cR.addActionListener(e -> tablaCursos.cambiar());
         cR.setEnabled(false);
         qR = new JButton("Quitar"); qR.addActionListener(e-> tablaCursos.quitar());
         qR.setEnabled(false);

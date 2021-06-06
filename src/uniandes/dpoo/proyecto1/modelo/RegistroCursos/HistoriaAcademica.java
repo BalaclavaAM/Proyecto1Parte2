@@ -1,6 +1,7 @@
 package uniandes.dpoo.proyecto1.modelo.RegistroCursos;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
+import uniandes.dpoo.proyecto1.modelo.ErrorAgregar.ErrorAgregar;
 import uniandes.dpoo.proyecto1.modelo.Nota.Nota;
 import uniandes.dpoo.proyecto1.modelo.Registro.CursoRegistrado;
 import uniandes.dpoo.proyecto1.modelo.Registro.EstadoCurso;
@@ -50,7 +51,7 @@ public class HistoriaAcademica extends MallaCursos implements Serializable {
 
 
 
-    public ArrayList<EstadoAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
+    public ArrayList<ErrorAgregar> inscripcionCursos(ArrayList<CursoRegistrado> cursosP) {
         ultimoPeriodo = Periodo.copy(peridoSistema);
         return agregarCursos(cursosP, true);
     }

@@ -2,7 +2,6 @@ package uniandes.dpoo.proyecto1.modelo.usuario;
 
 import uniandes.dpoo.proyecto1.modelo.Cursos_Req.Pensum;
 
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Map;

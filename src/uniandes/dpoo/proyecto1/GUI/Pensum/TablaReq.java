@@ -1,7 +1,5 @@
 package uniandes.dpoo.proyecto1.GUI.Pensum;
 
-import uniandes.dpoo.proyecto1.GUI.Validaciones.auxValidarReq;
-import uniandes.dpoo.proyecto1.modelo.RegistroCursos.HistoriaAcademica;
 import uniandes.dpoo.proyecto1.modelo.Requerimientos.Requerimiento;
 
 import javax.swing.*;
@@ -14,16 +12,13 @@ import java.util.Map;
 import java.util.Vector;
 
 public class TablaReq extends JTable {
-    private final Map<Requerimiento,Double> reqMap;
     private final ArrayList<String> listReq;
-    private DefaultTableModel model;
 
     public TablaReq(Map<Requerimiento,Double> reqMap){
-        this.reqMap = reqMap;
         listReq = new ArrayList<>();
         Vector<Vector<String>> data = crearData(reqMap);
         Vector<String> colnames = new Vector<>(Arrays.asList("Nombre","Tipologia","Nivel","Mains","Creditos","Semestre", "Avance"));
-        model = new DefaultTableModel(data,colnames){
+        DefaultTableModel model = new DefaultTableModel(data, colnames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
